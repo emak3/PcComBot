@@ -1,4 +1,4 @@
-// DOM要素
+// DOM Elements
 const userSection = document.getElementById('userSection');
 const loginPrompt = document.getElementById('loginPrompt');
 const formContainer = document.getElementById('formContainer');
@@ -15,54 +15,35 @@ const fileList = document.getElementById('fileList');
 const submitBtn = document.getElementById('submitBtn');
 const toast = document.getElementById('toast');
 
-// 選択されたファイルを管理
+// Selected files management
 let selectedFiles = [];
 
-// ページ読み込み時の初期化
+// Page initialization
 document.addEventListener('DOMContentLoaded', async () => {
-    // ページロード時のアニメーション
-    document.body.style.opacity = '0';
-    await new Promise(resolve => setTimeout(resolve, 100));
-    document.body.style.transition = 'opacity 0.6s ease';
-    document.body.style.opacity = '1';
-
     await checkAuthStatus();
     setupEventListeners();
-    addThemeToggle();
 });
 
-// 認証状態確認
+// Check authentication status
 async function checkAuthStatus() {
     try {
-        showLoadingState();
         const response = await fetch('/api/user');
         const data = await response.json();
         
         if (data.user) {
             showUserInfo(data.user);
-            await showForm();
+            showForm();
         } else {
             showLoginPrompt();
         }
     } catch (error) {
         console.error('認証状態確認エラー:', error);
-        showToast('🔌 ネットワークエラーが発生しました', 'error');
+        showToast('ネットワークエラーが発生しました', 'error');
         showLoginPrompt();
-    } finally {
-        hideLoadingState();
     }
 }
 
-// ローディング状態表示
-function showLoadingState() {
-    document.body.style.cursor = 'wait';
-}
-
-function hideLoadingState() {
-    document.body.style.cursor = 'default';
-}
-
-// ユーザー情報表示
+// Show user information
 function showUserInfo(user) {
     userSection.innerHTML = `
         <div class="user-info">
@@ -71,18 +52,18 @@ function showUserInfo(user) {
         </div>
         <div class="auth-buttons">
             <button class="btn btn-secondary" onclick="logout()">
-                👋 ログアウト
+                <i class="fas fa-sign-out-alt"></i> ログアウト
             </button>
         </div>
     `;
 }
 
-// ログインプロンプト表示
+// Show login prompt
 function showLoginPrompt() {
     userSection.innerHTML = `
         <div class="auth-buttons">
             <button class="btn btn-discord" onclick="login()">
-                <span class="discord-icon">🎮</span>
+                <i class="fab fa-discord"></i>
                 ログイン
             </button>
         </div>
@@ -91,72 +72,48 @@ function showLoginPrompt() {
     formContainer.style.display = 'none';
 }
 
-// フォーム表示
-async function showForm() {
+// Show form
+function showForm() {
     loginPrompt.style.display = 'none';
     formContainer.style.display = 'block';
-    
-    // アニメーション効果
-    await new Promise(resolve => setTimeout(resolve, 100));
-    formContainer.style.opacity = '0';
-    formContainer.style.transform = 'translateY(20px)';
-    formContainer.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-    
-    requestAnimationFrame(() => {
-        formContainer.style.opacity = '1';
-        formContainer.style.transform = 'translateY(0)';
-    });
 }
 
-// イベントリスナー設定
+// Setup event listeners
 function setupEventListeners() {
-    // カテゴリー選択時の処理
+    // Category change handler
     categorySelect.addEventListener('change', () => {
         const isOther = categorySelect.value === 'その他';
         customTitleGroup.style.display = isOther ? 'block' : 'none';
-        
-        if (isOther) {
-            customTitleGroup.style.opacity = '0';
-            customTitleGroup.style.transform = 'translateY(-10px)';
-            setTimeout(() => {
-                customTitleGroup.style.transition = 'all 0.3s ease';
-                customTitleGroup.style.opacity = '1';
-                customTitleGroup.style.transform = 'translateY(0)';
-            }, 10);
-        }
     });
 
-    // 管理者との対話チェック時の処理
+    // Dialog checkbox handler
     wantDialogCheckbox.addEventListener('change', () => {
         if (wantDialogCheckbox.checked) {
             anonymousCheckbox.checked = false;
             anonymousCheckbox.disabled = true;
             anonymousCheckbox.closest('.checkbox-label').style.opacity = '0.5';
-            showToast('💬 対話モードでは匿名は利用できません', 'info');
+            showToast('対話モードでは匿名は利用できません', 'info');
         } else {
             anonymousCheckbox.disabled = false;
             anonymousCheckbox.closest('.checkbox-label').style.opacity = '1';
         }
     });
 
-    // 文字数カウンター
+    // Character counter
     contentTextarea.addEventListener('input', () => {
         const count = contentTextarea.value.length;
         charCount.textContent = count;
         
         if (count > 800) {
-            charCount.style.color = 'var(--accent-pink)';
-            charCount.style.fontWeight = '700';
+            charCount.style.color = 'var(--discord-red)';
         } else if (count > 700) {
-            charCount.style.color = 'var(--accent-purple)';
-            charCount.style.fontWeight = '600';
+            charCount.style.color = 'var(--discord-yellow)';
         } else {
             charCount.style.color = 'var(--text-muted)';
-            charCount.style.fontWeight = '500';
         }
     });
 
-    // ファイルドラッグ&ドロップ
+    // File drag and drop
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         fileUploadArea.addEventListener(eventName, preventDefaults);
     });
@@ -183,15 +140,15 @@ function setupEventListeners() {
         handleFiles(files);
     });
 
-    // ファイル選択
+    // File selection
     fileInput.addEventListener('change', (e) => {
         handleFiles(e.target.files);
     });
 
-    // フォーム送信
+    // Form submission
     inquiryForm.addEventListener('submit', handleSubmit);
 
-    // キーボードショートカット
+    // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.key === 'Enter') {
             if (document.activeElement === contentTextarea) {
@@ -201,72 +158,64 @@ function setupEventListeners() {
     });
 }
 
-// ファイル処理
+// Handle file selection
 function handleFiles(files) {
     for (let file of files) {
         if (selectedFiles.length >= 5) {
-            showToast('📎 ファイルは最大5つまでです', 'error');
+            showToast('ファイルは最大5つまでです', 'error');
             break;
         }
 
         if (file.size > 1024 * 1024) {
-            showToast(`📏 ${file.name} は1MBを超えています`, 'error');
+            showToast(`${file.name} は1MBを超えています`, 'error');
             continue;
         }
 
-        // 重複チェック
+        // Check for duplicates
         if (selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
-            showToast(`🔄 ${file.name} は既に選択されています`, 'error');
+            showToast(`${file.name} は既に選択されています`, 'error');
             continue;
         }
 
         selectedFiles.push(file);
-        showToast(`✅ ${file.name} を追加しました`, 'success');
+        showToast(`${file.name} を追加しました`, 'success');
     }
 
     updateFileList();
 }
 
-// ファイルリスト更新
+// Update file list display
 function updateFileList() {
     fileList.innerHTML = '';
     
     selectedFiles.forEach((file, index) => {
         const fileItem = document.createElement('div');
         fileItem.className = 'file-item';
-        fileItem.style.opacity = '0';
-        fileItem.style.transform = 'translateY(10px)';
         
         fileItem.innerHTML = `
             <div class="file-info">
+                <i class="fas fa-file"></i>
                 <span class="file-name">${escapeHtml(file.name)}</span>
                 <span class="file-size">(${formatFileSize(file.size)})</span>
             </div>
             <button type="button" class="file-remove" onclick="removeFile(${index})">
-                🗑️ 削除
+                <i class="fas fa-times"></i> 削除
             </button>
         `;
         
         fileList.appendChild(fileItem);
-        
-        // アニメーション
-        setTimeout(() => {
-            fileItem.style.transition = 'all 0.3s ease';
-            fileItem.style.opacity = '1';
-            fileItem.style.transform = 'translateY(0)';
-        }, index * 50);
     });
 }
 
-// ファイル削除
+// Remove file
 function removeFile(index) {
     const removedFile = selectedFiles[index];
     selectedFiles.splice(index, 1);
     updateFileList();
-    showToast(`🗑️ ${removedFile.name} を削除しました`, 'info');
+    showToast(`${removedFile.name} を削除しました`, 'info');
 }
 
-// ファイルサイズフォーマット
+// Format file size
 function formatFileSize(bytes) {
     if (bytes === 0) return '0 B';
     const k = 1024;
@@ -275,7 +224,7 @@ function formatFileSize(bytes) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
 }
 
-// フォーム送信処理
+// Handle form submission
 async function handleSubmit(e) {
     e.preventDefault();
     
@@ -286,46 +235,46 @@ async function handleSubmit(e) {
     const anonymous = anonymousCheckbox.checked;
     const content = contentTextarea.value.trim();
 
-    // バリデーション
+    // Validation
     if (!category) {
-        showToast('📋 カテゴリーを選択してください', 'error');
+        showToast('カテゴリーを選択してください', 'error');
         categorySelect.focus();
         return;
     }
 
     if (category === 'その他' && !customTitle.trim()) {
-        showToast('🏷️ タイトルを入力してください', 'error');
+        showToast('タイトルを入力してください', 'error');
         document.getElementById('customTitle').focus();
         return;
     }
 
     if (!content) {
-        showToast('📄 内容を入力してください', 'error');
+        showToast('内容を入力してください', 'error');
         contentTextarea.focus();
         return;
     }
 
     if (content.length > 800) {
-        showToast('📏 内容は800文字以内で入力してください', 'error');
+        showToast('内容は800文字以内で入力してください', 'error');
         contentTextarea.focus();
         return;
     }
 
-    // フォームデータ作成
+    // Build form data
     formData.append('category', category);
     formData.append('customTitle', customTitle);
     formData.append('wantDialog', wantDialog ? 'on' : '');
     formData.append('anonymous', anonymous ? 'on' : '');
     formData.append('content', content);
 
-    // ファイル追加
+    // Add files
     selectedFiles.forEach(file => {
         formData.append('attachments', file);
     });
 
-    // 送信中状態
+    // Set loading state
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '🚀 送信中...';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 送信中...';
     submitBtn.classList.add('loading');
 
     try {
@@ -337,45 +286,36 @@ async function handleSubmit(e) {
         const result = await response.json();
 
         if (response.ok) {
-            showToast(`✅ ${result.message}`, 'success');
-            await resetFormWithAnimation();
+            showToast(result.message, 'success');
+            resetForm();
         } else {
-            showToast(`❌ ${result.error || 'エラーが発生しました'}`, 'error');
+            showToast(result.error || 'エラーが発生しました', 'error');
         }
     } catch (error) {
         console.error('送信エラー:', error);
-        showToast('🔌 送信に失敗しました。ネットワークを確認してください。', 'error');
+        showToast('送信に失敗しました。ネットワークを確認してください。', 'error');
     } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '🚀 送信する';
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> 送信する';
         submitBtn.classList.remove('loading');
     }
 }
 
-// フォームリセット（アニメーション付き）
-async function resetFormWithAnimation() {
-    // フェードアウト
-    inquiryForm.style.transition = 'opacity 0.3s ease';
-    inquiryForm.style.opacity = '0.5';
-    
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
-    // リセット
+// Reset form
+function resetForm() {
     inquiryForm.reset();
     selectedFiles = [];
     updateFileList();
     customTitleGroup.style.display = 'none';
     charCount.textContent = '0';
+    charCount.style.color = 'var(--text-muted)';
     anonymousCheckbox.disabled = false;
     anonymousCheckbox.closest('.checkbox-label').style.opacity = '1';
-    
-    // フェードイン
-    inquiryForm.style.opacity = '1';
 }
 
-// トースト表示
+// Show toast notification
 function showToast(message, type = 'success') {
-    // 既存のトーストがあれば削除
+    // Remove existing toast
     toast.classList.remove('show');
     
     setTimeout(() => {
@@ -383,13 +323,14 @@ function showToast(message, type = 'success') {
         toast.className = `toast ${type}`;
         toast.classList.add('show');
         
+        // Auto hide after 4 seconds
         setTimeout(() => {
             toast.classList.remove('show');
         }, 4000);
     }, 100);
 }
 
-// HTMLエスケープ
+// Escape HTML
 function escapeHtml(text) {
     const map = {
         '&': '&amp;',
@@ -401,28 +342,22 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, m => map[m]);
 }
 
-// テーマトグル追加
-function addThemeToggle() {
-    // 今回はダークテーマのみなので、将来的な拡張のためのプレースホルダー
-}
-
-// ログイン
+// Login function
 function login() {
-    // ローディングアニメーション
     const loginBtn = event.target;
-    loginBtn.innerHTML = '🎮 ログイン中...';
+    loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ログイン中...';
     loginBtn.disabled = true;
     
     setTimeout(() => {
         window.location.href = '/auth/login';
-    }, 500);
+    }, 300);
 }
 
-// ログアウト
+// Logout function
 async function logout() {
     try {
         const logoutBtn = event.target;
-        logoutBtn.innerHTML = '👋 ログアウト中...';
+        logoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ログアウト中...';
         logoutBtn.disabled = true;
 
         const response = await fetch('/auth/logout', {
@@ -433,7 +368,7 @@ async function logout() {
         });
 
         if (response.ok) {
-            showToast('👋 ログアウトしました', 'success');
+            showToast('ログアウトしました', 'success');
             setTimeout(() => {
                 window.location.reload();
             }, 1000);
@@ -442,17 +377,10 @@ async function logout() {
         }
     } catch (error) {
         console.error('ログアウトエラー:', error);
-        showToast('❌ ログアウトに失敗しました', 'error');
+        showToast('ログアウトに失敗しました', 'error');
         
-        // ボタンを元に戻す
-        event.target.innerHTML = '👋 ログアウト';
+        // Reset button
+        event.target.innerHTML = '<i class="fas fa-sign-out-alt"></i> ログアウト';
         event.target.disabled = false;
     }
-}
-
-// サービスワーカー登録（将来的なオフライン対応）
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        // 今回は実装しないが、将来的にオフライン機能を追加可能
-    });
 }

@@ -1,4 +1,4 @@
-/* リセットとベース設定 */
+/* Discord PC Gaming Theme */
 * {
     margin: 0;
     padding: 0;
@@ -6,39 +6,45 @@
 }
 
 :root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    --dark-bg: #0d1117;
-    --darker-bg: #010409;
-    --card-bg: #161b22;
-    --elevated-bg: #21262d;
-    --border-color: #30363d;
-    --text-primary: #f0f6fc;
-    --text-secondary: #8b949e;
-    --text-muted: #656d76;
-    --accent-blue: #58a6ff;
-    --accent-purple: #bc8cff;
-    --accent-pink: #ff7eb6;
-    --accent-green: #7ce38b;
-    --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    --shadow-md: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-    --shadow-sm: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    /* Discord Brand Colors */
+    --discord-blurple: #5865F2;
+    --discord-green: #57F287;
+    --discord-yellow: #FEE75C;
+    --discord-fuchsia: #EB459E;
+    --discord-red: #ED4245;
+    
+    /* Discord UI Colors */
+    --dark-primary: #36393F;
+    --dark-secondary: #2F3136;
+    --dark-tertiary: #202225;
+    --channel-default: #96989D;
+    --interactive-normal: #B9BBBE;
+    --interactive-hover: #DCDDDE;
+    --interactive-active: #FFFFFF;
+    
+    /* Gaming Accent Colors */
+    --gaming-cyan: #00D9FF;
+    --gaming-pink: #FF006E;
+    --gaming-green: #8AC926;
+    
+    /* Functional Colors */
+    --text-normal: #DCDDDE;
+    --text-muted: #72767D;
+    --text-link: #00AFF4;
+    --background-primary: #36393F;
+    --background-secondary: #2F3136;
+    --background-tertiary: #202225;
+    --background-accent: #4F545C;
+    --border-color: #40444B;
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-    background: var(--dark-bg);
-    background-image: 
-        radial-gradient(circle at 25% 25%, #1f2937 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, #374151 0%, transparent 50%);
-    color: var(--text-primary);
-    min-height: 100vh;
-    line-height: 1.6;
-    font-feature-settings: 'cv11', 'ss01';
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: var(--background-tertiary);
+    color: var(--text-normal);
+    line-height: 1.5;
+    font-size: 16px;
+    overflow-x: hidden;
 }
 
 .container {
@@ -47,279 +53,218 @@ body {
     flex-direction: column;
 }
 
-/* ヘッダー */
+/* Header - Discord Style */
 .header {
-    background: rgba(22, 27, 34, 0.95);
-    backdrop-filter: blur(20px);
+    background-color: var(--background-secondary);
     border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: var(--shadow-sm);
 }
 
 .header-content {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 1.5rem 2rem;
+    padding: 16px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .header-title {
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-size: 1.875rem;
-    font-weight: 800;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    letter-spacing: -0.025em;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--interactive-active);
 }
 
 .header-icon {
-    font-size: 2.25rem;
-    filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
+    font-size: 24px;
+    color: var(--gaming-cyan);
 }
 
-/* ユーザーセクション */
+/* User Section */
 .user-section {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 12px;
 }
 
 .user-info {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    background: var(--elevated-bg);
-    padding: 0.75rem 1.25rem;
-    border-radius: 50px;
+    gap: 8px;
+    background-color: var(--background-accent);
+    padding: 8px 12px;
+    border-radius: 8px;
     border: 1px solid var(--border-color);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.user-info:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--accent-blue);
 }
 
 .user-avatar {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    border: 2px solid var(--accent-blue);
-    transition: all 0.3s ease;
-}
-
-.user-avatar:hover {
-    border-color: var(--accent-purple);
-    transform: scale(1.1);
+    border: 2px solid var(--discord-blurple);
 }
 
 .user-name {
-    color: var(--text-primary);
-    font-weight: 600;
-    font-size: 1rem;
+    color: var(--interactive-active);
+    font-weight: 500;
+    font-size: 14px;
 }
 
-.auth-buttons {
-    display: flex;
-    gap: 0.75rem;
-}
-
-/* メインコンテンツ */
+/* Main Content */
 .main {
     flex: 1;
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 3rem 2rem;
+    padding: 32px 24px;
     width: 100%;
 }
 
-/* ログインプロンプト */
+/* Login Prompt */
 .login-prompt {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 70vh;
+    min-height: 60vh;
 }
 
 .login-card {
-    background: var(--card-bg);
+    background-color: var(--background-primary);
     border: 1px solid var(--border-color);
-    border-radius: 24px;
-    padding: 4rem 3rem;
+    border-radius: 8px;
+    padding: 40px;
     text-align: center;
-    max-width: 480px;
+    max-width: 440px;
     width: 100%;
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
-}
-
-.login-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--primary-gradient);
 }
 
 .login-card h2 {
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 1.5rem;
-    font-size: 2.25rem;
-    font-weight: 700;
-    letter-spacing: -0.025em;
+    color: var(--interactive-active);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
 }
 
 .login-card p {
-    color: var(--text-secondary);
-    margin-bottom: 2.5rem;
-    line-height: 1.7;
-    font-size: 1.125rem;
+    color: var(--channel-default);
+    margin-bottom: 24px;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
-/* フォームカード */
+/* Form Card */
 .form-container {
     width: 100%;
-    animation: fadeInUp 0.6s ease-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .form-card {
-    background: var(--card-bg);
+    background-color: var(--background-primary);
     border: 1px solid var(--border-color);
-    border-radius: 24px;
-    padding: 3rem;
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
-}
-
-.form-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--primary-gradient);
+    border-radius: 8px;
+    padding: 32px;
 }
 
 .form-title {
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 2.5rem;
+    color: var(--interactive-active);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
     text-align: center;
-    letter-spacing: -0.025em;
 }
 
-/* フォーム要素 */
+/* Form Elements */
 .form-group {
-    margin-bottom: 2rem;
+    margin-bottom: 20px;
 }
 
 .form-label {
     display: block;
-    color: var(--text-primary);
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    font-size: 0.95rem;
+    color: var(--interactive-active);
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.5px;
+}
+
+.form-label i {
+    margin-right: 6px;
+    color: var(--discord-blurple);
+    font-size: 14px;
 }
 
 .required {
-    color: var(--accent-pink);
-    margin-left: 0.25rem;
+    color: var(--discord-red);
 }
 
 .form-input,
 .form-select,
 .form-textarea {
     width: 100%;
-    background: var(--elevated-bg);
-    border: 2px solid var(--border-color);
-    color: var(--text-primary);
-    padding: 1rem 1.25rem;
-    font-size: 1rem;
-    border-radius: 16px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: var(--background-tertiary);
+    border: 1px solid var(--border-color);
+    color: var(--text-normal);
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 16px;
     font-family: inherit;
+    transition: border-color 0.2s ease;
 }
 
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus {
     outline: none;
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 0 4px rgba(88, 166, 255, 0.1);
-    transform: translateY(-2px);
+    border-color: var(--discord-blurple);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--text-muted);
 }
 
 .form-textarea {
     resize: vertical;
-    min-height: 140px;
-    line-height: 1.6;
+    min-height: 120px;
+    line-height: 1.5;
 }
 
 .char-counter {
     text-align: right;
     color: var(--text-muted);
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
-    font-weight: 500;
+    font-size: 12px;
+    margin-top: 4px;
 }
 
-/* チェックボックス */
+/* Checkbox Styling */
 .checkbox-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 16px;
 }
 
 .checkbox-label {
     display: flex;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 12px;
     cursor: pointer;
-    color: var(--text-primary);
-    font-weight: 500;
-    text-transform: none;
-    letter-spacing: normal;
-    font-size: 1rem;
-    padding: 1rem;
-    border-radius: 16px;
-    transition: all 0.3s ease;
+    color: var(--text-normal);
+    font-size: 14px;
+    padding: 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.checkbox-label i {
+    margin-right: 8px;
+    color: var(--discord-blurple);
+    margin-top: 2px;
 }
 
 .checkbox-label:hover {
-    background: rgba(88, 166, 255, 0.05);
+    background-color: var(--background-secondary);
 }
 
 .checkbox {
@@ -327,80 +272,59 @@ body {
 }
 
 .checkbox-custom {
-    width: 24px;
-    height: 24px;
-    background: var(--elevated-bg);
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
+    width: 18px;
+    height: 18px;
+    background-color: var(--background-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
     flex-shrink: 0;
-    margin-top: 0.125rem;
+    margin-top: 2px;
     position: relative;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s ease;
 }
 
 .checkbox:checked + .checkbox-custom {
-    background: var(--accent-blue);
-    border-color: var(--accent-blue);
-    transform: scale(1.1);
+    background-color: var(--discord-blurple);
+    border-color: var(--discord-blurple);
 }
 
 .checkbox:checked + .checkbox-custom::after {
     content: '✓';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: -1px;
+    left: 3px;
     color: white;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
 }
 
 .checkbox-help {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-    line-height: 1.5;
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 4px;
+    line-height: 1.4;
 }
 
-/* ファイルアップロード */
+/* File Upload */
 .file-upload-area {
     border: 2px dashed var(--border-color);
-    background: var(--elevated-bg);
-    border-radius: 20px;
-    padding: 3rem 2rem;
+    background-color: var(--background-secondary);
+    border-radius: 8px;
+    padding: 40px 20px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s ease;
     position: relative;
-    overflow: hidden;
-}
-
-.file-upload-area::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(88, 166, 255, 0.1), transparent);
-    transition: left 0.6s ease;
 }
 
 .file-upload-area:hover {
-    border-color: var(--accent-blue);
-    background: rgba(88, 166, 255, 0.05);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-}
-
-.file-upload-area:hover::before {
-    left: 100%;
+    border-color: var(--discord-blurple);
+    background-color: var(--background-tertiary);
 }
 
 .file-upload-area.dragover {
-    border-color: var(--accent-green);
-    background: rgba(124, 227, 139, 0.1);
-    transform: scale(1.02);
+    border-color: var(--discord-green);
+    background-color: rgba(87, 242, 135, 0.1);
 }
 
 .file-input {
@@ -418,276 +342,310 @@ body {
 }
 
 .file-upload-icon {
-    font-size: 3rem;
-    display: block;
-    margin-bottom: 1rem;
-    color: var(--accent-blue);
+    font-size: 48px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.file-upload-icon i {
+    font-size: 48px;
+}
+
+.file-upload-area:hover .file-upload-icon,
+.file-upload-area:hover .file-upload-icon i {
+    color: var(--discord-blurple);
 }
 
 .file-upload-note {
     color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-top: 0.75rem;
+    font-size: 12px;
+    margin-top: 8px;
 }
 
-/* ファイルリスト */
+/* File List */
 .file-list {
-    margin-top: 1.5rem;
-    display: grid;
-    gap: 0.75rem;
+    margin-top: 16px;
 }
 
 .file-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--elevated-bg);
-    padding: 1rem 1.25rem;
-    border-radius: 16px;
+    background-color: var(--background-secondary);
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 4px;
     border: 1px solid var(--border-color);
-    transition: all 0.3s ease;
-}
-
-.file-item:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
 }
 
 .file-info {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 8px;
+}
+
+.file-info i {
+    color: var(--text-muted);
+    font-size: 14px;
 }
 
 .file-name {
-    color: var(--text-primary);
-    font-weight: 600;
+    color: var(--text-normal);
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .file-size {
     color: var(--text-muted);
-    font-size: 0.875rem;
+    font-size: 12px;
 }
 
 .file-remove {
-    background: var(--accent-pink);
+    background-color: var(--discord-red);
     color: white;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 12px;
+    padding: 6px 12px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 0.875rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    font-size: 12px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
 }
 
 .file-remove:hover {
-    background: #ff6b9d;
-    transform: scale(1.05);
+    background-color: #c23638;
 }
 
-/* ボタン */
+/* Buttons */
 .btn {
-    padding: 1rem 2rem;
+    padding: 12px 24px;
     border: none;
-    font-size: 1rem;
-    font-weight: 600;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 8px;
     text-decoration: none;
     justify-content: center;
-    border-radius: 16px;
-    position: relative;
-    overflow: hidden;
+    font-family: inherit;
 }
 
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1), transparent 70%);
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-}
-
-.btn:hover::before {
-    transform: translateX(100%);
+.btn i {
+    font-size: 16px;
 }
 
 .btn-discord {
-    background: var(--primary-gradient);
+    background-color: var(--discord-blurple);
     color: white;
-    box-shadow: var(--shadow-md);
 }
 
 .btn-discord:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
+    background-color: #4752c4;
 }
 
 .btn-secondary {
-    background: var(--elevated-bg);
-    color: var(--text-primary);
+    background-color: var(--background-accent);
+    color: var(--text-normal);
     border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover {
-    background: var(--border-color);
-    transform: translateY(-2px);
+    background-color: var(--border-color);
 }
 
 .btn-submit {
-    background: var(--success-gradient);
-    color: white;
-    font-weight: 700;
+    background-color: var(--discord-green);
+    color: var(--background-tertiary);
+    font-weight: 600;
     width: 100%;
-    padding: 1.25rem;
-    font-size: 1.125rem;
-    box-shadow: var(--shadow-md);
+    padding: 16px;
+    font-size: 16px;
 }
 
 .btn-submit:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
+    background-color: #4ac741;
 }
 
 .btn-submit:disabled {
-    background: var(--elevated-bg);
+    background-color: var(--background-accent);
     color: var(--text-muted);
     cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
 }
 
 .discord-icon {
-    font-size: 1.2rem;
+    font-size: 16px;
 }
 
 .form-actions {
-    margin-top: 2.5rem;
+    margin-top: 24px;
 }
 
-/* トースト通知 */
+/* Toast Notifications */
 .toast {
     position: fixed;
-    top: 2rem;
-    right: 2rem;
-    background: var(--card-bg);
+    top: 24px;
+    right: 24px;
+    background-color: var(--background-primary);
     border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    padding: 1.25rem 1.75rem;
-    border-radius: 16px;
-    box-shadow: var(--shadow-lg);
+    color: var(--text-normal);
+    padding: 16px 20px;
+    border-radius: 8px;
     transform: translateX(400px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s ease;
     z-index: 1000;
     max-width: 400px;
-    backdrop-filter: blur(20px);
+    font-size: 14px;
 }
 
 .toast.show {
     transform: translateX(0);
 }
 
-.toast.error {
-    border-left: 4px solid var(--accent-pink);
-}
-
 .toast.success {
-    border-left: 4px solid var(--accent-green);
+    border-left: 4px solid var(--discord-green);
 }
 
-/* アニメーション */
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
+.toast.error {
+    border-left: 4px solid var(--discord-red);
 }
 
-.loading {
-    animation: pulse 2s infinite;
+.toast.info {
+    border-left: 4px solid var(--discord-blurple);
 }
 
-/* レスポンシブ */
+/* Gaming Accent Bar */
+.gaming-accent {
+    height: 3px;
+    background: linear-gradient(90deg, 
+        var(--gaming-cyan) 0%, 
+        var(--discord-blurple) 25%, 
+        var(--gaming-pink) 50%, 
+        var(--discord-blurple) 75%, 
+        var(--gaming-cyan) 100%);
+    animation: rainbow-flow 3s linear infinite;
+}
+
+@keyframes rainbow-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .header-content {
-        padding: 1rem;
+        padding: 12px 16px;
         flex-direction: column;
-        gap: 1rem;
+        gap: 12px;
     }
-
-    .header-title {
-        font-size: 1.5rem;
-    }
-
+    
     .main {
-        padding: 1.5rem 1rem;
+        padding: 24px 16px;
     }
-
+    
     .form-card,
     .login-card {
-        padding: 2rem 1.5rem;
-        border-radius: 20px;
+        padding: 24px;
     }
-
+    
     .user-info {
-        padding: 0.6rem 1rem;
+        padding: 6px 10px;
     }
-
-    .user-name {
-        font-size: 0.9rem;
-    }
-
+    
     .toast {
-        top: 1rem;
-        right: 1rem;
-        left: 1rem;
+        top: 16px;
+        right: 16px;
+        left: 16px;
         max-width: none;
-    }
-
-    .file-upload-area {
-        padding: 2rem 1.5rem;
     }
 }
 
 @media (max-width: 480px) {
-    .form-title {
-        font-size: 1.75rem;
-    }
-
-    .btn {
-        padding: 0.875rem 1.5rem;
-        font-size: 0.95rem;
-    }
-
     .header-title {
-        font-size: 1.25rem;
+        font-size: 18px;
+    }
+    
+    .form-title {
+        font-size: 20px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .file-upload-area {
+        padding: 30px 15px;
+    }
+    
+    .file-upload-icon {
+        font-size: 36px;
     }
 }
 
-/* スクロールバー */
+/* Discord-style scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--dark-bg);
+    background: var(--background-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--border-color);
+    background: var(--background-accent);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--text-muted);
+    background: var(--border-color);
+}
+
+/* Loading animation for Font Awesome spinner */
+.fa-spin {
+    animation: fa-spin 2s infinite linear;
+}
+
+@keyframes fa-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Focus states for accessibility */
+.btn:focus,
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: 2px solid var(--discord-blurple);
+    outline-offset: 2px;
+}
+
+/* Loading state */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
