@@ -1,7 +1,7 @@
 module.exports = {
     "token": process.env.TOKEN,
     "clientId": process.env.CLIENT_ID,
-    "pccomId": process.env.PCCOM_ID,
+    "pccomId": process.env.PCCOM_ID ?? "932529116400459786",
     "profile": process.env.PROFILE,
     //質問チャンネルID
     "questionChId": "1019989168283197483",
