@@ -1,10 +1,10 @@
 module.exports = {
     "token": process.env.TOKEN,
-    "clientId": process.env.CLIENT_ID ?? "1385169281091637269",
-    "pccomId": process.env.PCCOM_ID ?? "932529116400459786",
+    "clientId": process.env.CLIENT_ID,
+    "pccomId": process.env.PCCOM_ID,
     "profile": process.env.PROFILE,
     //質問チャンネルID
-    "questionChId": "1385170391227437166",
+    "questionChId": "1019989168283197483",
     //解決済みタグ
     "kaiketsuTag": "1159827748148215928",
     //タイムアウトメンバーにつけるロール
@@ -14,7 +14,7 @@ module.exports = {
     //ベストアンサーロール
     "bestAnswerRole": "1067445728542199828",
     //2週間未経過通知
-    "timeoutNotice": "1385170391227437166",
+    "timeoutNotice": "1385287795014242394",
      // Web関連設定
     "webPort": process.env.WEB_PORT ?? 3000,
     "webDomain": process.env.WEB_DOMAIN ?? "http://localhost:3000",
