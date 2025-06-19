@@ -19,14 +19,16 @@ module.exports = {
     "webPort": process.env.WEB_PORT ?? 3000,
     "webDomain": process.env.WEB_DOMAIN ?? "http://localhost:3000",
     "clientSecret": process.env.CLIENT_SECRET,
-    "sessionSecret": process.env.SESSION_SECRET ?? "your-session-secret",
+    "sessionSecret": process.env.SESSION_SECRET,
     
-    "authUrl":process.env.AUTH_URL,
+    // OAuth2設定を修正
+    "authUrl": process.env.AUTH_URL,
+    "redirectUri": process.env.REDIRECT_URI ?? `${process.env.WEB_DOMAIN ?? "http://localhost:3000"}/auth/callback`,
+    
     // 問い合わせ関連チャンネル
-    "inquiryChannelId": process.env.INQUIRY_CHANNEL_ID ?? "1385170391227437166",
-    "inquiryCategoryId": process.env.INQUIRY_CATEGORY_ID ?? "1385170391227437166",
+    "inquiryChannelId": process.env.INQUIRY_CHANNEL_ID,
+    "inquiryCategoryId": process.env.INQUIRY_CATEGORY_ID,
     
     // 管理者ロール
-    "adminRoleId": process.env.ADMIN_ROLE_ID ?? "1067445728542199828"
+    "adminRoleId": process.env.ADMIN_ROLE_ID
 }
-
