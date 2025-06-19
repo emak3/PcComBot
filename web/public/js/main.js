@@ -145,6 +145,9 @@ function setupEventListeners() {
         handleFiles(e.target.files);
     });
 
+    // Paste functionality for images
+    document.addEventListener('paste', handlePaste);
+
     // Form submission
     inquiryForm.addEventListener('submit', handleSubmit);
 
@@ -155,7 +158,63 @@ function setupEventListeners() {
                 handleSubmit(e);
             }
         }
+        
+        // Show paste hint when Ctrl is pressed
+        if (e.key === 'Control') {
+            const pasteInfo = document.querySelector('.paste-info');
+            if (pasteInfo && formContainer.style.display !== 'none') {
+                pasteInfo.style.background = 'rgba(88, 166, 255, 0.1)';
+                pasteInfo.style.borderColor = 'var(--discord-blurple)';
+            }
+        }
     });
+
+    document.addEventListener('keyup', (e) => {
+        // Reset paste hint when Ctrl is released
+        if (e.key === 'Control') {
+            const pasteInfo = document.querySelector('.paste-info');
+            if (pasteInfo) {
+                pasteInfo.style.background = 'var(--background-secondary)';
+                pasteInfo.style.borderColor = 'var(--border-color)';
+            }
+        }
+    });
+}
+
+// Handle paste functionality
+function handlePaste(e) {
+    // Only handle paste when the form is visible and focused area is appropriate
+    if (formContainer.style.display === 'none') return;
+    
+    const items = e.clipboardData?.items;
+    if (!items) return;
+
+    const files = [];
+    
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        
+        // Check if item is a file and is an image
+        if (item.kind === 'file' && item.type.startsWith('image/')) {
+            const file = item.getAsFile();
+            if (file) {
+                // Generate a filename for pasted images
+                const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                const extension = file.type.split('/')[1] || 'png';
+                const fileName = `pasted-image-${timestamp}.${extension}`;
+                
+                // Create a new File object with a proper name
+                const namedFile = new File([file], fileName, { type: file.type });
+                files.push(namedFile);
+            }
+        }
+    }
+    
+    if (files.length > 0) {
+        e.preventDefault(); // Prevent default paste behavior
+        handleFiles(files);
+        showToast(`📋 ${files.length}個の画像をペーストしました`, 'success');
+    }
 }
 
 // Handle file selection
