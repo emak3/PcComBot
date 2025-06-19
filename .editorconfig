@@ -1,0 +1,57 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+tab_width = 4
+trim_trailing_whitespace = true
+
+# ------------------------------------------------------------------------------
+# 拡張子単位の設定
+[*.{md,markdown}]
+# mdはスペース解釈有
+trim_trailing_whitespace = false
+
+[*.bat]
+end_of_line = crlf
+
+[*.yml]
+# ymlはスペースのみ
+indent_size = 2
+indent_style = space
+
+[*.py]
+# PEP8 準拠
+indent_style = space
+
+[*.java]
+# Google Style Guide 準拠
+indent_style = space
+
+[*.{cc,cpp,cxx,c++,hpp,hxx}]
+# Google Style Guide 準拠
+indent_style = space
+indent_size = 2
+
+[*.sh]
+# Google Style Guide 準拠
+indent_style = space
+indent_size = 2
+
+# ------------------------------------------------------------------------------
+# 特定ファイル
+[{package.json,package-lock.json,npm-shrinkwrap.json,yarn.lock}]
+# node自動生成系ファイルはunset
+indent_size = unset
+indent_style = unset
+
+[{makefile,Makefile,GNUmakefile}]
+# makeはタブのみ
+# ファイル名はmakefileが推奨
+indent_style = tab
+
+# ------------------------------------------------------------------------------
+# ここより下に各リポジトリで必要な設定
