@@ -1,0 +1,474 @@
+/* リセットとベース設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    color: #dcddde;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ヘッダー */
+.header {
+    background: #2f3136;
+    border-bottom: 1px solid #40444b;
+    padding: 1rem 0;
+    box-shadow: 0 1px 0 rgba(4, 4, 5, 0.2), 0 1.5px 0 rgba(6, 6, 7, 0.05), 0 2px 0 rgba(4, 4, 5, 0.05);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header-icon {
+    font-size: 1.8rem;
+}
+
+/* ユーザーセクション */
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #40444b;
+    padding: 0.5rem 1rem;
+    border: 1px solid #4f545c;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #5865f2;
+}
+
+.user-name {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* メインコンテンツ */
+.main {
+    flex: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+}
+
+/* ログインプロンプト */
+.login-prompt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.login-card {
+    background: #36393f;
+    border: 1px solid #40444b;
+    padding: 3rem;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-card h2 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.login-card p {
+    color: #b9bbbe;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+/* フォームカード */
+.form-container {
+    width: 100%;
+}
+
+.form-card {
+    background: #36393f;
+    border: 1px solid #40444b;
+    padding: 2rem;
+}
+
+.form-title {
+    color: #ffffff;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* フォーム要素 */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    color: #b9bbbe;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.required {
+    color: #f04747;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    background: #40444b;
+    border: 1px solid #4f545c;
+    color: #dcddde;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transition: border-color 0.15s ease;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #5865f2;
+    box-shadow: 0 0 0 1px #5865f2;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+}
+
+.char-counter {
+    text-align: right;
+    color: #72767d;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* チェックボックス */
+.checkbox-group {
+    margin-bottom: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    color: #dcddde;
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 1rem;
+}
+
+.checkbox {
+    display: none;
+}
+
+.checkbox-custom {
+    width: 20px;
+    height: 20px;
+    background: #40444b;
+    border: 1px solid #4f545c;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+    position: relative;
+    transition: all 0.15s ease;
+}
+
+.checkbox:checked + .checkbox-custom {
+    background: #5865f2;
+    border-color: #5865f2;
+}
+
+.checkbox:checked + .checkbox-custom::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.checkbox-help {
+    color: #72767d;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    line-height: 1.4;
+}
+
+/* ファイルアップロード */
+.file-upload-area {
+    border: 2px dashed #4f545c;
+    background: #2f3136;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+    position: relative;
+}
+
+.file-upload-area:hover {
+    border-color: #5865f2;
+}
+
+.file-upload-area.dragover {
+    border-color: #5865f2;
+    background: #40444b;
+}
+
+.file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-upload-content {
+    pointer-events: none;
+}
+
+.file-upload-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.file-upload-note {
+    color: #72767d;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* ファイルリスト */
+.file-list {
+    margin-top: 1rem;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #40444b;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #4f545c;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.file-name {
+    color: #dcddde;
+    font-weight: 500;
+}
+
+.file-size {
+    color: #72767d;
+    font-size: 0.875rem;
+}
+
+.file-remove {
+    background: #f04747;
+    color: #ffffff;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background-color 0.15s ease;
+}
+
+.file-remove:hover {
+    background: #d73636;
+}
+
+/* ボタン */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.btn-discord {
+    background: #5865f2;
+    color: #ffffff;
+}
+
+.btn-discord:hover {
+    background: #4752c4;
+}
+
+.btn-secondary {
+    background: #4f545c;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background: #5d6269;
+}
+
+.btn-submit {
+    background: #57f287;
+    color: #000000;
+    font-weight: 600;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+}
+
+.btn-submit:hover {
+    background: #4fc46e;
+}
+
+.btn-submit:disabled {
+    background: #4f545c;
+    color: #72767d;
+    cursor: not-allowed;
+}
+
+.discord-icon {
+    font-size: 1.2rem;
+}
+
+.form-actions {
+    margin-top: 2rem;
+}
+
+/* トースト通知 */
+.toast {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: #36393f;
+    border: 1px solid #40444b;
+    color: #dcddde;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid #57f287;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    max-width: 400px;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast.error {
+    border-left-color: #f04747;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    .header-content {
+        padding: 0 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .header-title {
+        font-size: 1.25rem;
+    }
+
+    .main {
+        padding: 1rem;
+    }
+
+    .form-card,
+    .login-card {
+        padding: 1.5rem;
+    }
+
+    .user-info {
+        padding: 0.4rem 0.8rem;
+    }
+
+    .user-name {
+        font-size: 0.9rem;
+    }
+
+    .toast {
+        top: 1rem;
+        right: 1rem;
+        left: 1rem;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-title {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .file-upload-area {
+        padding: 1.5rem;
+    }
+}

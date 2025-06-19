@@ -14,6 +14,19 @@ module.exports = {
     //ベストアンサーロール
     "bestAnswerRole": "1067445728542199828",
     //2週間未経過通知
-    "timeoutNotice": "1385170391227437166"
+    "timeoutNotice": "1385170391227437166",
+     // Web関連設定
+    "webPort": process.env.WEB_PORT ?? 3000,
+    "webDomain": process.env.WEB_DOMAIN ?? "http://localhost:3000",
+    "clientSecret": process.env.CLIENT_SECRET,
+    "sessionSecret": process.env.SESSION_SECRET ?? "your-session-secret",
+    
+    "authUrl":process.env.AUTH_URL,
+    // 問い合わせ関連チャンネル
+    "inquiryChannelId": process.env.INQUIRY_CHANNEL_ID ?? "1385170391227437166",
+    "inquiryCategoryId": process.env.INQUIRY_CATEGORY_ID ?? "1385170391227437166",
+    
+    // 管理者ロール
+    "adminRoleId": process.env.ADMIN_ROLE_ID ?? "1067445728542199828"
 }
 

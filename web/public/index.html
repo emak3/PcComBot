@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Community - 管理者への問い合わせ</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">
+                    <span class="header-icon">🖥️</span>
+                    PC Community
+                </h1>
+                <div class="user-section" id="userSection">
+                    <!-- ユーザー情報がここに動的に挿入される -->
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <main class="main">
+            <!-- ログイン前の表示 -->
+            <div class="login-prompt" id="loginPrompt" style="display: none;">
+                <div class="login-card">
+                    <h2>管理者への問い合わせ</h2>
+                    <p>問い合わせフォームを利用するには、Discordアカウントでログインしてください。</p>
+                    <button class="btn btn-discord" onclick="login()">
+                        <span class="discord-icon">🎮</span>
+                        Discordでログイン
+                    </button>
+                </div>
+            </div>
+
+            <!-- ログイン後のフォーム -->
+            <div class="form-container" id="formContainer" style="display: none;">
+                <div class="form-card">
+                    <h2 class="form-title">管理者への問い合わせ</h2>
+                    
+                    <form id="inquiryForm" enctype="multipart/form-data">
+                        <!-- カテゴリー選択 -->
+                        <div class="form-group">
+                            <label for="category" class="form-label">カテゴリー <span class="required">*</span></label>
+                            <select id="category" name="category" class="form-select" required>
+                                <option value="">選択してください</option>
+                                <option value="違反報告">違反報告</option>
+                                <option value="管理者への質問">管理者への質問</option>
+                                <option value="要望・意見">要望・意見</option>
+                                <option value="タイムアウト解除申請">タイムアウト解除申請</option>
+                                <option value="その他">その他</option>
+                            </select>
+                        </div>
+
+                        <!-- その他の場合のタイトル入力 -->
+                        <div class="form-group" id="customTitleGroup" style="display: none;">
+                            <label for="customTitle" class="form-label">タイトル</label>
+                            <input type="text" id="customTitle" name="customTitle" class="form-input" placeholder="具体的なタイトルを入力してください" maxlength="50">
+                        </div>
+
+                        <!-- チェックボックス -->
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="wantDialog" name="wantDialog" class="checkbox">
+                                    <span class="checkbox-custom"></span>
+                                    管理者との対話を希望する
+                                </label>
+                                <p class="checkbox-help">チェックすると専用のチャンネルが作成され、管理者と直接やり取りができます。</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="anonymous" name="anonymous" class="checkbox">
+                                    <span class="checkbox-custom"></span>
+                                    匿名を希望する
+                                </label>
+                                <p class="checkbox-help">※荒らし防止のため、管理者には送信者情報が表示されます。</p>
+                            </div>
+                        </div>
+
+                        <!-- 内容入力 -->
+                        <div class="form-group">
+                            <label for="content" class="form-label">内容 <span class="required">*</span></label>
+                            <textarea id="content" name="content" class="form-textarea" placeholder="問い合わせ内容を詳しく記入してください（800文字以内）" maxlength="800" required></textarea>
+                            <div class="char-counter">
+                                <span id="charCount">0</span> / 800
+                            </div>
+                        </div>
+
+                        <!-- ファイル添付 -->
+                        <div class="form-group">
+                            <label for="attachments" class="form-label">添付ファイル</label>
+                            <div class="file-upload-area" id="fileUploadArea">
+                                <input type="file" id="attachments" name="attachments" multiple accept=".jpg,.jpeg,.png,.gif,.pdf,.txt,.doc,.docx,.zip,.rar" class="file-input">
+                                <div class="file-upload-content">
+                                    <span class="file-upload-icon">📎</span>
+                                    <p>ファイルをドラッグ&ドロップまたはクリックして選択</p>
+                                    <p class="file-upload-note">最大5ファイル、各1MB未満</p>
+                                </div>
+                            </div>
+                            <div id="fileList" class="file-list"></div>
+                        </div>
+
+                        <!-- 送信ボタン -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-submit" id="submitBtn">
+                                送信する
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- 成功・エラーメッセージ -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -3,6 +3,9 @@ const config = require("./config.js");
 const log = require("./logger.js");
 const { readdirSync } = require("node:fs");
 require("./utils/newUsernameSystem")
+const WebServer = require("./web/server.js");
+require("./utils/newUsernameSystem")
+
 
 const client = new Client({
     intents: [
@@ -72,4 +75,10 @@ for (const file of readdirSync("./messages").filter((file) =>
     client.messages.push(message);
 }
 
-client.login(config.token).then(log.info(config));
+client.login(config.token).then(() => {
+    log.info("Discord Bot config:", config);
+    
+    // Webサーバー起動
+    const webServer = new WebServer(client);
+    webServer.start();
+});
