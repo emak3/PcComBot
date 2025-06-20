@@ -139,6 +139,15 @@ async function createDialogChannel(client, user, categoryTitle, content, files) 
                         PermissionFlagsBits.ReadMessageHistory,
                         PermissionFlagsBits.ManageMessages
                     ]
+                },
+                {
+                    id: config.supportRoleId, // 管理者
+                    allow: [
+                        PermissionFlagsBits.ViewChannel,
+                        PermissionFlagsBits.SendMessages,
+                        PermissionFlagsBits.ReadMessageHistory,
+                        PermissionFlagsBits.ManageMessages
+                    ]
                 }
             ]
         });

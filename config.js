@@ -30,5 +30,6 @@ module.exports = {
     "inquiryCategoryId": process.env.INQUIRY_CATEGORY_ID,
     
     // 管理者ロール
-    "adminRoleId": process.env.ADMIN_ROLE_ID
+    "adminRoleId": process.env.ADMIN_ROLE_ID,
+    "supportRoleId": process.env.SUP_ROLE_ID,
 }
