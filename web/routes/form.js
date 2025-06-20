@@ -55,10 +55,10 @@ router.post('/submit', requireAuth, upload.array('attachments', 5), async (req, 
             .setTitle('📝 新しい問い合わせ')
             .setThumbnail(user.avatarURL)
             .addFields([
-                { name: '📋 カテゴリー', value: categoryTitle, inline: true },
                 { name: '👤 送信者', value: `${user.displayName}\n(<@${user.id}>)`, inline: true },
                 { name: '💬 管理者との対話', value: wantDialog === 'on' ? '✅ 希望する' : '❌ 希望しない', inline: true },
                 { name: '🕶️ 匿名希望', value: anonymous === 'on' ? '✅ 希望する' : '❌ 希望しない', inline: true },
+                { name: '📋 カテゴリー', value: categoryTitle, inline: true },
                 { name: '📄 内容', value: content }
             ])
             .setTimestamp()
