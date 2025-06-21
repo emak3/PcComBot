@@ -1,6 +1,24 @@
 const express = require('express');
 const multer = require('multer');
-const { EmbedBuilder, ChannelType, PermissionFlagsBits } = require('discord.js');
+const {
+    AttachmentBuilder,
+    ContainerBuilder,
+    TextDisplayBuilder,
+    MessageFlags,
+    SectionBuilder,
+    ThumbnailBuilder,
+    MediaGalleryBuilder,
+    MediaGalleryItemBuilder,
+    FileBuilder,
+    SeparatorBuilder,
+    SeparatorSpacingSize,
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    EmbedBuilder,
+    ChannelType,
+    PermissionFlagsBits,
+} = require('discord.js');
 const config = require('../../config.js');
 const log = require('../../logger.js');
 const { requireAuth } = require('../middleware/auth.js');
@@ -19,7 +37,7 @@ const upload = multer({
         const allowedTypes = /jpeg|jpg|png|gif|pdf|txt|doc|docx|zip|rar/;
         const extname = allowedTypes.test(file.originalname.toLowerCase());
         const mimetype = allowedTypes.test(file.mimetype);
-        
+
         if (extname && mimetype) {
             return cb(null, true);
         } else {
@@ -27,6 +45,14 @@ const upload = multer({
         }
     }
 });
+
+function isImageFile(file) {
+    const imageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+
+    return imageTypes.includes(file.mimetype) ||
+        imageExtensions.some(ext => file.originalname.toLowerCase().endsWith(ext));
+}
 
 // フォーム送信処理
 router.post('/submit', requireAuth, upload.array('attachments', 5), async (req, res) => {
@@ -49,20 +75,145 @@ router.post('/submit', requireAuth, upload.array('attachments', 5), async (req, 
             categoryTitle = `その他: ${customTitle}`;
         }
 
-        // 問い合わせ内容のEmbed作成
-        const embed = new EmbedBuilder()
-            .setColor('#5865F2')
-            .setTitle('📝 新しい問い合わせ')
-            .setThumbnail(user.avatarURL)
-            .addFields([
-                { name: '👤 送信者', value: `${user.displayName}\n(<@${user.id}>)`, inline: true },
-                { name: '💬 管理者との対話', value: wantDialog === 'on' ? '✅ 希望する' : '❌ 希望しない', inline: true },
-                { name: '🕶️ 匿名希望', value: anonymous === 'on' ? '✅ 希望する' : '❌ 希望しない', inline: true },
-                { name: '📋 カテゴリー', value: categoryTitle, inline: true },
-                { name: '📄 内容', value: content }
-            ])
-            .setTimestamp()
-            .setFooter({ text: `User ID: ${user.id}` });
+        const discordUser = await req.client.users.fetch(user.id);
+
+        const inquiryContainer = new ContainerBuilder()
+            .addSectionComponents(
+                section => section
+                    .addTextDisplayComponents(
+                        textDisplay => textDisplay
+                            .setContent('## 📝 新しい問い合わせ'),
+                        textDisplay => textDisplay
+                            .setContent('**👤 送信者**'),
+                        textDisplay => textDisplay
+                            .setContent(`${discordUser.displayName}  (<@${discordUser.id}>)`)
+                    )
+                    .setThumbnailAccessory(
+                        thumbnail => thumbnail
+                            .setURL(discordUser.displayAvatarURL())
+                    )
+            )
+            .addSeparatorComponents(
+                separator => separator
+            )
+            .addTextDisplayComponents(
+                textDisplay => textDisplay
+                    .setContent(`💬 **管理者との対話**：  ${wantDialog === 'on' ? '✅ 希望する' : '❌ 希望しない'}`),
+                textDisplay => textDisplay
+                    .setContent(`🕶️ **匿名希望　　　**：  ${anonymous === 'on' ? '✅ 希望する' : '❌ 希望しない'}`)
+            )
+            .addSeparatorComponents(
+                separator => separator
+            )
+            .addTextDisplayComponents(
+                textDisplay => textDisplay
+                    .setContent(`### 📋 カテゴリー ${categoryTitle}`),
+                textDisplay => textDisplay
+                    .setContent(categoryTitle)
+            )
+            .addSeparatorComponents(
+                separator => separator
+            )
+            .addTextDisplayComponents(
+                textDisplay => textDisplay
+                    .setContent('### 📄 内容'),
+                textDisplay => textDisplay
+                    .setContent(content)
+            );
+
+        // 添付ファイルがある場合の処理
+        const fileAttachments = [];
+        if (req.files && req.files.length > 0) {
+            // ファイルアタッチメントを作成
+            req.files.forEach(file => {
+                fileAttachments.push(
+                    new AttachmentBuilder()
+                        .setFile(file.buffer)
+                        .setName(file.originalname)
+                );
+            });
+
+            // 画像ファイルと非画像ファイルを分ける
+            const imageFiles = req.files.filter(file => isImageFile(file));
+            const nonImageFiles = req.files.filter(file => !isImageFile(file));
+
+            // セパレーターを追加
+            inquiryContainer.addSeparatorComponents(
+                separator => separator
+            );
+
+            // 画像ファイルがある場合、Media Galleryを追加
+            if (imageFiles.length > 0) {
+                const mediaGalleryBuilder = new MediaGalleryBuilder();
+                inquiryContainer.addTextDisplayComponents(
+                    textDisplay => textDisplay
+                        .setContent('### 🖼️ 添付画像')
+                );
+                imageFiles.forEach(file => {
+                    mediaGalleryBuilder.addItems(
+                        new MediaGalleryItemBuilder()
+                            .setURL(`attachment://${file.originalname}`)
+                    );
+                });
+
+                inquiryContainer.addMediaGalleryComponents(mediaGalleryBuilder);
+            }
+
+            // 非画像ファイルがある場合、Fileコンポーネントを追加
+            if (nonImageFiles.length > 0) {
+                // 画像がある場合はセパレーターを追加
+                if (imageFiles.length > 0) {
+                    inquiryContainer.addSeparatorComponents(
+                        separator => separator
+                    );
+                }
+
+                // 添付ファイルセクションのタイトル
+                inquiryContainer.addTextDisplayComponents(
+                    textDisplay => textDisplay
+                        .setContent('### 📎 添付ファイル')
+                );
+
+                // 各非画像ファイルをFileコンポーネントとして追加
+                nonImageFiles.forEach(file => {
+                    inquiryContainer.addFileComponents(
+                        fileBuilder => fileBuilder
+                            .setURL(`attachment://${file.originalname}`)
+                    );
+                });
+            }
+        }
+
+        let disable = true
+        if (anonymous === 'on') {
+            disable = true
+        } else {
+            if (wantDialog === 'on') {
+                disable = true
+            } else {
+                disable = false
+            }
+        }
+
+        // セパレーターとボタンセクションを追加
+        inquiryContainer
+            .addSeparatorComponents(
+                separator => separator
+            )
+            .addSectionComponents(
+                section => section
+                    .addTextDisplayComponents(
+                        textDisplay => textDisplay
+                            .setContent(`-# 送信日時: <t:${Math.floor(Date.now() / 1000)}:F>\nUser ID: ${user.id}`)
+                    )
+                    .setButtonAccessory(
+                        button => button
+                            .setCustomId(`crch_${user.id}`)
+                            .setLabel('🔏 対話チャンネルを作成')
+                            .setStyle(ButtonStyle.Success)
+                            .setDisabled(disable)
+                    )
+            );
 
         // 問い合わせチャンネルに送信
         const inquiryChannel = req.client.channels.cache.get(config.inquiryChannelId);
@@ -71,16 +222,10 @@ router.post('/submit', requireAuth, upload.array('attachments', 5), async (req, 
         }
 
         const messageData = {
-            embeds: [embed]
+            components: [inquiryContainer],
+            files: fileAttachments,
+            flags: MessageFlags.IsComponentsV2
         };
-
-        // 添付ファイルがある場合
-        if (req.files && req.files.length > 0) {
-            messageData.files = req.files.map(file => ({
-                attachment: file.buffer,
-                name: file.originalname
-            }));
-        }
 
         const sentMessage = await inquiryChannel.send(messageData);
 
@@ -90,10 +235,10 @@ router.post('/submit', requireAuth, upload.array('attachments', 5), async (req, 
         }
 
         log.info(`問い合わせが送信されました: ${user.username} (${user.id}) - ${categoryTitle}`);
-        
-        res.json({ 
-            success: true, 
-            message: '問い合わせを送信しました。' + (wantDialog === 'on' ? ' 専用チャンネルを作成しました。' : '') 
+
+        res.json({
+            success: true,
+            message: '問い合わせを送信しました。' + (wantDialog === 'on' ? ' 専用チャンネルを作成しました。' : '')
         });
 
     } catch (error) {
@@ -153,29 +298,130 @@ async function createDialogChannel(client, user, categoryTitle, content, files) 
         });
 
         // 初期メッセージ送信
-        const initialEmbed = new EmbedBuilder()
-            .setColor('#5865F2')
-            .setTitle('💬 管理者との対話チャンネル')
-            .setDescription(`<@${user.id}> さんの問い合わせです。`)
-            .addFields([
-                { name: '📋 カテゴリー', value: categoryTitle },
-                { name: '📄 初期内容', value: content }
-            ])
-            .setThumbnail(user.avatarURL)
-            .setTimestamp();
+        const discordUser = await client.users.fetch(user.id);
 
+        const mainContainer =
+            new ContainerBuilder()
+                .addSectionComponents(
+                    section => section
+                        .addTextDisplayComponents(
+                            textDisplay => textDisplay
+                                .setContent('## 💬 管理者との対話チャンネル'),
+                            textDisplay => textDisplay
+                                .setContent(`<@${discordUser.id}> さんの問い合わせ`),
+                            textDisplay => textDisplay
+                                .setContent(`\n対話希望に ✅ が入っていたため、チャンネルを作成しました。`),
+                        )
+                        .setThumbnailAccessory(
+                            thumbnail => thumbnail
+                                .setURL(discordUser.displayAvatarURL()),
+                        )
+                )
+                .addSeparatorComponents(
+                    separator => separator,
+                )
+                .addTextDisplayComponents(
+                    textDisplay => textDisplay
+                        .setContent('### 📋 カテゴリー'),
+                    textDisplay => textDisplay
+                        .setContent(categoryTitle),
+                )
+                .addSeparatorComponents(
+                    separator => separator,
+                )
+                .addTextDisplayComponents(
+                    textDisplay => textDisplay
+                        .setContent('### 📄 内容'),
+                    textDisplay => textDisplay
+                        .setContent(content),
+                )
+                .addSeparatorComponents(
+                    separator => separator,
+                );
+
+        // メッセージデータの基本構造
         const messageData = {
-            content: `<@${user.id}> <@&${config.adminRoleId}>`,
-            embeds: [initialEmbed]
+            components: [mainContainer],
+            files: [],
+            flags: MessageFlags.IsComponentsV2
         };
 
+        // ファイルがある場合、Media Galleryを追加
         if (files && files.length > 0) {
-            messageData.files = files.map(file => ({
-                attachment: file.buffer,
-                name: file.originalname
-            }));
+            const fileAttachments = files.map(file =>
+                new AttachmentBuilder()
+                    .setFile(file.buffer)
+                    .setName(file.originalname)
+            );
+
+            // 画像ファイルと非画像ファイルを分ける
+            const imageFiles = files.filter(file => isImageFile(file));
+            const nonImageFiles = files.filter(file => !isImageFile(file));
+
+            // 画像ファイルがある場合、Media Galleryを追加
+            if (imageFiles.length > 0) {
+                const mediaGalleryBuilder = new MediaGalleryBuilder();
+                mainContainer.addTextDisplayComponents(
+                    textDisplay => textDisplay
+                        .setContent('### 🖼️ 添付画像')
+                );
+
+                imageFiles.forEach(file => {
+                    mediaGalleryBuilder.addItems(
+                        new MediaGalleryItemBuilder()
+                            .setURL(`attachment://${file.originalname}`)
+                    );
+                });
+
+                mainContainer.addMediaGalleryComponents(mediaGalleryBuilder);
+            }
+
+            // 非画像ファイルがある場合、Fileコンポーネントを追加
+            if (nonImageFiles.length > 0) {
+                // セパレーターを追加（画像がある場合のみ）
+                if (imageFiles.length > 0) {
+                    mainContainer.addSeparatorComponents(
+                        separator => separator
+                    );
+                }
+
+                // 添付ファイルセクションのタイトル
+                mainContainer.addTextDisplayComponents(
+                    textDisplay => textDisplay
+                        .setContent('### 📎 添付ファイル')
+                );
+
+                // 各非画像ファイルをFileコンポーネントとして追加
+                nonImageFiles.forEach(file => {
+                    mainContainer.addFileComponents(
+                        fileBuilder => fileBuilder
+                            .setURL(`attachment://${file.originalname}`)
+                    );
+                });
+            }
+
+            messageData.files.push(...fileAttachments);
         }
 
+        mainContainer
+            .addSeparatorComponents(
+                separator => separator
+            )
+            .addSectionComponents(
+                section => section
+                    .addTextDisplayComponents(
+                        textDisplay => textDisplay
+                            .setContent(`-# 送信日時: <t:${Math.floor(Date.now() / 1000)}:F>\n-# 問題が解決したら右の [対話終了] ボタンを押してください。`),
+                    )
+                    .setButtonAccessory(
+                        button => button
+                            .setCustomId(`lockch_${discordUser.id}`)
+                            .setLabel('🔒 対話終了')
+                            .setStyle(ButtonStyle.Primary)
+                    ),
+            );
+
+        // メッセージを送信
         await channel.send(messageData);
 
         log.info(`対話チャンネルを作成しました: ${channel.name} (${channel.id})`);

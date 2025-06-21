@@ -1,4 +1,3 @@
-// DOM Elements
 const userSection = document.getElementById('userSection');
 const loginPrompt = document.getElementById('loginPrompt');
 const formContainer = document.getElementById('formContainer');
@@ -159,7 +158,6 @@ function setupEventListeners() {
             }
         }
         
-        // Show paste hint when Ctrl is pressed
         if (e.key === 'Control') {
             const pasteInfo = document.querySelector('.paste-info');
             if (pasteInfo && formContainer.style.display !== 'none') {

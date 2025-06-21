@@ -2,5 +2,5 @@
     "watch": ["*/**/*"],
     "ext": "js",
     "ignore": ["node_modules"],
-    "exec": "npm start"
+    "exec": "node --env-file=dev.env index.js"
 }

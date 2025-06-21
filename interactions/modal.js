@@ -6,6 +6,9 @@ const { BaseInteraction } = require("discord.js");
 module.exports = async function (interaction) {
     if (!interaction.isModalSubmit()) return;
     for (const value of interaction.client.modals) {
-        await value(interaction);
+        // 関数であることを確認してから実行
+        if (typeof value === 'function') {
+            await value(interaction);
+        }
     }
 }

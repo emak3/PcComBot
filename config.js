@@ -11,6 +11,8 @@ module.exports = {
     "timeoutMemberRoleId": "1142862037173669899",
     //PC紹介チャンネルID
     "pcsyokaiId": "933243864234459136",
+    //ticketのアーカイブカテゴリーID
+    "newCategoryId": "1385971327210487951",
     //ベストアンサーロール
     "bestAnswerRole": "1067445728542199828",
     //2週間未経過通知
