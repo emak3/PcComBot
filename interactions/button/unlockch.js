@@ -32,7 +32,7 @@ module.exports = async function (interaction) {
                         if (section.accessory && section.accessory.data.type === 2) {
                             sectionData.accessory = {
                                 ...section.accessory.data,
-                                disabled: false
+                                disabled: true
                             };
                         }
 
