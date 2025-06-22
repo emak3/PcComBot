@@ -95,7 +95,6 @@ function extractMessageInfo(message) {
         const rawComponents = JSON.parse(JSON.stringify(message.components));
         log.debug('完全な生のJSONコンポーネント:', JSON.stringify(rawComponents, null, 2));
 
-        // コンポーネントを再帰的に探索（完全な生のJSONから）
         function extractFromPureJSON(components) {
             const textDisplays = [];
 
@@ -107,15 +106,15 @@ function extractMessageInfo(message) {
                     if (obj.type === 10 && obj.content) {
                         textDisplays.push(obj.content);
                     }
-                    // type: 12 がMediaGalleryコンポーネント（完全な生のJSONから）
+                    // type: 12 がMediaGalleryコンポーネント
                     else if (obj.type === 12 && obj.items && Array.isArray(obj.items)) {
                         // 完全な生のJSONのitemsを使用
                         mediaGalleryItems.push(...obj.items);
                         log.debug('Pure JSON MediaGallery items found:', obj.items.length, obj.items);
                     }
-                    // type: 13 がFileコンポーネント（完全な生のJSONから）
+                    // type: 13 がFileコンポーネント
                     else if (obj.type === 13 && obj.file) {
-                        // 完全な生のJSONの値を使用（nameは使わずURLのみ）
+                        // 完全な生のJSONの値を使用
                         const fileInfo = {
                             url: obj.file.url,
                             size: obj.size || 0,
@@ -135,9 +134,11 @@ function extractMessageInfo(message) {
 
         const allTexts = extractFromPureJSON(rawComponents);
 
-        log.debug('抽出されたテキスト:', allTexts);
-        log.debug('抽出されたMediaGallery（完全なJSON）:', mediaGalleryItems);
-        log.debug('抽出されたFileComponents（完全なJSON）:', fileComponents);
+        /*
+                log.debug('抽出されたテキスト:', allTexts);
+                log.debug('抽出されたMediaGallery:', mediaGalleryItems);
+                log.debug('抽出されたFileComponents:', fileComponents);
+        */
 
         // カテゴリーと内容を検索
         for (let i = 0; i < allTexts.length; i++) {
