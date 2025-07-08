@@ -4,6 +4,13 @@ const log = require("./logger.js");
 const { readdirSync } = require("node:fs");
 require("./utils/newUsernameSystem")
 const WebServer = require("./web/server.js");
+
+// Firebase初期化
+const Database = require("./utils/database.js");
+
+// RSS機能
+const RssService = require("./services/RssService.js");
+
 require("./utils/newUsernameSystem")
 
 
@@ -76,8 +83,36 @@ for (const file of readdirSync("./messages").filter((file) =>
 }
 
 client.login(config.token).then(() => {
-    log.info("Discord Bot config:", config);
-    
+    //    log.info("Discord Bot config:", config);
+
+    // Firebase初期化
+    const database = new Database();
+
+    // RSS機能の初期化
+    if (config.rss?.enabled && database.isConnected()) {
+        try {
+            const rssService = new RssService(client);
+
+            // 有効なRSSフィードをフィルタリング
+            const enabledFeeds = config.rss.feeds.filter(feed => feed.enabled !== false);
+
+            if (enabledFeeds.length > 0) {
+                rssService.startScheduledProcessing(enabledFeeds);
+                log.info(`RSS機能を開始しました (${enabledFeeds.length}個のフィード)`);
+            } else {
+                log.info('有効なRSSフィードが設定されていません');
+            }
+        } catch (error) {
+            log.error('RSS機能の初期化に失敗しました:', error);
+        }
+    } else {
+        if (!config.rss?.enabled) {
+            log.info('RSS機能は無効になっています');
+        } else if (!database.isConnected()) {
+            log.warn('Firebase接続が無効のため、RSS機能は利用できません');
+        }
+    }
+
     // Webサーバー起動
     const webServer = new WebServer(client);
     webServer.start();
