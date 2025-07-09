@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PC Community - 管理者への問い合わせ</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
 </head>
+
 <body>
     <!-- Gaming Accent Bar -->
     <div class="gaming-accent"></div>
-    
+
     <div class="container">
         <!-- Header -->
         <header class="header">
@@ -28,6 +31,14 @@
 
         <!-- Main Content -->
         <main class="main">
+            <!-- Not Support Page Message -->
+            <div class="not-support-page" id="notSupportPage" style="display: none;">
+                <div class="info-card">
+                    <h2><i class="fas fa-info-circle"></i> PC Community</h2>
+                    <p>管理者への問い合わせは <a href="/support">こちら</a> からお願いします。</p>
+                </div>
+            </div>
+
             <!-- Login Prompt -->
             <div class="login-prompt" id="loginPrompt" style="display: none;">
                 <div class="login-card">
@@ -44,11 +55,12 @@
             <div class="form-container" id="formContainer" style="display: none;">
                 <div class="form-card">
                     <h2 class="form-title"><i class="fas fa-edit"></i> 管理者への問い合わせ</h2>
-                    
+
                     <form id="inquiryForm" enctype="multipart/form-data">
                         <!-- Category Selection -->
                         <div class="form-group">
-                            <label for="category" class="form-label"><i class="fas fa-list"></i> カテゴリー <span class="required">*</span></label>
+                            <label for="category" class="form-label"><i class="fas fa-list"></i> カテゴリー <span
+                                    class="required">*</span></label>
                             <select id="category" name="category" class="form-select" required>
                                 <option value="">カテゴリーを選択してください</option>
                                 <option value="違反報告">🚨 違反報告</option>
@@ -63,7 +75,8 @@
                         <!-- Custom Title for "Other" -->
                         <div class="form-group" id="customTitleGroup" style="display: none;">
                             <label for="customTitle" class="form-label"><i class="fas fa-tag"></i> タイトル</label>
-                            <input type="text" id="customTitle" name="customTitle" class="form-input" placeholder="具体的なタイトルを入力してください" maxlength="50">
+                            <input type="text" id="customTitle" name="customTitle" class="form-input"
+                                placeholder="具体的なタイトルを入力してください" maxlength="50">
                         </div>
 
                         <!-- Checkboxes -->
@@ -89,10 +102,157 @@
                             </div>
                         </div>
 
-                        <!-- Content Input -->
+                        <!-- Content Input with Markdown Support -->
                         <div class="form-group">
-                            <label for="content" class="form-label"><i class="fas fa-pen"></i> 内容 <span class="required">*</span></label>
-                            <textarea id="content" name="content" class="form-textarea" placeholder="問い合わせ内容を詳しく記入してください（800文字以内）" maxlength="800" required></textarea>
+                            <label for="content" class="form-label">
+                                <i class="fas fa-pen"></i> 内容 <span class="required">*</span>
+                                <span class="markdown-help">
+                                    <i class="fab fa-markdown"></i> Markdown対応
+                                    <button type="button" class="btn-help" onclick="toggleMarkdownHelp()">
+                                        <i class="fas fa-question-circle"></i>
+                                    </button>
+                                </span>
+                            </label>
+
+                            <!-- Markdown Help -->
+                            <div class="markdown-help-panel" id="markdownHelpPanel" style="display: none;">
+                                <div class="markdown-help-content">
+                                    <h4><i class="fab fa-markdown"></i> Discord Markdownの使い方</h4>
+                                    <div class="markdown-examples">
+                                        <div class="markdown-example">
+                                            <strong>太字:</strong> <code>**太字**</code> → <strong>太字</strong>
+                                        </div>
+                                        <div class="markdown-example">
+                                            <strong>斜体:</strong> <code>*斜体*</code> → <em>斜体</em>
+                                        </div>
+                                        <div class="markdown-example">
+                                            <strong>下線:</strong> <code>__下線__</code> → <u>下線</u>
+                                        </div>
+                                        <div class="markdown-example">
+                                            <strong>打ち消し線:</strong> <code>~~打ち消し~~</code> → <del>打ち消し</del>
+                                        </div>
+                                        <div class="markdown-example">
+                                            <strong>スポイラー:</strong> <code>||隠しテキスト||</code> → <span
+                                                class="spoiler">隠しテキスト</span>
+                                        </div>
+                                        <div class="markdown-example">
+                                            <strong>コード:</strong> <code>`コード`</code> → <code>コード</code>
+                                        </div>
+                                        <div class="markdown-example">
+                                            <strong>コードブロック:</strong> <code>```<br>コードブロック<br>```</code>
+                                        </div>
+                                        <div class="markdown-example">
+                                            <strong>見出し:</strong> <code># 大見出し</code>, <code>## 中見出し</code>,
+                                            <code>### 小見出し</code>
+                                        </div>
+                                        <div class="markdown-example">
+                                            <strong>サブテキスト:</strong> <code>-# 小さなテキスト</code>
+                                        </div>
+                                        <div class="markdown-example">
+                                            <strong>引用:</strong> <code>> 引用文</code>
+                                        </div>
+                                        <div class="markdown-example">
+                                            <strong>リスト:</strong> <code>- アイテム</code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Markdown Editor Container -->
+                            <div class="markdown-editor-container">
+                                <!-- Markdown Toolbar -->
+                                <div class="markdown-toolbar" id="markdownToolbar" style="display: none;">
+                                    <div class="toolbar-section">
+                                        <button type="button" class="toolbar-btn" onclick="applyMarkdown('bold')"
+                                            title="太字 (Ctrl+B)">
+                                            <i class="fas fa-bold"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" onclick="applyMarkdown('italic')"
+                                            title="斜体 (Ctrl+I)">
+                                            <i class="fas fa-italic"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" onclick="applyMarkdown('underline')"
+                                            title="下線 (Ctrl+U)">
+                                            <i class="fas fa-underline"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn"
+                                            onclick="applyMarkdown('strikethrough')" title="打ち消し線">
+                                            <i class="fas fa-strikethrough"></i>
+                                        </button>
+                                    </div>
+                                    <div class="toolbar-section">
+                                        <button type="button" class="toolbar-btn" onclick="applyMarkdown('spoiler')"
+                                            title="スポイラー">
+                                            <i class="fas fa-eye-slash"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" onclick="applyMarkdown('code')"
+                                            title="コード">
+                                            <i class="fas fa-code"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" onclick="applyMarkdown('codeblock')"
+                                            title="コードブロック">
+                                            <i class="fas fa-file-code"></i>
+                                        </button>
+                                    </div>
+                                    <div class="toolbar-section">
+                                        <button type="button" class="toolbar-btn" onclick="applyMarkdown('header1')"
+                                            title="大見出し">
+                                            <strong>H1</strong>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" onclick="applyMarkdown('header2')"
+                                            title="中見出し">
+                                            <strong>H2</strong>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" onclick="applyMarkdown('header3')"
+                                            title="小見出し">
+                                            <strong>H3</strong>
+                                        </button>
+                                    </div>
+                                    <div class="toolbar-section">
+                                        <button type="button" class="toolbar-btn" onclick="applyMarkdown('subtext')"
+                                            title="サブテキスト">
+                                            <i class="fas fa-subscript"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" onclick="applyMarkdown('quote')"
+                                            title="引用">
+                                            <i class="fas fa-quote-left"></i>
+                                        </button>
+                                        <button type="button" class="toolbar-btn" onclick="applyMarkdown('list')"
+                                            title="リスト">
+                                            <i class="fas fa-list"></i>
+                                        </button>
+                                    </div>
+                                    <div class="toolbar-section">
+                                        <button type="button" class="toolbar-btn" onclick="togglePreview()"
+                                            title="プレビュー">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Editor and Preview -->
+                                <div class="editor-container">
+                                    <div class="editor-tabs">
+                                        <button type="button" class="editor-tab active" onclick="switchTab('editor')">
+                                            <i class="fas fa-edit"></i> 編集
+                                        </button>
+                                        <button type="button" class="editor-tab" onclick="switchTab('preview')">
+                                            <i class="fas fa-eye"></i> プレビュー
+                                        </button>
+                                    </div>
+
+                                    <textarea id="content" name="content" class="form-textarea markdown-editor"
+                                        placeholder="問い合わせ内容を詳しく記入してください（800文字以内）&#10;&#10;Discord Markdownを使用できます：&#10;**太字** *斜体* __下線__ ~~打ち消し線~~ ||スポイラー|| `コード`&#10;# 大見出し ## 中見出し ### 小見出し&#10;-# サブテキスト > 引用 - リスト"
+                                        maxlength="800" required></textarea>
+
+                                    <div class="markdown-preview" id="markdownPreview" style="display: none;">
+                                        <div class="preview-content" id="previewContent">
+                                            <em>プレビューする内容がありません</em>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="char-counter">
                                 <span id="charCount">0</span> / 800
                             </div>
@@ -102,7 +262,8 @@
                         <div class="form-group">
                             <label for="attachments" class="form-label"><i class="fas fa-paperclip"></i> 添付ファイル</label>
                             <div class="file-upload-area" id="fileUploadArea">
-                                <input type="file" id="attachments" name="attachments" multiple accept=".jpg,.jpeg,.png,.gif,.pdf,.txt,.doc,.docx,.zip,.rar" class="file-input">
+                                <input type="file" id="attachments" name="attachments" multiple
+                                    accept=".jpg,.jpeg,.png,.gif,.pdf,.txt,.doc,.docx,.zip,.rar" class="file-input">
                                 <div class="file-upload-content">
                                     <div class="file-upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
                                     <p><strong>ファイルをドラッグ&ドロップ</strong><br>またはクリックして選択</p>
@@ -133,4 +294,5 @@
 
     <script src="/js/main.js"></script>
 </body>
+
 </html>

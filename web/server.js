@@ -22,7 +22,7 @@ class WebServer {
             secret: config.sessionSecret,
             resave: false,
             saveUninitialized: false,
-            cookie: { 
+            cookie: {
                 secure: false, // HTTPSを使用する場合はtrue
                 maxAge: 24 * 60 * 60 * 1000 // 24時間
             }
@@ -30,7 +30,7 @@ class WebServer {
 
         // 静的ファイル提供
         this.app.use(express.static(path.join(__dirname, 'public')));
-        
+
         // JSON解析
         this.app.use(express.json({ limit: '10mb' }));
         this.app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -47,8 +47,13 @@ class WebServer {
         this.app.use('/auth', authRoutes);
         this.app.use('/form', formRoutes);
 
-        // メインページ
+        // メインページ（別のページを表示）
         this.app.get('/', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'home.html'));
+        });
+
+        // サポートページ
+        this.app.get('/support', (req, res) => {
             res.sendFile(path.join(__dirname, 'public', 'index.html'));
         });
 

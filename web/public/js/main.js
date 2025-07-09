@@ -1,6 +1,7 @@
 const userSection = document.getElementById('userSection');
 const loginPrompt = document.getElementById('loginPrompt');
 const formContainer = document.getElementById('formContainer');
+const notSupportPage = document.getElementById('notSupportPage');
 const inquiryForm = document.getElementById('inquiryForm');
 const categorySelect = document.getElementById('category');
 const customTitleGroup = document.getElementById('customTitleGroup');
@@ -14,21 +15,52 @@ const fileList = document.getElementById('fileList');
 const submitBtn = document.getElementById('submitBtn');
 const toast = document.getElementById('toast');
 
+// Markdown elements
+const markdownToolbar = document.getElementById('markdownToolbar');
+const markdownPreview = document.getElementById('markdownPreview');
+const previewContent = document.getElementById('previewContent');
+const markdownHelpPanel = document.getElementById('markdownHelpPanel');
+
 // Selected files management
 let selectedFiles = [];
+let currentTab = 'editor';
+let isSupportPage = false;
 
 // Page initialization
 document.addEventListener('DOMContentLoaded', async () => {
-    await checkAuthStatus();
-    setupEventListeners();
+    // Check if current page is support page
+    isSupportPage = window.location.pathname === '/support';
+
+    if (isSupportPage) {
+        await checkAuthStatus();
+        setupEventListeners();
+        setupMarkdownEditor();
+    } else {
+        showNotSupportPage();
+    }
 });
+
+// Show not support page
+function showNotSupportPage() {
+    if (notSupportPage) {
+        notSupportPage.style.display = 'flex';
+    }
+    if (loginPrompt) {
+        loginPrompt.style.display = 'none';
+    }
+    if (formContainer) {
+        formContainer.style.display = 'none';
+    }
+}
 
 // Check authentication status
 async function checkAuthStatus() {
+    if (!isSupportPage) return;
+
     try {
         const response = await fetch('/api/user');
         const data = await response.json();
-        
+
         if (data.user) {
             showUserInfo(data.user);
             showForm();
@@ -79,6 +111,8 @@ function showForm() {
 
 // Setup event listeners
 function setupEventListeners() {
+    if (!isSupportPage) return;
+
     // Category change handler
     categorySelect.addEventListener('change', () => {
         const isOther = categorySelect.value === 'その他';
@@ -102,13 +136,18 @@ function setupEventListeners() {
     contentTextarea.addEventListener('input', () => {
         const count = contentTextarea.value.length;
         charCount.textContent = count;
-        
+
         if (count > 800) {
             charCount.style.color = 'var(--discord-red)';
         } else if (count > 700) {
             charCount.style.color = 'var(--discord-yellow)';
         } else {
             charCount.style.color = 'var(--text-muted)';
+        }
+
+        // Update preview if in preview mode
+        if (currentTab === 'preview') {
+            updatePreview();
         }
     });
 
@@ -157,7 +196,49 @@ function setupEventListeners() {
                 handleSubmit(e);
             }
         }
-        
+
+        // Markdown shortcuts
+        if (e.ctrlKey && document.activeElement === contentTextarea) {
+            switch (e.key) {
+                case 'b':
+                    e.preventDefault();
+                    applyMarkdown('bold');
+                    break;
+                case 'i':
+                    e.preventDefault();
+                    applyMarkdown('italic');
+                    break;
+                case 'u':
+                    e.preventDefault();
+                    applyMarkdown('underline');
+                    break;
+                case 's':
+                    e.preventDefault();
+                    applyMarkdown('strikethrough');
+                    break;
+                case 'e':
+                    e.preventDefault();
+                    applyMarkdown('code');
+                    break;
+                case 'Enter':
+                    e.preventDefault();
+                    applyMarkdown('codeblock');
+                    break;
+                case '1':
+                    e.preventDefault();
+                    applyMarkdown('header1');
+                    break;
+                case '2':
+                    e.preventDefault();
+                    applyMarkdown('header2');
+                    break;
+                case '3':
+                    e.preventDefault();
+                    applyMarkdown('header3');
+                    break;
+            }
+        }
+
         if (e.key === 'Control') {
             const pasteInfo = document.querySelector('.paste-info');
             if (pasteInfo && formContainer.style.display !== 'none') {
@@ -179,19 +260,260 @@ function setupEventListeners() {
     });
 }
 
+// Setup markdown editor
+function setupMarkdownEditor() {
+    if (!isSupportPage) return;
+
+    // Show toolbar when text is selected
+    contentTextarea.addEventListener('mouseup', handleTextSelection);
+    contentTextarea.addEventListener('keyup', handleTextSelection);
+
+    // Update preview when typing
+    contentTextarea.addEventListener('input', () => {
+        if (currentTab === 'preview') {
+            updatePreview();
+        }
+    });
+}
+
+// Handle text selection
+function handleTextSelection() {
+    const selection = contentTextarea.selectionStart !== contentTextarea.selectionEnd;
+    if (selection) {
+        markdownToolbar.style.display = 'flex';
+    } else {
+        setTimeout(() => {
+            if (contentTextarea.selectionStart === contentTextarea.selectionEnd) {
+                markdownToolbar.style.display = 'none';
+            }
+        }, 100);
+    }
+}
+
+// Apply markdown formatting
+function applyMarkdown(type) {
+    const start = contentTextarea.selectionStart;
+    const end = contentTextarea.selectionEnd;
+    const selectedText = contentTextarea.value.substring(start, end);
+    const beforeText = contentTextarea.value.substring(0, start);
+    const afterText = contentTextarea.value.substring(end);
+
+    let newText = '';
+    let cursorOffset = 0;
+
+    switch (type) {
+        case 'bold':
+            newText = `**${selectedText}**`;
+            cursorOffset = selectedText ? 2 : 2;
+            break;
+        case 'italic':
+            newText = `*${selectedText}*`;
+            cursorOffset = selectedText ? 1 : 1;
+            break;
+        case 'underline':
+            newText = `__${selectedText}__`;
+            cursorOffset = selectedText ? 2 : 2;
+            break;
+        case 'strikethrough':
+            newText = `~~${selectedText}~~`;
+            cursorOffset = selectedText ? 2 : 2;
+            break;
+        case 'spoiler':
+            newText = `||${selectedText}||`;
+            cursorOffset = selectedText ? 2 : 2;
+            break;
+        case 'code':
+            newText = `\`${selectedText}\``;
+            cursorOffset = selectedText ? 1 : 1;
+            break;
+        case 'codeblock':
+            newText = `\`\`\`\n${selectedText}\n\`\`\``;
+            cursorOffset = selectedText ? 4 : 4;
+            break;
+        case 'header1':
+            newText = `# ${selectedText}`;
+            cursorOffset = selectedText ? 2 : 2;
+            break;
+        case 'header2':
+            newText = `## ${selectedText}`;
+            cursorOffset = selectedText ? 3 : 3;
+            break;
+        case 'header3':
+            newText = `### ${selectedText}`;
+            cursorOffset = selectedText ? 4 : 4;
+            break;
+        case 'subtext':
+            newText = `-# ${selectedText}`;
+            cursorOffset = selectedText ? 3 : 3;
+            break;
+        case 'quote':
+            const lines = selectedText.split('\n');
+            newText = lines.map(line => `> ${line}`).join('\n');
+            cursorOffset = selectedText ? 2 : 2;
+            break;
+        case 'list':
+            const listLines = selectedText.split('\n');
+            newText = listLines.map(line => `- ${line}`).join('\n');
+            cursorOffset = selectedText ? 2 : 2;
+            break;
+    }
+
+    contentTextarea.value = beforeText + newText + afterText;
+
+    // Update cursor position
+    const newCursorPos = selectedText ? start + newText.length : start + cursorOffset;
+    contentTextarea.setSelectionRange(newCursorPos, newCursorPos);
+
+    // Update character count
+    const count = contentTextarea.value.length;
+    charCount.textContent = count;
+
+    // Update preview if in preview mode
+    if (currentTab === 'preview') {
+        updatePreview();
+    }
+
+    // Focus back to textarea
+    contentTextarea.focus();
+
+    // Hide toolbar after applying
+    markdownToolbar.style.display = 'none';
+}
+
+// Switch between editor and preview tabs
+function switchTab(tab) {
+    currentTab = tab;
+
+    const editorTab = document.querySelector('.editor-tab');
+    const previewTab = document.querySelector('.editor-tab:nth-child(2)');
+
+    if (tab === 'editor') {
+        editorTab.classList.add('active');
+        previewTab.classList.remove('active');
+        contentTextarea.style.display = 'block';
+        markdownPreview.style.display = 'none';
+    } else {
+        editorTab.classList.remove('active');
+        previewTab.classList.add('active');
+        contentTextarea.style.display = 'none';
+        markdownPreview.style.display = 'block';
+        updatePreview();
+    }
+}
+
+// Toggle preview mode
+function togglePreview() {
+    if (currentTab === 'editor') {
+        switchTab('preview');
+    } else {
+        switchTab('editor');
+    }
+}
+
+// Update preview content
+function updatePreview() {
+    const text = contentTextarea.value;
+    if (!text.trim()) {
+        previewContent.innerHTML = '<em>プレビューする内容がありません</em>';
+        return;
+    }
+
+    // Simple markdown parsing for Discord-style formatting
+    let html = escapeHtml(text);
+
+    // Code blocks (最初に処理して一時的にプレースホルダーに置き換え)
+    const codeBlocks = [];
+    html = html.replace(/```([a-zA-Z]*)\n?([\s\S]*?)```/g, (match, lang, code) => {
+        // 先頭と末尾の改行を削除
+        let cleanCode = code.replace(/^\n+/, '').replace(/\n+$/, '');
+        const placeholder = `__CODEBLOCK_${codeBlocks.length}__`;
+
+        // シンタックスハイライト用のクラスを追加（簡易実装）
+        const langClass = lang ? ` class="language-${lang}"` : '';
+        codeBlocks.push(`<pre><code${langClass}>${cleanCode}</code></pre>`);
+        return placeholder;
+    });
+
+    // Inline code (コードブロックの次に処理)
+    const inlineCodes = [];
+    html = html.replace(/`([^`]+)`/g, (match, code) => {
+        const placeholder = `__INLINECODE_${inlineCodes.length}__`;
+        inlineCodes.push(`<code>${code}</code>`);
+        return placeholder;
+    });
+
+    // Headers (行の開始から処理)
+    html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+    html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+    html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+    // Subtext
+    html = html.replace(/^-# (.+)$/gm, '<span class="subtext">$1</span>');
+
+    // Spoiler tags
+    html = html.replace(/\|\|([^|]+)\|\|/g, '<span class="spoiler">$1</span>');
+
+    // Bold (3個、2個の順で処理)
+    html = html.replace(/\*\*\*([^*]+)\*\*\*/g, '<strong><em>$1</em></strong>');
+    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+    // Underline + formatting combinations
+    html = html.replace(/__\*\*\*([^_*]+)\*\*\*__/g, '<u><strong><em>$1</em></strong></u>');
+    html = html.replace(/__\*\*([^_*]+)\*\*__/g, '<u><strong>$1</strong></u>');
+    html = html.replace(/__\*([^_*]+)\*__/g, '<u><em>$1</em></u>');
+    html = html.replace(/__([^_]+)__/g, '<u>$1</u>');
+
+    // Italic (single asterisk or underscore)
+    html = html.replace(/(?<!\*)\*(?!\*)([^*]+)\*(?!\*)/g, '<em>$1</em>');
+    html = html.replace(/(?<!_)_(?!_)([^_]+)_(?!_)/g, '<em>$1</em>');
+
+    // Strikethrough
+    html = html.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+
+    // Quote (行の開始から処理)
+    html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+
+    // List items (行の開始から処理)
+    html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+
+    // Wrap consecutive list items in ul tags
+    html = html.replace(/\n/g, '<br>');
+
+    // プレースホルダーを元に戻す
+    inlineCodes.forEach((code, index) => {
+        html = html.replace(`__INLINECODE_${index}__`, code);
+    });
+
+    codeBlocks.forEach((code, index) => {
+        html = html.replace(`__CODEBLOCK_${index}__`, code);
+    });
+
+    previewContent.innerHTML = html;
+}
+
+// Toggle markdown help panel
+function toggleMarkdownHelp() {
+    const panel = markdownHelpPanel;
+    if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+    } else {
+        panel.style.display = 'none';
+    }
+}
+
 // Handle paste functionality
 function handlePaste(e) {
     // Only handle paste when the form is visible and focused area is appropriate
     if (formContainer.style.display === 'none') return;
-    
+
     const items = e.clipboardData?.items;
     if (!items) return;
 
     const files = [];
-    
+
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
-        
+
         // Check if item is a file and is an image
         if (item.kind === 'file' && item.type.startsWith('image/')) {
             const file = item.getAsFile();
@@ -200,14 +522,14 @@ function handlePaste(e) {
                 const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
                 const extension = file.type.split('/')[1] || 'png';
                 const fileName = `pasted-image-${timestamp}.${extension}`;
-                
+
                 // Create a new File object with a proper name
                 const namedFile = new File([file], fileName, { type: file.type });
                 files.push(namedFile);
             }
         }
     }
-    
+
     if (files.length > 0) {
         e.preventDefault(); // Prevent default paste behavior
         handleFiles(files);
@@ -244,11 +566,11 @@ function handleFiles(files) {
 // Update file list display
 function updateFileList() {
     fileList.innerHTML = '';
-    
+
     selectedFiles.forEach((file, index) => {
         const fileItem = document.createElement('div');
         fileItem.className = 'file-item';
-        
+
         fileItem.innerHTML = `
             <div class="file-info">
                 <i class="fas fa-file"></i>
@@ -259,7 +581,7 @@ function updateFileList() {
                 <i class="fas fa-times"></i> 削除
             </button>
         `;
-        
+
         fileList.appendChild(fileItem);
     });
 }
@@ -284,7 +606,7 @@ function formatFileSize(bytes) {
 // Handle form submission
 async function handleSubmit(e) {
     e.preventDefault();
-    
+
     const formData = new FormData();
     const category = categorySelect.value;
     const customTitle = document.getElementById('customTitle').value;
@@ -368,18 +690,21 @@ function resetForm() {
     charCount.style.color = 'var(--text-muted)';
     anonymousCheckbox.disabled = false;
     anonymousCheckbox.closest('.checkbox-label').style.opacity = '1';
+    markdownToolbar.style.display = 'none';
+    markdownHelpPanel.style.display = 'none';
+    switchTab('editor');
 }
 
 // Show toast notification
 function showToast(message, type = 'success') {
     // Remove existing toast
     toast.classList.remove('show');
-    
+
     setTimeout(() => {
         toast.textContent = message;
         toast.className = `toast ${type}`;
         toast.classList.add('show');
-        
+
         // Auto hide after 4 seconds
         setTimeout(() => {
             toast.classList.remove('show');
@@ -404,9 +729,12 @@ function login() {
     const loginBtn = event.target;
     loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ログイン中...';
     loginBtn.disabled = true;
-    
+
+    // 現在のページに応じてリダイレクト先を指定
+    const returnTo = isSupportPage ? '/support' : '/';
+
     setTimeout(() => {
-        window.location.href = '/auth/login';
+        window.location.href = `/auth/login?returnTo=${encodeURIComponent(returnTo)}`;
     }, 300);
 }
 
@@ -435,7 +763,7 @@ async function logout() {
     } catch (error) {
         console.error('ログアウトエラー:', error);
         showToast('ログアウトに失敗しました', 'error');
-        
+
         // Reset button
         event.target.innerHTML = '<i class="fas fa-sign-out-alt"></i> ログアウト';
         event.target.disabled = false;

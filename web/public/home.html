@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Community</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+</head>
+
+<body>
+    <!-- Gaming Accent Bar -->
+    <div class="gaming-accent"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">
+                    <i class="fas fa-desktop header-icon"></i>
+                    PC Community
+                </h1>
+                <div class="user-section" id="userSection">
+                    <!-- ユーザー情報がここに動的に挿入される -->
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Not Support Page Message -->
+            <div class="not-support-page" id="notSupportPage">
+                <div class="info-card">
+                    <h2><i class="fas fa-home"></i> PC Community</h2>
+                    <p>💻パソコミ・PC Community<br>
+                        管理者への問い合わせは <a href="/support">こちら</a> からお願いします。</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

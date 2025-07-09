@@ -11,6 +11,10 @@ const OAUTH_SCOPE = 'identify';
 
 // ログインページにリダイレクト
 router.get('/login', (req, res) => {
+    // リダイレクト先を保存（デフォルトは/support）
+    const returnTo = req.query.returnTo || '/support';
+    req.session.returnTo = returnTo;
+    
     const authURL = config.authUrl || `https://discord.com/api/oauth2/authorize?client_id=${config.clientId}&redirect_uri=${encodeURIComponent(config.redirectUri)}&response_type=code&scope=${OAUTH_SCOPE}`;
     
     log.debug('認証URL:', authURL);
@@ -101,7 +105,11 @@ router.get('/callback', async (req, res) => {
         };
 
         log.info(`ユーザーがログインしました: ${discordUser.username} (${discordUser.id})`);
-        res.redirect('/');
+        
+        // 保存されたリダイレクト先または/supportにリダイレクト
+        const returnTo = req.session.returnTo || '/support';
+        delete req.session.returnTo; // 使用後削除
+        res.redirect(returnTo);
 
     } catch (error) {
         log.error('OAuth2認証エラー:', error.response?.data || error.message);
