@@ -96,13 +96,13 @@ module.exports = {
             {
                 name: "PC/テクノロジーの総合情報サイト｜PC Watch",
                 url: "https://pc.watch.impress.co.jp/data/rss/1.0/pcw/feed.rdf",
-                channels: ["1385170391227437166"],
+                channels: ["1392149286942281808"],
                 enabled: true
             },
             {
                 name: "ギャズログ｜GAZLOG",
                 url: "https://gazlog.jp/feed/",
-                channels: ["1385170391227437166"],
+                channels: ["1392149451950391356"],
                 enabled: true
             },
         ]
