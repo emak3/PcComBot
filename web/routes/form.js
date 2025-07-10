@@ -25,6 +25,16 @@ const { requireAuth } = require('../middleware/auth.js');
 
 const router = express.Router();
 
+// ファイル名を安全にする関数
+function sanitizeFileName(filename) {
+    // スペースをハイフンに置き換え、その他の問題のある文字も処理
+    return filename
+        .replace(/\s+/g, '-')  // スペース（複数の連続も含む）をハイフンに
+        .replace(/[<>:"/\\|?*]/g, '-')  // ファイル名に使えない文字をハイフンに
+        .replace(/-+/g, '-')  // 連続するハイフンを単一に
+        .replace(/^-+|-+$/g, '');  // 先頭・末尾のハイフンを削除
+}
+
 // ファイルアップロード設定
 const upload = multer({
     storage: multer.memoryStorage(),
@@ -124,13 +134,19 @@ router.post('/submit', requireAuth, upload.array('attachments', 5), async (req, 
         // 添付ファイルがある場合の処理
         const fileAttachments = [];
         if (req.files && req.files.length > 0) {
-            // ファイルアタッチメントを作成
+            // ファイルアタッチメントを作成（ファイル名を安全にする）
             req.files.forEach(file => {
+                const safeFileName = sanitizeFileName(file.originalname);
+                log.debug(`ファイル名を変更: "${file.originalname}" → "${safeFileName}"`);
+
                 fileAttachments.push(
                     new AttachmentBuilder()
                         .setFile(file.buffer)
-                        .setName(file.originalname)
+                        .setName(safeFileName)
                 );
+
+                // 元のファイル名も安全なものに更新（後続処理用）
+                file.originalname = safeFileName;
             });
 
             // 画像ファイルと非画像ファイルを分ける
@@ -348,11 +364,12 @@ async function createDialogChannel(client, user, categoryTitle, content, files) 
 
         // ファイルがある場合、Media Galleryを追加
         if (files && files.length > 0) {
-            const fileAttachments = files.map(file =>
-                new AttachmentBuilder()
+            const fileAttachments = files.map(file => {
+                const safeFileName = sanitizeFileName(file.originalname);
+                return new AttachmentBuilder()
                     .setFile(file.buffer)
-                    .setName(file.originalname)
-            );
+                    .setName(safeFileName);
+            });
 
             // 画像ファイルと非画像ファイルを分ける
             const imageFiles = files.filter(file => isImageFile(file));
@@ -367,9 +384,10 @@ async function createDialogChannel(client, user, categoryTitle, content, files) 
                 );
 
                 imageFiles.forEach(file => {
+                    const safeFileName = sanitizeFileName(file.originalname);
                     mediaGalleryBuilder.addItems(
                         new MediaGalleryItemBuilder()
-                            .setURL(`attachment://${file.originalname}`)
+                            .setURL(`attachment://${safeFileName}`)
                     );
                 });
 
@@ -393,9 +411,10 @@ async function createDialogChannel(client, user, categoryTitle, content, files) 
 
                 // 各非画像ファイルをFileコンポーネントとして追加
                 nonImageFiles.forEach(file => {
+                    const safeFileName = sanitizeFileName(file.originalname);
                     mainContainer.addFileComponents(
                         fileBuilder => fileBuilder
-                            .setURL(`attachment://${file.originalname}`)
+                            .setURL(`attachment://${safeFileName}`)
                     );
                 });
             }

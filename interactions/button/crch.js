@@ -14,6 +14,16 @@ const log = require("../../logger.js");
 const config = require("../../config.js");
 const axios = require("axios");
 
+// ファイル名を安全にする関数
+function sanitizeFileName(filename) {
+    // スペースをハイフンに置き換え、その他の問題のある文字も処理
+    return filename
+        .replace(/\s+/g, '-')  // スペース（複数の連続も含む）をハイフンに
+        .replace(/[<>:"/\\|?*]/g, '-')  // ファイル名に使えない文字をハイフンに
+        .replace(/-+/g, '-')  // 連続するハイフンを単一に
+        .replace(/^-+|-+$/g, '');  // 先頭・末尾のハイフンを削除
+}
+
 /**
  * @param {ButtonInteraction} interaction
  */
@@ -310,11 +320,12 @@ async function sendDialogMessage(channel, user, messageInfo) {
 
                     const imageUrl = item.media.url;
 
-                    // URLからファイル名を抽出
+                    // URLからファイル名を抽出し、安全にする
                     const urlParts = imageUrl.split('/');
-                    const filename = urlParts[urlParts.length - 1].split('?')[0] || `image_${i}.png`;
+                    const originalFilename = urlParts[urlParts.length - 1].split('?')[0] || `image_${i}.png`;
+                    const filename = sanitizeFileName(originalFilename);
 
-                    log.debug(`画像${i}ダウンロード中:`, { filename, url: imageUrl.substring(0, 100) + '...' });
+                    log.debug(`画像${i}ダウンロード中:`, { originalFilename, filename, url: imageUrl.substring(0, 100) + '...' });
 
                     // ファイルを一時的にダウンロード
                     const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
@@ -350,11 +361,12 @@ async function sendDialogMessage(channel, user, messageInfo) {
 
                     const fileUrl = fileComp.url;
 
-                    // URLからファイル名を抽出
+                    // URLからファイル名を抽出し、安全にする
                     const urlParts = fileUrl.split('/');
-                    const filename = urlParts[urlParts.length - 1].split('?')[0] || `file_${i}`;
+                    const originalFilename = urlParts[urlParts.length - 1].split('?')[0] || `file_${i}`;
+                    const filename = sanitizeFileName(originalFilename);
 
-                    log.debug(`ファイル${i}ダウンロード中:`, { filename, url: fileUrl.substring(0, 100) + '...' });
+                    log.debug(`ファイル${i}ダウンロード中:`, { originalFilename, filename, url: fileUrl.substring(0, 100) + '...' });
 
                     // ファイルを一時的にダウンロード
                     const response = await axios.get(fileUrl, { responseType: 'arraybuffer' });
@@ -497,23 +509,27 @@ async function disableButton(interaction) {
                                     const response = await axios.get(originalAttachment.url, { responseType: 'arraybuffer' });
                                     const buffer = Buffer.from(response.data);
 
+                                    // ファイル名を安全にする
+                                    const safeFilename = sanitizeFileName(filename);
+
                                     const attachmentBuilder = new AttachmentBuilder()
                                         .setFile(buffer)
-                                        .setName(filename);
+                                        .setName(safeFilename);
 
                                     fileAttachments.push(attachmentBuilder);
-                                    fileUrlMap.set(fileUrl, filename);
+                                    fileUrlMap.set(fileUrl, safeFilename);
 
-                                    log.debug('ファイル再取得完了:', filename);
+                                    log.debug('ファイル再取得完了:', filename, '→', safeFilename);
                                 }
                             } else {
                                 // 外部URLの場合は直接ダウンロード
                                 const response = await axios.get(fileUrl, { responseType: 'arraybuffer' });
                                 const buffer = Buffer.from(response.data);
 
-                                // URLからファイル名を抽出
+                                // URLからファイル名を抽出し、安全にする
                                 const urlParts = fileUrl.split('/');
-                                const filename = urlParts[urlParts.length - 1].split('?')[0] || 'file';
+                                const originalFilename = urlParts[urlParts.length - 1].split('?')[0] || 'file';
+                                const filename = sanitizeFileName(originalFilename);
 
                                 const attachmentBuilder = new AttachmentBuilder()
                                     .setFile(buffer)
@@ -522,7 +538,7 @@ async function disableButton(interaction) {
                                 fileAttachments.push(attachmentBuilder);
                                 fileUrlMap.set(fileUrl, filename);
 
-                                log.debug('ファイルダウンロード完了:', filename);
+                                log.debug('ファイルダウンロード完了:', originalFilename, '→', filename);
                             }
                         } catch (error) {
                             log.error('ファイルダウンロードエラー:', error.message);

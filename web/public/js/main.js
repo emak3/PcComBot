@@ -26,6 +26,16 @@ let selectedFiles = [];
 let currentTab = 'editor';
 let isSupportPage = false;
 
+// ファイル名を安全にする関数
+function sanitizeFileName(filename) {
+    // スペースをハイフンに置き換え、その他の問題のある文字も処理
+    return filename
+        .replace(/\s+/g, '-')  // スペース（複数の連続も含む）をハイフンに
+        .replace(/[<>:"/\\|?*]/g, '-')  // ファイル名に使えない文字をハイフンに
+        .replace(/-+/g, '-')  // 連続するハイフンを単一に
+        .replace(/^-+|-+$/g, '');  // 先頭・末尾のハイフンを削除
+}
+
 // Page initialization
 document.addEventListener('DOMContentLoaded', async () => {
     // Check if current page is support page
@@ -550,7 +560,18 @@ function handleFiles(files) {
             continue;
         }
 
-        // Check for duplicates
+        // ファイル名にスペースがある場合の警告とファイル名修正
+        const originalName = file.name;
+        const safeName = sanitizeFileName(originalName);
+
+        if (originalName !== safeName) {
+            showToast(`ファイル名を修正しました: "${originalName}" → "${safeName}"`, 'info');
+
+            // File オブジェクトを新しい名前で再作成
+            file = new File([file], safeName, { type: file.type });
+        }
+
+        // Check for duplicates (修正後の名前で)
         if (selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
             showToast(`${file.name} は既に選択されています`, 'error');
             continue;
