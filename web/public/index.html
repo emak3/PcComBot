@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PC Community - 管理者への問い合わせ</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/pages.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
@@ -23,6 +24,24 @@
                     <i class="fas fa-desktop header-icon"></i>
                     PC Community
                 </h1>
+                <nav class="header-nav">
+                    <a href="/" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        ホーム
+                    </a>
+                    <a href="/rules" class="nav-link">
+                        <i class="fas fa-gavel"></i>
+                        ルール
+                    </a>
+                    <a href="/guidelines" class="nav-link">
+                        <i class="fas fa-question-circle"></i>
+                        質問ガイド
+                    </a>
+                    <a href="/support" class="nav-link active">
+                        <i class="fas fa-headset"></i>
+                        サポート
+                    </a>
+                </nav>
                 <div class="user-section" id="userSection">
                     <!-- ユーザー情報がここに動的に挿入される -->
                 </div>
@@ -288,11 +307,44 @@
             </div>
         </main>
 
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h4>
+                        <i class="fas fa-desktop"></i>
+                        PC Community
+                    </h4>
+                    <p>PCに関する質問、情報共有、雑談を楽しめるDiscordコミュニティ</p>
+                </div>
+                <div class="footer-links">
+                    <h5>リンク</h5>
+                    <ul>
+                        <li><a href="/rules">コミュニティルール</a></li>
+                        <li><a href="/guidelines">質問ガイドライン</a></li>
+                        <li><a href="/support">サポート</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h5>SNS</h5>
+                    <div class="social-links">
+                        <button class="social-btn discord" onclick="joinDiscord()">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PC Community. All rights reserved.</p>
+            </div>
+        </footer>
+
         <!-- Toast Notification -->
         <div class="toast" id="toast"></div>
     </div>
 
     <script src="/js/main.js"></script>
+    <script src="/js/pages.js"></script>
 </body>
 
 </html>

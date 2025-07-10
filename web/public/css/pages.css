@@ -1,0 +1,1850 @@
+/* Pages.css - 各ページ専用のスタイル */
+
+/* Header Navigation */
+.header-nav {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--interactive-active);
+    background-color: var(--background-accent);
+}
+
+.nav-link.active {
+    color: var(--discord-blurple);
+    background-color: rgba(88, 101, 242, 0.1);
+}
+
+.nav-link i {
+    font-size: 16px;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, var(--background-secondary) 0%, var(--background-primary) 100%);
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, var(--discord-blurple), var(--gaming-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    display: block;
+    font-size: 24px;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.hero-description {
+    font-size: 18px;
+    color: var(--text-normal);
+    margin-bottom: 32px;
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.btn-primary {
+    background-color: var(--discord-blurple);
+    color: white;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: #4752c4;
+}
+
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pc-showcase {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pc-icon {
+    font-size: 120px;
+    color: var(--discord-blurple);
+    animation: float 3s ease-in-out infinite;
+}
+
+.floating-icons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.floating-icons i {
+    position: absolute;
+    font-size: 24px;
+    color: var(--gaming-cyan);
+    animation: orbit 8s linear infinite;
+}
+
+.floating-icons i:nth-child(1) {
+    top: 10%;
+    left: 50%;
+    animation-delay: 0s;
+}
+
+.floating-icons i:nth-child(2) {
+    top: 50%;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+.floating-icons i:nth-child(3) {
+    bottom: 10%;
+    left: 50%;
+    animation-delay: 4s;
+}
+
+.floating-icons i:nth-child(4) {
+    top: 50%;
+    left: 10%;
+    animation-delay: 6s;
+}
+
+/* Animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes orbit {
+    0% {
+        transform: rotate(0deg) translateX(80px) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg) translateX(80px) rotate(-360deg);
+    }
+}
+
+/* Features Section */
+.features-section {
+    margin-bottom: 60px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-header h3 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--interactive-active);
+    margin-bottom: 8px;
+}
+
+.section-header p {
+    font-size: 16px;
+    color: var(--text-muted);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.feature-card {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--discord-blurple);
+    box-shadow: 0 8px 24px rgba(88, 101, 242, 0.2);
+}
+
+.feature-icon {
+    font-size: 48px;
+    color: var(--discord-blurple);
+    margin-bottom: 16px;
+}
+
+.feature-card h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--interactive-active);
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Stats Section */
+.stats-section {
+    background-color: var(--background-secondary);
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 60px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+}
+
+.stat-card {
+    text-align: center;
+}
+
+.stat-icon {
+    font-size: 32px;
+    color: var(--gaming-cyan);
+    margin-bottom: 12px;
+}
+
+.stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--interactive-active);
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Links Section */
+.links-section {
+    margin-bottom: 60px;
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.link-card {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.link-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--discord-blurple);
+    box-shadow: 0 4px 16px rgba(88, 101, 242, 0.1);
+}
+
+.link-icon {
+    font-size: 32px;
+    color: var(--discord-blurple);
+    margin-bottom: 16px;
+}
+
+.link-card h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--interactive-active);
+    margin-bottom: 8px;
+}
+
+.link-card p {
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.link-arrow {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 18px;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+}
+
+.link-card:hover .link-arrow {
+    color: var(--discord-blurple);
+    transform: translateX(4px);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--background-secondary);
+    border-top: 1px solid var(--border-color);
+    margin-top: 60px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+}
+
+.footer-info h4 {
+    color: var(--interactive-active);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-info p {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.footer-links h5 {
+    color: var(--interactive-active);
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--discord-blurple);
+}
+
+.footer-social h5 {
+    color: var(--interactive-active);
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+}
+
+.social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.social-btn.discord {
+    background-color: var(--discord-blurple);
+    color: white;
+}
+
+.social-btn.discord:hover {
+    background-color: #4752c4;
+    transform: scale(1.1);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--border-color);
+    padding: 16px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* Page Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 40px 0;
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.page-icon {
+    font-size: 48px;
+    color: var(--discord-blurple);
+}
+
+.page-title h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--interactive-active);
+}
+
+.page-description {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Content Section */
+.content-section {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Notice Cards */
+.notice-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 32px;
+    border-left: 4px solid;
+}
+
+.notice-card.important {
+    background-color: rgba(237, 66, 69, 0.1);
+    border-left-color: var(--discord-red);
+}
+
+.notice-icon {
+    font-size: 24px;
+    color: var(--discord-red);
+    margin-top: 4px;
+}
+
+.notice-content h3 {
+    color: var(--interactive-active);
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.notice-content p {
+    color: var(--text-normal);
+    line-height: 1.6;
+}
+
+/* Table of Contents */
+.toc-card {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+.toc-card h3 {
+    color: var(--interactive-active);
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+.toc-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 8px;
+}
+
+.toc-list a {
+    color: var(--discord-blurple);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: block;
+}
+
+.toc-list a:hover {
+    background-color: var(--background-tertiary);
+}
+
+/* Rule Sections */
+.rule-section {
+    margin-bottom: 48px;
+}
+
+.rule-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--interactive-active);
+    font-size: 24px;
+    margin-bottom: 24px;
+}
+
+.rule-section h3 i {
+    color: var(--discord-blurple);
+}
+
+.rule-cards {
+    display: grid;
+    gap: 20px;
+}
+
+.rule-card {
+    display: flex;
+    gap: 20px;
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 24px;
+    transition: all 0.2s ease;
+}
+
+.rule-card:hover {
+    border-color: var(--discord-blurple);
+}
+
+.rule-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--discord-blurple);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.rule-content h4 {
+    color: var(--interactive-active);
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.rule-content p {
+    color: var(--text-normal);
+    line-height: 1.6;
+}
+
+/* Rule Lists */
+.rule-list {
+    display: grid;
+    gap: 16px;
+}
+
+.rule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+    background-color: var(--background-secondary);
+    border-radius: 8px;
+}
+
+.rule-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.rule-icon.good {
+    background-color: var(--discord-green);
+    color: white;
+}
+
+.rule-icon.bad {
+    background-color: var(--discord-red);
+    color: white;
+}
+
+.rule-text {
+    color: var(--text-normal);
+    line-height: 1.6;
+}
+
+/* Prohibited Actions */
+.prohibited-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.prohibited-card {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 24px;
+    border-left: 4px solid;
+}
+
+.prohibited-card.severe {
+    border-left-color: var(--discord-red);
+}
+
+.prohibited-card.moderate {
+    border-left-color: var(--discord-yellow);
+}
+
+.prohibited-card.minor {
+    border-left-color: var(--discord-blurple);
+}
+
+.prohibited-icon {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.prohibited-card.severe .prohibited-icon {
+    color: var(--discord-red);
+}
+
+.prohibited-card.moderate .prohibited-icon {
+    color: var(--discord-yellow);
+}
+
+.prohibited-card.minor .prohibited-icon {
+    color: var(--discord-blurple);
+}
+
+.prohibited-card h4 {
+    color: var(--interactive-active);
+    margin-bottom: 16px;
+    font-size: 18px;
+}
+
+.prohibited-card ul {
+    list-style: none;
+}
+
+.prohibited-card li {
+    padding: 4px 0;
+    color: var(--text-normal);
+    position: relative;
+    padding-left: 16px;
+}
+
+.prohibited-card li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+}
+
+/* Penalty Steps */
+.penalty-steps {
+    display: grid;
+    gap: 20px;
+}
+
+.penalty-step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--discord-red), var(--discord-yellow));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+    padding-top: 4px;
+}
+
+.step-content h4 {
+    color: var(--interactive-active);
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.step-content p {
+    color: var(--text-normal);
+    line-height: 1.6;
+}
+
+/* Contact Section */
+.contact-section {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-color);
+}
+
+.contact-card {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.contact-methods {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background-color: var(--background-tertiary);
+    border-radius: 6px;
+    color: var(--text-normal);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.contact-method:hover {
+    background-color: var(--background-accent);
+    color: var(--discord-blurple);
+}
+
+.contact-method i {
+    font-size: 16px;
+}
+
+/* Enhanced Rules & Guidelines Styles */
+.warning-card {
+    background: linear-gradient(135deg, rgba(237, 66, 69, 0.1), rgba(237, 66, 69, 0.05));
+    border: 1px solid var(--discord-red);
+    border-left: 4px solid var(--discord-red);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.warning-icon {
+    color: var(--discord-red);
+    font-size: 24px;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.warning-content h3 {
+    color: var(--interactive-active);
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.warning-content p {
+    color: var(--text-normal);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.warning-content p:last-child {
+    margin-bottom: 0;
+}
+
+.warning-content a {
+    color: var(--discord-blurple);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.warning-content a:hover {
+    text-decoration: underline;
+}
+
+/* Rules Container */
+.rules-container,
+.guidelines-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.rule-card,
+.guideline-card {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.rule-card:hover,
+.guideline-card:hover {
+    border-color: var(--discord-blurple);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(88, 101, 242, 0.1);
+}
+
+.guideline-card.danger {
+    border-left: 4px solid var(--discord-red);
+}
+
+.guideline-card.danger:hover {
+    border-color: var(--discord-red);
+}
+
+.rule-header,
+.guideline-header {
+    background: linear-gradient(135deg, var(--background-primary), var(--background-secondary));
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.rule-icon,
+.guideline-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--discord-blurple);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.guideline-card.danger .guideline-icon {
+    background-color: var(--discord-red);
+}
+
+.rule-header h3,
+.guideline-header h3 {
+    color: var(--interactive-active);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.rule-content,
+.guideline-content {
+    padding: 24px;
+}
+
+.rule-content>p,
+.guideline-content>p {
+    color: var(--text-normal);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.rule-content>p:last-child,
+.guideline-content>p:last-child {
+    margin-bottom: 0;
+}
+
+/* Lists */
+.rule-list,
+.tips-list,
+.usage-list,
+.checklist,
+.status-list,
+.rules-list,
+.example-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+}
+
+.rule-list li,
+.tips-list li,
+.usage-list li,
+.checklist li,
+.status-list li,
+.example-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    color: var(--text-normal);
+    line-height: 1.5;
+}
+
+.rule-list li::before,
+.tips-list li::before,
+.usage-list li::before,
+.checklist li::before,
+.status-list li::before,
+.example-list li::before {
+    content: "•";
+    color: var(--discord-blurple);
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.rules-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.rules-list li:last-child {
+    border-bottom: none;
+}
+
+.rules-list li i {
+    color: var(--discord-blurple);
+    font-size: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.rules-list li strong {
+    color: var(--interactive-active);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.rules-list li p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Info Boxes */
+.info-box,
+.reason-box {
+    background-color: var(--background-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.info-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.info-title i {
+    color: var(--discord-blurple);
+    font-size: 16px;
+}
+
+.info-content p {
+    color: var(--text-normal);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.info-content p:last-child {
+    margin-bottom: 0;
+}
+
+.reason-box h5 {
+    color: var(--interactive-active);
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.reason-box p {
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Name Rules Section */
+.name-rules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.allowed-section,
+.restrictions-section {
+    background-color: var(--background-tertiary);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.allowed-section h4,
+.restrictions-section h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.allowed-section h4 i {
+    color: var(--discord-green);
+}
+
+.restrictions-section h4 i {
+    color: var(--discord-yellow);
+}
+
+.allowed-list,
+.restrictions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.allowed-list li,
+.restrictions-list li {
+    padding: 4px 0;
+    color: var(--text-normal);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.allowed-list li::before {
+    content: "✓";
+    color: var(--discord-green);
+    font-weight: bold;
+}
+
+.restrictions-list li::before {
+    content: "!";
+    color: var(--discord-yellow);
+    font-weight: bold;
+}
+
+.symbols-section {
+    grid-column: span 2;
+    margin-top: 16px;
+}
+
+.symbols-section h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.symbols-section h4 i {
+    color: var(--discord-blurple);
+}
+
+.symbols-box {
+    background-color: var(--background-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+}
+
+.symbols-box code {
+    background: none;
+    padding: 0;
+    color: var(--text-normal);
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+/* Topics Grid */
+.topics-grid {
+    margin-top: 16px;
+}
+
+.forbidden-topics {
+    background-color: var(--background-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.forbidden-topics h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.forbidden-topics h4 i {
+    color: var(--discord-red);
+}
+
+.forbidden-topics ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.forbidden-topics li {
+    padding: 4px 0;
+    color: var(--text-normal);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.forbidden-topics li::before {
+    content: "×";
+    color: var(--discord-red);
+    font-weight: bold;
+}
+
+/* Promo Examples */
+.promo-examples {
+    margin-top: 16px;
+}
+
+.bad-example {
+    background-color: var(--background-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.bad-example h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.bad-example h4 i {
+    color: var(--discord-red);
+}
+
+.bad-example ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bad-example li {
+    padding: 4px 0;
+    color: var(--text-normal);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bad-example li::before {
+    content: "×";
+    color: var(--discord-red);
+    font-weight: bold;
+}
+
+/* Guide Link */
+.guide-link {
+    margin-top: 16px;
+    text-align: center;
+}
+
+/* Contact Section Updates */
+.contact-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.contact-header i {
+    color: var(--discord-blurple);
+    font-size: 24px;
+}
+
+.contact-header h3 {
+    color: var(--interactive-active);
+    margin: 0;
+    font-size: 20px;
+}
+
+.contact-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+/* Terms Section */
+.terms-section {
+    margin-top: 32px;
+}
+
+.terms-card {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.terms-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.terms-header i {
+    color: var(--discord-blurple);
+    font-size: 24px;
+}
+
+.terms-header h3 {
+    color: var(--interactive-active);
+    margin: 0;
+    font-size: 20px;
+}
+
+.terms-content p {
+    color: var(--text-normal);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.terms-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.terms-list li {
+    margin-bottom: 8px;
+}
+
+.terms-list a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--discord-blurple);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.terms-list a:hover {
+    background-color: var(--background-tertiary);
+    text-decoration: none;
+}
+
+.terms-list a i {
+    font-size: 14px;
+}
+
+/* Guidelines specific styles */
+.search-tips,
+.title-tips,
+.checklist-section,
+.required-info {
+    margin-top: 16px;
+}
+
+.search-tips h4,
+.title-tips h4,
+.checklist-section h4,
+.required-info h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.search-tips h4 i,
+.title-tips h4 i,
+.checklist-section h4 i,
+.required-info h4 i {
+    color: var(--discord-blurple);
+}
+
+.title-examples {
+    margin-top: 16px;
+}
+
+.title-examples h5 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.title-examples h5 i {
+    color: var(--discord-green);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.info-item {
+    background-color: var(--background-tertiary);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.info-item h5 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.info-item h5 i {
+    color: var(--discord-blurple);
+}
+
+.info-item p {
+    color: var(--text-normal);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.example-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.bad-example,
+.good-example {
+    background-color: var(--background-tertiary);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.bad-example h5,
+.good-example h5 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.bad-example h5 i {
+    color: var(--discord-red);
+}
+
+.good-example h5 i {
+    color: var(--discord-green);
+}
+
+.bad-example p,
+.good-example p {
+    color: var(--text-normal);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.usage-types {
+    margin-top: 16px;
+}
+
+.usage-type {
+    background-color: var(--background-tertiary);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.usage-type h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.usage-type h4 i {
+    color: var(--discord-blurple);
+}
+
+.code-section {
+    margin-top: 16px;
+}
+
+.code-section h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.code-section h4 i {
+    color: var(--discord-blurple);
+}
+
+.code-example {
+    background-color: var(--background-tertiary);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.code-example p {
+    color: var(--text-normal);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.code-example pre {
+    background-color: var(--background-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px;
+    margin: 12px 0;
+    overflow-x: auto;
+}
+
+.code-example code {
+    color: var(--text-normal);
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 13px;
+}
+
+.prohibited-item {
+    background-color: var(--background-tertiary);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.prohibited-item h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.prohibited-item h4 i {
+    color: var(--discord-red);
+}
+
+.resolution-steps {
+    margin-top: 16px;
+}
+
+.step {
+    background-color: var(--background-tertiary);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.step h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.step h4 i {
+    color: var(--discord-blurple);
+}
+
+.close-instructions {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: var(--background-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+}
+
+.close-instructions h5 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.close-instructions h5 i {
+    color: var(--discord-blurple);
+}
+
+.close-instructions p {
+    color: var(--text-normal);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.answerer-rules {
+    margin-top: 16px;
+}
+
+.notes-section {
+    margin-top: 32px;
+}
+
+.notes-card {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.notes-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.notes-header i {
+    color: var(--discord-blurple);
+    font-size: 24px;
+}
+
+.notes-header h3 {
+    color: var(--interactive-active);
+    margin: 0;
+    font-size: 20px;
+}
+
+.notes-content p {
+    color: var(--text-normal);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.last-updated {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-style: italic;
+}
+
+.no-message-warning {
+    background-color: var(--background-tertiary);
+    border: 1px solid var(--discord-yellow);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.no-message-warning i {
+    color: var(--discord-yellow);
+    font-size: 20px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.no-message-warning p {
+    color: var(--text-normal);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding: 0 20px;
+    }
+
+    .hero-title {
+        font-size: 36px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .header-nav {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .nav-link {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        text-align: center;
+    }
+
+    .page-title {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .page-icon {
+        font-size: 36px;
+    }
+
+    .page-title h2 {
+        font-size: 28px;
+    }
+
+    .rule-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .contact-methods {
+        flex-direction: column;
+    }
+
+    .floating-icons i {
+        font-size: 20px;
+    }
+
+    /* Rules & Guidelines Mobile */
+    .name-rules {
+        grid-template-columns: 1fr;
+    }
+
+    .symbols-section {
+        grid-column: span 1;
+    }
+
+    .example-comparison {
+        grid-template-columns: 1fr;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-buttons {
+        flex-direction: column;
+    }
+
+    .rule-header,
+    .guideline-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .warning-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .terms-list a {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .section-header h3 {
+        font-size: 24px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .links-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .prohibited-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rule-content,
+    .guideline-content {
+        padding: 16px;
+    }
+
+    .rule-header,
+    .guideline-header {
+        padding: 16px;
+    }
+
+    .rule-header h3,
+    .guideline-header h3 {
+        font-size: 16px;
+    }
+
+    .rule-icon,
+    .guideline-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .warning-card {
+        padding: 16px;
+    }
+
+    .warning-content h3 {
+        font-size: 18px;
+    }
+
+    .symbols-box code {
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+    .contact-card,
+    .terms-card,
+    .notes-card {
+        padding: 16px;
+    }
+
+    .step {
+        padding: 12px;
+    }
+
+    .code-example {
+        padding: 12px;
+    }
+
+    .close-instructions {
+        padding: 8px;
+    }
+
+    .no-message-warning {
+        padding: 12px;
+    }
+}

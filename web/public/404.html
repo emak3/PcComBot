@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - ページが見つかりません | PC Community</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+</head>
+
+<body>
+    <!-- Gaming Accent Bar -->
+    <div class="gaming-accent"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">
+                    <i class="fas fa-desktop header-icon"></i>
+                    PC Community
+                </h1>
+                <nav class="header-nav">
+                    <a href="/" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        ホーム
+                    </a>
+                    <a href="/rules" class="nav-link">
+                        <i class="fas fa-gavel"></i>
+                        ルール
+                    </a>
+                    <a href="/guidelines" class="nav-link">
+                        <i class="fas fa-question-circle"></i>
+                        質問ガイド
+                    </a>
+                    <a href="/support" class="nav-link">
+                        <i class="fas fa-headset"></i>
+                        サポート
+                    </a>
+                </nav>
+                <div class="user-section" id="userSection">
+                    <div class="auth-buttons">
+                        <button class="btn btn-discord" onclick="loginDiscord()">
+                            <i class="fab fa-discord"></i>
+                            ログイン
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="error-container">
+                <div class="error-content">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="error-code">404</div>
+                    <div class="error-message">
+                        <h2>ページが見つかりません</h2>
+                        <p>お探しのページは削除されたか、URLが間違っている可能性があります。</p>
+                    </div>
+                    <div class="error-actions">
+                        <button class="btn btn-primary" onclick="goHome()">
+                            <i class="fas fa-home"></i>
+                            ホームに戻る
+                        </button>
+                        <button class="btn btn-secondary" onclick="goBack()">
+                            <i class="fas fa-arrow-left"></i>
+                            前のページに戻る
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Popular Pages -->
+                <div class="popular-pages">
+                    <h3>人気のページ</h3>
+                    <div class="popular-links">
+                        <a href="/rules" class="popular-link">
+                            <i class="fas fa-gavel"></i>
+                            <span>コミュニティルール</span>
+                        </a>
+                        <a href="/guidelines" class="popular-link">
+                            <i class="fas fa-question-circle"></i>
+                            <span>質問ガイドライン</span>
+                        </a>
+                        <a href="/support" class="popular-link">
+                            <i class="fas fa-headset"></i>
+                            <span>サポート</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Search -->
+                <div class="search-section">
+                    <h3>お探しのページが見つかりませんか？</h3>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="検索キーワードを入力..." class="search-input">
+                        <button class="btn btn-discord" onclick="searchContent()">
+                            <i class="fas fa-search"></i>
+                            検索
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h4>
+                        <i class="fas fa-desktop"></i>
+                        PC Community
+                    </h4>
+                    <p>PCに関する質問、情報共有、雑談を楽しめるDiscordコミュニティ</p>
+                </div>
+                <div class="footer-links">
+                    <h5>リンク</h5>
+                    <ul>
+                        <li><a href="/rules">コミュニティルール</a></li>
+                        <li><a href="/guidelines">質問ガイドライン</a></li>
+                        <li><a href="/support">サポート</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h5>SNS</h5>
+                    <div class="social-links">
+                        <button class="social-btn discord" onclick="joinDiscord()">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PC Community. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/pages.js"></script>
+    <script>
+        // 404ページ専用のスクリプト
+        function goHome() {
+            window.location.href = '/';
+        }
+
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = '/';
+            }
+        }
+
+        function searchContent() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                // 簡単な検索機能（実際の実装では検索APIを使用）
+                const searchUrls = {
+                    'ルール': '/rules',
+                    'rule': '/rules',
+                    '質問': '/guidelines',
+                    'question': '/guidelines',
+                    'ガイド': '/guidelines',
+                    'guide': '/guidelines',
+                    'サポート': '/support',
+                    'support': '/support',
+                    'ヘルプ': '/support',
+                    'help': '/support'
+                };
+
+                const lowerQuery = query.toLowerCase();
+                for (const [key, url] of Object.entries(searchUrls)) {
+                    if (key.toLowerCase().includes(lowerQuery) || lowerQuery.includes(key.toLowerCase())) {
+                        window.location.href = url;
+                        return;
+                    }
+                }
+
+                // 見つからない場合はホームページへ
+                showToast('該当するページが見つかりませんでした', 'info');
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 2000);
+            }
+        }
+
+        // Enterキーで検索
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchContent();
+            }
+        });
+
+        // 自動フォーカス
+        document.getElementById('searchInput').focus();
+    </script>
+
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .error-content {
+            margin-bottom: 60px;
+        }
+
+        .error-icon {
+            font-size: 120px;
+            color: var(--discord-yellow);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .error-code {
+            font-size: 72px;
+            font-weight: 900;
+            color: var(--interactive-active);
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--discord-blurple), var(--gaming-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .error-message h2 {
+            font-size: 32px;
+            color: var(--interactive-active);
+            margin-bottom: 16px;
+        }
+
+        .error-message p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .popular-pages {
+            background-color: var(--background-secondary);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 40px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .popular-pages h3 {
+            color: var(--interactive-active);
+            margin-bottom: 24px;
+            font-size: 20px;
+        }
+
+        .popular-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .popular-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background-color: var(--background-tertiary);
+            border-radius: 8px;
+            color: var(--text-normal);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .popular-link:hover {
+            background-color: var(--background-accent);
+            color: var(--discord-blurple);
+            transform: translateY(-2px);
+        }
+
+        .popular-link i {
+            font-size: 20px;
+        }
+
+        .search-section {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .search-section h3 {
+            color: var(--interactive-active);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--background-tertiary);
+            color: var(--text-normal);
+            font-size: 16px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--discord-blurple);
+        }
+
+        @media (max-width: 768px) {
+            .error-icon {
+                font-size: 80px;
+            }
+
+            .error-code {
+                font-size: 48px;
+            }
+
+            .error-message h2 {
+                font-size: 24px;
+            }
+
+            .error-message p {
+                font-size: 16px;
+            }
+
+            .error-actions {
+                flex-direction: column;
+            }
+
+            .popular-links {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+        }
+    </style>
+</body>
+
+</html>

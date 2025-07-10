@@ -62,6 +62,7 @@ module.exports = {
     "bestAnswerRole": "1067445728542199828",
     //2週間未経過通知
     "timeoutNotice": "1385287795014242394",
+    
     // Web関連設定
     "webPort": process.env.WEB_PORT ?? 3000,
     "webDomain": process.env.WEB_DOMAIN ?? "http://localhost:3000",
@@ -79,6 +80,35 @@ module.exports = {
     // 管理者ロール
     "adminRoleId": process.env.ADMIN_ROLE_ID,
     "supportRoleId": process.env.SUP_ROLE_ID,
+
+    // Discord招待リンク
+    "discordInviteUrl": process.env.DISCORD_INVITE_URL ?? "https://discord.gg/your-server-link",
+
+    // サイト設定
+    "site": {
+        "title": "PC Community",
+        "description": "PCに関する質問、情報共有、雑談を楽しめるDiscordコミュニティ",
+        "keywords": "PC,コンピューター,Discord,コミュニティ,質問,サポート,パソコン",
+        "author": "PC Community",
+        "language": "ja",
+        "charset": "UTF-8",
+        "viewport": "width=device-width, initial-scale=1.0",
+        "themeColor": "#5865F2",
+        "backgroundColor": "#36393F"
+    },
+
+    // OGP設定
+    "ogp": {
+        "siteName": "PC Community",
+        "title": "PC Community - パソコミ",
+        "description": "PCに関する質問、情報共有、雑談を楽しめるDiscordコミュニティです。初心者から上級者まで、みんなで学び合いましょう！",
+        "type": "website",
+        "url": process.env.WEB_DOMAIN ?? "http://localhost:3000",
+        "image": `${process.env.WEB_DOMAIN ?? "http://localhost:3000"}/images/ogp.png`,
+        "locale": "ja_JP",
+        "twitterCard": "summary_large_image",
+        "twitterSite": "@pccomm_official"
+    },
 
     // Firebase設定
     firebase: {
@@ -106,5 +136,36 @@ module.exports = {
                 enabled: true
             },
         ]
+    },
+
+    // ログレベル設定
+    "logging": {
+        "level": process.env.LOG_LEVEL || "info",
+        "fileOutput": process.env.LOG_FILE_OUTPUT !== 'false',
+        "maxFileSize": process.env.LOG_MAX_FILE_SIZE || "10MB",
+        "maxFiles": process.env.LOG_MAX_FILES || 5
+    },
+
+    // レート制限設定
+    "rateLimit": {
+        "enabled": process.env.RATE_LIMIT_ENABLED !== 'false',
+        "windowMs": parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15分
+        "maxRequests": parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
+        "message": "リクエストが多すぎます。しばらく待ってからやり直してください。"
+    },
+
+    // セキュリティ設定
+    "security": {
+        "enableCORS": process.env.ENABLE_CORS !== 'false',
+        "trustedOrigins": process.env.TRUSTED_ORIGINS?.split(',') || [],
+        "enableCSP": process.env.ENABLE_CSP !== 'false',
+        "enableHSTS": process.env.ENABLE_HSTS !== 'false'
+    },
+
+    // 開発者設定
+    "development": {
+        "enabled": process.env.NODE_ENV === 'development',
+        "debugMode": process.env.DEBUG_MODE === 'true',
+        "mockData": process.env.MOCK_DATA === 'true'
     }
 };

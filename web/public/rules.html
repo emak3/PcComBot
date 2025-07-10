@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Community - コミュニティルール</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+</head>
+
+<body>
+    <!-- Gaming Accent Bar -->
+    <div class="gaming-accent"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">
+                    <i class="fas fa-desktop header-icon"></i>
+                    PC Community
+                </h1>
+                <nav class="header-nav">
+                    <a href="/" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        ホーム
+                    </a>
+                    <a href="/rules" class="nav-link active">
+                        <i class="fas fa-gavel"></i>
+                        ルール
+                    </a>
+                    <a href="/guidelines" class="nav-link">
+                        <i class="fas fa-question-circle"></i>
+                        質問ガイド
+                    </a>
+                    <a href="/support" class="nav-link">
+                        <i class="fas fa-headset"></i>
+                        サポート
+                    </a>
+                </nav>
+                <div class="user-section" id="userSection">
+                    <div class="auth-buttons">
+                        <button class="btn btn-discord" onclick="loginDiscord()">
+                            <i class="fab fa-discord"></i>
+                            ログイン
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-title">
+                    <i class="fas fa-gavel page-icon"></i>
+                    <h2>コミュニティルール</h2>
+                </div>
+                <p class="page-description">
+                    みんなが快適に過ごすためのルールです。必ずお読みください。
+                </p>
+            </div>
+
+            <!-- Rules Content -->
+            <div class="content-section">
+                <!-- Important Notice -->
+                <div class="warning-card">
+                    <div class="warning-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="warning-content">
+                        <h3>重要事項</h3>
+                        <p>上記のルールを破った場合、BANされる前に数回の警告をしますが、重度の違反行為や明らかな荒らし行為は警告なしに即BANとなる場合があります。</p>
+                        <p><a href="https://discord.com/terms" target="_blank" rel="noopener noreferrer">DiscordのTOS</a>
+                            に違反した場合、即座にBANされます。上記以外の行為であっても、運営は適切と思われる処置を行う権利があります。</p>
+                    </div>
+                </div>
+
+                <!-- Rules -->
+                <div class="rules-container">
+                    <!-- Rule 1: スパム禁止 -->
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <div class="rule-icon">
+                                <i class="fas fa-ban"></i>
+                            </div>
+                            <h3>スパムは禁止です！</h3>
+                        </div>
+                        <div class="rule-content">
+                            <p>以下の行為は禁止されています：</p>
+                            <ul class="rule-list">
+                                <li>短縮URLや隠しURL</li>
+                                <li>過剰な絵文字</li>
+                                <li>過剰なリアクション</li>
+                                <li>テキストウォール（長すぎる文章）</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Rule 2: SFW -->
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <div class="rule-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>SFWを心がけましょう！</h3>
+                        </div>
+                        <div class="rule-content">
+                            <p>常識の範囲内であれば、多少の悪口は問題ありません。</p>
+                            <p>もしあなたのユーザー名 / PFPが不快なものであれば、変更を求められる場合があります。</p>
+                            <div class="info-box">
+                                <div class="info-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    用語説明
+                                </div>
+                                <div class="info-content">
+                                    <p><strong>SFW</strong>: Safe for work（職場でも安全な内容）</p>
+                                    <p><strong>PFP</strong>: Profile picture（プロフィール画像）</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 3: 読みやすい名前 -->
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <div class="rule-icon">
+                                <i class="fas fa-user-edit"></i>
+                            </div>
+                            <h3>読みやすい名前にしましょう！</h3>
+                        </div>
+                        <div class="rule-content">
+                            <p>メンションがしにくい特殊文字を含んだユーザー名の場合は変更が必須です。</p>
+
+                            <div class="name-rules">
+                                <div class="allowed-section">
+                                    <h4>
+                                        <i class="fas fa-check-circle"></i>
+                                        使用可能な文字
+                                    </h4>
+                                    <ul class="allowed-list">
+                                        <li>英語</li>
+                                        <li>英数字</li>
+                                        <li>漢字</li>
+                                        <li>カタカナ</li>
+                                        <li>ひらがな</li>
+                                        <li>一部記号</li>
+                                    </ul>
+                                </div>
+
+                                <div class="restrictions-section">
+                                    <h4>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        制限事項
+                                    </h4>
+                                    <ul class="restrictions-list">
+                                        <li>名前の初めに記号は入れられません</li>
+                                        <li>特殊文字を含むことはできません</li>
+                                    </ul>
+                                </div>
+
+                                <div class="symbols-section">
+                                    <h4>
+                                        <i class="fas fa-list"></i>
+                                        使用可能な記号
+                                    </h4>
+                                    <div class="symbols-box">
+                                        <code>[ ] @ ^ $ ( ) _ { } | ? + \ * .</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 4: 一般的な会話のみ -->
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <div class="rule-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3>一般的な会話のみ</h3>
+                        </div>
+                        <div class="rule-content">
+                            <p>宗教、政治、その他ネガティブで攻撃的な話題は禁止です。</p>
+                            <p>論争を始めようとすることは、攻撃的であるとみなされます。</p>
+
+                            <div class="topics-grid">
+                                <div class="forbidden-topics">
+                                    <h4>
+                                        <i class="fas fa-times-circle"></i>
+                                        禁止トピック
+                                    </h4>
+                                    <ul>
+                                        <li>宗教的な話題</li>
+                                        <li>政治的な話題</li>
+                                        <li>攻撃的な内容</li>
+                                        <li>論争を誘発する内容</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 5: 広告や自己宣伝は禁止 -->
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <div class="rule-icon">
+                                <i class="fas fa-ad"></i>
+                            </div>
+                            <h3>広告や自己宣伝は禁止</h3>
+                        </div>
+                        <div class="rule-content">
+                            <p>許可された場合以外や、話の流れにそぐわない自分のコンテンツやチャンネルのリンクは禁止です。</p>
+                            <p>また、Discord等のコミュニティー勧誘は一切認めません。</p>
+
+                            <div class="promo-examples">
+                                <div class="bad-example">
+                                    <h4>
+                                        <i class="fas fa-times"></i>
+                                        禁止例
+                                    </h4>
+                                    <ul>
+                                        <li>無関係なYouTubeチャンネル宣伝</li>
+                                        <li>他のDiscordサーバーへの勧誘</li>
+                                        <li>商品やサービスの宣伝</li>
+                                        <li>アフィリエイトリンク</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 6: 質問はガイドを読んでから -->
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <div class="rule-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <h3>質問はガイドを読んでから！</h3>
+                        </div>
+                        <div class="rule-content">
+                            <p>質問フォーラムを使用する前に、必ず質問ガイドラインを読んでください。</p>
+                            <p>明らかに読んでいないと分かる質問に回答する行為も禁止です。</p>
+                            <p>不足部分は回答側が質問する前にスレッドに投稿される埋め込みの選択肢から選択してください。</p>
+
+                            <div class="guide-link">
+                                <a href="/guidelines" class="btn btn-primary">
+                                    <i class="fas fa-book"></i>
+                                    質問ガイドラインを読む
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="contact-section">
+                    <div class="contact-card">
+                        <div class="contact-header">
+                            <i class="fas fa-hands-helping"></i>
+                            <h3>サポートが必要な場合</h3>
+                        </div>
+                        <div class="contact-content">
+                            <p>質問がありましたら遠慮なく親切なMODに助けを求めてください！</p>
+                            <div class="contact-buttons">
+                                <a href="/support" class="btn btn-secondary">
+                                    <i class="fas fa-headset"></i>
+                                    サポートに連絡
+                                </a>
+                                <button class="btn btn-discord" onclick="joinDiscord()">
+                                    <i class="fab fa-discord"></i>
+                                    Discordに参加
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms Reference -->
+                <div class="terms-section">
+                    <div class="terms-card">
+                        <div class="terms-header">
+                            <i class="fas fa-file-contract"></i>
+                            <h3>参考資料</h3>
+                        </div>
+                        <div class="terms-content">
+                            <p>その他の規約や利用規約については、以下もご確認ください：</p>
+                            <ul class="terms-list">
+                                <li>
+                                    <a href="https://discord.com/terms" target="_blank" rel="noopener noreferrer">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        Discord Terms of Service
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://discord.com/guidelines" target="_blank" rel="noopener noreferrer">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        Discord Community Guidelines
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h4>
+                        <i class="fas fa-desktop"></i>
+                        PC Community
+                    </h4>
+                    <p>PCに関する質問、情報共有、雑談を楽しめるDiscordコミュニティ</p>
+                </div>
+                <div class="footer-links">
+                    <h5>リンク</h5>
+                    <ul>
+                        <li><a href="/rules">コミュニティルール</a></li>
+                        <li><a href="/guidelines">質問ガイドライン</a></li>
+                        <li><a href="/support">サポート</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h5>SNS</h5>
+                    <div class="social-links">
+                        <button class="social-btn discord" onclick="joinDiscord()">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PC Community. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/pages.js"></script>
+</body>
+
+</html>

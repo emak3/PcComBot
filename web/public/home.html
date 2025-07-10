@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC Community</title>
+    <title>PC Community - ホーム</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/pages.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
@@ -23,29 +24,225 @@
                     <i class="fas fa-desktop header-icon"></i>
                     PC Community
                 </h1>
+                <nav class="header-nav">
+                    <a href="/" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        ホーム
+                    </a>
+                    <a href="/rules" class="nav-link">
+                        <i class="fas fa-gavel"></i>
+                        ルール
+                    </a>
+                    <a href="/guidelines" class="nav-link">
+                        <i class="fas fa-question-circle"></i>
+                        質問ガイド
+                    </a>
+                    <a href="/support" class="nav-link">
+                        <i class="fas fa-headset"></i>
+                        サポート
+                    </a>
+                </nav>
                 <div class="user-section" id="userSection">
-                    <!-- ユーザー情報がここに動的に挿入される -->
+                    <div class="auth-buttons">
+                        <button class="btn btn-discord" onclick="loginDiscord()">
+                            <i class="fab fa-discord"></i>
+                            ログイン
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
 
         <!-- Main Content -->
         <main class="main">
-            <!-- Not Support Page Message -->
-            <div class="not-support-page" id="notSupportPage">
-                <div class="info-card">
-                    <h2><i class="fas fa-home"></i> PC Community</h2>
-                    <p>💻パソコミ・PC Community<br>
-                        管理者への問い合わせは <a href="/support">こちら</a> からお願いします。</p>
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h2 class="hero-title">
+                            <span class="gradient-text">PC Community</span>
+                            <span class="subtitle">〜パソコミ〜</span>
+                        </h2>
+                        <p class="hero-description">
+                            PCに関する質問、情報共有、雑談を楽しめるDiscordコミュニティです。<br>
+                            初心者から上級者まで、みんなで学び合いましょう！
+                        </p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="joinDiscord()">
+                                <i class="fab fa-discord"></i>
+                                Discordに参加
+                            </button>
+                            <a href="/guidelines" class="btn btn-secondary">
+                                <i class="fas fa-book"></i>
+                                質問ガイド
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="pc-showcase">
+                            <div class="pc-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="floating-icons">
+                                <i class="fas fa-microchip"></i>
+                                <i class="fas fa-memory"></i>
+                                <i class="fas fa-hard-drive"></i>
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <div class="section-header">
+                    <h3>コミュニティの特徴</h3>
+                    <p>PCコミュニティで得られる体験</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h4>気軽に質問</h4>
+                        <p>PC初心者でも気軽に質問できる環境。専門的な質問も大歓迎です。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>知識の共有</h4>
+                        <p>メンバー同士で知識を共有し、みんなで成長できるコミュニティです。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4>技術サポート</h4>
+                        <p>PCのトラブルシューティングから自作PC相談まで幅広くサポート。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>最新情報</h4>
+                        <p>PC関連の最新情報やニュースを自動配信。トレンドを逃しません。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Stats -->
+            <section class="stats-section">
+                <div class="section-header">
+                    <h3>コミュニティ統計</h3>
+                    <p>活発なコミュニティの証拠</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number" id="memberCount">---</div>
+                        <div class="stat-label">メンバー数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-number" id="messageCount">---</div>
+                        <div class="stat-label">今日のメッセージ</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="stat-number" id="questionCount">---</div>
+                        <div class="stat-label">解決済み質問</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">オンライン</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Links -->
+            <section class="links-section">
+                <div class="section-header">
+                    <h3>クイックリンク</h3>
+                    <p>よく使用されるリンク集</p>
+                </div>
+                <div class="links-grid">
+                    <a href="/rules" class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h4>コミュニティルール</h4>
+                        <p>みんなが快適に過ごすためのルール</p>
+                        <span class="link-arrow">→</span>
+                    </a>
+                    <a href="/guidelines" class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h4>質問ガイドライン</h4>
+                        <p>効果的な質問の仕方とマナー</p>
+                        <span class="link-arrow">→</span>
+                    </a>
+                    <a href="/support" class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4>管理者サポート</h4>
+                        <p>問題や要望を管理者に報告</p>
+                        <span class="link-arrow">→</span>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h4>
+                        <i class="fas fa-desktop"></i>
+                        PC Community
+                    </h4>
+                    <p>PCに関する質問、情報共有、雑談を楽しめるDiscordコミュニティ</p>
+                </div>
+                <div class="footer-links">
+                    <h5>リンク</h5>
+                    <ul>
+                        <li><a href="/rules">コミュニティルール</a></li>
+                        <li><a href="/guidelines">質問ガイドライン</a></li>
+                        <li><a href="/support">サポート</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h5>SNS</h5>
+                    <div class="social-links">
+                        <button class="social-btn discord" onclick="joinDiscord()">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </main>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PC Community. All rights reserved.</p>
+            </div>
+        </footer>
 
         <!-- Toast Notification -->
         <div class="toast" id="toast"></div>
     </div>
 
     <script src="/js/main.js"></script>
+    <script src="/js/pages.js"></script>
 </body>
 
 </html>
