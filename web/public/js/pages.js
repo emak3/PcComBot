@@ -1,7 +1,7 @@
 // pages.js - ページ専用の JavaScript 関数
-
+const config = require("../../../config.js");
 // Discord参加リンクを取得
-let DISCORD_INVITE_URL = 'https://discord.gg/your-server-link';
+let DISCORD_INVITE_URL = config.discordInviteUrl;
 
 // ページ読み込み時の初期化
 document.addEventListener('DOMContentLoaded', async () => {
