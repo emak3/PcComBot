@@ -44,10 +44,7 @@
                 </nav>
                 <div class="user-section" id="userSection">
                     <div class="auth-buttons">
-                        <button class="btn btn-discord" onclick="loginDiscord()">
-                            <i class="fab fa-discord"></i>
-                            ログイン
-                        </button>
+                        
                     </div>
                 </div>
             </div>
@@ -82,16 +79,16 @@
                 </div>
 
                 <!-- Rules -->
-                <div class="rules-container">
+                <div class="guidelines-container">
                     <!-- Rule 1: スパム禁止 -->
-                    <div class="rule-card">
-                        <div class="rule-header">
-                            <div class="rule-icon">
+                    <div class="guideline-card">
+                        <div class="guideline-header">
+                            <div class="guideline-icon">
                                 <i class="fas fa-ban"></i>
                             </div>
                             <h3>スパムは禁止です！</h3>
                         </div>
-                        <div class="rule-content">
+                        <div class="guideline-content">
                             <p>以下の行為は禁止されています：</p>
                             <ul class="rule-list">
                                 <li>短縮URLや隠しURL</li>
@@ -99,20 +96,30 @@
                                 <li>過剰なリアクション</li>
                                 <li>テキストウォール（長すぎる文章）</li>
                             </ul>
+                            <div class="info-box">
+                                <div class="info-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    詳細説明
+                                </div>
+                                <div class="info-content">
+                                    <p>スパム行為は他のメンバーの体験を損ねる行為です。適度な絵文字の使用や通常の会話は問題ありません。</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Rule 2: SFW -->
-                    <div class="rule-card">
-                        <div class="rule-header">
-                            <div class="rule-icon">
+                    <div class="guideline-card">
+                        <div class="guideline-header">
+                            <div class="guideline-icon">
                                 <i class="fas fa-shield-alt"></i>
                             </div>
                             <h3>SFWを心がけましょう！</h3>
                         </div>
-                        <div class="rule-content">
+                        <div class="guideline-content">
                             <p>常識の範囲内であれば、多少の悪口は問題ありません。</p>
                             <p>もしあなたのユーザー名 / PFPが不快なものであれば、変更を求められる場合があります。</p>
+                            
                             <div class="info-box">
                                 <div class="info-title">
                                     <i class="fas fa-info-circle"></i>
@@ -123,18 +130,35 @@
                                     <p><strong>PFP</strong>: Profile picture（プロフィール画像）</p>
                                 </div>
                             </div>
+
+                            <div class="example-comparison">
+                                <div class="bad-example">
+                                    <h5>
+                                        <i class="fas fa-times-circle"></i>
+                                        避けるべき内容
+                                    </h5>
+                                    <p>過度に攻撃的な言葉、不適切な画像、職場で見るのが困難な内容</p>
+                                </div>
+                                <div class="good-example">
+                                    <h5>
+                                        <i class="fas fa-check-circle"></i>
+                                        適切な内容
+                                    </h5>
+                                    <p>建設的な議論、適度な冗談、誰でも見ることができる内容</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Rule 3: 読みやすい名前 -->
-                    <div class="rule-card">
-                        <div class="rule-header">
-                            <div class="rule-icon">
+                    <div class="guideline-card">
+                        <div class="guideline-header">
+                            <div class="guideline-icon">
                                 <i class="fas fa-user-edit"></i>
                             </div>
                             <h3>読みやすい名前にしましょう！</h3>
                         </div>
-                        <div class="rule-content">
+                        <div class="guideline-content">
                             <p>メンションがしにくい特殊文字を含んだユーザー名の場合は変更が必須です。</p>
 
                             <div class="name-rules">
@@ -161,6 +185,7 @@
                                     <ul class="restrictions-list">
                                         <li>名前の初めに記号は入れられません</li>
                                         <li>特殊文字を含むことはできません</li>
+                                        <li>メンション時に困難な文字は避けてください</li>
                                     </ul>
                                 </div>
 
@@ -174,18 +199,23 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="reason-box">
+                                <h5>理由</h5>
+                                <p>読みやすい名前により、コミュニケーションが円滑になり、メンションやメッセージのやり取りがスムーズになります。</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Rule 4: 一般的な会話のみ -->
-                    <div class="rule-card">
-                        <div class="rule-header">
-                            <div class="rule-icon">
+                    <div class="guideline-card">
+                        <div class="guideline-header">
+                            <div class="guideline-icon">
                                 <i class="fas fa-comments"></i>
                             </div>
                             <h3>一般的な会話のみ</h3>
                         </div>
-                        <div class="rule-content">
+                        <div class="guideline-content">
                             <p>宗教、政治、その他ネガティブで攻撃的な話題は禁止です。</p>
                             <p>論争を始めようとすることは、攻撃的であるとみなされます。</p>
 
@@ -200,21 +230,28 @@
                                         <li>政治的な話題</li>
                                         <li>攻撃的な内容</li>
                                         <li>論争を誘発する内容</li>
+                                        <li>差別的な発言</li>
+                                        <li>過度にネガティブな内容</li>
                                     </ul>
                                 </div>
+                            </div>
+
+                            <div class="reason-box">
+                                <h5>理由</h5>
+                                <p>PCコミュニティは技術的な学習と情報交換を目的としています。建設的で前向きな環境を維持するため、論争を招く話題は避けています。</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Rule 5: 広告や自己宣伝は禁止 -->
-                    <div class="rule-card">
-                        <div class="rule-header">
-                            <div class="rule-icon">
+                    <div class="guideline-card">
+                        <div class="guideline-header">
+                            <div class="guideline-icon">
                                 <i class="fas fa-ad"></i>
                             </div>
                             <h3>広告や自己宣伝は禁止</h3>
                         </div>
-                        <div class="rule-content">
+                        <div class="guideline-content">
                             <p>許可された場合以外や、話の流れにそぐわない自分のコンテンツやチャンネルのリンクは禁止です。</p>
                             <p>また、Discord等のコミュニティー勧誘は一切認めません。</p>
 
@@ -229,24 +266,45 @@
                                         <li>他のDiscordサーバーへの勧誘</li>
                                         <li>商品やサービスの宣伝</li>
                                         <li>アフィリエイトリンク</li>
+                                        <li>営利目的の投稿</li>
                                     </ul>
+                                </div>
+                            </div>
+
+                            <div class="info-box">
+                                <div class="info-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    例外について
+                                </div>
+                                <div class="info-content">
+                                    <p>技術的な質問への回答や情報共有の一環として、関連するリンクを共有することは問題ありません。ただし、主目的が宣伝でないことが重要です。</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Rule 6: 質問はガイドを読んでから -->
-                    <div class="rule-card">
-                        <div class="rule-header">
-                            <div class="rule-icon">
+                    <div class="guideline-card">
+                        <div class="guideline-header">
+                            <div class="guideline-icon">
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <h3>質問はガイドを読んでから！</h3>
                         </div>
-                        <div class="rule-content">
+                        <div class="guideline-content">
                             <p>質問フォーラムを使用する前に、必ず質問ガイドラインを読んでください。</p>
                             <p>明らかに読んでいないと分かる質問に回答する行為も禁止です。</p>
                             <p>不足部分は回答側が質問する前にスレッドに投稿される埋め込みの選択肢から選択してください。</p>
+
+                            <div class="info-box">
+                                <div class="info-title">
+                                    <i class="fas fa-book"></i>
+                                    質問ガイドラインの重要性
+                                </div>
+                                <div class="info-content">
+                                    <p>適切な質問により、より早く正確な回答を得ることができます。回答者の時間を尊重し、効率的な問題解決につながります。</p>
+                                </div>
+                            </div>
 
                             <div class="guide-link">
                                 <a href="/guidelines" class="btn btn-primary">
