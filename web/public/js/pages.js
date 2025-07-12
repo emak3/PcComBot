@@ -1,7 +1,7 @@
-// pages.js - ページ専用の JavaScript 関数
-const config = require("../../../config.js");
-// Discord参加リンクを取得
-let DISCORD_INVITE_URL = config.discordInviteUrl;
+// pages.js - ページ専用の JavaScript 関数（修正版）
+
+// Discord参加リンクを初期化（デフォルト値）
+let DISCORD_INVITE_URL = 'https://discord.gg/your-server-link';
 
 // ページ読み込み時の初期化
 document.addEventListener('DOMContentLoaded', async () => {
@@ -31,9 +31,38 @@ async function loadDiscordInvite() {
 
         if (data.success && data.inviteUrl) {
             DISCORD_INVITE_URL = data.inviteUrl;
+            console.log('Discord招待リンクを取得しました:', DISCORD_INVITE_URL);
+        } else {
+            console.warn('Discord招待リンクの取得に失敗、フォールバックを使用:', data.inviteUrl);
+            DISCORD_INVITE_URL = data.inviteUrl || 'https://discord.gg/your-server-link';
         }
     } catch (error) {
         console.error('Discord招待リンクの取得に失敗しました:', error);
+        console.warn('デフォルトのDiscord招待リンクを使用します');
+        // デフォルト値をそのまま使用
+    }
+}
+
+// Discord参加
+function joinDiscord() {
+    console.log('joinDiscord関数が呼び出されました');
+    console.log('使用するDiscord招待リンク:', DISCORD_INVITE_URL);
+
+    if (!DISCORD_INVITE_URL || DISCORD_INVITE_URL === 'https://discord.gg/your-server-link') {
+        console.warn('Discord招待リンクが設定されていません');
+        showToast('Discord招待リンクが設定されていません。管理者にお問い合わせください。', 'error');
+        return;
+    }
+
+    try {
+        // 新しいタブでDiscordに参加
+        window.open(DISCORD_INVITE_URL, '_blank');
+
+        // 参加完了の案内を表示
+        showToast('Discordサーバーを開きました！', 'success');
+    } catch (error) {
+        console.error('Discord招待リンクの開放に失敗:', error);
+        showToast('Discordサーバーを開けませんでした。', 'error');
     }
 }
 
@@ -212,15 +241,6 @@ async function logoutUser() {
     }
 }
 
-// Discord参加
-function joinDiscord() {
-    // 新しいタブでDiscordに参加
-    window.open(DISCORD_INVITE_URL, '_blank');
-
-    // 参加完了の案内を表示
-    showToast('Discordサーバーを開きました！', 'success');
-}
-
 // スムーズスクロールの設定
 function setupSmoothScroll() {
     // アンカーリンクのクリック時にスムーズスクロール
@@ -352,7 +372,8 @@ function debugInfo() {
         page: getCurrentPage(),
         userAgent: navigator.userAgent,
         location: window.location.href,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        discordInviteUrl: DISCORD_INVITE_URL
     };
 
     console.log('Debug Info:', info);

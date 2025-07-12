@@ -172,6 +172,24 @@ class WebServer {
             }
         });
 
+        this.app.get('/api/discord-invite', (req, res) => {
+            try {
+                const inviteUrl = config.discordInviteUrl || 'https://discord.gg/your-server-link';
+
+                res.json({
+                    success: true,
+                    inviteUrl: inviteUrl
+                });
+            } catch (error) {
+                log.error('Discord招待リンク取得エラー:', error);
+                res.json({
+                    success: false,
+                    error: 'Discord招待リンクの取得に失敗しました',
+                    inviteUrl: 'https://discord.gg/your-server-link' // フォールバック
+                });
+            }
+        });
+
         // 健康チェック
         this.app.get('/health', (req, res) => {
             res.json({
