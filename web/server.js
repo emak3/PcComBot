@@ -64,7 +64,7 @@ class WebServer {
 
         // サポートページ
         this.app.get('/support', (req, res) => {
-            res.sendFile(path.join(__dirname, 'public', 'index.html'));
+            res.sendFile(path.join(__dirname, 'public', 'support.html'));
         });
 
         // APIエンドポイント - ユーザー情報取得
