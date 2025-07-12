@@ -4,18 +4,23 @@
 .gaming-accent {
     height: 3px;
     background: linear-gradient(90deg,
-        var(--gaming-cyan) 0%,
-        var(--discord-blurple) 25%,
-        var(--gaming-pink) 50%,
-        var(--discord-blurple) 75%,
-        var(--gaming-cyan) 100%);
+            var(--gaming-cyan) 0%,
+            var(--discord-blurple) 25%,
+            var(--gaming-pink) 50%,
+            var(--discord-blurple) 75%,
+            var(--gaming-cyan) 100%);
     background-size: 200% 100%;
     animation: rainbow-flow 3s linear infinite;
 }
 
 @keyframes rainbow-flow {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 200% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
 }
 
 /* Header */
@@ -49,8 +54,49 @@
 }
 
 .header-icon {
-    font-size: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    transition: all 0.2s ease;
+}
+
+.server-icon {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: all 0.2s ease;
+}
+
+.server-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 12px rgba(88, 101, 242, 0.4);
+}
+
+/* Fallback for FontAwesome icons when server icon fails */
+.header-icon.fas {
+    font-size: 32px;
     color: var(--gaming-cyan);
+}
+
+.header-icon.fas:hover {
+    color: var(--discord-blurple);
+    transform: scale(1.1);
+}
+
+/* Loading state for server icon */
+.server-icon-loading {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(45deg,
+            var(--background-secondary),
+            var(--background-accent),
+            var(--background-secondary));
+    background-size: 200% 200%;
+    animation: shimmer 1.5s ease-in-out infinite;
 }
 
 /* Header Navigation */
@@ -230,4 +276,134 @@
     margin: 0 auto;
     padding: 32px 24px;
     width: 100%;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% -200%;
+    }
+
+    50% {
+        background-position: 200% 200%;
+    }
+
+    100% {
+        background-position: -200% -200%;
+    }
+}
+
+/* Error state styling */
+.server-icon-error {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--discord-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+}
+
+.server-icon-error::before {
+    content: "!";
+    font-weight: bold;
+}
+
+/* Header title with server icon */
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--interactive-active);
+    white-space: nowrap;
+}
+
+/* Responsive adjustments for server icon */
+@media (max-width: 768px) {
+    .server-icon {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    .header-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .header-icon.fas {
+        font-size: 28px;
+    }
+
+    .server-icon-loading,
+    .server-icon-error {
+        width: 28px;
+        height: 28px;
+    }
+
+    .server-icon-error {
+        font-size: 14px;
+    }
+
+    /* Hero section responsive */
+    .hero-server-icon {
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+    .hero-icon-loading {
+        width: 100px;
+        height: 100px;
+    }
+
+    .pc-icon {
+        font-size: 100px;
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .server-icon {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .header-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .header-icon.fas {
+        font-size: 24px;
+    }
+
+    .server-icon-loading,
+    .server-icon-error {
+        width: 24px;
+        height: 24px;
+    }
+
+    .server-icon-error {
+        font-size: 12px;
+    }
+
+    /* Hero section responsive */
+    .hero-server-icon {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    .hero-icon-loading {
+        width: 80px;
+        height: 80px;
+    }
+
+    .pc-icon {
+        font-size: 80px;
+        width: 80px;
+        height: 80px;
+    }
 }

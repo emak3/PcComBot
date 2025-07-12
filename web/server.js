@@ -66,6 +66,39 @@ class WebServer {
         this.app.get('/support', (req, res) => {
             res.sendFile(path.join(__dirname, 'public', 'support.html'));
         });
+        this.app.get('/api/server-icon', (req, res) => {
+            try {
+                const guild = req.client.guilds.cache.get(config.pccomId);
+
+                if (!guild) {
+                    return res.json({
+                        success: false,
+                        error: 'サーバーが見つかりません',
+                        fallbackIcon: 'fas fa-desktop'
+                    });
+                }
+
+                const iconURL = guild.iconURL({
+                    format: 'png',
+                    size: 128,
+                    dynamic: true
+                });
+
+                res.json({
+                    success: true,
+                    iconURL: iconURL,
+                    serverName: guild.name,
+                    fallbackIcon: 'fas fa-desktop'
+                });
+            } catch (error) {
+                log.error('サーバーアイコン取得エラー:', error);
+                res.json({
+                    success: false,
+                    error: 'サーバーアイコンの取得に失敗しました',
+                    fallbackIcon: 'fas fa-desktop'
+                });
+            }
+        });
 
         // APIエンドポイント - ユーザー情報取得
         this.app.get('/api/user', (req, res) => {

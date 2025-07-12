@@ -1,4 +1,4 @@
-// pages.js - ページ専用の JavaScript 関数（修正版）
+// web/public/js/pages.js の修正版
 
 // Discord参加リンクを初期化（デフォルト値）
 let DISCORD_INVITE_URL = 'https://discord.gg/your-server-link';
@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Discord招待リンクの取得
     await loadDiscordInvite();
 
+    // サーバーアイコンの取得と設定
+    await loadServerIcon();
+
     // ページ固有の初期化
     const currentPage = getCurrentPage();
 
@@ -22,6 +25,115 @@ document.addEventListener('DOMContentLoaded', async () => {
     // スムーズスクロール設定
     setupSmoothScroll();
 });
+
+// サーバーアイコンを取得して設定
+async function loadServerIcon() {
+    try {
+        // ローディング状態を表示
+        showLoadingIcon();
+
+        const response = await fetch('/api/server-icon');
+        const data = await response.json();
+
+        if (data.success && data.iconURL) {
+            updateHeaderIcon(data.iconURL, data.serverName);
+            console.log('サーバーアイコンを取得しました:', data.iconURL);
+        } else {
+            console.warn('サーバーアイコンの取得に失敗、フォールバックアイコンを使用');
+            updateHeaderIcon(null, 'PC Community');
+        }
+    } catch (error) {
+        console.error('サーバーアイコンの取得に失敗しました:', error);
+        console.warn('デフォルトアイコンを使用します');
+        updateHeaderIcon(null, 'PC Community');
+    }
+}
+
+// ローディングアイコンを表示
+function showLoadingIcon() {
+    const headerIcons = document.querySelectorAll('.header-icon');
+    const heroIcon = document.querySelector('.pc-icon');
+
+    // ヘッダーアイコンのローディング
+    headerIcons.forEach(iconElement => {
+        iconElement.className = 'header-icon';
+        iconElement.innerHTML = '<div class="server-icon-loading"></div>';
+    });
+
+    // ヒーローセクションアイコンのローディング
+    if (heroIcon) {
+        heroIcon.innerHTML = '<div class="hero-icon-loading"></div>';
+    }
+}
+
+// ヘッダーアイコンを更新
+function updateHeaderIcon(iconURL, serverName) {
+    const headerIcons = document.querySelectorAll('.header-icon');
+    const heroIcon = document.querySelector('.pc-icon');
+
+    // ヘッダーアイコンの更新
+    headerIcons.forEach(iconElement => {
+        if (iconURL) {
+            // サーバーアイコンが取得できた場合
+            const imgElement = document.createElement('img');
+            imgElement.src = iconURL;
+            imgElement.alt = serverName || 'Server Icon';
+            imgElement.className = 'server-icon';
+            imgElement.style.width = '32px';
+            imgElement.style.height = '32px';
+            imgElement.style.borderRadius = '50%';
+            imgElement.style.objectFit = 'cover';
+
+            // エラー時のフォールバック
+            imgElement.onerror = function () {
+                console.warn('サーバーアイコンの読み込みに失敗、FontAwesomeアイコンにフォールバック');
+                this.style.display = 'none';
+                iconElement.className = 'fas fa-desktop header-icon';
+                iconElement.style.fontSize = '32px';
+            };
+
+            // 既存のクラスをクリアして画像に置換
+            iconElement.className = 'header-icon';
+            iconElement.style.fontSize = '';
+            iconElement.innerHTML = '';
+            iconElement.appendChild(imgElement);
+        } else {
+            // フォールバック：FontAwesome アイコン
+            iconElement.className = 'fas fa-desktop header-icon';
+            iconElement.style.fontSize = '32px';
+            iconElement.innerHTML = '';
+        }
+    });
+
+    // ヒーローセクションのアイコンも更新
+    if (heroIcon) {
+        if (iconURL) {
+            // サーバーアイコンが取得できた場合
+            const imgElement = document.createElement('img');
+            imgElement.src = iconURL;
+            imgElement.alt = serverName || 'Server Icon';
+            imgElement.className = 'hero-server-icon';
+            imgElement.style.width = '120px';
+            imgElement.style.height = '120px';
+            imgElement.style.borderRadius = '50%';
+            imgElement.style.objectFit = 'cover';
+
+            // エラー時のフォールバック
+            imgElement.onerror = function () {
+                console.warn('ヒーローアイコンの読み込みに失敗、FontAwesomeアイコンにフォールバック');
+                this.style.display = 'none';
+                heroIcon.innerHTML = '<i class="fas fa-desktop"></i>';
+            };
+
+            // 既存の内容をクリアして画像に置換
+            heroIcon.innerHTML = '';
+            heroIcon.appendChild(imgElement);
+        } else {
+            // フォールバック：FontAwesome アイコン
+            heroIcon.innerHTML = '<i class="fas fa-desktop"></i>';
+        }
+    }
+}
 
 // Discord招待リンクを取得
 async function loadDiscordInvite() {
@@ -39,7 +151,6 @@ async function loadDiscordInvite() {
     } catch (error) {
         console.error('Discord招待リンクの取得に失敗しました:', error);
         console.warn('デフォルトのDiscord招待リンクを使用します');
-        // デフォルト値をそのまま使用
     }
 }
 
@@ -55,10 +166,7 @@ function joinDiscord() {
     }
 
     try {
-        // 新しいタブでDiscordに参加
         window.open(DISCORD_INVITE_URL, '_blank');
-
-        // 参加完了の案内を表示
         showToast('Discordサーバーを開きました！', 'success');
     } catch (error) {
         console.error('Discord招待リンクの開放に失敗:', error);
@@ -119,7 +227,6 @@ async function loadCommunityStats() {
         if (data.success) {
             updateStatsDisplay(data.stats);
         } else {
-            // デフォルト値を設定
             updateStatsDisplay({
                 members: 1500,
                 todayMessages: 234,
@@ -128,7 +235,6 @@ async function loadCommunityStats() {
         }
     } catch (error) {
         console.error('統計の取得に失敗しました:', error);
-        // デフォルト値を設定
         updateStatsDisplay({
             members: 1500,
             todayMessages: 234,
@@ -197,7 +303,6 @@ function loginDiscord() {
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ログイン中...';
     btn.disabled = true;
 
-    // 現在のページを保存
     const currentPath = window.location.pathname;
     const returnTo = currentPath === '/' ? '/home' : currentPath;
 
@@ -234,7 +339,6 @@ async function logoutUser() {
         console.error('ログアウトエラー:', error);
         showToast('ログアウトに失敗しました', 'error');
 
-        // ボタンを元に戻す
         const btn = event.target;
         btn.innerHTML = '<i class="fas fa-sign-out-alt"></i> ログアウト';
         btn.disabled = false;
@@ -243,7 +347,6 @@ async function logoutUser() {
 
 // スムーズスクロールの設定
 function setupSmoothScroll() {
-    // アンカーリンクのクリック時にスムーズスクロール
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -264,7 +367,6 @@ function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     if (!toast) return;
 
-    // 既存のトーストを削除
     toast.classList.remove('show');
 
     setTimeout(() => {
@@ -272,7 +374,6 @@ function showToast(message, type = 'success') {
         toast.className = `toast ${type}`;
         toast.classList.add('show');
 
-        // 4秒後に自動で非表示
         setTimeout(() => {
             toast.classList.remove('show');
         }, 4000);
@@ -296,12 +397,10 @@ window.addEventListener('error', (e) => {
     console.error('JavaScript エラー:', e.error);
 });
 
-// 未処理のPromise拒否をキャッチ
 window.addEventListener('unhandledrejection', (e) => {
     console.error('未処理のPromise拒否:', e.reason);
 });
 
-// ページ離脱時のクリーンアップ
 window.addEventListener('beforeunload', () => {
     // 必要に応じてクリーンアップ処理を追加
 });
@@ -335,31 +434,26 @@ function goBack() {
 
 // キーボードショートカット
 document.addEventListener('keydown', (e) => {
-    // Ctrl+Home: ホームに戻る
     if (e.ctrlKey && e.key === 'Home') {
         e.preventDefault();
         navigateTo('/');
     }
 
-    // Ctrl+H: ホームに戻る
     if (e.ctrlKey && e.key === 'h') {
         e.preventDefault();
         navigateTo('/');
     }
 
-    // Ctrl+R: ルールページ
     if (e.ctrlKey && e.key === 'r') {
         e.preventDefault();
         navigateTo('/rules');
     }
 
-    // Ctrl+G: ガイドラインページ
     if (e.ctrlKey && e.key === 'g') {
         e.preventDefault();
         navigateTo('/guidelines');
     }
 
-    // Ctrl+S: サポートページ
     if (e.ctrlKey && e.key === 's') {
         e.preventDefault();
         navigateTo('/support');
