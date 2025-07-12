@@ -1,0 +1,533 @@
+/* components.css - 再利用可能なコンポーネント */
+
+/* Buttons */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    justify-content: center;
+    font-family: inherit;
+    line-height: 1;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn i {
+    font-size: 16px;
+}
+
+.btn-primary {
+    background-color: var(--discord-blurple);
+    color: white;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: #4752c4;
+}
+
+.btn-secondary {
+    background-color: var(--background-accent);
+    color: var(--text-normal);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: var(--border-color);
+}
+
+.btn-discord {
+    background-color: var(--discord-blurple);
+    color: white;
+}
+
+.btn-discord:hover:not(:disabled) {
+    background-color: #4752c4;
+}
+
+.btn-submit {
+    background-color: var(--discord-green);
+    color: var(--background-tertiary);
+    font-weight: 600;
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+}
+
+.btn-submit:hover:not(:disabled) {
+    background-color: #4ac741;
+}
+
+/* Cards */
+.card {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    border-color: var(--discord-blurple);
+    box-shadow: 0 4px 16px rgba(88, 101, 242, 0.1);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--discord-blurple);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.card-title {
+    color: var(--interactive-active);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.card-content p {
+    color: var(--text-normal);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.card-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Feature Cards */
+.feature-card {
+    text-align: center;
+    padding: 32px;
+}
+
+.feature-icon {
+    font-size: 48px;
+    color: var(--discord-blurple);
+    margin-bottom: 16px;
+}
+
+.feature-card h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--interactive-active);
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Stats Cards */
+.stat-card {
+    text-align: center;
+    padding: 24px;
+}
+
+.stat-icon {
+    font-size: 32px;
+    color: var(--gaming-cyan);
+    margin-bottom: 12px;
+}
+
+.stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--interactive-active);
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Link Cards */
+.link-card {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+
+.link-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--discord-blurple);
+    box-shadow: 0 4px 16px rgba(88, 101, 242, 0.1);
+}
+
+.link-icon {
+    font-size: 32px;
+    color: var(--discord-blurple);
+    margin-bottom: 16px;
+}
+
+.link-card h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--interactive-active);
+    margin-bottom: 8px;
+}
+
+.link-card p {
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.link-arrow {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 18px;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+}
+
+.link-card:hover .link-arrow {
+    color: var(--discord-blurple);
+    transform: translateX(4px);
+}
+
+/* Notice Cards */
+.notice-card,
+.warning-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    border-left: 4px solid;
+}
+
+.notice-card.important,
+.warning-card {
+    background: linear-gradient(135deg, rgba(237, 66, 69, 0.1), rgba(237, 66, 69, 0.05));
+    border-left-color: var(--discord-red);
+    border: 1px solid var(--discord-red);
+}
+
+.notice-icon,
+.warning-icon {
+    font-size: 24px;
+    color: var(--discord-red);
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.notice-content,
+.warning-content {
+    flex: 1;
+}
+
+.notice-content h3,
+.warning-content h3 {
+    color: var(--interactive-active);
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.notice-content p,
+.warning-content p {
+    color: var(--text-normal);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.notice-content p:last-child,
+.warning-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Info Boxes */
+.info-box {
+    background-color: var(--background-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.info-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--interactive-active);
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.info-title i {
+    color: var(--discord-blurple);
+    font-size: 16px;
+}
+
+.info-content p {
+    color: var(--text-normal);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.info-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Lists */
+.rule-list,
+.tips-list,
+.usage-list,
+.checklist,
+.example-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+}
+
+.rule-list li,
+.tips-list li,
+.usage-list li,
+.checklist li,
+.example-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    color: var(--text-normal);
+    line-height: 1.5;
+}
+
+.rule-list li::before,
+.tips-list li::before,
+.usage-list li::before,
+.checklist li::before,
+.example-list li::before {
+    content: "•";
+    color: var(--discord-blurple);
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* Toast Notifications */
+.toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    background-color: var(--background-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-normal);
+    padding: 16px 20px;
+    border-radius: 8px;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    max-width: 400px;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast.success {
+    border-left: 4px solid var(--discord-green);
+}
+
+.toast.error {
+    border-left: 4px solid var(--discord-red);
+}
+
+.toast.info {
+    border-left: 4px solid var(--discord-blurple);
+}
+
+.toast.warning {
+    border-left: 4px solid var(--discord-yellow);
+}
+
+/* Grids */
+.features-grid,
+.stats-grid,
+.links-grid {
+    display: grid;
+    gap: 24px;
+}
+
+.features-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+}
+
+.links-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Guidelines/Rules specific components */
+.guideline-card,
+.rule-card {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-bottom: 24px;
+}
+
+.guideline-card:hover,
+.rule-card:hover {
+    border-color: var(--discord-blurple);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(88, 101, 242, 0.1);
+}
+
+.guideline-card.danger {
+    border-left: 4px solid var(--discord-red);
+}
+
+.guideline-card.danger:hover {
+    border-color: var(--discord-red);
+}
+
+.guideline-card.danger .guideline-icon {
+    background-color: var(--discord-red);
+}
+
+.guideline-header,
+.rule-header {
+    background: linear-gradient(135deg, var(--background-primary), var(--background-secondary));
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.guideline-icon,
+.rule-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--discord-blurple);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.guideline-header h3,
+.rule-header h3 {
+    color: var(--interactive-active);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.guideline-content,
+.rule-content {
+    padding: 24px;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .gaming-accent {
+        animation: none !important;
+    }
+}
+
+/* Focus styles for better accessibility */
+.btn:focus-visible,
+.nav-link:focus-visible,
+.link-card:focus-visible {
+    outline: 2px solid var(--discord-blurple);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .btn:hover,
+    .nav-link:hover,
+    .card:hover {
+        outline: 2px solid;
+    }
+}

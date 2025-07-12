@@ -1,0 +1,700 @@
+/* responsive.css - レスポンシブデザイン */
+
+/* タブレット向け (768px - 1024px) */
+@media (max-width: 1024px) {
+    .hero-content {
+        gap: 40px;
+        padding: 0 30px;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* タブレット・小さいデスクトップ向け (max-width: 768px) */
+@media (max-width: 768px) {
+    /* ヘッダーの最適化 */
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .header-content {
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .header-title {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .header-icon {
+        font-size: 20px;
+    }
+
+    /* ナビゲーションの調整 */
+    .header-nav {
+        justify-content: center;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+
+    .nav-link {
+        padding: 6px 10px;
+        font-size: 12px;
+        flex: 1;
+        min-width: auto;
+        justify-content: center;
+    }
+
+    .nav-link i {
+        font-size: 14px;
+    }
+
+    /* ユーザーセクションの調整 */
+    .user-section {
+        align-self: center;
+    }
+
+    .user-info {
+        padding: 6px 10px;
+    }
+
+    .user-avatar {
+        width: 28px;
+        height: 28px;
+    }
+
+    .user-name {
+        font-size: 13px;
+    }
+
+    /* メインコンテンツの調整 */
+    .main {
+        padding: 20px 16px;
+    }
+
+    /* ヒーローセクションの調整 */
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+        padding: 0 20px;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* ページヘッダーの調整 */
+    .page-header {
+        padding: 30px 0;
+        margin-bottom: 30px;
+    }
+
+    .page-title {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .page-icon {
+        font-size: 36px;
+    }
+
+    .page-title h2 {
+        font-size: 28px;
+    }
+
+    .page-description {
+        font-size: 16px;
+    }
+
+    /* カードの調整 */
+    .guideline-card,
+    .rule-card {
+        margin-bottom: 20px;
+    }
+
+    .guideline-header,
+    .rule-header {
+        padding: 16px 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .guideline-content,
+    .rule-content {
+        padding: 20px;
+    }
+
+    .guideline-icon,
+    .rule-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+
+    /* 警告カードの調整 */
+    .warning-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .warning-content h3 {
+        font-size: 18px;
+    }
+
+    /* グリッドレイアウトの調整 */
+    .features-grid,
+    .stats-grid,
+    .links-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .name-rules {
+        grid-template-columns: 1fr;
+    }
+
+    .symbols-section {
+        grid-column: span 1;
+    }
+
+    .example-comparison {
+        grid-template-columns: 1fr;
+    }
+
+    /* 連絡先ボタン */
+    .contact-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* フッターの最適化 */
+    .footer {
+        margin-top: 40px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 30px 20px;
+        text-align: center;
+    }
+
+    .footer-info h4 {
+        font-size: 18px;
+    }
+
+    .footer-info p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .footer-links h5,
+    .footer-social h5 {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    .footer-links a {
+        font-size: 14px;
+    }
+
+    .footer-bottom {
+        padding: 12px 0;
+    }
+
+    .footer-bottom p {
+        font-size: 12px;
+    }
+
+    /* フローティングアイコンの調整 */
+    .floating-icons i {
+        font-size: 20px;
+    }
+
+    .pc-icon {
+        font-size: 80px;
+    }
+
+    /* トーストの調整 */
+    .toast {
+        top: 16px;
+        right: 16px;
+        left: 16px;
+        max-width: none;
+    }
+}
+
+/* スマートフォン向けの最適化 (max-width: 480px) */
+@media (max-width: 480px) {
+    /* さらに小さなヘッダー */
+    .header-content {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+
+    .header-title {
+        font-size: 16px;
+    }
+
+    .header-icon {
+        font-size: 18px;
+    }
+
+    /* ナビゲーションをよりコンパクトに */
+    .header-nav {
+        gap: 2px;
+    }
+
+    .nav-link {
+        padding: 5px 8px;
+        font-size: 11px;
+        border-radius: 4px;
+    }
+
+    .nav-link i {
+        font-size: 12px;
+    }
+
+    /* ユーザーセクション */
+    .user-info {
+        padding: 4px 8px;
+    }
+
+    .user-avatar {
+        width: 24px;
+        height: 24px;
+    }
+
+    .user-name {
+        font-size: 12px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    /* メインコンテンツ */
+    .main {
+        padding: 16px 12px;
+    }
+
+    /* ヒーローセクション */
+    .hero-section {
+        padding: 40px 0;
+        margin-bottom: 30px;
+    }
+
+    .hero-content {
+        padding: 0 16px;
+        gap: 24px;
+    }
+
+    .hero-title {
+        font-size: 24px;
+        line-height: 1.2;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* ページヘッダー */
+    .page-header {
+        padding: 24px 0;
+        margin-bottom: 24px;
+    }
+
+    .page-icon {
+        font-size: 32px;
+    }
+
+    .page-title h2 {
+        font-size: 24px;
+    }
+
+    .page-description {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* カードの更なる調整 */
+    .guideline-card,
+    .rule-card {
+        border-radius: 8px;
+        margin-bottom: 16px;
+    }
+
+    .guideline-header,
+    .rule-header {
+        padding: 14px 16px;
+    }
+
+    .guideline-content,
+    .rule-content {
+        padding: 16px;
+    }
+
+    .guideline-header h3,
+    .rule-header h3 {
+        font-size: 16px;
+    }
+
+    .guideline-icon,
+    .rule-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+        border-radius: 8px;
+    }
+
+    /* 警告カード */
+    .warning-card {
+        padding: 16px;
+        border-radius: 8px;
+    }
+
+    .warning-icon {
+        font-size: 20px;
+    }
+
+    .warning-content h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .warning-content p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* 情報ボックス */
+    .info-box {
+        padding: 12px;
+        border-radius: 6px;
+        margin-top: 12px;
+    }
+
+    .info-title {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .info-content p {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    /* リスト */
+    .rule-list li,
+    .tips-list li,
+    .usage-list li,
+    .checklist li,
+    .example-list li {
+        font-size: 14px;
+        line-height: 1.4;
+        padding: 6px 0;
+    }
+
+    /* 記号ボックス */
+    .symbols-box code {
+        font-size: 11px;
+        letter-spacing: 1px;
+        padding: 8px;
+    }
+
+    /* ボタン */
+    .btn-primary,
+    .btn-secondary,
+    .btn-discord {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    /* 統計カード */
+    .stat-card {
+        padding: 16px 12px;
+    }
+
+    .stat-icon {
+        font-size: 28px;
+    }
+
+    .stat-number {
+        font-size: 28px;
+    }
+
+    .stat-label {
+        font-size: 12px;
+    }
+
+    /* フィーチャーカード */
+    .feature-card {
+        padding: 24px 20px;
+    }
+
+    .feature-icon {
+        font-size: 40px;
+    }
+
+    .feature-card h4 {
+        font-size: 18px;
+    }
+
+    .feature-card p {
+        font-size: 14px;
+    }
+
+    /* フッター */
+    .footer-content {
+        padding: 24px 16px;
+        gap: 20px;
+    }
+
+    .footer-info h4 {
+        font-size: 16px;
+    }
+
+    .footer-info p {
+        font-size: 13px;
+    }
+
+    .footer-links h5,
+    .footer-social h5 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .footer-links a {
+        font-size: 13px;
+    }
+
+    .footer-bottom {
+        padding: 10px 0;
+    }
+
+    .footer-bottom p {
+        font-size: 11px;
+    }
+
+    .social-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    /* エラーページ */
+    .error-icon {
+        font-size: 80px;
+    }
+
+    .error-code {
+        font-size: 48px;
+    }
+
+    .error-message h2 {
+        font-size: 24px;
+    }
+
+    .error-message p {
+        font-size: 16px;
+    }
+
+    .error-actions {
+        flex-direction: column;
+    }
+}
+
+/* 極小デバイス対応 (max-width: 320px) */
+@media (max-width: 320px) {
+    .header-content {
+        padding: 8px 10px;
+    }
+
+    .header-title {
+        font-size: 15px;
+    }
+
+    .nav-link {
+        padding: 4px 6px;
+        font-size: 10px;
+    }
+
+    .main {
+        padding: 12px 8px;
+    }
+
+    .hero-title {
+        font-size: 20px;
+    }
+
+    .page-title h2 {
+        font-size: 20px;
+    }
+
+    .guideline-content,
+    .rule-content {
+        padding: 12px;
+    }
+
+    .btn {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+}
+
+/* 印刷スタイル */
+@media print {
+    .header,
+    .footer,
+    .toast,
+    .social-links,
+    .contact-buttons,
+    .auth-buttons,
+    .gaming-accent {
+        display: none !important;
+    }
+
+    .main {
+        margin: 0;
+        padding: 20px;
+        max-width: none;
+    }
+
+    .guideline-card,
+    .rule-card {
+        break-inside: avoid;
+        margin-bottom: 20px;
+        border: 1px solid #000;
+    }
+
+    .page-header {
+        break-after: avoid;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    .warning-card,
+    .info-box {
+        border: 1px solid #ccc;
+    }
+}
+
+/* 高コントラストモード */
+@media (prefers-contrast: high) {
+    .nav-link:hover,
+    .nav-link.active {
+        outline: 2px solid;
+    }
+
+    .btn {
+        border: 2px solid;
+    }
+
+    .card:hover {
+        outline: 2px solid;
+    }
+}
+
+/* アニメーション削減設定 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .floating-icons i,
+    .pc-icon,
+    .gaming-accent {
+        animation: none !important;
+    }
+}
+
+/* ダークモード用の追加調整 */
+@media (prefers-color-scheme: dark) {
+    .header {
+        border-bottom-color: var(--border-color);
+    }
+
+    .footer {
+        border-top-color: var(--border-color);
+    }
+}
+
+/* フォーカス表示の改善 */
+@media (max-width: 768px) {
+    .btn:focus-visible,
+    .nav-link:focus-visible,
+    .link-card:focus-visible {
+        outline: 3px solid var(--discord-blurple);
+        outline-offset: 2px;
+    }
+}
+
+/* タッチデバイス向けの最適化 */
+@media (hover: none) and (pointer: coarse) {
+    .nav-link,
+    .btn,
+    .link-card {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .social-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* 横向きスマートフォン対応 */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero-section {
+        padding: 30px 0;
+    }
+
+    .page-header {
+        padding: 20px 0;
+    }
+
+    .main {
+        padding: 16px 20px;
+    }
+}
