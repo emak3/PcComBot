@@ -1,5 +1,5 @@
 // utils/logger.js - RSS機能用のloggerアダプター
-const log = require('../logger.js');
+const log = require("../logger.js");
 
 // shikeoのlogger形式をPcComBotのlog4jsに変換するアダプター
 const logger = {
@@ -10,7 +10,7 @@ const logger = {
                 if (data.stack) {
                     log.debug(`Stack: ${data.stack}`);
                 }
-            } else if (typeof data === 'object') {
+            } else if (typeof data === "object") {
                 try {
                     log.debug(`${message} - Data: ${JSON.stringify(data, null, 2)}`);
                 } catch (err) {
@@ -28,7 +28,7 @@ const logger = {
         if (data !== null) {
             if (data instanceof Error) {
                 log.info(`${message} - Error: ${data.message}`);
-            } else if (typeof data === 'object') {
+            } else if (typeof data === "object") {
                 try {
                     log.info(`${message} - Data: ${JSON.stringify(data, null, 2)}`);
                 } catch (err) {
@@ -46,7 +46,7 @@ const logger = {
         if (data !== null) {
             if (data instanceof Error) {
                 log.warn(`${message} - Error: ${data.message}`);
-            } else if (typeof data === 'object') {
+            } else if (typeof data === "object") {
                 try {
                     log.warn(`${message} - Data: ${JSON.stringify(data, null, 2)}`);
                 } catch (err) {
@@ -67,7 +67,7 @@ const logger = {
                 if (data.stack) {
                     log.error(`Stack: ${data.stack}`);
                 }
-            } else if (typeof data === 'object') {
+            } else if (typeof data === "object") {
                 try {
                     log.error(`${message} - Data: ${JSON.stringify(data, null, 2)}`);
                 } catch (err) {

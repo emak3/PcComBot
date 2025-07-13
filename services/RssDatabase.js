@@ -1,13 +1,13 @@
 // services/RssDatabase.js
-const admin = require('firebase-admin');
-const crypto = require('crypto');
-const logger = require('../utils/logger.js');
+const admin = require("firebase-admin");
+const crypto = require("crypto");
+const logger = require("../utils/logger.js");
 
 class RssDatabase {
-    constructor() {
+    constructor () {
         this.db = admin.firestore();
-        this.collectionName = 'rss_status';
-        this.sentItemsCollection = 'rss_sent_items';
+        this.collectionName = "rss_status";
+        this.sentItemsCollection = "rss_sent_items";
     }
 
     /**
@@ -15,8 +15,8 @@ class RssDatabase {
      * @param {string} url URL
      * @returns {string} ハッシュ化されたID
      */
-    getSafeDocumentId(url) {
-        return crypto.createHash('md5').update(url).digest('hex');
+    getSafeDocumentId (url) {
+        return crypto.createHash("md5").update(url).digest("hex");
     }
 
     /**
@@ -24,11 +24,11 @@ class RssDatabase {
      * @param {string|Date} dateStr 日付文字列またはDateオブジェクト
      * @returns {Date|null} 標準化された日付
      */
-    parseDate(dateStr) {
+    parseDate (dateStr) {
         if (!dateStr) return null;
 
         try {
-            if (typeof dateStr === 'string') {
+            if (typeof dateStr === "string") {
                 const date = new Date(dateStr);
                 if (isNaN(date.getTime())) {
                     logger.warn(`無効な日付文字列: ${dateStr}`);
@@ -39,7 +39,7 @@ class RssDatabase {
 
             if (dateStr instanceof Date) {
                 if (isNaN(dateStr.getTime())) {
-                    logger.warn(`無効なDateオブジェクト`);
+                    logger.warn("無効なDateオブジェクト");
                     return null;
                 }
                 return dateStr;
@@ -65,7 +65,7 @@ class RssDatabase {
      * @param {string} lastTitle 最後に処理したアイテムのタイトル
      * @returns {Promise<boolean>} 成功したかどうか
      */
-    async updateRssStatus(feedUrl, lastItemId, lastPublishDate, lastTitle) {
+    async updateRssStatus (feedUrl, lastItemId, lastPublishDate, lastTitle) {
         if (!feedUrl) {
             logger.error("更新エラー: フィードURLが指定されていません");
             return false;
@@ -106,7 +106,7 @@ class RssDatabase {
      * @param {string} feedUrl フィードURL
      * @returns {Promise<Object|null>} RSSステータスまたはnull
      */
-    async getRssStatus(feedUrl) {
+    async getRssStatus (feedUrl) {
         if (!feedUrl) {
             logger.error("取得エラー: フィードURLが指定されていません");
             return null;
@@ -119,7 +119,7 @@ class RssDatabase {
 
             if (doc.exists) {
                 const data = doc.data();
-                let lastPublishDate = this.parseDate(data.lastPublishDate);
+                const lastPublishDate = this.parseDate(data.lastPublishDate);
 
                 return {
                     lastItemId: data.lastItemId || null,
@@ -138,7 +138,7 @@ class RssDatabase {
      * すべてのRSSステータスを取得する
      * @returns {Promise<Object>} {feedUrl: statusObject}形式のオブジェクト
      */
-    async getAllRssStatus() {
+    async getAllRssStatus () {
         try {
             const snapshot = await this.db.collection(this.collectionName).get();
             const statusObj = {};
@@ -167,7 +167,7 @@ class RssDatabase {
      * @param {string} itemId アイテムID（guid、title、またはリンク）
      * @returns {Promise<boolean>} 送信済みの場合true
      */
-    async isItemSent(feedUrl, itemId) {
+    async isItemSent (feedUrl, itemId) {
         if (!feedUrl || !itemId) return false;
 
         try {
@@ -190,7 +190,7 @@ class RssDatabase {
      * @param {string} title アイテムタイトル
      * @returns {Promise<void>}
      */
-    async markItemAsSent(feedUrl, itemId, title) {
+    async markItemAsSent (feedUrl, itemId, title) {
         if (!feedUrl || !itemId) return;
 
         try {
@@ -201,7 +201,7 @@ class RssDatabase {
             await this.db.collection(this.sentItemsCollection).doc(docId).set({
                 feedUrl,
                 itemId,
-                title: title || '',
+                title: title || "",
                 sentAt: admin.firestore.FieldValue.serverTimestamp(),
                 createdAt: admin.firestore.FieldValue.serverTimestamp()
             });
@@ -216,13 +216,13 @@ class RssDatabase {
      * 古い送信済みアイテムを削除（30日以上古いもの）
      * @returns {Promise<void>}
      */
-    async cleanupOldSentItems() {
+    async cleanupOldSentItems () {
         try {
             const thirtyDaysAgo = new Date();
             thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
             const snapshot = await this.db.collection(this.sentItemsCollection)
-                .where('createdAt', '<', thirtyDaysAgo)
+                .where("createdAt", "<", thirtyDaysAgo)
                 .get();
 
             if (snapshot.empty) return;

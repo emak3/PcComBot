@@ -10,4 +10,4 @@ module.exports = async function (interaction) {
     } else {
         await interaction.reply({ content: "コマンドが存在しない又は、エラーの可能性があります。", flags: MessageFlags.Ephemeral });
     }
-}
+};

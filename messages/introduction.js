@@ -16,4 +16,4 @@ module.exports = async function (message) {
             )
             .catch((e) => e.message);
     }
-}
+};

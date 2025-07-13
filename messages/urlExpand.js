@@ -53,7 +53,7 @@ module.exports = async function (message) {
                             ? msg.attachments.map((attachment) => {
                                 if (attachment.spoiler) {
                                     return new AttachmentBuilder(attachment.url, {
-                                        spoiler: true,
+                                        spoiler: true
                                     });
                                 } else {
                                     return attachment.url;
@@ -76,7 +76,7 @@ module.exports = async function (message) {
                             ? msg.attachments.map((attachment) => {
                                 if (attachment.spoiler) {
                                     return new AttachmentBuilder(attachment.url, {
-                                        spoiler: true,
+                                        spoiler: true
                                     });
                                 } else {
                                     return attachment.url;
@@ -92,4 +92,4 @@ module.exports = async function (message) {
         }
     }
 
-}
+};

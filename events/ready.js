@@ -7,9 +7,9 @@ module.exports = {
     /**
      * @param {Client} client
      */
-    async execute(client) {
+    async execute (client) {
         log.debug("login:" + client.user.tag);
-        client.user.setPresence({ status: 'idle' });
+        client.user.setPresence({ status: "idle" });
         const commands = [];
         for (const command of client.commands.values()) {
             commands.push(command.command.toJSON());
@@ -18,7 +18,7 @@ module.exports = {
             try {
                 log.info(`Started refreshing ${commands.length} application (/) commands.`);
                 const data = await client.rest.put(Routes.applicationCommands(client.user.id), {
-                    body: commands,
+                    body: commands
                 });
                 log.info(`${data.length} 個のApplication Commandsを登録。`);
             } catch (error) {
@@ -26,4 +26,4 @@ module.exports = {
             }
         })();
     }
-}
+};

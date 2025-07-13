@@ -1,19 +1,19 @@
 // eslint-disable-next-line no-unused-vars
 const { ButtonInteraction } = require("discord.js");
 const log = require("../../logger.js");
-const config = require("../../config.js");
+// const config = require("../../config.js");
 
 /**
  * @param {ButtonInteraction} interaction
  */
 module.exports = async function (interaction) {
     if (interaction.customId.startsWith("unlockch")) {
-        const member = interaction.customId.split('_')[1];
+        const member = interaction.customId.split("_")[1];
 
         await interaction.channel.permissionOverwrites.edit(member, {
             SendMessages: true,
             ViewChannel: true,
-            ReadMessageHistory: true,
+            ReadMessageHistory: true
         });
 
         const disableAllButtons = (components) => {
@@ -55,11 +55,11 @@ module.exports = async function (interaction) {
                 components: updatedComponents
             });
         } catch (error) {
-            console.error('更新エラー:', error);
+            log.error("更新エラー:", error);
         }
 
         await interaction.reply({
-            content: '🔓',
+            content: "🔓"
         });
     }
-}
+};

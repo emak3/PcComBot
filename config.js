@@ -1,11 +1,12 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
+const log = require("./logger.js");
 
 /**
  * Firebase サービスアカウント設定を取得
  * @returns {Object} Firebase サービスアカウント設定
  */
-function getFirebaseServiceAccount() {
+function getFirebaseServiceAccount () {
     // 方法1: サービスアカウントファイルを使用
     if (process.env.FIREBASE_SERVICE_ACCOUNT_PATH) {
         const serviceAccountPath = path.resolve(process.env.FIREBASE_SERVICE_ACCOUNT_PATH);
@@ -14,11 +15,11 @@ function getFirebaseServiceAccount() {
             try {
                 return require(serviceAccountPath);
             } catch (error) {
-                console.error('Firebaseサービスアカウントファイルの読み込みに失敗しました:', error.message);
+                log.error("Firebaseサービスアカウントファイルの読み込みに失敗しました:", error.message);
             }
         } else {
-            console.warn(`Firebaseサービスアカウントファイルが見つかりません: ${serviceAccountPath}`);
-            console.warn('環境変数からFirebase設定を読み込みます...');
+            log.warn(`Firebaseサービスアカウントファイルが見つかりません: ${serviceAccountPath}`);
+            log.warn("環境変数からFirebase設定を読み込みます...");
         }
     }
 
@@ -28,7 +29,7 @@ function getFirebaseServiceAccount() {
             type: "service_account",
             project_id: process.env.FIREBASE_PROJECT_ID,
             private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID || null,
-            private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+            private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
             client_email: process.env.FIREBASE_CLIENT_EMAIL,
             client_id: process.env.FIREBASE_CLIENT_ID || null,
             auth_uri: "https://accounts.google.com/o/oauth2/auth",
@@ -39,7 +40,7 @@ function getFirebaseServiceAccount() {
     }
 
     // FirebaseなしでもRSS以外は動作するように警告のみ出力
-    console.warn('Firebase設定が見つかりません。RSS機能は利用できませんが、他の機能は利用可能です。');
+    log.warn("Firebase設定が見つかりません。RSS機能は利用できませんが、他の機能は利用可能です。");
     return null;
 }
 
@@ -62,7 +63,7 @@ module.exports = {
     "bestAnswerRole": "1067445728542199828",
     //2週間未経過通知
     "timeoutNotice": "1385287795014242394",
-    
+
     // Web関連設定
     "webPort": process.env.WEB_PORT ?? 3000,
     "webDomain": process.env.WEB_DOMAIN ?? "http://localhost:3000",
@@ -118,7 +119,7 @@ module.exports = {
 
     // RSS機能設定
     rss: {
-        enabled: process.env.RSS_ENABLED !== 'false' && getFirebaseServiceAccount() !== null,
+        enabled: process.env.RSS_ENABLED !== "false" && getFirebaseServiceAccount() !== null,
 
         intervalMinutes: parseInt(process.env.RSS_INTERVAL_MINUTES) || 10,
 
@@ -134,21 +135,21 @@ module.exports = {
                 url: "https://gazlog.jp/feed/",
                 channels: ["1392149451950391356"],
                 enabled: true
-            },
+            }
         ]
     },
 
     // ログレベル設定
     "logging": {
         "level": process.env.LOG_LEVEL || "info",
-        "fileOutput": process.env.LOG_FILE_OUTPUT !== 'false',
+        "fileOutput": process.env.LOG_FILE_OUTPUT !== "false",
         "maxFileSize": process.env.LOG_MAX_FILE_SIZE || "10MB",
         "maxFiles": process.env.LOG_MAX_FILES || 5
     },
 
     // レート制限設定
     "rateLimit": {
-        "enabled": process.env.RATE_LIMIT_ENABLED !== 'false',
+        "enabled": process.env.RATE_LIMIT_ENABLED !== "false",
         "windowMs": parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15分
         "maxRequests": parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
         "message": "リクエストが多すぎます。しばらく待ってからやり直してください。"
@@ -156,16 +157,16 @@ module.exports = {
 
     // セキュリティ設定
     "security": {
-        "enableCORS": process.env.ENABLE_CORS !== 'false',
-        "trustedOrigins": process.env.TRUSTED_ORIGINS?.split(',') || [],
-        "enableCSP": process.env.ENABLE_CSP !== 'false',
-        "enableHSTS": process.env.ENABLE_HSTS !== 'false'
+        "enableCORS": process.env.ENABLE_CORS !== "false",
+        "trustedOrigins": process.env.TRUSTED_ORIGINS?.split(",") || [],
+        "enableCSP": process.env.ENABLE_CSP !== "false",
+        "enableHSTS": process.env.ENABLE_HSTS !== "false"
     },
 
     // 開発者設定
     "development": {
-        "enabled": process.env.NODE_ENV === 'development',
-        "debugMode": process.env.DEBUG_MODE === 'true',
-        "mockData": process.env.MOCK_DATA === 'true'
+        "enabled": process.env.NODE_ENV === "development",
+        "debugMode": process.env.DEBUG_MODE === "true",
+        "mockData": process.env.MOCK_DATA === "true"
     }
 };

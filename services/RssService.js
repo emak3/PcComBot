@@ -1,23 +1,23 @@
 // services/RssService.js
-const { MessageFlags } = require('discord.js');
-const Parser = require('rss-parser');
-const cron = require('node-cron');
-const RssDatabase = require('./RssDatabase.js');
-const { getFavicon } = require('../utils/favicon-utils.js');
-const getWebhookInChannel = require('../utils/webhookGet.js');
-const { createRssEmbed, safeCompareDate } = require('./FeedFormatter.js');
-const logger = require('../utils/logger.js');
+const { MessageFlags } = require("discord.js");
+const Parser = require("rss-parser");
+const cron = require("node-cron");
+const RssDatabase = require("./RssDatabase.js");
+const { getFavicon } = require("../utils/favicon-utils.js");
+const getWebhookInChannel = require("../utils/webhookGet.js");
+const { createRssEmbed, safeCompareDate } = require("./FeedFormatter.js");
+const logger = require("../utils/logger.js");
 
 class RssService {
-    constructor(client) {
+    constructor (client) {
         this.client = client;
         this.parser = new Parser({
             customFields: {
                 item: [
-                    ['media:thumbnail', 'mediaThumbnail'],
-                    ['media:content', 'mediaContent'],
-                    ['enclosure', 'enclosure'],
-                    ['image', 'image']
+                    ["media:thumbnail", "mediaThumbnail"],
+                    ["media:content", "mediaContent"],
+                    ["enclosure", "enclosure"],
+                    ["image", "image"]
                 ]
             }
         });
@@ -30,7 +30,7 @@ class RssService {
      * @param {string} url URL
      * @returns {string|null} ドメイン
      */
-    extractDomain(url) {
+    extractDomain (url) {
         try {
             const urlObj = new URL(url);
             return urlObj.hostname;
@@ -46,7 +46,7 @@ class RssService {
      * @param {Object} feed フィード情報
      * @param {string} faviconUrl ファビコンURL
      */
-    async sendRssToWebhook(webhook, item, feed, faviconUrl) {
+    async sendRssToWebhook (webhook, item, feed, faviconUrl) {
         try {
             // Embedを作成
             const container = await createRssEmbed(item, feed);
@@ -72,7 +72,7 @@ class RssService {
 
                 // avatarURLが問題の場合、それを除いて再試行
                 if (messageOptions.avatarURL) {
-                    logger.info(`avatarURLを削除して再試行します`);
+                    logger.info("avatarURLを削除して再試行します");
                     delete messageOptions.avatarURL;
                     await webhook.send(messageOptions);
                     logger.info(`avatarURLなしでの送信成功: ${item.title}`);
@@ -87,7 +87,7 @@ class RssService {
             try {
                 await webhook.send({
                     username: feed.name,
-                    content: `**${item.title}**\n${item.link || ''}`,
+                    content: `**${item.title}**\n${item.link || ""}`
                 });
                 logger.info(`フォールバック送信成功: ${item.title}`);
             } catch (fallbackError) {
@@ -100,18 +100,18 @@ class RssService {
      * RSSフィードを処理する
      * @param {Array} rssFeeds RSS設定配列
      */
-    async processRssFeeds(rssFeeds) {
+    async processRssFeeds (rssFeeds) {
         if (this.isProcessing) {
-            logger.warn('RSS処理が既に実行中です');
+            logger.warn("RSS処理が既に実行中です");
             return;
         }
 
         this.isProcessing = true;
-        logger.info('RSSフィードの処理を開始します');
+        logger.info("RSSフィードの処理を開始します");
 
         try {
             if (!rssFeeds || rssFeeds.length === 0) {
-                logger.info('RSSフィードが設定されていません');
+                logger.info("RSSフィードが設定されていません");
                 return;
             }
 
@@ -254,29 +254,29 @@ class RssService {
      * 定期実行を開始する
      * @param {Array} rssFeeds RSS設定配列
      */
-    startScheduledProcessing(rssFeeds) {
+    startScheduledProcessing (rssFeeds) {
         // 初回実行
         setTimeout(async () => {
             await this.processRssFeeds(rssFeeds);
         }, 5000); // 5秒後に初回実行
 
         // 定期実行のスケジュール設定 (10分ごと)
-        cron.schedule('*/10 * * * *', async () => {
-            logger.info('定期実行: RSSフィードを処理します');
+        cron.schedule("*/10 * * * *", async () => {
+            logger.info("定期実行: RSSフィードを処理します");
             await this.processRssFeeds(rssFeeds);
         });
 
         // 古いデータクリーンアップ（毎日午前3時）
-        cron.schedule('0 3 * * *', async () => {
-            logger.info('定期クリーンアップ: 古い送信済みアイテムを削除します');
+        cron.schedule("0 3 * * *", async () => {
+            logger.info("定期クリーンアップ: 古い送信済みアイテムを削除します");
             try {
                 await this.rssDatabase.cleanupOldSentItems();
             } catch (error) {
-                logger.error('クリーンアップエラー:', error);
+                logger.error("クリーンアップエラー:", error);
             }
         });
 
-        logger.info('RSS定期実行が開始されました (10分間隔)');
+        logger.info("RSS定期実行が開始されました (10分間隔)");
     }
 }
 

@@ -1,11 +1,11 @@
-module.exports = async function getWebhookInChannel(channel) {
-    var _a;
+module.exports = async function getWebhookInChannel (channel) {
+    let _a;
     const webhookMaps = new Map();
     const webhook = (_a = webhookMaps.get(channel.id)) !== null && _a !== void 0 ? _a : (await getWebhook(webhookMaps, channel));
     return webhook;
-}
-async function getWebhook(webhookMaps, channel) {
-    var _a, _b;
+};
+async function getWebhook (webhookMaps, channel) {
+    let _a, _b;
     if (channel.isThread()) {
         if (channel.parent) {
             const webhooks = await channel.parent.fetchWebhooks();

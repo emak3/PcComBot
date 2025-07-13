@@ -7,8 +7,8 @@ module.exports = async function (interaction) {
     if (!interaction.isModalSubmit()) return;
     for (const value of interaction.client.modals) {
         // 関数であることを確認してから実行
-        if (typeof value === 'function') {
+        if (typeof value === "function") {
             await value(interaction);
         }
     }
-}
+};

@@ -5,9 +5,9 @@ module.exports = {
     /**
      * @param {BaseInteraction} interaction
      */
-    async execute(interaction) {
+    async execute (interaction) {
         for (const value of interaction.client.interactions) {
             await value(interaction);
         }
     }
-}
+};

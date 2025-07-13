@@ -8,13 +8,13 @@ const config = require("../../config.js");
  */
 module.exports = async function (interaction) {
     if (interaction.customId.startsWith("deletech")) {
-        const member = interaction.customId.split('_')[1];
+        const member = interaction.customId.split("_")[1];
         const oldName = interaction.channel.name;
 
         await interaction.channel.permissionOverwrites.edit(member, {
             SendMessages: false,
             ViewChannel: false,
-            ReadMessageHistory: false,
+            ReadMessageHistory: false
         });
 
         const disableAllButtons = (components) => {
@@ -56,7 +56,7 @@ module.exports = async function (interaction) {
                 components: updatedComponents
             });
         } catch (error) {
-            console.error('更新エラー:', error);
+            log.error("更新エラー:", error);
         }
 
         await interaction.channel.edit({
@@ -64,7 +64,7 @@ module.exports = async function (interaction) {
             parent: config.newCategoryId
         });
         await interaction.reply({
-            content: '🗑️',
+            content: "🗑️"
         });
     }
-}
+};

@@ -5,9 +5,9 @@ module.exports = {
     /**
      * @param {Message} message
      */
-    async execute(message) {
+    async execute (message) {
         for (const value of message.client.messages) {
             await value(message);
         }
     }
-}
+};

@@ -2,7 +2,6 @@ const { Client, Partials, GatewayIntentBits } = require("discord.js");
 const config = require("./config.js");
 const log = require("./logger.js");
 const { readdirSync } = require("node:fs");
-require("./utils/newUsernameSystem")
 const WebServer = require("./web/server.js");
 
 // Firebase初期化
@@ -11,7 +10,7 @@ const Database = require("./utils/database.js");
 // RSS機能
 const RssService = require("./services/RssService.js");
 
-require("./utils/newUsernameSystem")
+require("./utils/newUsernameSystem");
 
 
 const client = new Client({
@@ -35,7 +34,7 @@ process.on("uncaughtException", (error) => {
 });
 
 for (const file of readdirSync("./events").filter((file) =>
-    file.endsWith(".js"),
+    file.endsWith(".js")
 )) {
     const event = require(`./events/${file}`);
     if (event.once) {
@@ -46,37 +45,37 @@ for (const file of readdirSync("./events").filter((file) =>
     }
 }
 for (const file of readdirSync("./commands").filter((file) =>
-    file.endsWith(".js"),
+    file.endsWith(".js")
 )) {
     const command = require(`./commands/${file}`);
     client.commands.set(command.command.name, command);
 }
 for (const file of readdirSync("./interactions").filter((file) =>
-    file.endsWith(".js"),
+    file.endsWith(".js")
 )) {
     const interaction = require(`./interactions/${file}`);
     client.interactions.push(interaction);
 }
 for (const file of readdirSync("./interactions/modal").filter((file) =>
-    file.endsWith(".js"),
+    file.endsWith(".js")
 )) {
     const modal = require(`./interactions/modal/${file}`);
     client.modals.push(modal);
 }
 for (const file of readdirSync("./interactions/button").filter((file) =>
-    file.endsWith(".js"),
+    file.endsWith(".js")
 )) {
     const button = require(`./interactions/button/${file}`);
     client.buttons.push(button);
 }
 for (const file of readdirSync("./interactions/menu").filter((file) =>
-    file.endsWith(".js"),
+    file.endsWith(".js")
 )) {
     const menu = require(`./interactions/menu/${file}`);
     client.menus.push(menu);
 }
 for (const file of readdirSync("./messages").filter((file) =>
-    file.endsWith(".js"),
+    file.endsWith(".js")
 )) {
     const message = require(`./messages/${file}`);
     client.messages.push(message);
@@ -100,16 +99,16 @@ client.login(config.token).then(() => {
                 rssService.startScheduledProcessing(enabledFeeds);
                 log.info(`RSS機能を開始しました (${enabledFeeds.length}個のフィード)`);
             } else {
-                log.info('有効なRSSフィードが設定されていません');
+                log.info("有効なRSSフィードが設定されていません");
             }
         } catch (error) {
-            log.error('RSS機能の初期化に失敗しました:', error);
+            log.error("RSS機能の初期化に失敗しました:", error);
         }
     } else {
         if (!config.rss?.enabled) {
-            log.info('RSS機能は無効になっています');
+            log.info("RSS機能は無効になっています");
         } else if (!database.isConnected()) {
-            log.warn('Firebase接続が無効のため、RSS機能は利用できません');
+            log.warn("Firebase接続が無効のため、RSS機能は利用できません");
         }
     }
 

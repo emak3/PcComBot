@@ -7,17 +7,17 @@ const {
     SeparatorSpacingSize,
     MediaGalleryBuilder,
     MediaGalleryItemBuilder
-} = require('discord.js');
-const axios = require('axios');
-const { JSDOM } = require('jsdom');
-const logger = require('../utils/logger.js');
+} = require("discord.js");
+const axios = require("axios");
+const { JSDOM } = require("jsdom");
+const logger = require("../utils/logger.js");
 
 /**
  * WebページからOGP画像を取得する
  * @param {string} url ページURL
  * @returns {Promise<string|null>} 画像URL
  */
-async function getOgImage(url) {
+async function getOgImage (url) {
     try {
         const response = await axios.get(url, { timeout: 5000 });
         const html = response.data;
@@ -26,32 +26,32 @@ async function getOgImage(url) {
 
         // OGP画像を検索
         const ogImage = document.querySelector('meta[property="og:image"]');
-        if (ogImage && ogImage.getAttribute('content')) {
-            return ogImage.getAttribute('content');
+        if (ogImage && ogImage.getAttribute("content")) {
+            return ogImage.getAttribute("content");
         }
 
         // Twitter Card画像を検索
         const twitterImage = document.querySelector('meta[name="twitter:image"]');
-        if (twitterImage && twitterImage.getAttribute('content')) {
-            return twitterImage.getAttribute('content');
+        if (twitterImage && twitterImage.getAttribute("content")) {
+            return twitterImage.getAttribute("content");
         }
 
         // 最初の大きい画像を検索
-        const images = Array.from(document.querySelectorAll('img'));
+        const images = Array.from(document.querySelectorAll("img"));
         const largeImages = images.filter(img => {
-            const width = parseInt(img.getAttribute('width') || '0', 10);
-            const height = parseInt(img.getAttribute('height') || '0', 10);
+            const width = parseInt(img.getAttribute("width") || "0", 10);
+            const height = parseInt(img.getAttribute("height") || "0", 10);
             return (width >= 200 && height >= 200) ||
-                (img.src && (img.src.includes('header') || img.src.includes('thumbnail') || img.src.includes('eyecatch')));
+                (img.src && (img.src.includes("header") || img.src.includes("thumbnail") || img.src.includes("eyecatch")));
         });
 
         if (largeImages.length > 0) {
-            let imgSrc = largeImages[0].getAttribute('src');
+            let imgSrc = largeImages[0].getAttribute("src");
             // 相対パスを絶対パスに変換
-            if (imgSrc && imgSrc.startsWith('/')) {
+            if (imgSrc && imgSrc.startsWith("/")) {
                 const baseUrl = new URL(url);
                 imgSrc = `${baseUrl.protocol}//${baseUrl.host}${imgSrc}`;
-            } else if (imgSrc && !imgSrc.startsWith('http')) {
+            } else if (imgSrc && !imgSrc.startsWith("http")) {
                 const baseUrl = new URL(url);
                 imgSrc = `${baseUrl.protocol}//${baseUrl.host}/${imgSrc}`;
             }
@@ -70,7 +70,7 @@ async function getOgImage(url) {
  * @param {Object} item RSSアイテム
  * @returns {Promise<string|null>} 画像URL
  */
-async function getImageFromItem(item) {
+async function getImageFromItem (item) {
     try {
         // RSSパーサーで取得した項目をチェック
         if (item.mediaThumbnail && item.mediaThumbnail.$ && item.mediaThumbnail.$.url) {
@@ -82,7 +82,7 @@ async function getImageFromItem(item) {
         }
 
         if (item.enclosure && item.enclosure.url &&
-            item.enclosure.type && item.enclosure.type.startsWith('image/')) {
+            item.enclosure.type && item.enclosure.type.startsWith("image/")) {
             return item.enclosure.url;
         }
 
@@ -111,7 +111,7 @@ async function getImageFromItem(item) {
  * @param {Date|string} date2 比較する日付2
  * @returns {boolean} date1がdate2より新しいならtrue
  */
-function safeCompareDate(date1, date2) {
+function safeCompareDate (date1, date2) {
     try {
         if (!date1 || !date2) {
             return false;
@@ -119,7 +119,7 @@ function safeCompareDate(date1, date2) {
 
         let d1, d2;
 
-        if (typeof date1 === 'string') {
+        if (typeof date1 === "string") {
             d1 = new Date(date1);
         } else if (date1 instanceof Date) {
             d1 = date1;
@@ -129,7 +129,7 @@ function safeCompareDate(date1, date2) {
             return false;
         }
 
-        if (typeof date2 === 'string') {
+        if (typeof date2 === "string") {
             d2 = new Date(date2);
         } else if (date2 instanceof Date) {
             d2 = date2;
@@ -157,7 +157,7 @@ function safeCompareDate(date1, date2) {
  * @param {string} faviconUrl ファビコンURL
  * @returns {Promise<ContainerBuilder>} ContainerBuilder
  */
-async function createRssEmbed(item, feed) {
+async function createRssEmbed (item, feed) {
     try {
         // 画像URLを取得
         const imageUrl = await getImageFromItem(item);
@@ -180,7 +180,7 @@ async function createRssEmbed(item, feed) {
         if (item.contentSnippet) {
             // 内容が長い場合は切り詰める
             const description = item.contentSnippet.length > 500
-                ? item.contentSnippet.substring(0, 500).trim() + '...'
+                ? item.contentSnippet.substring(0, 500).trim() + "..."
                 : item.contentSnippet.trim();
 
             const contentText = new TextDisplayBuilder().setContent(description);
@@ -217,7 +217,7 @@ async function createRssEmbed(item, feed) {
 
         // カテゴリ
         if (item.categories && item.categories.length > 0) {
-            metaTextParts.push(`📁 **カテゴリ**: ${item.categories.join(', ')}`);
+            metaTextParts.push(`📁 **カテゴリ**: ${item.categories.join(", ")}`);
         }
 
         // 著者
@@ -229,26 +229,26 @@ async function createRssEmbed(item, feed) {
         // 公開日時
         if (item.pubDate) {
             const pubDate = new Date(item.pubDate);
-            const formattedDate = pubDate.toLocaleString('ja-JP', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                weekday: 'short'
+            const formattedDate = pubDate.toLocaleString("ja-JP", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                weekday: "short"
             });
 
             metaTextParts.push(`📅 **公開日時**: ${formattedDate}`);
         }
 
         if (metaTextParts.length > 0) {
-            const metaText = new TextDisplayBuilder().setContent(metaTextParts.join('\n'));
+            const metaText = new TextDisplayBuilder().setContent(metaTextParts.join("\n"));
             container.addTextDisplayComponents(metaText);
         }
 
         // フッター
         const footerText = new TextDisplayBuilder().setContent(
-            `-# RSS経由で自動配信されました`
+            "-# RSS経由で自動配信されました"
         );
         container.addTextDisplayComponents(footerText);
 
@@ -256,10 +256,10 @@ async function createRssEmbed(item, feed) {
         if (item.link) {
             // 記事リンクボタン
             const readArticleButton = new ButtonBuilder()
-                .setLabel('記事を読む')
+                .setLabel("記事を読む")
                 .setURL(item.link)
                 .setStyle(ButtonStyle.Link)
-                .setEmoji('🔗');
+                .setEmoji("🔗");
 
             container.addActionRowComponents(row => {
                 row.addComponents(readArticleButton);
@@ -278,5 +278,5 @@ module.exports = {
     getOgImage,
     getImageFromItem,
     safeCompareDate,
-    createRssEmbed,
+    createRssEmbed
 };

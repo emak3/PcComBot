@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-unused-vars
+
 const {
     Message,
     AttachmentBuilder,
@@ -33,50 +33,50 @@ module.exports = async function (message) {
                     section => section
                         .addTextDisplayComponents(
                             textDisplay => textDisplay
-                                .setContent('## 💬 管理者との対話チャンネル'),
+                                .setContent("## 💬 管理者との対話チャンネル"),
                             textDisplay => textDisplay
                                 .setContent(`<@${discordUser.id}> さんの問い合わせ`),
                             textDisplay => textDisplay
-                                .setContent(`\n対話希望に ✅ が入っていたため、チャンネルを作成しました。`),
+                                .setContent("\n対話希望に ✅ が入っていたため、チャンネルを作成しました。")
                         )
                         .setThumbnailAccessory(
                             thumbnail => thumbnail
-                                .setURL(discordUser.displayAvatarURL()),
+                                .setURL(discordUser.displayAvatarURL())
                         )
                 )
                 .addSeparatorComponents(
-                    separator => separator,
+                    separator => separator
                 )
                 .addTextDisplayComponents(
                     textDisplay => textDisplay
-                        .setContent('### 📋 カテゴリー'),
+                        .setContent("### 📋 カテゴリー"),
                     textDisplay => textDisplay
-                        .setContent('かてごりーのたいとる'),
+                        .setContent("かてごりーのたいとる")
                 )
                 .addSeparatorComponents(
-                    separator => separator,
+                    separator => separator
                 )
                 .addTextDisplayComponents(
                     textDisplay => textDisplay
-                        .setContent('### 📄 内容'),
+                        .setContent("### 📄 内容"),
                     textDisplay => textDisplay
-                        .setContent('そうしんされたないよう'),
+                        .setContent("そうしんされたないよう")
                 )
                 .addSeparatorComponents(
-                    separator => separator,
+                    separator => separator
                 )
                 .addSectionComponents(
                     section => section
                         .addTextDisplayComponents(
                             textDisplay => textDisplay
-                                .setContent('-# 問題が解決したら右の [対話終了] ボタンを押してください。'),
+                                .setContent("-# 問題が解決したら右の [対話終了] ボタンを押してください。")
                         )
                         .setButtonAccessory(
                             button => button
                                 .setCustomId(`lockch_${discordUser.id}`)
-                                .setLabel('🔒 対話終了')
+                                .setLabel("🔒 対話終了")
                                 .setStyle(ButtonStyle.Primary)
-                        ),
+                        )
                 );
 
         // メッセージデータの基本構造
@@ -86,4 +86,4 @@ module.exports = async function (message) {
         };
         await message.channel.send(messageData);
     }
-}
+};
