@@ -7,7 +7,15 @@ module.exports = {
      */
     async execute (interaction) {
         for (const value of interaction.client.interactions) {
-            await value(interaction);
+            try {
+                await value(interaction);
+                // インタラクションが処理された場合は他のハンドラーを実行しない
+                if (interaction.replied || interaction.deferred) {
+                    break;
+                }
+            } catch (error) {
+                console.error("インタラクションハンドラーエラー:", error);
+            }
         }
     }
 };

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const { ChatInputCommandInteraction, EmbedBuilder, PermissionFlagsBits, ContextMenuCommandBuilder, ApplicationCommandType, MessageFlags } = require("discord.js");
+const { ChatInputCommandInteraction, EmbedBuilder, PermissionFlagsBits, InteractionContextType, ContextMenuCommandBuilder, ApplicationCommandType, MessageFlags } = require("discord.js");
 const log = require("../logger.js");
 const config = require("../config.js");
 
@@ -8,7 +8,7 @@ module.exports = {
         .setName("Timeout")
         .setNameLocalization("ja", "タイムアウト")
         .setType(ApplicationCommandType.User)
-        .setDMPermission(false)
+        .setContexts(InteractionContextType.Guild)
         .setDefaultMemberPermissions(PermissionFlagsBits.CreatePublicThreads),
     /**
      * @param {ChatInputCommandInteraction} interaction

@@ -1,19 +1,33 @@
 // eslint-disable-next-line no-unused-vars
-const { ChatInputCommandInteraction, ContextMenuCommandBuilder, ApplicationCommandType, EmbedBuilder, MessageFlags } = require("discord.js");
+const { ChatInputCommandInteraction, ContextMenuCommandBuilder, InteractionContextType, ApplicationCommandType, EmbedBuilder, MessageFlags } = require("discord.js");
 const config = require("../config.js");
 module.exports = {
     command: new ContextMenuCommandBuilder()
         .setName("BestAnswer")
         .setNameLocalization("ja", "BestAnswer")
         .setType(ApplicationCommandType.Message)
-        .setDMPermission(false),
+        .setContexts(InteractionContextType.Guild),
     /**
      * @param {ChatInputCommandInteraction} interaction
      */
-    async execute (interaction) {
+    async execute(interaction) {
         if (interaction.channel.parentId === config.questionChId) {
             const thread = interaction.channel;
             if (interaction.user.id !== thread.ownerId) return await interaction.reply({ content: "投稿者以外使用できません。", flags: MessageFlags.Ephemeral });
+
+            try {
+                // ForumAutoCheckerの状態を更新
+                if (interaction.client.forumAutoChecker) {
+                    interaction.client.forumAutoChecker.markThreadAsHandled(interaction.targetId);
+                }
+            } catch (error) {
+                console.error("スレッドクローズ中にエラー:", error);
+                await interaction.reply({
+                    content: "スレッドのクローズ中にエラーが発生しました。",
+                    flags: MessageFlags.Ephemeral
+                });
+            }
+
             const answerEmbed = new EmbedBuilder()
                 .setColor("#55b87d")
                 .setDescription("### ✅ 質問が解決しました\nこの質問は解決済みです。 `@ 回答者` 質問への回答ありがとうございました。\n" + `[ 回答 ](https://discord.com/channels/${interaction.guildId}/${interaction.channelId}/${interaction.targetId})`);

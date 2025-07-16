@@ -10,6 +10,9 @@ const Database = require("./utils/database.js");
 // RSS機能
 const RssService = require("./services/RssService.js");
 
+// フォーラム自動チェック機能
+const ForumAutoChecker = require("./services/ForumAutoChecker.js");
+
 require("./utils/newUsernameSystem");
 
 
@@ -110,6 +113,16 @@ client.login(config.token).then(() => {
         } else if (!database.isConnected()) {
             log.warn("Firebase接続が無効のため、RSS機能は利用できません");
         }
+    }
+
+    // フォーラム自動チェック機能の初期化
+    try {
+        const forumAutoChecker = new ForumAutoChecker(client);
+        client.forumAutoChecker = forumAutoChecker; // クライアントオブジェクトに追加
+        forumAutoChecker.start();
+        log.info("フォーラム自動チェック機能を開始しました");
+    } catch (error) {
+        log.error("フォーラム自動チェック機能の初期化に失敗しました:", error);
     }
 
     // Webサーバー起動
