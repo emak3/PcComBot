@@ -126,8 +126,28 @@ class ForumAutoChecker {
                     // スレッドの作成者を取得
                     const owner = await guild.members.fetch(ownerId).catch(() => null);
                     if (!owner) {
-                        log.warn(`スレッド ${thread.id} の作成者 ${ownerId} が見つかりません`);
-                        errorCount++;
+                        // 作成者がサーバーから抜けている場合、スレッドを自動クローズ
+                        log.info(`スレッド作成者 ${ownerId} がサーバーから抜けているため、スレッド ${thread.name} を自動クローズします`);
+                        
+                        try {
+                            // スレッドにクローズ理由を投稿
+                            const closeEmbed = DiscordHelpers.createInfoEmbed(
+                                "🔒 スレッド自動クローズ",
+                                "このスレッドの作成者がサーバーから退出したため、自動的にクローズされました。",
+                                { color: "#ff6b6b" }
+                            );
+                            await DiscordHelpers.safeMessageSend(thread, { embeds: [closeEmbed] });
+                            
+                            // スレッドをアーカイブ（クローズ）
+                            await thread.setArchived(true, "作成者がサーバーから退出したため自動クローズ");
+                            
+                            // チェック済みとしてマーク
+                            this.checkedThreads.add(thread.id);
+                            processedCount++;
+                        } catch (closeError) {
+                            ErrorHandler.logError(closeError, `スレッドクローズエラー (${thread.id})`, log);
+                            errorCount++;
+                        }
                         continue;
                     }
 
