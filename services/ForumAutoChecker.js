@@ -82,6 +82,12 @@ class ForumAutoChecker {
                     continue;
                 }
 
+                // 除外スレッドの場合はスキップ
+                if (await forumExclude.isChannelExcluded(threadId)) {
+                    log.info(`スレッド ${thread.name} (${threadId}) は除外設定されているためスキップします`);
+                    continue;
+                }
+
                 // 既にチェック済みの場合はスキップ
                 if (this.checkedThreads.has(threadId)) {
                     continue;

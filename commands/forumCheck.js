@@ -12,7 +12,7 @@ const log = require("../logger.js");
 module.exports = {
     command: new SlashCommandBuilder()
         .setName("forum-check")
-        .setNameLocalization("ja", "フォーラムチェック")
+        .setNameLocalization("ja", "forum-check")
         .setDescription("Check for inactive forum threads and ask thread creators for closure confirmation")
         .setDescriptionLocalization("ja", "2日以上発言がないフォーラムスレッドをチェックし、作成者にクローズ確認を求める")
         .setContexts(InteractionContextType.Guild)
@@ -59,6 +59,11 @@ module.exports = {
             for (const [, thread] of threads.threads) {
                 // 解決済みタグがついている場合はスキップ
                 if (thread.appliedTags.includes(config.kaiketsuTag)) { //config.kaiketsuTag
+                    continue;
+                }
+
+                // 除外スレッドの場合はスキップ
+                if (await forumExclude.isChannelExcluded(thread.id)) {
                     continue;
                 }
 
