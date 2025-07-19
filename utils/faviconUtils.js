@@ -1,6 +1,6 @@
 // utils/favicon-utils.js
 const axios = require("axios");
-const logger = require("./logger.js");
+const logger = require("../logger.js");
 
 /**
  * ドメインからサブドメインを削除する
