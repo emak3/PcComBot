@@ -2,7 +2,7 @@ const { ChannelType, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("d
 const config = require("../config.js");
 const log = require("../logger.js");
 const cron = require("node-cron");
-const forumExclude = require("../commands/forum-exclude.js");
+const forumExclude = require("../commands/forumExclude.js");
 const DiscordHelpers = require("../utils/discordHelpers.js");
 const ErrorHandler = require("../utils/errorHandler.js");
 

@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const log = require("./logger.js");
 
 /**
  * Firebase サービスアカウント設定を取得
@@ -40,7 +39,7 @@ function getFirebaseServiceAccount () {
     }
 
     // FirebaseなしでもRSS以外は動作するように警告のみ出力
-    log.warn("Firebase設定が見つかりません。RSS機能は利用できませんが、他の機能は利用可能です。");
+    console.warn("Firebase設定が見つかりません。RSS機能は利用できませんが、他の機能は利用可能です。");
     return null;
 }
 
