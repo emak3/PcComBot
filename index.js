@@ -86,7 +86,7 @@ for (const file of readdirSync("./messages").filter((file) =>
     client.messages.push(message);
 }
 
-client.login(config.token).then(() => {
+client.login(config.token).then(async () => {
     //    log.info("Discord Bot config:", config);
 
     // Firebase初期化
