@@ -52,8 +52,16 @@ for (const file of readdirSync("./events").filter((file) =>
 for (const file of readdirSync("./commands").filter((file) =>
     file.endsWith(".js")
 )) {
-    const command = require(`./commands/${file}`);
-    client.commands.set(command.command.name, command);
+    try {
+        const command = require(`./commands/${file}`);
+        if (command.command && command.command.name) {
+            client.commands.set(command.command.name, command);
+        } else {
+            log.error(`コマンドファイル ${file} の構造が正しくありません:`, command);
+        }
+    } catch (error) {
+        log.error(`コマンドファイル ${file} の読み込みに失敗しました:`, error);
+    }
 }
 for (const file of readdirSync("./interactions").filter((file) =>
     file.endsWith(".js")

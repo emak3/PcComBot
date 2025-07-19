@@ -25,7 +25,7 @@ function initDatabase () {
  * @module ForumExcludeCommand
  */
 module.exports = {
-    data: new SlashCommandBuilder()
+    command: new SlashCommandBuilder()
         .setName("forum-exclude")
         .setDescription("フォーラムチェック除外チャンネルを管理します")
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
