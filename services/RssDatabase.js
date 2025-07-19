@@ -1,7 +1,7 @@
 // services/RssDatabase.js
 const admin = require("firebase-admin");
 const crypto = require("crypto");
-const logger = require("../utils/logger.js");
+const logger = require("../logger.js");
 
 class RssDatabase {
     constructor () {

@@ -10,7 +10,8 @@ const {
 } = require("discord.js");
 const axios = require("axios");
 const { JSDOM } = require("jsdom");
-const logger = require("../utils/logger.js");
+const { URL } = require("url");
+const logger = require("../logger.js");
 
 /**
  * WebページからOGP画像を取得する
@@ -157,7 +158,7 @@ function safeCompareDate (date1, date2) {
  * @param {string} faviconUrl ファビコンURL
  * @returns {Promise<ContainerBuilder>} ContainerBuilder
  */
-async function createRssEmbed (item, feed) {
+async function createRssEmbed (item, _feed) {
     try {
         // 画像URLを取得
         const imageUrl = await getImageFromItem(item);

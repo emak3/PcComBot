@@ -9,6 +9,8 @@ const Database = require("./utils/database.js");
 
 // RSS機能
 const RssService = require("./services/RssService.js");
+const RssScheduler = require("./services/RssScheduler.js");
+const RssDatabase = require("./services/RssDatabase.js");
 
 // フォーラム自動チェック機能
 const ForumAutoChecker = require("./services/ForumAutoChecker.js");
@@ -94,12 +96,14 @@ client.login(config.token).then(() => {
     if (config.rss?.enabled && database.isConnected()) {
         try {
             const rssService = new RssService(client);
+            const rssDatabase = new RssDatabase();
+            const rssScheduler = new RssScheduler(rssService, rssDatabase);
 
             // 有効なRSSフィードをフィルタリング
             const enabledFeeds = config.rss.feeds.filter(feed => feed.enabled !== false);
 
             if (enabledFeeds.length > 0) {
-                rssService.startScheduledProcessing(enabledFeeds);
+                await rssScheduler.startAllSchedules(enabledFeeds);
                 log.info(`RSS機能を開始しました (${enabledFeeds.length}個のフィード)`);
             } else {
                 log.info("有効なRSSフィードが設定されていません");

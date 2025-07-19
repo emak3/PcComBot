@@ -1,10 +1,21 @@
-const { ChannelType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const { ChannelType, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const config = require("../config.js");
 const log = require("../logger.js");
 const cron = require("node-cron");
+const forumExclude = require("../commands/forum-exclude.js");
+const DiscordHelpers = require("../utils/discordHelpers.js");
+const ErrorHandler = require("../utils/errorHandler.js");
 
+/**
+ * フォーラムの非アクティブスレッドを自動チェックし、管理するクラス
+ * @class ForumAutoChecker
+ */
 class ForumAutoChecker {
-    constructor(client) {
+    /**
+     * コンストラクタ
+     * @param {Client} client - Discord クライアント
+     */
+    constructor (client) {
         this.client = client;
         this.checkedThreads = new Set(); // 既にチェック済みのスレッドを記録
         this.pendingClosures = new Map(); // 24時間後の自動クローズ予定スレッド
@@ -14,7 +25,7 @@ class ForumAutoChecker {
     /**
      * 自動チェック機能を開始
      */
-    start() {
+    start () {
         if (this.isRunning) {
             log.warn("ForumAutoChecker は既に実行中です");
             return;
@@ -37,8 +48,8 @@ class ForumAutoChecker {
     /**
      * 非アクティブなスレッドをチェック
      */
-    async checkInactiveThreads() {
-        try {
+    async checkInactiveThreads () {
+        return await ErrorHandler.standardTryCatch(async () => {
             log.info("フォーラムの非アクティブスレッドチェックを開始します");
 
             const guild = this.client.guilds.cache.first();
@@ -51,6 +62,12 @@ class ForumAutoChecker {
             const forumChannel = guild.channels.cache.get(config.questionChId);
             if (!forumChannel || forumChannel.type !== ChannelType.GuildForum) {
                 log.error("質問フォーラムチャンネルが見つからないか、フォーラムチャンネルではありません");
+                return;
+            }
+
+            // 除外チャンネルかどうかをチェック
+            if (await forumExclude.isChannelExcluded(forumChannel.id)) {
+                log.info(`フォーラムチャンネル ${forumChannel.name} (${forumChannel.id}) は除外設定されているためスキップします`);
                 return;
             }
 
@@ -72,8 +89,9 @@ class ForumAutoChecker {
 
                 try {
                     // 最後のメッセージの時刻を取得
-                    const lastMessage = await thread.messages.fetch({ limit: 1 }).then(messages => messages.first());
-                    
+                    const messages = await thread.messages.fetch({ limit: 1 });
+                    const lastMessage = messages.first();
+
                     if (lastMessage && lastMessage.createdTimestamp < threeDaysAgo) {
                         inactiveThreads.push({
                             thread: thread,
@@ -82,7 +100,7 @@ class ForumAutoChecker {
                         });
                     }
                 } catch (error) {
-                    log.error(`スレッド ${threadId} のメッセージ取得中にエラー:`, error);
+                    ErrorHandler.logError(error, `スレッドメッセージ取得エラー (${threadId})`, log);
                 }
             }
 
@@ -98,7 +116,7 @@ class ForumAutoChecker {
             for (const inactiveThread of inactiveThreads) {
                 try {
                     const { thread, ownerId, lastMessageTime } = inactiveThread;
-                    
+
                     // スレッドの作成者を取得
                     const owner = await guild.members.fetch(ownerId).catch(() => null);
                     if (!owner) {
@@ -108,17 +126,19 @@ class ForumAutoChecker {
                     }
 
                     // 確認メッセージとボタンを作成
-                    const embed = new EmbedBuilder()
-                        .setColor("#ff9900")
-                        .setTitle("📋 質問スレッドの確認")
-                        .setDescription(`あなたが作成した質問「**${thread.name}**」で2日以上発言がありません。\n\nこの質問は__解決__しましたか？それとも質問を__続けます__か？\n\n`+"質問が解決した場合は、解決に役立った質問を `右クリック` もしくは、`長押し` をして `アプリ` → `BestAnswer` の順にコマンドを実行してください。")
-                        .addFields([
-                            { name: "スレッド", value: `<#${thread.id}>`, inline: true },
-                            { name: "最終発言", value: `<t:${Math.floor(lastMessageTime / 1000)}:R>`, inline: true }
-                        ])
-                        .setTimestamp()
-                        .setImage('https://i.gyazo.com/49cf3736cde4f9ac4ee9bb929b995a36.png')
-                        .setFooter({ text: "24時間以内に回答がない場合、自動的にクローズされます" });
+                    const embed = DiscordHelpers.createInfoEmbed(
+                        "📋 質問スレッドの確認",
+                        `あなたが作成した質問「**${thread.name}**」で2日以上発言がありません。\n\nこの質問は__解決__しましたか？それとも質問を__続けます__か？\n\n` + "質問が解決した場合は、解決に役立った質問を `右クリック` もしくは、`長押し` をして `アプリ` → `BestAnswer` の順にコマンドを実行してください。",
+                        {
+                            color: "#ff9900",
+                            fields: [
+                                { name: "スレッド", value: `<#${thread.id}>`, inline: true },
+                                { name: "最終発言", value: `<t:${Math.floor(lastMessageTime / 1000)}:R>`, inline: true }
+                            ],
+                            image: "https://i.gyazo.com/49cf3736cde4f9ac4ee9bb929b995a36.png",
+                            footer: { text: "24時間以内に回答がない場合、自動的にクローズされます" }
+                        }
+                    );
 
                     const row = new ActionRowBuilder()
                         .addComponents(
@@ -130,7 +150,7 @@ class ForumAutoChecker {
                         );
 
                     // スレッド内にメッセージを投稿
-                    await thread.send({
+                    await DiscordHelpers.safeMessageSend(thread, {
                         content: `<@${ownerId}>`,
                         embeds: [embed],
                         components: [row]
@@ -138,7 +158,7 @@ class ForumAutoChecker {
 
                     // チェック済みとしてマーク
                     this.checkedThreads.add(thread.id);
-                    
+
                     // 24時間後の自動クローズを予約
                     const autoCloseTime = Date.now() + (24 * 60 * 60 * 1000);
                     this.pendingClosures.set(thread.id, {
@@ -154,23 +174,21 @@ class ForumAutoChecker {
                     await new Promise(resolve => setTimeout(resolve, 1000));
 
                 } catch (error) {
-                    log.error(`スレッド ${inactiveThread.thread.id} の処理中にエラー:`, error);
+                    ErrorHandler.logError(error, `スレッド処理エラー (${inactiveThread.thread.id})`, log);
                     errorCount++;
                 }
             }
 
             log.info(`フォーラムチェック完了: 処理済み${processedCount}件, エラー${errorCount}件`);
 
-        } catch (error) {
-            log.error("フォーラム自動チェック中にエラー:", error);
-        }
+        }, "フォーラム自動チェック", log);
     }
 
     /**
      * 24時間経過したスレッドを自動でクローズ
      */
-    async processAutomaticClosures() {
-        try {
+    async processAutomaticClosures () {
+        return await ErrorHandler.standardTryCatch(async () => {
             const now = Date.now();
             const toClose = [];
 
@@ -208,22 +226,20 @@ class ForumAutoChecker {
                     log.info(`スレッド ${thread.name} (${threadId}) を自動クローズしました`);
 
                 } catch (error) {
-                    log.error(`スレッド ${threadId} の自動クローズ中にエラー:`, error);
+                    ErrorHandler.logError(error, `スレッド自動クローズエラー (${threadId})`, log);
                     // エラーの場合も予定から削除
                     this.pendingClosures.delete(threadId);
                 }
             }
 
-        } catch (error) {
-            log.error("自動クローズ処理中にエラー:", error);
-        }
+        }, "自動クローズ処理", log);
     }
 
     /**
      * スレッドが手動で操作された場合の処理
      * @param {string} threadId - スレッドID
      */
-    markThreadAsHandled(threadId) {
+    markThreadAsHandled (threadId) {
         this.pendingClosures.delete(threadId);
         // チェック済みマークは残す（再チェックを防ぐため）
     }
@@ -232,7 +248,7 @@ class ForumAutoChecker {
      * スレッドが継続された場合の処理
      * @param {string} threadId - スレッドID
      */
-    markThreadAsContinued(threadId) {
+    markThreadAsContinued (threadId) {
         this.pendingClosures.delete(threadId);
         this.checkedThreads.delete(threadId); // 再チェック可能にする
     }
@@ -240,12 +256,12 @@ class ForumAutoChecker {
     /**
      * チェック済みスレッドリストをクリーンアップ（週1回実行推奨）
      */
-    cleanupCheckedThreads() {
+    cleanupCheckedThreads () {
         const guild = this.client.guilds.cache.first();
         if (!guild) return;
 
         const existingThreadIds = new Set();
-        
+
         // 現在存在するスレッドIDを収集
         guild.channels.cache.forEach(channel => {
             if (channel.type === ChannelType.PublicThread) {
