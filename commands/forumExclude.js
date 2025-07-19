@@ -4,7 +4,7 @@ const Database = require("../utils/database.js");
 const DiscordHelpers = require("../utils/discordHelpers.js");
 const ErrorHandler = require("../utils/errorHandler.js");
 
-const excludedChannels = new Set(); // 除外チャンネルのID一覧（キャッシュ）
+const excludedThreads = new Set(); // 除外スレッドのID一覧（キャッシュ）
 let database = null;
 let lastCacheUpdate = 0;
 const CACHE_EXPIRE_TIME = 5 * 60 * 1000; // 5分でキャッシュ更新
@@ -27,30 +27,30 @@ function initDatabase () {
 module.exports = {
     command: new SlashCommandBuilder()
         .setName("forum-exclude")
-        .setDescription("フォーラムチェック除外チャンネルを管理します")
+        .setDescription("フォーラムチェック除外スレッドを管理します")
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
         .addSubcommand(subcommand =>
             subcommand
                 .setName("add")
-                .setDescription("チャンネルをフォーラムチェック除外リストに追加")
+                .setDescription("フォーラムスレッドをチェック除外リストに追加")
                 .addChannelOption(option =>
                     option
-                        .setName("channel")
-                        .setDescription("除外するチャンネル")
+                        .setName("thread")
+                        .setDescription("除外するフォーラムスレッド")
                         .setRequired(true)
-                        .addChannelTypes(ChannelType.GuildForum)
+                        .addChannelTypes(ChannelType.PublicThread, ChannelType.PrivateThread)
                 )
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("remove")
-                .setDescription("チャンネルをフォーラムチェック除外リストから削除")
+                .setDescription("フォーラムスレッドをチェック除外リストから削除")
                 .addChannelOption(option =>
                     option
-                        .setName("channel")
-                        .setDescription("除外を解除するチャンネル")
+                        .setName("thread")
+                        .setDescription("除外を解除するフォーラムスレッド")
                         .setRequired(true)
-                        .addChannelTypes(ChannelType.GuildForum)
+                        .addChannelTypes(ChannelType.PublicThread, ChannelType.PrivateThread)
                 )
         )
         .addSubcommand(subcommand =>
@@ -88,22 +88,22 @@ module.exports = {
     // 除外チャンネル管理用の関数をエクスポート
     async isChannelExcluded (channelId) {
         await this.loadExcludedChannels();
-        return excludedChannels.has(channelId);
+        return excludedThreads.has(channelId);
     },
 
     async addExcludedChannel (channelId) {
-        excludedChannels.add(channelId);
+        excludedThreads.add(channelId);
         await this.saveToFirebase(channelId, true);
     },
 
     async removeExcludedChannel (channelId) {
-        excludedChannels.delete(channelId);
+        excludedThreads.delete(channelId);
         await this.saveToFirebase(channelId, false);
     },
 
     async getExcludedChannels () {
         await this.loadExcludedChannels();
-        return Array.from(excludedChannels);
+        return Array.from(excludedThreads);
     },
 
     // Firebase関連の内部関数
@@ -124,15 +124,15 @@ module.exports = {
             const db = database.getFirestore();
             const snapshot = await db.collection("forumExcludedChannels").get();
 
-            excludedChannels.clear();
+            excludedThreads.clear();
             snapshot.forEach(doc => {
                 if (doc.data().excluded) {
-                    excludedChannels.add(doc.id);
+                    excludedThreads.add(doc.id);
                 }
             });
 
             lastCacheUpdate = now;
-            log.debug(`除外チャンネル ${excludedChannels.size}件をFirebaseから読み込みました`);
+            log.debug(`除外チャンネル ${excludedThreads.size}件をFirebaseから読み込みました`);
 
             // 古いデータのクリーンアップ（30日以上古いデータを削除）
             await this.cleanupOldData();
@@ -201,12 +201,12 @@ module.exports = {
  */
 async function handleAdd (interaction) {
     return await ErrorHandler.standardTryCatch(async () => {
-        const channel = interaction.options.getChannel("channel");
+        const channel = interaction.options.getChannel("thread");
 
         // まず現在のデータをロード
         await module.exports.loadExcludedChannels();
 
-        if (excludedChannels.has(channel.id)) {
+        if (excludedThreads.has(channel.id)) {
             const warningEmbed = DiscordHelpers.createWarningEmbed(
                 "⚠️ 注意",
                 `**${channel.name}** は既に除外リストに登録されています。`
@@ -238,12 +238,12 @@ async function handleAdd (interaction) {
  */
 async function handleRemove (interaction) {
     return await ErrorHandler.standardTryCatch(async () => {
-        const channel = interaction.options.getChannel("channel");
+        const channel = interaction.options.getChannel("thread");
 
         // まず現在のデータをロード
         await module.exports.loadExcludedChannels();
 
-        if (!excludedChannels.has(channel.id)) {
+        if (!excludedThreads.has(channel.id)) {
             const warningEmbed = DiscordHelpers.createWarningEmbed(
                 "⚠️ 注意",
                 `**${channel.name}** は除外リストに登録されていません。`
@@ -278,7 +278,7 @@ async function handleList (interaction) {
         // まず現在のデータをロード
         await module.exports.loadExcludedChannels();
 
-        if (excludedChannels.size === 0) {
+        if (excludedThreads.size === 0) {
             const infoEmbed = DiscordHelpers.createInfoEmbed(
                 "📋 フォーラムチェック除外チャンネル一覧",
                 "現在除外設定されているチャンネルはありません。"
@@ -286,7 +286,7 @@ async function handleList (interaction) {
             return await DiscordHelpers.safeReply(interaction, { embeds: [infoEmbed] });
         }
 
-        const channelList = Array.from(excludedChannels)
+        const channelList = Array.from(excludedThreads)
             .map(channelId => {
                 const channel = interaction.guild.channels.cache.get(channelId);
                 return channel ? `• <#${channelId}> (${channel.name})` : `• ${channelId} (チャンネルが見つかりません)`;
@@ -298,7 +298,7 @@ async function handleList (interaction) {
             channelList,
             {
                 fields: [
-                    { name: "除外チャンネル数", value: `${excludedChannels.size}個`, inline: true }
+                    { name: "除外チャンネル数", value: `${excludedThreads.size}個`, inline: true }
                 ]
             }
         );
