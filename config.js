@@ -47,6 +47,7 @@ module.exports = {
     "token": process.env.TOKEN,
     "clientId": process.env.CLIENT_ID,
     "pccomId": process.env.PCCOM_ID ?? "932529116400459786",
+    "sanee": process.env.SIN_ID ?? "1294171228608659578",
     "profile": process.env.PROFILE,
     //質問チャンネルID
     "questionChId": "1019989168283197483",
