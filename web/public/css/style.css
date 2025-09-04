@@ -1214,6 +1214,61 @@ body {
     }
 }
 
+/* List styles for proper bullet/marker rendering */
+ul, ol {
+    padding-left: 24px;
+    margin: 16px 0;
+}
+
+ul li, ol li {
+    padding: 4px 0;
+    color: var(--text-normal);
+    line-height: 1.6;
+}
+
+/* Ensure list markers stay within container */
+.guideline-content ul,
+.guideline-content ol,
+.rule-list,
+.tips-list,
+.example-list,
+.checklist,
+.usage-list,
+.rules-list,
+.status-list {
+    list-style-position: inside;
+    padding-left: 16px;
+    margin: 12px 0;
+}
+
+.guideline-content ul li,
+.guideline-content ol li,
+.rule-list li,
+.tips-list li,
+.example-list li,
+.checklist li,
+.usage-list li,
+.rules-list li,
+.status-list li {
+    padding: 6px 0;
+    color: var(--text-normal);
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Special handling for code elements in lists */
+.guideline-content ul li code,
+.rule-list li code,
+.example-list li code {
+    background-color: var(--background-tertiary);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 13px;
+    color: var(--text-normal);
+}
+
 /* Focus states for accessibility */
 .btn:focus,
 .form-input:focus,
