@@ -1,4 +1,4 @@
-const userSection = document.getElementById("userSection");
+const formUserSection = document.getElementById("formUserSection");
 const loginPrompt = document.getElementById("loginPrompt");
 const formContainer = document.getElementById("formContainer");
 const notSupportPage = document.getElementById("notSupportPage");
@@ -11,20 +11,18 @@ const contentTextarea = document.getElementById("content");
 const charCount = document.getElementById("charCount");
 const fileInput = document.getElementById("attachments");
 const fileUploadArea = document.getElementById("fileUploadArea");
-const fileList = document.getElementById("fileList");
+const fileUploadContent = document.getElementById("fileUploadContent");
+const fileUploadPreview = document.getElementById("fileUploadPreview");
+const uploadPreviewGrid = document.getElementById("uploadPreviewGrid");
 const submitBtn = document.getElementById("submitBtn");
 const toast = document.getElementById("toast");
 
 // Markdown elements
-const markdownToolbar = document.getElementById("markdownToolbar");
-const markdownPreview = document.getElementById("markdownPreview");
-const previewContent = document.getElementById("previewContent");
-const markdownHelpPanel = document.getElementById("markdownHelpPanel");
 
 // Selected files management
 let selectedFiles = [];
-let currentTab = "editor";
 let isSupportPage = false;
+let userMenuVisible = false;
 
 // ファイル名を安全にする関数
 function sanitizeFileName (filename) {
@@ -44,9 +42,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (isSupportPage) {
         await checkAuthStatus();
         setupEventListeners();
-        setupMarkdownEditor();
     } else {
         showNotSupportPage();
+    }
+});
+
+// Clean up on page unload (especially important for mobile)
+window.addEventListener("beforeunload", () => {
+    if (toast) {
+        hideToast();
+    }
+});
+
+// Clean up on visibility change (mobile background/foreground)
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden" && toast) {
+        // Force immediate cleanup when page becomes hidden
+        toast.classList.remove("show");
+        toast.style.display = "none";
+        toast.textContent = "";
+        toast.className = "toast";
     }
 });
 
@@ -86,29 +101,32 @@ async function checkAuthStatus () {
 
 // Show user information
 function showUserInfo (user) {
-    userSection.innerHTML = `
-        <div class="user-info">
-            <img src="${user.avatarURL}" alt="Avatar" class="user-avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
-            <span class="user-name">${escapeHtml(user.displayName || user.globalName || user.username)}</span>
-        </div>
-        <div class="auth-buttons">
-            <button class="btn btn-secondary" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i> ログアウト
-            </button>
-        </div>
-    `;
+    // Form user section - show user with dropdown
+    if (formUserSection) {
+        formUserSection.innerHTML = `
+            <div class="form-user-info" onclick="toggleUserMenu()">
+                <img src="${user.avatarURL}" alt="Avatar" class="form-user-avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                <span class="form-user-name">${escapeHtml(user.displayName || user.globalName || user.username)}</span>
+                <i class="fas fa-chevron-down form-user-dropdown"></i>
+                <div class="form-user-menu" id="formUserMenu">
+                    <div class="form-user-menu-item" onclick="logout(); event.stopPropagation();">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>ログアウト</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        formUserSection.style.display = "flex";
+    }
 }
 
 // Show login prompt
 function showLoginPrompt () {
-    userSection.innerHTML = `
-        <div class="auth-buttons">
-            <button class="btn btn-discord" onclick="login()">
-                <i class="fab fa-discord"></i>
-                ログイン
-            </button>
-        </div>
-    `;
+    // Hide form user section
+    if (formUserSection) {
+        formUserSection.style.display = "none";
+    }
+    
     loginPrompt.style.display = "flex";
     formContainer.style.display = "none";
 }
@@ -117,6 +135,28 @@ function showLoginPrompt () {
 function showForm () {
     loginPrompt.style.display = "none";
     formContainer.style.display = "block";
+}
+
+// Toggle user menu
+function toggleUserMenu() {
+    const menu = document.getElementById("formUserMenu");
+    if (menu) {
+        userMenuVisible = !userMenuVisible;
+        if (userMenuVisible) {
+            menu.classList.add("show");
+        } else {
+            menu.classList.remove("show");
+        }
+    }
+}
+
+// Close user menu when clicking outside
+function closeUserMenu() {
+    const menu = document.getElementById("formUserMenu");
+    if (menu && userMenuVisible) {
+        userMenuVisible = false;
+        menu.classList.remove("show");
+    }
 }
 
 // Setup event listeners
@@ -142,7 +182,7 @@ function setupEventListeners () {
         }
     });
 
-    // Character counter
+    // Character counter and live preview
     contentTextarea.addEventListener("input", () => {
         const count = contentTextarea.value.length;
         charCount.textContent = count;
@@ -155,10 +195,8 @@ function setupEventListeners () {
             charCount.style.color = "var(--text-muted)";
         }
 
-        // Update preview if in preview mode
-        if (currentTab === "preview") {
-            updatePreview();
-        }
+        // Update live highlight in editor
+        updateLiveHighlight();
     });
 
     // File drag and drop
@@ -198,6 +236,16 @@ function setupEventListeners () {
 
     // Form submission
     inquiryForm.addEventListener("submit", handleSubmit);
+
+    // Close user menu when clicking outside
+    document.addEventListener("click", (e) => {
+        const formUserInfo = document.querySelector(".form-user-info");
+        const formUserMenu = document.getElementById("formUserMenu");
+        
+        if (userMenuVisible && formUserInfo && !formUserInfo.contains(e.target)) {
+            closeUserMenu();
+        }
+    });
 
     // Keyboard shortcuts
     document.addEventListener("keydown", (e) => {
@@ -270,246 +318,7 @@ function setupEventListeners () {
     });
 }
 
-// Setup markdown editor
-function setupMarkdownEditor () {
-    if (!isSupportPage) return;
 
-    // Show toolbar when text is selected
-    contentTextarea.addEventListener("mouseup", handleTextSelection);
-    contentTextarea.addEventListener("keyup", handleTextSelection);
-
-    // Update preview when typing
-    contentTextarea.addEventListener("input", () => {
-        if (currentTab === "preview") {
-            updatePreview();
-        }
-    });
-}
-
-// Handle text selection
-function handleTextSelection () {
-    const selection = contentTextarea.selectionStart !== contentTextarea.selectionEnd;
-    if (selection) {
-        markdownToolbar.style.display = "flex";
-    } else {
-        setTimeout(() => {
-            if (contentTextarea.selectionStart === contentTextarea.selectionEnd) {
-                markdownToolbar.style.display = "none";
-            }
-        }, 100);
-    }
-}
-
-// Apply markdown formatting
-function applyMarkdown (type) {
-    const start = contentTextarea.selectionStart;
-    const end = contentTextarea.selectionEnd;
-    const selectedText = contentTextarea.value.substring(start, end);
-    const beforeText = contentTextarea.value.substring(0, start);
-    const afterText = contentTextarea.value.substring(end);
-
-    let newText = "";
-    let cursorOffset = 0;
-
-    switch (type) {
-    case "bold":
-        newText = `**${selectedText}**`;
-        cursorOffset = selectedText ? 2 : 2;
-        break;
-    case "italic":
-        newText = `*${selectedText}*`;
-        cursorOffset = selectedText ? 1 : 1;
-        break;
-    case "underline":
-        newText = `__${selectedText}__`;
-        cursorOffset = selectedText ? 2 : 2;
-        break;
-    case "strikethrough":
-        newText = `~~${selectedText}~~`;
-        cursorOffset = selectedText ? 2 : 2;
-        break;
-    case "spoiler":
-        newText = `||${selectedText}||`;
-        cursorOffset = selectedText ? 2 : 2;
-        break;
-    case "code":
-        newText = `\`${selectedText}\``;
-        cursorOffset = selectedText ? 1 : 1;
-        break;
-    case "codeblock":
-        newText = `\`\`\`\n${selectedText}\n\`\`\``;
-        cursorOffset = selectedText ? 4 : 4;
-        break;
-    case "header1":
-        newText = `# ${selectedText}`;
-        cursorOffset = selectedText ? 2 : 2;
-        break;
-    case "header2":
-        newText = `## ${selectedText}`;
-        cursorOffset = selectedText ? 3 : 3;
-        break;
-    case "header3":
-        newText = `### ${selectedText}`;
-        cursorOffset = selectedText ? 4 : 4;
-        break;
-    case "subtext":
-        newText = `-# ${selectedText}`;
-        cursorOffset = selectedText ? 3 : 3;
-        break;
-    case "quote":
-        const lines = selectedText.split("\n");
-        newText = lines.map(line => `> ${line}`).join("\n");
-        cursorOffset = selectedText ? 2 : 2;
-        break;
-    case "list":
-        const listLines = selectedText.split("\n");
-        newText = listLines.map(line => `- ${line}`).join("\n");
-        cursorOffset = selectedText ? 2 : 2;
-        break;
-    }
-
-    contentTextarea.value = beforeText + newText + afterText;
-
-    // Update cursor position
-    const newCursorPos = selectedText ? start + newText.length : start + cursorOffset;
-    contentTextarea.setSelectionRange(newCursorPos, newCursorPos);
-
-    // Update character count
-    const count = contentTextarea.value.length;
-    charCount.textContent = count;
-
-    // Update preview if in preview mode
-    if (currentTab === "preview") {
-        updatePreview();
-    }
-
-    // Focus back to textarea
-    contentTextarea.focus();
-
-    // Hide toolbar after applying
-    markdownToolbar.style.display = "none";
-}
-
-// Switch between editor and preview tabs
-function switchTab (tab) {
-    currentTab = tab;
-
-    const editorTab = document.querySelector(".editor-tab");
-    const previewTab = document.querySelector(".editor-tab:nth-child(2)");
-
-    if (tab === "editor") {
-        editorTab.classList.add("active");
-        previewTab.classList.remove("active");
-        contentTextarea.style.display = "block";
-        markdownPreview.style.display = "none";
-    } else {
-        editorTab.classList.remove("active");
-        previewTab.classList.add("active");
-        contentTextarea.style.display = "none";
-        markdownPreview.style.display = "block";
-        updatePreview();
-    }
-}
-
-// Toggle preview mode
-function togglePreview () {
-    if (currentTab === "editor") {
-        switchTab("preview");
-    } else {
-        switchTab("editor");
-    }
-}
-
-// Update preview content
-function updatePreview () {
-    const text = contentTextarea.value;
-    if (!text.trim()) {
-        previewContent.innerHTML = "<em>プレビューする内容がありません</em>";
-        return;
-    }
-
-    // Simple markdown parsing for Discord-style formatting
-    let html = escapeHtml(text);
-
-    // Code blocks (最初に処理して一時的にプレースホルダーに置き換え)
-    const codeBlocks = [];
-    html = html.replace(/```([a-zA-Z]*)\n?([\s\S]*?)```/g, (match, lang, code) => {
-        // 先頭と末尾の改行を削除
-        const cleanCode = code.replace(/^\n+/, "").replace(/\n+$/, "");
-        const placeholder = `__CODEBLOCK_${codeBlocks.length}__`;
-
-        // シンタックスハイライト用のクラスを追加（簡易実装）
-        const langClass = lang ? ` class="language-${lang}"` : "";
-        codeBlocks.push(`<pre><code${langClass}>${cleanCode}</code></pre>`);
-        return placeholder;
-    });
-
-    // Inline code (コードブロックの次に処理)
-    const inlineCodes = [];
-    html = html.replace(/`([^`]+)`/g, (match, code) => {
-        const placeholder = `__INLINECODE_${inlineCodes.length}__`;
-        inlineCodes.push(`<code>${code}</code>`);
-        return placeholder;
-    });
-
-    // Headers (行の開始から処理)
-    html = html.replace(/^### (.+)$/gm, "<h3>$1</h3>");
-    html = html.replace(/^## (.+)$/gm, "<h2>$1</h2>");
-    html = html.replace(/^# (.+)$/gm, "<h1>$1</h1>");
-
-    // Subtext
-    html = html.replace(/^-# (.+)$/gm, '<span class="subtext">$1</span>');
-
-    // Spoiler tags
-    html = html.replace(/\|\|([^|]+)\|\|/g, '<span class="spoiler">$1</span>');
-
-    // Bold (3個、2個の順で処理)
-    html = html.replace(/\*\*\*([^*]+)\*\*\*/g, "<strong><em>$1</em></strong>");
-    html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-
-    // Underline + formatting combinations
-    html = html.replace(/__\*\*\*([^_*]+)\*\*\*__/g, "<u><strong><em>$1</em></strong></u>");
-    html = html.replace(/__\*\*([^_*]+)\*\*__/g, "<u><strong>$1</strong></u>");
-    html = html.replace(/__\*([^_*]+)\*__/g, "<u><em>$1</em></u>");
-    html = html.replace(/__([^_]+)__/g, "<u>$1</u>");
-
-    // Italic (single asterisk or underscore)
-    html = html.replace(/(?<!\*)\*(?!\*)([^*]+)\*(?!\*)/g, "<em>$1</em>");
-    html = html.replace(/(?<!_)_(?!_)([^_]+)_(?!_)/g, "<em>$1</em>");
-
-    // Strikethrough
-    html = html.replace(/~~([^~]+)~~/g, "<del>$1</del>");
-
-    // Quote (行の開始から処理)
-    html = html.replace(/^> (.+)$/gm, "<blockquote>$1</blockquote>");
-
-    // List items (行の開始から処理)
-    html = html.replace(/^- (.+)$/gm, "<li>$1</li>");
-
-    // Wrap consecutive list items in ul tags
-    html = html.replace(/\n/g, "<br>");
-
-    // プレースホルダーを元に戻す
-    inlineCodes.forEach((code, index) => {
-        html = html.replace(`__INLINECODE_${index}__`, code);
-    });
-
-    codeBlocks.forEach((code, index) => {
-        html = html.replace(`__CODEBLOCK_${index}__`, code);
-    });
-
-    previewContent.innerHTML = html;
-}
-
-// Toggle markdown help panel
-function toggleMarkdownHelp () {
-    const panel = markdownHelpPanel;
-    if (panel.style.display === "none") {
-        panel.style.display = "block";
-    } else {
-        panel.style.display = "none";
-    }
-}
 
 // Handle paste functionality
 function handlePaste (e) {
@@ -581,38 +390,69 @@ function handleFiles (files) {
         showToast(`${file.name} を追加しました`, "success");
     }
 
-    updateFileList();
+    updateUploadPreview();
 }
 
-// Update file list display
-function updateFileList () {
-    fileList.innerHTML = "";
-
-    selectedFiles.forEach((file, index) => {
-        const fileItem = document.createElement("div");
-        fileItem.className = "file-item";
-
-        fileItem.innerHTML = `
-            <div class="file-info">
-                <i class="fas fa-file"></i>
-                <span class="file-name">${escapeHtml(file.name)}</span>
-                <span class="file-size">(${formatFileSize(file.size)})</span>
-            </div>
-            <button type="button" class="file-remove" onclick="removeFile(${index})">
-                <i class="fas fa-times"></i> 削除
-            </button>
-        `;
-
-        fileList.appendChild(fileItem);
-    });
-}
 
 // Remove file
 function removeFile (index) {
     const removedFile = selectedFiles[index];
     selectedFiles.splice(index, 1);
-    updateFileList();
+    updateUploadPreview();
     showToast(`${removedFile.name} を削除しました`, "info");
+}
+
+
+// Update upload preview area
+function updateUploadPreview() {
+    if (selectedFiles.length === 0) {
+        fileUploadContent.style.display = "block";
+        fileUploadPreview.style.display = "none";
+    } else {
+        fileUploadContent.style.display = "none";
+        fileUploadPreview.style.display = "block";
+        
+        uploadPreviewGrid.innerHTML = "";
+        
+        selectedFiles.forEach((file, index) => {
+            const previewCard = document.createElement("div");
+            previewCard.className = "upload-preview-card";
+            
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    previewCard.innerHTML = `
+                        <div class="upload-preview-image">
+                            <img src="${e.target.result}" alt="Preview" />
+                        </div>
+                        <div class="upload-preview-info">
+                            <div class="upload-preview-name">${file.name}</div>
+                            <div class="upload-preview-size">${formatFileSize(file.size)}</div>
+                        </div>
+                        <button type="button" class="upload-preview-delete" onclick="removeFile(${index})">
+                            <i class="fas fa-trash"></i> 削除
+                        </button>
+                    `;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewCard.innerHTML = `
+                    <div class="upload-preview-icon-container">
+                        <i class="fas fa-${getFileIcon(file.type)} upload-preview-file-icon"></i>
+                    </div>
+                    <div class="upload-preview-info">
+                        <div class="upload-preview-name">${file.name}</div>
+                        <div class="upload-preview-size">${formatFileSize(file.size)}</div>
+                    </div>
+                    <button type="button" class="upload-preview-delete" onclick="removeFile(${index})">
+                        <i class="fas fa-trash"></i> 削除
+                    </button>
+                `;
+            }
+            
+            uploadPreviewGrid.appendChild(previewCard);
+        });
+    }
 }
 
 // Format file size
@@ -622,6 +462,16 @@ function formatFileSize (bytes) {
     const sizes = ["B", "KB", "MB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
+}
+
+// Get file icon based on file type
+function getFileIcon(fileType) {
+    if (fileType.startsWith('image/')) return 'image';
+    if (fileType.includes('pdf')) return 'file-pdf';
+    if (fileType.includes('word') || fileType.includes('document')) return 'file-word';
+    if (fileType.includes('zip') || fileType.includes('rar')) return 'file-archive';
+    if (fileType.includes('text')) return 'file-alt';
+    return 'file';
 }
 
 // Handle form submission
@@ -705,32 +555,65 @@ async function handleSubmit (e) {
 function resetForm () {
     inquiryForm.reset();
     selectedFiles = [];
-    updateFileList();
+    updateUploadPreview();
     customTitleGroup.style.display = "none";
     charCount.textContent = "0";
     charCount.style.color = "var(--text-muted)";
     anonymousCheckbox.disabled = false;
     anonymousCheckbox.closest(".checkbox-label").style.opacity = "1";
-    markdownToolbar.style.display = "none";
-    markdownHelpPanel.style.display = "none";
-    switchTab("editor");
 }
 
 // Show toast notification
 function showToast (message, type = "success") {
-    // Remove existing toast
-    toast.classList.remove("show");
+    if (!toast) return;
+    
+    // Clear any existing timeouts
+    if (toast.hideTimeout) {
+        clearTimeout(toast.hideTimeout);
+    }
+    if (toast.showTimeout) {
+        clearTimeout(toast.showTimeout);
+    }
 
-    setTimeout(() => {
+    // Hide current toast first
+    toast.classList.remove("show");
+    
+    // Reset toast state
+    toast.showTimeout = setTimeout(() => {
         toast.textContent = message;
         toast.className = `toast ${type}`;
+        toast.style.display = "block";
         toast.classList.add("show");
 
-        // Auto hide after 4 seconds
-        setTimeout(() => {
-            toast.classList.remove("show");
+        // Auto hide after 4 seconds with cleanup
+        toast.hideTimeout = setTimeout(() => {
+            hideToast();
         }, 4000);
     }, 100);
+}
+
+// Hide toast with complete cleanup
+function hideToast() {
+    if (!toast) return;
+    
+    toast.classList.remove("show");
+    
+    // Wait for transition to complete before hiding
+    setTimeout(() => {
+        toast.style.display = "none";
+        toast.textContent = "";
+        toast.className = "toast";
+        
+        // Clear any remaining timeouts
+        if (toast.hideTimeout) {
+            clearTimeout(toast.hideTimeout);
+            toast.hideTimeout = null;
+        }
+        if (toast.showTimeout) {
+            clearTimeout(toast.showTimeout);
+            toast.showTimeout = null;
+        }
+    }, 300); // Match CSS transition duration
 }
 
 // Escape HTML
