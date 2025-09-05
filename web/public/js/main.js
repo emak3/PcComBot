@@ -105,13 +105,13 @@ function showUserInfo (user) {
     if (formUserSection) {
         formUserSection.innerHTML = `
             <div class="form-user-info" onclick="toggleUserMenu()">
-                <img src="${user.avatarURL}" alt="Avatar" class="form-user-avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                <img src="${user.avatarURL}" alt="Avatar" class="form-user-avatar" onerror="this.src='/favicon.ico'">
                 <span class="form-user-name">${escapeHtml(user.displayName || user.globalName || user.username)}</span>
                 <i class="fas fa-chevron-down form-user-dropdown"></i>
                 <div class="form-user-menu" id="formUserMenu">
                     <div class="form-user-menu-item" onclick="logout(); event.stopPropagation();">
                         <i class="fas fa-sign-out-alt"></i>
-                        <span>ログアウト</span>
+                        <span>${i18n.translate('common.logout')}</span>
                     </div>
                 </div>
             </div>
@@ -175,7 +175,7 @@ function setupEventListeners () {
             anonymousCheckbox.checked = false;
             anonymousCheckbox.disabled = true;
             anonymousCheckbox.closest(".checkbox-label").style.opacity = "0.5";
-            showToast("対話モードでは匿名は利用できません", "info");
+            showToast(i18n.translate('js.messages.anonymous_not_available_in_dialog'), "info");
         } else {
             anonymousCheckbox.disabled = false;
             anonymousCheckbox.closest(".checkbox-label").style.opacity = "1";
@@ -352,20 +352,20 @@ function handlePaste (e) {
     if (files.length > 0) {
         e.preventDefault(); // Prevent default paste behavior
         handleFiles(files);
-        showToast(`📋 ${files.length}個の画像をペーストしました`, "success");
+        showToast(i18n.translate('js.messages.images_pasted', {count: files.length}), "success");
     }
 }
 
-// Handle file selection
+// Handle file selection / ファイル選択処理
 function handleFiles (files) {
     for (let file of files) {
         if (selectedFiles.length >= 5) {
-            showToast("ファイルは最大5つまでです", "error");
+            showToast(i18n.translate('js.messages.max_files'), "error");
             break;
         }
 
         if (file.size > 1024 * 1024) {
-            showToast(`${file.name} は1MBを超えています`, "error");
+            showToast(i18n.translate('js.messages.file_too_large', {filename: file.name}), "error");
             continue;
         }
 
@@ -374,7 +374,7 @@ function handleFiles (files) {
         const safeName = sanitizeFileName(originalName);
 
         if (originalName !== safeName) {
-            showToast(`ファイル名を修正しました: "${originalName}" → "${safeName}"`, "info");
+            showToast(i18n.translate('js.messages.filename_fixed', {original: originalName, safe: safeName}), "info");
 
             // File オブジェクトを新しい名前で再作成
             file = new File([file], safeName, { type: file.type });
@@ -382,28 +382,28 @@ function handleFiles (files) {
 
         // Check for duplicates (修正後の名前で)
         if (selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
-            showToast(`${file.name} は既に選択されています`, "error");
+            showToast(i18n.translate('js.messages.file_already_selected', {filename: file.name}), "error");
             continue;
         }
 
         selectedFiles.push(file);
-        showToast(`${file.name} を追加しました`, "success");
+        showToast(i18n.translate('js.messages.file_added', {filename: file.name}), "success");
     }
 
     updateUploadPreview();
 }
 
 
-// Remove file
+// Remove file / ファイル削除
 function removeFile (index) {
     const removedFile = selectedFiles[index];
     selectedFiles.splice(index, 1);
     updateUploadPreview();
-    showToast(`${removedFile.name} を削除しました`, "info");
+    showToast(i18n.translate('js.messages.file_removed', {filename: removedFile.name}), "info");
 }
 
 
-// Update upload preview area
+// Update upload preview area / アップロードプレビュー領域更新
 function updateUploadPreview() {
     if (selectedFiles.length === 0) {
         fileUploadContent.style.display = "block";
@@ -430,7 +430,7 @@ function updateUploadPreview() {
                             <div class="upload-preview-size">${formatFileSize(file.size)}</div>
                         </div>
                         <button type="button" class="upload-preview-delete" onclick="removeFile(${index})">
-                            <i class="fas fa-trash"></i> 削除
+                            <i class="fas fa-trash"></i> ${i18n.translate('common.delete')}
                         </button>
                     `;
                 };
@@ -445,7 +445,7 @@ function updateUploadPreview() {
                         <div class="upload-preview-size">${formatFileSize(file.size)}</div>
                     </div>
                     <button type="button" class="upload-preview-delete" onclick="removeFile(${index})">
-                        <i class="fas fa-trash"></i> 削除
+                        <i class="fas fa-trash"></i> ${i18n.translate('common.delete')}
                     </button>
                 `;
             }
@@ -474,7 +474,7 @@ function getFileIcon(fileType) {
     return 'file';
 }
 
-// Handle form submission
+// Handle form submission / フォーム送信処理
 async function handleSubmit (e) {
     e.preventDefault();
 
@@ -487,25 +487,25 @@ async function handleSubmit (e) {
 
     // Validation
     if (!category) {
-        showToast("カテゴリーを選択してください", "error");
+        showToast(i18n.translate('js.messages.select_category'), "error");
         categorySelect.focus();
         return;
     }
 
     if (category === "その他" && !customTitle.trim()) {
-        showToast("タイトルを入力してください", "error");
+        showToast(i18n.translate('js.messages.enter_title'), "error");
         document.getElementById("customTitle").focus();
         return;
     }
 
     if (!content) {
-        showToast("内容を入力してください", "error");
+        showToast(i18n.translate('js.messages.enter_content'), "error");
         contentTextarea.focus();
         return;
     }
 
     if (content.length > 800) {
-        showToast("内容は800文字以内で入力してください", "error");
+        showToast(i18n.translate('js.messages.content_too_long'), "error");
         contentTextarea.focus();
         return;
     }
@@ -522,9 +522,9 @@ async function handleSubmit (e) {
         formData.append("attachments", file);
     });
 
-    // Set loading state
+    // Set loading state / ローディング状態設定
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 送信中...';
+    submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${i18n.translate('js.messages.sending')}...`;
     submitBtn.classList.add("loading");
 
     try {
@@ -539,14 +539,14 @@ async function handleSubmit (e) {
             showToast(result.message, "success");
             resetForm();
         } else {
-            showToast(result.error || "エラーが発生しました", "error");
+            showToast(result.error || i18n.translate('js.messages.error_occurred'), "error");
         }
     } catch (error) {
         console.error("送信エラー:", error);
-        showToast("送信に失敗しました。ネットワークを確認してください。", "error");
+        showToast(i18n.translate('js.messages.network_error'), "error");
     } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> 送信する';
+        submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> ${i18n.translate('common.submit')}`;
         submitBtn.classList.remove("loading");
     }
 }
@@ -628,10 +628,10 @@ function escapeHtml (text) {
     return text.replace(/[&<>"']/g, m => map[m]);
 }
 
-// Login function
+// Login function / ログイン機能
 function login () {
     const loginBtn = event.target;
-    loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ログイン中...';
+    loginBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${i18n.translate('js.messages.logging_in')}`;
     loginBtn.disabled = true;
 
     // 現在のページに応じてリダイレクト先を指定
@@ -642,11 +642,11 @@ function login () {
     }, 300);
 }
 
-// Logout function
+// Logout function / ログアウト機能
 async function logout () {
     try {
         const logoutBtn = event.target;
-        logoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ログアウト中...';
+        logoutBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${i18n.translate('js.messages.logging_out')}...`;
         logoutBtn.disabled = true;
 
         const response = await fetch("/auth/logout", {
@@ -657,7 +657,7 @@ async function logout () {
         });
 
         if (response.ok) {
-            showToast("ログアウトしました", "success");
+            showToast(i18n.translate('js.messages.logged_out'), "success");
             setTimeout(() => {
                 window.location.reload();
             }, 1000);
@@ -666,10 +666,11 @@ async function logout () {
         }
     } catch (error) {
         console.error("ログアウトエラー:", error);
-        showToast("ログアウトに失敗しました", "error");
+        showToast(i18n.translate('js.messages.logout_failed'), "error");
 
         // Reset button
-        event.target.innerHTML = '<i class="fas fa-sign-out-alt"></i> ログアウト';
+        event.target.innerHTML = `<i class="fas fa-sign-out-alt"></i> ${i18n.translate('common.logout')}`;
         event.target.disabled = false;
     }
 }
+

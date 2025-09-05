@@ -4,15 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC Community - コミュニティルール</title>
+    <title data-i18n="rules.title">PC Community - コミュニティルール</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/pages.css">
     <link rel="stylesheet" href="/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+    <link rel="icon" href="./favicon.ico">
 </head>
 
 <body>
@@ -24,25 +23,24 @@
         <header class="header">
             <div class="header-content">
                 <h1 class="header-title">
-                    <i class="fas fa-desktop header-icon"></i>
-                    PC Community
+                    <img src="./server_name.png" alt="PC Community" style="height: 40px; width: auto;">
                 </h1>
                 <nav class="header-nav">
                     <a href="/" class="nav-link">
                         <i class="fas fa-home"></i>
-                        ホーム
+                        <span data-i18n="common.home">ホーム</span>
                     </a>
                     <a href="/rules" class="nav-link active">
                         <i class="fas fa-gavel"></i>
-                        ルール
+                        <span data-i18n="common.rules">ルール</span>
                     </a>
                     <a href="/guidelines" class="nav-link">
                         <i class="fas fa-question-circle"></i>
-                        質問ガイド
+                        <span data-i18n="common.guidelines">質問ガイド</span>
                     </a>
                     <a href="/support" class="nav-link">
                         <i class="fas fa-headset"></i>
-                        サポート
+                        <span data-i18n="common.support">サポート</span>
                     </a>
                 </nav>
             </div>
@@ -54,9 +52,9 @@
             <div class="page-header">
                 <div class="page-title">
                     <i class="fas fa-gavel page-icon"></i>
-                    <h2>コミュニティルール</h2>
+                    <h2 data-i18n="rules_detailed.title">コミュニティルール</h2>
                 </div>
-                <p class="page-description">
+                <p class="page-description" data-i18n="rules_detailed.description">
                     みんなが快適に過ごすためのルールです。必ずお読みください。
                 </p>
             </div>
@@ -69,9 +67,9 @@
                         <i class="fas fa-exclamation-triangle"></i>
                     </div>
                     <div class="warning-content">
-                        <h3>重要事項</h3>
-                        <p>上記のルールを破った場合、BANされる前に数回の警告をしますが、重度の違反行為や明らかな荒らし行為は警告なしに即BANとなる場合があります。</p>
-                        <p><a href="https://discord.com/terms" target="_blank" rel="noopener noreferrer">DiscordのTOS</a>
+                        <h3 data-i18n="rules_detailed.important_notice.title">重要事項</h3>
+                        <p data-i18n="rules_detailed.important_notice.content1">上記のルールを破った場合、BANされる前に数回の警告をしますが、重度の違反行為や明らかな荒らし行為は警告なしに即BANとなる場合があります。</p>
+                        <p data-i18n="rules_detailed.important_notice.content2"><a href="https://discord.com/terms" target="_blank" rel="noopener noreferrer">DiscordのTOS</a>
                             に違反した場合、即座にBANされます。上記以外の行為であっても、運営は適切と思われる処置を行う権利があります。</p>
                     </div>
                 </div>
@@ -84,23 +82,23 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-ban"></i>
                             </div>
-                            <h3>スパムは禁止です！</h3>
+                            <h3 data-i18n="rules_detailed.rules.0.title">スパムは禁止です！</h3>
                         </div>
                         <div class="guideline-content">
-                            <p>以下の行為は禁止されています：</p>
+                            <p data-i18n="rules_detailed.rules.0.content">以下の行為は禁止されています：</p>
                             <ul class="rule-list">
-                                <li>短縮URLや隠しURL</li>
-                                <li>過剰な絵文字</li>
-                                <li>過剰なリアクション</li>
-                                <li>テキストウォール（長すぎる文章）</li>
+                                <li data-i18n="rules_detailed.rules.0.items.0">短縮URLや隠しURL</li>
+                                <li data-i18n="rules_detailed.rules.0.items.1">過剰な絵文字</li>
+                                <li data-i18n="rules_detailed.rules.0.items.2">過剰なリアクション</li>
+                                <li data-i18n="rules_detailed.rules.0.items.3">テキストウォール（長すぎる文章）</li>
                             </ul>
                             <div class="info-box">
                                 <div class="info-title">
                                     <i class="fas fa-info-circle"></i>
-                                    詳細説明
+                                    <span data-i18n="rules_detailed.rules.0.info.title">詳細説明</span>
                                 </div>
                                 <div class="info-content">
-                                    <p>スパム行為は他のメンバーの体験を損ねる行為です。適度な絵文字の使用や通常の会話は問題ありません。</p>
+                                    <p data-i18n="rules_detailed.rules.0.info.content">スパム行為は他のメンバーの体験を損ねる行為です。適度な絵文字の使用や通常の会話は問題ありません。</p>
                                 </div>
                             </div>
                         </div>
@@ -112,20 +110,20 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-shield-alt"></i>
                             </div>
-                            <h3>SFWを心がけましょう！</h3>
+                            <h3 data-i18n="rules_detailed.rules.1.title">SFWを心がけましょう！</h3>
                         </div>
                         <div class="guideline-content">
-                            <p>常識の範囲内であれば、多少の悪口は問題ありません。</p>
-                            <p>もしあなたのユーザー名 / PFPが不快なものであれば、変更を求められる場合があります。</p>
+                            <p data-i18n="rules_detailed.rules.1.content1">常識の範囲内であれば、多少の悪口は問題ありません。</p>
+                            <p data-i18n="rules_detailed.rules.1.content2">もしあなたのユーザー名 / PFPが不快なものであれば、変更を求められる場合があります。</p>
 
                             <div class="info-box">
                                 <div class="info-title">
                                     <i class="fas fa-info-circle"></i>
-                                    用語説明
+                                    <span data-i18n="rules_detailed.rules.1.terms.title">用語説明</span>
                                 </div>
                                 <div class="info-content">
-                                    <p><strong>SFW</strong>: Safe for work（職場でも安全な内容）</p>
-                                    <p><strong>PFP</strong>: Profile picture（プロフィール画像）</p>
+                                    <p data-i18n="rules_detailed.rules.1.terms.sfw"><strong>SFW</strong>: Safe for work（職場でも安全な内容）</p>
+                                    <p data-i18n="rules_detailed.rules.1.terms.pfp"><strong>PFP</strong>: Profile picture（プロフィール画像）</p>
                                 </div>
                             </div>
 
@@ -133,16 +131,16 @@
                                 <div class="bad-example">
                                     <h5>
                                         <i class="fas fa-times-circle"></i>
-                                        避けるべき内容
+                                        <span data-i18n="rules_detailed.rules.1.examples.bad.title">避けるべき内容</span>
                                     </h5>
-                                    <p>過度に攻撃的な言葉、不適切な画像、職場で見るのが困難な内容</p>
+                                    <p data-i18n="rules_detailed.rules.1.examples.bad.content">過度に攻撃的な言葉、不適切な画像、職場で見るのが困難な内容</p>
                                 </div>
                                 <div class="good-example">
                                     <h5>
                                         <i class="fas fa-check-circle"></i>
-                                        適切な内容
+                                        <span data-i18n="rules_detailed.rules.1.examples.good.title">適切な内容</span>
                                     </h5>
-                                    <p>建設的な議論、適度な冗談、誰でも見ることができる内容</p>
+                                    <p data-i18n="rules_detailed.rules.1.examples.good.content">建設的な議論、適度な冗談、誰でも見ることができる内容</p>
                                 </div>
                             </div>
                         </div>
@@ -154,53 +152,53 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-user-edit"></i>
                             </div>
-                            <h3>読みやすい名前にしましょう！</h3>
+                            <h3 data-i18n="rules_detailed.rules.2.title">読みやすい名前にしましょう！</h3>
                         </div>
                         <div class="guideline-content">
-                            <p>メンションがしにくい特殊文字を含んだユーザー名の場合は変更が必須です。</p>
+                            <p data-i18n="rules_detailed.rules.2.content">メンションがしにくい特殊文字を含んだユーザー名の場合は変更が必須です。</p>
 
                             <div class="name-rules">
                                 <div class="allowed-section">
                                     <h4>
                                         <i class="fas fa-check-circle"></i>
-                                        使用可能な文字
+                                        <span data-i18n="rules_detailed.rules.2.allowed.title">使用可能な文字</span>
                                     </h4>
                                     <ul class="allowed-list">
-                                        <li>英語</li>
-                                        <li>英数字</li>
-                                        <li>漢字</li>
-                                        <li>カタカナ</li>
-                                        <li>ひらがな</li>
-                                        <li>一部記号</li>
+                                        <li data-i18n="rules_detailed.rules.2.allowed.items.0">英語</li>
+                                        <li data-i18n="rules_detailed.rules.2.allowed.items.1">英数字</li>
+                                        <li data-i18n="rules_detailed.rules.2.allowed.items.2">漢字</li>
+                                        <li data-i18n="rules_detailed.rules.2.allowed.items.3">カタカナ</li>
+                                        <li data-i18n="rules_detailed.rules.2.allowed.items.4">ひらがな</li>
+                                        <li data-i18n="rules_detailed.rules.2.allowed.items.5">一部記号</li>
                                     </ul>
                                 </div>
 
                                 <div class="restrictions-section">
                                     <h4>
                                         <i class="fas fa-exclamation-circle"></i>
-                                        制限事項
+                                        <span data-i18n="rules_detailed.rules.2.restrictions.title">制限事項</span>
                                     </h4>
                                     <ul class="restrictions-list">
-                                        <li>名前の初めに記号は入れられません</li>
-                                        <li>特殊文字を含むことはできません</li>
-                                        <li>メンション時に困難な文字は避けてください</li>
+                                        <li data-i18n="rules_detailed.rules.2.restrictions.items.0">名前の初めに記号は入れられません</li>
+                                        <li data-i18n="rules_detailed.rules.2.restrictions.items.1">特殊文字を含むことはできません</li>
+                                        <li data-i18n="rules_detailed.rules.2.restrictions.items.2">メンション時に困難な文字は避けてください</li>
                                     </ul>
                                 </div>
 
                                 <div class="symbols-section">
                                     <h4>
                                         <i class="fas fa-list"></i>
-                                        使用可能な記号
+                                        <span data-i18n="rules_detailed.rules.2.symbols.title">使用可能な記号</span>
                                     </h4>
                                     <div class="symbols-box">
-                                        <code>[ ] @ ^ $ ( ) _ { } | ? + \ * .</code>
+                                        <code data-i18n="rules_detailed.rules.2.symbols.content">[ ] @ ^ $ ( ) _ { } | ? + \ * .</code>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="reason-box">
                                 <h5>理由</h5>
-                                <p>読みやすい名前により、コミュニケーションが円滑になり、メンションやメッセージのやり取りがスムーズになります。</p>
+                                <p data-i18n="rules_detailed.rules.2.reason">読みやすい名前により、コミュニケーションが円滑になり、メンションやメッセージのやり取りがスムーズになります。</p>
                             </div>
                         </div>
                     </div>
@@ -211,32 +209,32 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-comments"></i>
                             </div>
-                            <h3>一般的な会話のみ</h3>
+                            <h3 data-i18n="rules_detailed.rules.3.title">一般的な会話のみ</h3>
                         </div>
                         <div class="guideline-content">
-                            <p>宗教、政治、その他ネガティブで攻撃的な話題は禁止です。</p>
-                            <p>論争を始めようとすることは、攻撃的であるとみなされます。</p>
+                            <p data-i18n="rules_detailed.rules.3.content1">宗教、政治、その他ネガティブで攻撃的な話題は禁止です。</p>
+                            <p data-i18n="rules_detailed.rules.3.content2">論争を始めようとすることは、攻撃的であるとみなされます。</p>
 
                             <div class="topics-grid">
                                 <div class="forbidden-topics">
                                     <h4>
                                         <i class="fas fa-times-circle"></i>
-                                        禁止トピック
+                                        <span data-i18n="rules_detailed.rules.3.forbidden_topics.title">禁止トピック</span>
                                     </h4>
                                     <ul>
-                                        <li>宗教的な話題</li>
-                                        <li>政治的な話題</li>
-                                        <li>攻撃的な内容</li>
-                                        <li>論争を誘発する内容</li>
-                                        <li>差別的な発言</li>
-                                        <li>過度にネガティブな内容</li>
+                                        <li data-i18n="rules_detailed.rules.3.forbidden_topics.items.0">宗教的な話題</li>
+                                        <li data-i18n="rules_detailed.rules.3.forbidden_topics.items.1">政治的な話題</li>
+                                        <li data-i18n="rules_detailed.rules.3.forbidden_topics.items.2">攻撃的な内容</li>
+                                        <li data-i18n="rules_detailed.rules.3.forbidden_topics.items.3">論争を誘発する内容</li>
+                                        <li data-i18n="rules_detailed.rules.3.forbidden_topics.items.4">差別的な発言</li>
+                                        <li data-i18n="rules_detailed.rules.3.forbidden_topics.items.5">過度にネガティブな内容</li>
                                     </ul>
                                 </div>
                             </div>
 
                             <div class="reason-box">
                                 <h5>理由</h5>
-                                <p>PCコミュニティは技術的な学習と情報交換を目的としています。建設的で前向きな環境を維持するため、論争を招く話題は避けています。</p>
+                                <p data-i18n="rules_detailed.rules.3.reason">PCコミュニティは技術的な学習と情報交換を目的としています。建設的で前向きな環境を維持するため、論争を招く話題は避けています。</p>
                             </div>
                         </div>
                     </div>
@@ -247,24 +245,24 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-ad"></i>
                             </div>
-                            <h3>広告や自己宣伝は禁止</h3>
+                            <h3 data-i18n="rules_detailed.rules.4.title">広告や自己宣伝は禁止</h3>
                         </div>
                         <div class="guideline-content">
-                            <p>許可された場合以外や、話の流れにそぐわない自分のコンテンツやチャンネルのリンクは禁止です。</p>
-                            <p>また、Discord等のコミュニティー勧誘は一切認めません。</p>
+                            <p data-i18n="rules_detailed.rules.4.content1">許可された場合以外や、話の流れにそぐわない自分のコンテンツやチャンネルのリンクは禁止です。</p>
+                            <p data-i18n="rules_detailed.rules.4.content2">また、Discord等のコミュニティー勧誘は一切認めません。</p>
 
                             <div class="promo-examples">
                                 <div class="bad-example">
                                     <h4>
                                         <i class="fas fa-times"></i>
-                                        禁止例
+                                        <span data-i18n="rules_detailed.rules.4.forbidden_examples.title">禁止例</span>
                                     </h4>
                                     <ul>
-                                        <li>無関係なYouTubeチャンネル宣伝</li>
-                                        <li>他のDiscordサーバーへの勧誘</li>
-                                        <li>商品やサービスの宣伝</li>
-                                        <li>アフィリエイトリンク</li>
-                                        <li>営利目的の投稿</li>
+                                        <li data-i18n="rules_detailed.rules.4.forbidden_examples.items.0">無関係なYouTubeチャンネル宣伝</li>
+                                        <li data-i18n="rules_detailed.rules.4.forbidden_examples.items.1">他のDiscordサーバーへの勧誘</li>
+                                        <li data-i18n="rules_detailed.rules.4.forbidden_examples.items.2">商品やサービスの宣伝</li>
+                                        <li data-i18n="rules_detailed.rules.4.forbidden_examples.items.3">アフィリエイトリンク</li>
+                                        <li data-i18n="rules_detailed.rules.4.forbidden_examples.items.4">営利目的の投稿</li>
                                     </ul>
                                 </div>
                             </div>
@@ -272,10 +270,10 @@
                             <div class="info-box">
                                 <div class="info-title">
                                     <i class="fas fa-info-circle"></i>
-                                    例外について
+                                    <span data-i18n="rules_detailed.rules.4.exception.title">例外について</span>
                                 </div>
                                 <div class="info-content">
-                                    <p>技術的な質問への回答や情報共有の一環として、関連するリンクを共有することは問題ありません。ただし、主目的が宣伝でないことが重要です。</p>
+                                    <p data-i18n="rules_detailed.rules.4.exception.content">技術的な質問への回答や情報共有の一環として、関連するリンクを共有することは問題ありません。ただし、主目的が宣伝でないことが重要です。</p>
                                 </div>
                             </div>
                         </div>
@@ -287,27 +285,27 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-question-circle"></i>
                             </div>
-                            <h3>質問はガイドを読んでから！</h3>
+                            <h3 data-i18n="rules_detailed.rules.5.title">質問はガイドを読んでから！</h3>
                         </div>
                         <div class="guideline-content">
-                            <p>質問フォーラムを使用する前に、必ず質問ガイドラインを読んでください。</p>
-                            <p>明らかに読んでいないと分かる質問に回答する行為も禁止です。</p>
-                            <p>不足部分は回答側が質問する前にスレッドに投稿される埋め込みの選択肢から選択してください。</p>
+                            <p data-i18n="rules_detailed.rules.5.content1">質問フォーラムを使用する前に、必ず質問ガイドラインを読んでください。</p>
+                            <p data-i18n="rules_detailed.rules.5.content2">明らかに読んでいないと分かる質問に回答する行為も禁止です。</p>
+                            <p data-i18n="rules_detailed.rules.5.content3">不足部分は回答側が質問する前にスレッドに投稿される埋め込みの選択肢から選択してください。</p>
 
                             <div class="info-box">
                                 <div class="info-title">
                                     <i class="fas fa-book"></i>
-                                    質問ガイドラインの重要性
+                                    <span data-i18n="rules_detailed.rules.5.importance.title">質問ガイドラインの重要性</span>
                                 </div>
                                 <div class="info-content">
-                                    <p>適切な質問により、より早く正確な回答を得ることができます。回答者の時間を尊重し、効率的な問題解決につながります。</p>
+                                    <p data-i18n="rules_detailed.rules.5.importance.content">適切な質問により、より早く正確な回答を得ることができます。回答者の時間を尊重し、効率的な問題解決につながります。</p>
                                 </div>
                             </div>
 
                             <div class="guide-link">
                                 <a href="/guidelines" class="btn btn-primary">
                                     <i class="fas fa-book"></i>
-                                    質問ガイドラインを読む
+                                    <span data-i18n="rules_detailed.rules.5.guide_link">質問ガイドラインを読む</span>
                                 </a>
                             </div>
                         </div>
@@ -319,18 +317,18 @@
                     <div class="contact-card">
                         <div class="contact-header">
                             <i class="fas fa-hands-helping"></i>
-                            <h3>サポートが必要な場合</h3>
+                            <h3 data-i18n="rules_detailed.contact.title">サポートが必要な場合</h3>
                         </div>
                         <div class="contact-content">
-                            <p>質問がありましたら遠慮なく親切なMODに助けを求めてください！</p>
+                            <p data-i18n="rules_detailed.contact.content">質問がありましたら遠慮なく親切なMODに助けを求めてください！</p>
                             <div class="contact-buttons">
                                 <a href="/support" class="btn btn-secondary">
                                     <i class="fas fa-headset"></i>
-                                    サポートに連絡
+                                    <span data-i18n="rules_detailed.contact.support_link">サポートに連絡</span>
                                 </a>
                                 <button class="btn btn-discord" onclick="joinDiscord()">
                                     <i class="fab fa-discord"></i>
-                                    Discordに参加
+                                    <span data-i18n="rules_detailed.contact.discord_link">Discordに参加</span>
                                 </button>
                             </div>
                         </div>
@@ -342,21 +340,21 @@
                     <div class="terms-card">
                         <div class="terms-header">
                             <i class="fas fa-file-contract"></i>
-                            <h3>参考資料</h3>
+                            <h3 data-i18n="rules_detailed.terms.title">参考資料</h3>
                         </div>
                         <div class="terms-content">
-                            <p>その他の規約や利用規約については、以下もご確認ください：</p>
+                            <p data-i18n="rules_detailed.terms.content">その他の規約や利用規約については、以下もご確認ください：</p>
                             <ul class="terms-list">
                                 <li>
                                     <a href="https://discord.com/terms" target="_blank" rel="noopener noreferrer">
                                         <i class="fas fa-external-link-alt"></i>
-                                        Discord Terms of Service
+                                        <span data-i18n="rules_detailed.terms.discord_tos">Discord Terms of Service</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://discord.com/guidelines" target="_blank" rel="noopener noreferrer">
                                         <i class="fas fa-external-link-alt"></i>
-                                        Discord Community Guidelines
+                                        <span data-i18n="rules_detailed.terms.discord_guidelines">Discord Community Guidelines</span>
                                     </a>
                                 </li>
                             </ul>
@@ -371,23 +369,23 @@
             <div class="footer-content">
                 <div class="footer-info">
                     <h4>
-                        <i class="fas fa-desktop header-icon"></i>
-                        パソコミ - PC Community
+                        <i class="header-icon"></i>
+                        <span data-i18n="footer.title">パソコミ - PC Community</span>
                     </h4>
-                    <p>パソコン・プログラミング愛好家のための最強コミュニティ</p>
-                    <p>1,500人以上のメンバーが参加し、解決率90%超えを誇るサポート体制</p>
-                    <p><strong>初心者歓迎・上級者歓迎・誰でも大歓迎！</strong></p>
+                    <p data-i18n="footer.description1">パソコン・プログラミング愛好家のための最強コミュニティ</p>
+                    <p data-i18n="footer.description2">1,500人以上のメンバーが参加し、解決率90%超えを誇るサポート体制</p>
+                    <p data-i18n="footer.description3"><strong>初心者歓迎・上級者歓迎・誰でも大歓迎！</strong></p>
                 </div>
                 <div class="footer-links">
-                    <h5>リンク</h5>
+                    <h5 data-i18n="footer.links_title">リンク</h5>
                     <ul>
-                        <li><a href="/rules">コミュニティルール</a></li>
-                        <li><a href="/guidelines">質問ガイドライン</a></li>
-                        <li><a href="/support">サポート</a></li>
+                        <li><a href="/rules" data-i18n="common.rules">コミュニティルール</a></li>
+                        <li><a href="/guidelines" data-i18n="common.guidelines">質問ガイドライン</a></li>
+                        <li><a href="/support" data-i18n="common.support">サポート</a></li>
                     </ul>
                 </div>
                 <div class="footer-social">
-                    <h5>SNS・掲載サイト</h5>
+                    <h5 data-i18n="footer.social_title">SNS・掲載サイト</h5>
                     <div class="social-links">
                         <button class="social-btn discord"
                             onclick="window.open('https://discord.gg/uxENZNrk5n', '_blank')" title="Discordに参加">
@@ -409,11 +407,12 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 パソコミ - PC Community. All rights reserved.</p>
+                <p data-i18n="footer.copyright">&copy; 2024 パソコミ - PC Community. All rights reserved.</p>
             </div>
         </footer>
     </div>
 
+    <script src="/js/i18n.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/pages.js"></script>
 </body>

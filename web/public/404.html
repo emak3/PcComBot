@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - ページが見つかりません | PC Community</title>
+    <title data-i18n="404.title">404 - ページが見つかりません | PC Community</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/components.css">
@@ -24,25 +24,24 @@
         <header class="header">
             <div class="header-content">
                 <h1 class="header-title">
-                    <i class="fas fa-desktop header-icon"></i>
-                    PC Community
+                    <img src="./server_name.png" alt="PC Community" style="height: 40px; width: auto;">
                 </h1>
                 <nav class="header-nav">
                     <a href="/" class="nav-link">
                         <i class="fas fa-home"></i>
-                        ホーム
+                        <span data-i18n="common.home">ホーム</span>
                     </a>
                     <a href="/rules" class="nav-link">
                         <i class="fas fa-gavel"></i>
-                        ルール
+                        <span data-i18n="common.rules">ルール</span>
                     </a>
                     <a href="/guidelines" class="nav-link">
                         <i class="fas fa-question-circle"></i>
-                        質問ガイド
+                        <span data-i18n="common.guidelines">質問ガイド</span>
                     </a>
                     <a href="/support" class="nav-link">
                         <i class="fas fa-headset"></i>
-                        サポート
+                        <span data-i18n="common.support">サポート</span>
                     </a>
                 </nav>
             </div>
@@ -57,48 +56,48 @@
                     </div>
                     <div class="error-code">404</div>
                     <div class="error-message">
-                        <h2>ページが見つかりません</h2>
-                        <p>お探しのページは削除されたか、URLが間違っている可能性があります。</p>
+                        <h2 data-i18n="404.page_title">ページが見つかりません</h2>
+                        <p data-i18n="404.description">お探しのページは削除されたか、URLが間違っている可能性があります。</p>
                     </div>
                     <div class="error-actions">
                         <button class="btn btn-primary" onclick="goHome()">
                             <i class="fas fa-home"></i>
-                            ホームに戻る
+                            <span data-i18n="404.back_home">ホームに戻る</span>
                         </button>
                         <button class="btn btn-secondary" onclick="goBack()">
                             <i class="fas fa-arrow-left"></i>
-                            前のページに戻る
+                            <span data-i18n="404.back_previous">前のページに戻る</span>
                         </button>
                     </div>
                 </div>
 
                 <!-- Popular Pages -->
                 <div class="popular-pages">
-                    <h3>人気のページ</h3>
+                    <h3 data-i18n="404.popular_pages">人気のページ</h3>
                     <div class="popular-links">
                         <a href="/rules" class="popular-link">
                             <i class="fas fa-gavel"></i>
-                            <span>コミュニティルール</span>
+                            <span data-i18n="common.rules">コミュニティルール</span>
                         </a>
                         <a href="/guidelines" class="popular-link">
                             <i class="fas fa-question-circle"></i>
-                            <span>質問ガイドライン</span>
+                            <span data-i18n="common.guidelines">質問ガイドライン</span>
                         </a>
                         <a href="/support" class="popular-link">
                             <i class="fas fa-headset"></i>
-                            <span>サポート</span>
+                            <span data-i18n="common.support">サポート</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- Search -->
                 <div class="search-section">
-                    <h3>お探しのページが見つかりませんか？</h3>
+                    <h3 data-i18n="404.search_title">お探しのページが見つかりませんか？</h3>
                     <div class="search-box">
-                        <input type="text" id="searchInput" placeholder="検索キーワードを入力..." class="search-input">
+                        <input type="text" id="searchInput" data-i18n="404.search_placeholder" placeholder="検索キーワードを入力..." class="search-input">
                         <button class="btn btn-discord" onclick="searchContent()">
                             <i class="fas fa-search"></i>
-                            検索
+                            <span data-i18n="404.search_button">検索</span>
                         </button>
                     </div>
                 </div>
@@ -110,23 +109,23 @@
             <div class="footer-content">
                 <div class="footer-info">
                     <h4>
-                        <i class="fas fa-desktop header-icon"></i>
-                        パソコミ - PC Community
+                        <i class="header-icon"></i>
+                        <span data-i18n="footer.title">パソコミ - PC Community</span>
                     </h4>
-                    <p>パソコン・プログラミング愛好家のための最強コミュニティ</p>
-                    <p>1,500人以上のメンバーが参加し、解決率90%超えを誇るサポート体制</p>
-                    <p><strong>初心者歓迎・上級者歓迎・誰でも大歓迎！</strong></p>
+                    <p data-i18n="footer.description1">パソコン・プログラミング愛好家のための最強コミュニティ</p>
+                    <p data-i18n="footer.description2">1,500人以上のメンバーが参加し、解決率90%超えを誇るサポート体制</p>
+                    <p data-i18n="footer.description3"><strong>初心者歓迎・上級者歓迎・誰でも大歓迎！</strong></p>
                 </div>
                 <div class="footer-links">
-                    <h5>リンク</h5>
+                    <h5 data-i18n="footer.links_title">リンク</h5>
                     <ul>
-                        <li><a href="/rules">コミュニティルール</a></li>
-                        <li><a href="/guidelines">質問ガイドライン</a></li>
-                        <li><a href="/support">サポート</a></li>
+                        <li><a href="/rules" data-i18n="common.rules">コミュニティルール</a></li>
+                        <li><a href="/guidelines" data-i18n="common.guidelines">質問ガイドライン</a></li>
+                        <li><a href="/support" data-i18n="common.support">サポート</a></li>
                     </ul>
                 </div>
                 <div class="footer-social">
-                    <h5>SNS・掲載サイト</h5>
+                    <h5 data-i18n="footer.social_title">SNS・掲載サイト</h5>
                     <div class="social-links">
                         <button class="social-btn discord"
                             onclick="window.open('https://discord.gg/uxENZNrk5n', '_blank')" title="Discordに参加">
@@ -148,7 +147,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 パソコミ - PC Community. All rights reserved.</p>
+                <p data-i18n="footer.copyright">&copy; 2024 パソコミ - PC Community. All rights reserved.</p>
             </div>
         </footer>
     </div>
@@ -383,6 +382,8 @@
             }
         }
     </style>
+    
+    <script src="/js/i18n.js"></script>
 </body>
 
 </html>

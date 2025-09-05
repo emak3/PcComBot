@@ -4,15 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC Community - 質問ガイドライン</title>
+    <title data-i18n="guidelines.title">PC Community - 質問ガイドライン</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/pages.css">
     <link rel="stylesheet" href="/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+    <link rel="icon" href="./favicon.ico">
 </head>
 
 <body>
@@ -24,25 +23,24 @@
         <header class="header">
             <div class="header-content">
                 <h1 class="header-title">
-                    <i class="fas fa-desktop header-icon"></i>
-                    PC Community
+                    <img src="./server_name.png" alt="PC Community" style="height: 40px; width: auto;">
                 </h1>
                 <nav class="header-nav">
                     <a href="/" class="nav-link">
                         <i class="fas fa-home"></i>
-                        ホーム
+                        <span data-i18n="common.home">ホーム</span>
                     </a>
                     <a href="/rules" class="nav-link">
                         <i class="fas fa-gavel"></i>
-                        ルール
+                        <span data-i18n="common.rules">ルール</span>
                     </a>
                     <a href="/guidelines" class="nav-link active">
                         <i class="fas fa-question-circle"></i>
-                        質問ガイド
+                        <span data-i18n="common.guidelines">質問ガイド</span>
                     </a>
                     <a href="/support" class="nav-link">
                         <i class="fas fa-headset"></i>
-                        サポート
+                        <span data-i18n="common.support">サポート</span>
                     </a>
                 </nav>
             </div>
@@ -54,9 +52,9 @@
             <div class="page-header">
                 <div class="page-title">
                     <i class="fas fa-question-circle page-icon"></i>
-                    <h2>質問ガイドライン</h2>
+                    <h2 data-i18n="guidelines.title">質問ガイドライン</h2>
                 </div>
-                <p class="page-description">
+                <p class="page-description" data-i18n="guidelines.description">
                     質問をスムーズに解決するためのガイドラインです。必ず読んでから質問してください。
                 </p>
             </div>
@@ -69,9 +67,9 @@
                         <i class="fas fa-exclamation-triangle"></i>
                     </div>
                     <div class="warning-content">
-                        <h3>重要事項</h3>
-                        <p>当ガイドラインは、質問をスムーズに解決する為に制定しているものです。回答者から質問されるのは、質問の記載に不備があります。</p>
-                        <p><strong>ガイドライン順守を行っていない質問はモデレーターにより削除等の措置を行います。</strong></p>
+                        <h3 data-i18n="guidelines.important_notice.title">重要事項</h3>
+                        <p data-i18n="guidelines.important_notice.content1">当ガイドラインは、質問をスムーズに解決する為に制定しているものです。回答者から質問されるのは、質問の記載に不備があります。</p>
+                        <p><strong data-i18n="guidelines.important_notice.content2">ガイドライン順守を行っていない質問はモデレーターにより削除等の措置を行います。</strong></p>
                     </div>
                 </div>
 
@@ -83,24 +81,23 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-search"></i>
                             </div>
-                            <h3>検索して調べる</h3>
+                            <h3 data-i18n="guidelines.guidelines.0.title">検索して調べる</h3>
                         </div>
                         <div class="guideline-content">
-                            <p>質問前に必ず<a href="https://google.co.jp" target="_blank"
-                                    rel="noopener noreferrer">Google</a>などで検索してください。</p>
-                            <p>調べた事や調べてわかったこと・実践した事について記載してください。</p>
-                            <p>役に立たなかった関連するサイトのリンクを含めることで、あなたの質問が他のものとどのように違うのかを他の人が理解するのに役立ちます。</p>
+                            <p data-i18n="guidelines.guidelines.0.content1">質問前に必ずGoogleなどで検索してください。</p>
+                            <p data-i18n="guidelines.guidelines.0.content2">調べた事や調べてわかったこと・実践した事について記載してください。</p>
+                            <p data-i18n="guidelines.guidelines.0.content3">役に立たなかった関連するサイトのリンクを含めることで、あなたの質問が他のものとどのように違うのかを他の人が理解するのに役立ちます。</p>
 
                             <div class="search-tips">
                                 <h4>
                                     <i class="fas fa-lightbulb"></i>
-                                    検索のコツ
+                                    <span data-i18n="guidelines.guidelines.0.tips.title">検索のコツ</span>
                                 </h4>
                                 <ul class="tips-list">
-                                    <li>エラーメッセージをそのまま検索する</li>
-                                    <li>英語での検索も試してみる</li>
-                                    <li>複数のキーワードを組み合わせる</li>
-                                    <li>公式ドキュメントを確認する</li>
+                                    <li data-i18n="guidelines.guidelines.0.tips.items.0">エラーメッセージをそのまま検索する</li>
+                                    <li data-i18n="guidelines.guidelines.0.tips.items.1">英語での検索も試してみる</li>
+                                    <li data-i18n="guidelines.guidelines.0.tips.items.2">複数のキーワードを組み合わせる</li>
+                                    <li data-i18n="guidelines.guidelines.0.tips.items.3">公式ドキュメントを確認する</li>
                                 </ul>
                             </div>
                         </div>
@@ -112,30 +109,30 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-newspaper"></i>
                             </div>
-                            <h3>一目で内容がわかるタイトルを書く</h3>
+                            <h3 data-i18n="guidelines.guidelines.1.title">一目で内容がわかるタイトルを書く</h3>
                         </div>
                         <div class="guideline-content">
-                            <p>フォーラム上にはあなたの質問タイトルと詳細の冒頭一部が表示され、多くのメンバーがその情報をもとに答えられるものかどうか、興味があるかどうかを判断しています。</p>
-                            <p>タイトルを読んで意味が分からなかったり、興味を抱かなかったりすれば回答を得られない可能性があります。</p>
+                            <p data-i18n="guidelines.guidelines.1.content1">フォーラム上にはあなたの質問タイトルと詳細の冒頭一部が表示され、多くのメンバーがその情報をもとに答えられるものかどうか、興味があるかどうかを判断しています。</p>
+                            <p data-i18n="guidelines.guidelines.1.content2">タイトルを読んで意味が分からなかったり、興味を抱かなかったりすれば回答を得られない可能性があります。</p>
 
                             <div class="title-tips">
                                 <h4>
                                     <i class="fas fa-info-circle"></i>
-                                    タイトルの書き方
+                                    <span data-i18n="guidelines.guidelines.1.tips.title">タイトルの書き方</span>
                                 </h4>
-                                <p>タイトルをどのように書いていいのかがわからない場合は、<strong>タイトルは最後に</strong>書きます。質問の詳細部分を先に書いたほうが、今起きている問題を説明しやすくなることもあります。
+                                <p data-i18n="guidelines.guidelines.1.tips.content">タイトルをどのように書いていいのかがわからない場合は、タイトルは最後に 書きます。質問の詳細部分を先に書いたほうが、今起きている問題を説明しやすくなることもあります。
                                 </p>
 
                                 <div class="title-examples">
                                     <h5>
                                         <i class="fas fa-check-circle"></i>
-                                        良いタイトル例
+                                        <span data-i18n="guidelines.guidelines.1.tips.examples.title">良いタイトル例</span>
                                     </h5>
                                     <ul class="example-list">
-                                        <li><code>Windowsで「○○.dll」が見つからないエラー</code></li>
-                                        <li><code>Pythonで△△する方法</code></li>
-                                        <li><code>Minecraftが実行できない</code></li>
-                                        <li><code>CPUとGPUの違いについて</code></li>
+                                        <li><code data-i18n="guidelines.guidelines.1.tips.examples.items.0">Windowsで「○○.dll」が見つからないエラー</code></li>
+                                        <li><code data-i18n="guidelines.guidelines.1.tips.examples.items.1">Pythonで△△する方法</code></li>
+                                        <li><code data-i18n="guidelines.guidelines.1.tips.examples.items.2">Minecraftが実行できない</code></li>
+                                        <li><code data-i18n="guidelines.guidelines.1.tips.examples.items.3">CPUとGPUの違いについて</code></li>
                                     </ul>
                                 </div>
                             </div>
@@ -148,43 +145,43 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-list"></i>
                             </div>
-                            <h3>正しく伝わりやすい質問の本文を書く</h3>
+                            <h3 data-i18n="guidelines.guidelines.2.title">正しく伝わりやすい質問の本文を書く</h3>
                         </div>
                         <div class="guideline-content">
-                            <p>人に何かを質問するときは、質問内容と回答に必要な情報を正しく伝える必要があります。</p>
+                            <p data-i18n="guidelines.guidelines.2.content">人に何かを質問するときは、質問内容と回答に必要な情報を正しく伝える必要があります。</p>
 
                             <div class="checklist-section">
                                 <h4>
                                     <i class="fas fa-check-square"></i>
-                                    質問前のチェックリスト
+                                    <span data-i18n="guidelines.guidelines.2.checklist.title">質問前のチェックリスト</span>
                                 </h4>
                                 <ul class="checklist">
-                                    <li>抽象的な質問ではないですか？</li>
-                                    <li>何を教えてほしいのかはっきりしていますか？</li>
-                                    <li>他の人が読んでもあなたが思っている通りに伝わりますか？</li>
-                                    <li>その質問に答えるために必要な情報は記載されていますか？</li>
+                                    <li data-i18n="guidelines.guidelines.2.checklist.items.0">抽象的な質問ではないですか？</li>
+                                    <li data-i18n="guidelines.guidelines.2.checklist.items.1">何を教えてほしいのかはっきりしていますか？</li>
+                                    <li data-i18n="guidelines.guidelines.2.checklist.items.2">他の人が読んでもあなたが思っている通りに伝わりますか？</li>
+                                    <li data-i18n="guidelines.guidelines.2.checklist.items.3">その質問に答えるために必要な情報は記載されていますか？</li>
                                 </ul>
                             </div>
 
                             <div class="required-info">
                                 <h4>
                                     <i class="fas fa-clipboard-list"></i>
-                                    必要な情報
+                                    <span data-i18n="guidelines.guidelines.2.required_info.title">必要な情報</span>
                                 </h4>
                                 <div class="info-grid">
                                     <div class="info-item">
                                         <h5>
                                             <i class="fas fa-target"></i>
-                                            目的
+                                            <span data-i18n="guidelines.guidelines.2.required_info.purpose.title">目的</span>
                                         </h5>
-                                        <p>目的がわからないと、他の解決手段の提案ができません。</p>
+                                        <p data-i18n="guidelines.guidelines.2.required_info.purpose.content">目的がわからないと、他の解決手段の提案ができません。</p>
                                     </div>
                                     <div class="info-item">
                                         <h5>
                                             <i class="fas fa-cog"></i>
-                                            現状
+                                            <span data-i18n="guidelines.guidelines.2.required_info.current_state.title">現状</span>
                                         </h5>
-                                        <p>目的の解決手段として現在取り組んでいること。</p>
+                                        <p data-i18n="guidelines.guidelines.2.required_info.current_state.content">目的の解決手段として現在取り組んでいること。</p>
                                     </div>
                                 </div>
                             </div>
@@ -193,16 +190,16 @@
                                 <div class="bad-example">
                                     <h5>
                                         <i class="fas fa-times-circle"></i>
-                                        悪い例
+                                        <span data-i18n="guidelines.guidelines.2.examples.bad.title">悪い例</span>
                                     </h5>
-                                    <p>××ってどうやったらできるか</p>
+                                    <p data-i18n="guidelines.guidelines.2.examples.bad.content">××ってどうやったらできるか</p>
                                 </div>
                                 <div class="good-example">
                                     <h5>
                                         <i class="fas fa-check-circle"></i>
-                                        良い例
+                                        <span data-i18n="guidelines.guidelines.2.examples.good.title">良い例</span>
                                     </h5>
-                                    <p>○○をしたい。そのために××をしたいのでどのようにやる方法があるか。現状は〜〜</p>
+                                    <p data-i18n="guidelines.guidelines.2.examples.good.content">○○をしたい。そのために××をしたいのでどのようにやる方法があるか。現状は〜〜</p>
                                 </div>
                             </div>
                         </div>
@@ -214,32 +211,32 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-desktop"></i>
                             </div>
-                            <h3>使用しているもの</h3>
+                            <h3 data-i18n="guidelines.guidelines.3.title">使用しているもの</h3>
                         </div>
                         <div class="guideline-content">
                             <div class="usage-types">
                                 <div class="usage-type">
                                     <h4>
                                         <i class="fas fa-computer"></i>
-                                        パソコンの問題の場合
+                                        <span data-i18n="guidelines.guidelines.3.pc_problems.title">パソコンの問題の場合</span>
                                     </h4>
                                     <ul class="usage-list">
-                                        <li><strong>OS</strong>: Windows 10、Ubuntu 21.04 など</li>
-                                        <li><strong>パーツ</strong>: 問題の起きているパーツが判明しているならばそのパーツを書く</li>
-                                        <li><strong>PC型番</strong>: 購入したPCならば型番など</li>
+                                        <li data-i18n="guidelines.guidelines.3.pc_problems.items.0">OS: Windows 10、Ubuntu 21.04 など</li>
+                                        <li data-i18n="guidelines.guidelines.3.pc_problems.items.1">パーツ: 問題の起きているパーツが判明しているならばそのパーツを書く</li>
+                                        <li data-i18n="guidelines.guidelines.3.pc_problems.items.2">PC型番: 購入したPCならば型番など</li>
                                     </ul>
                                 </div>
 
                                 <div class="usage-type">
                                     <h4>
                                         <i class="fas fa-code"></i>
-                                        プログラムの問題の場合
+                                        <span data-i18n="guidelines.guidelines.3.programming_problems.title">プログラムの問題の場合</span>
                                     </h4>
                                     <ul class="usage-list">
-                                        <li><strong>OS</strong>: Windows 10、Ubuntu 21.04 など</li>
-                                        <li><strong>言語</strong>: Python 3.7、Node.js 14 など</li>
-                                        <li><strong>ライブラリ</strong>: pipやnpmなどでインストールしたライブラリ群</li>
-                                        <li><strong>コード</strong>: シンタックスハイライトをつけること</li>
+                                        <li data-i18n="guidelines.guidelines.3.programming_problems.items.0">OS: Windows 10、Ubuntu 21.04 など</li>
+                                        <li data-i18n="guidelines.guidelines.3.programming_problems.items.1">言語: Python 3.7、Node.js 14 など</li>
+                                        <li data-i18n="guidelines.guidelines.3.programming_problems.items.2">ライブラリ: pipやnpmなどでインストールしたライブラリ群</li>
+                                        <li data-i18n="guidelines.guidelines.3.programming_problems.items.3">コード: シンタックスハイライトをつけること</li>
                                     </ul>
                                 </div>
                             </div>
@@ -247,14 +244,14 @@
                             <div class="code-section">
                                 <h4>
                                     <i class="fas fa-code"></i>
-                                    コードの書き方
+                                    <span data-i18n="guidelines.guidelines.3.code_formatting.title">コードの書き方</span>
                                 </h4>
                                 <div class="code-example">
                                     <p>シンタックスハイライトの付け方：</p>
                                     <pre><code>```言語名(py, js, rb等)
 コード
 ```</code></pre>
-                                    <p><strong>重要：</strong> エラーやコードはコピペで全文を貼り付けること（スクリーンショットだと回答者の環境で再現するのが手間です）</p>
+                                    <p><strong data-i18n="guidelines.guidelines.3.code_formatting.important">重要： エラーやコードはコピペで全文を貼り付けること（スクリーンショットだと回答者の環境で再現するのが手間です）</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -266,18 +263,18 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-ban"></i>
                             </div>
-                            <h3>質問禁止事項</h3>
+                            <h3 data-i18n="guidelines.guidelines.4.title">質問禁止事項</h3>
                         </div>
                         <div class="guideline-content">
                             <div class="prohibited-item">
                                 <h4>
                                     <i class="fas fa-spider"></i>
-                                    スクレイピング関連
+                                    <span data-i18n="guidelines.guidelines.4.scraping.title">スクレイピング関連</span>
                                 </h4>
-                                <p>明示的に許可されてないサイトに対するスクレイピング行為に関する質問及び回答の禁止</p>
+                                <p data-i18n="guidelines.guidelines.4.scraping.content">明示的に許可されてないサイトに対するスクレイピング行為に関する質問及び回答の禁止</p>
                                 <div class="reason-box">
                                     <h5>理由</h5>
-                                    <p>一般的に推奨されない行為であり、明示的な禁止をしていない場合でもその他利用規約条項に抵触する行為である為。</p>
+                                    <p data-i18n="guidelines.guidelines.4.scraping.reason">一般的に推奨されない行為であり、明示的な禁止をしていない場合でもその他利用規約条項に抵触する行為である為。</p>
                                 </div>
                             </div>
                         </div>
@@ -289,23 +286,23 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-crown"></i>
                             </div>
-                            <h3>問題が解決したら</h3>
+                            <h3 data-i18n="guidelines.guidelines.5.title">問題が解決したら</h3>
                         </div>
                         <div class="guideline-content">
                             <div class="resolution-steps">
                                 <div class="step">
                                     <h4>
                                         <i class="fas fa-user-check"></i>
-                                        質問者の方へ
+                                        <span data-i18n="guidelines.guidelines.5.questioner.title">質問者の方へ</span>
                                     </h4>
-                                    <p>質問者は最後に<strong>解決方法についてまとめたものを記載してからクローズ</strong>してください。（自己解決した場合も同様です）</p>
+                                    <p data-i18n="guidelines.guidelines.5.questioner.content">質問者は最後に解決方法についてまとめたものを記載してからクローズ してください。（自己解決した場合も同様です）</p>
 
                                     <div class="close-instructions">
                                         <h5>
                                             <i class="fas fa-paperclip"></i>
-                                            クローズの方法
+                                            <span data-i18n="guidelines.guidelines.5.questioner.how_to_close.title">クローズの方法</span>
                                         </h5>
-                                        <p>解決につながったメッセージを<strong>右クリック</strong>もしくは<strong>長押し</strong>をして<strong>アプリ</strong>から<strong>BestAnswer</strong>を選択してください。
+                                        <p data-i18n="guidelines.guidelines.5.questioner.how_to_close.content">解決につながったメッセージを右クリック もしく長押し をしてアプリ からBestAnswer を選択してください。
                                         </p>
                                     </div>
                                 </div>
@@ -313,14 +310,14 @@
                                 <div class="step">
                                     <h4>
                                         <i class="fas fa-clock"></i>
-                                        放置されているスレッドについて
+                                        <span data-i18n="guidelines.guidelines.5.abandoned_threads.title">放置されているスレッドについて</span>
                                     </h4>
-                                    <p>管理者およびモデレーターがスレッドのクローズを要求することがあります：</p>
+                                    <p data-i18n="guidelines.guidelines.5.abandoned_threads.content">管理者およびモデレーターがスレッドのクローズを要求することがあります：</p>
                                     <ul class="status-list">
-                                        <li><strong>解決している場合</strong>: スレッドをまとめ、クローズしてください</li>
-                                        <li><strong>解決していない場合</strong>: まだ解決していない旨を知らせてください</li>
+                                        <li><strong data-i18n="guidelines.guidelines.5.abandoned_threads.resolved">解決している場合: スレッドをまとめ、クローズしてください</strong></li>
+                                        <li><strong data-i18n="guidelines.guidelines.5.abandoned_threads.unresolved">解決していない場合: まだ解決していない旨を知らせてください</strong></li>
                                     </ul>
-                                    <p>事情によりクローズしない事をモデレーターから許可された場合にも最低<strong>週1回</strong>は状況報告を行ってください。</p>
+                                    <p data-i18n="guidelines.guidelines.5.abandoned_threads.weekly_update">事情によりクローズしない事をモデレーターから許可された場合にも最低週1回 は状況報告を行ってください。</p>
                                 </div>
                             </div>
                         </div>
@@ -332,24 +329,24 @@
                             <div class="guideline-icon">
                                 <i class="fas fa-users"></i>
                             </div>
-                            <h3>@有識者（回答者）へ</h3>
+                            <h3 data-i18n="guidelines.guidelines.6.title">@有識者（回答者）へ</h3>
                         </div>
                         <div class="guideline-content">
                             <div class="answerer-rules">
                                 <ul class="rules-list">
                                     <li>
                                         <i class="fas fa-ban"></i>
-                                        <strong>ガイドライン違反の質問に回答することを禁じます</strong>
-                                        <p>ガイドラインに準拠した質問になるよう質問者に促してください</p>
+                                        <strong data-i18n="guidelines.guidelines.6.rules.0.title">ガイドライン違反の質問に回答することを禁じます</strong>
+                                        <p data-i18n="guidelines.guidelines.6.rules.0.content">ガイドラインに準拠した質問になるよう質問者に促してください</p>
                                     </li>
                                     <li>
                                         <i class="fas fa-lock"></i>
-                                        <strong>質問者がクローズするまでクローズ扱いにしないでください</strong>
+                                        <strong data-i18n="guidelines.guidelines.6.rules.1.title">質問者がクローズするまでクローズ扱いにしないでください</strong>
                                     </li>
                                     <li>
                                         <i class="fas fa-heart"></i>
-                                        <strong>優しく対応してください</strong>
-                                        <p>ガイドラインを守ってない投稿には優しくガイドラインのリンクを貼ってあげてください</p>
+                                        <strong data-i18n="guidelines.guidelines.6.rules.2.title">優しく対応してください</strong>
+                                        <p data-i18n="guidelines.guidelines.6.rules.2.content">ガイドラインを守ってない投稿には優しくガイドラインのリンクを貼ってあげてください</p>
                                     </li>
                                 </ul>
                             </div>
@@ -362,14 +359,14 @@
                     <div class="notes-card">
                         <div class="notes-header">
                             <i class="fas fa-info-circle"></i>
-                            <h3>重要なお知らせ</h3>
+                            <h3 data-i18n="guidelines.notes.title">重要なお知らせ</h3>
                         </div>
                         <div class="notes-content">
-                            <p>本ガイドラインは変更されることがあります。変更された場合は通知を行います。</p>
-                            <p class="last-updated">最終更新: 2024年11月1日 22:30</p>
+                            <p data-i18n="guidelines.notes.content1">本ガイドラインは変更されることがあります。変更された場合は通知を行います。</p>
+                            <p class="last-updated" data-i18n="guidelines.notes.last_updated">最終更新: 2024年11月1日 22:30</p>
                             <div class="no-message-warning">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                <p>本ガイドラインに関する質問は<a href="/support">こちら</a>で質問することができます。また、Discord内でも可能です。</p>
+                                <p data-i18n="guidelines.notes.contact">本ガイドラインに関する質問はこちらで質問することができます。また、Discord内でも可能です。</p>
                             </div>
                         </div>
                     </div>
@@ -382,23 +379,23 @@
             <div class="footer-content">
                 <div class="footer-info">
                     <h4>
-                        <i class="fas fa-desktop header-icon"></i>
-                        パソコミ - PC Community
+                        <i class="header-icon"></i>
+                        <span data-i18n="footer.title">パソコミ - PC Community</span>
                     </h4>
-                    <p>パソコン・プログラミング愛好家のための最強コミュニティ</p>
-                    <p>1,500人以上のメンバーが参加し、解決率90%超えを誇るサポート体制</p>
-                    <p><strong>初心者歓迎・上級者歓迎・誰でも大歓迎！</strong></p>
+                    <p data-i18n="footer.description1">パソコン・プログラミング愛好家のための最強コミュニティ</p>
+                    <p data-i18n="footer.description2">1,500人以上のメンバーが参加し、解決率90%超えを誇るサポート体制</p>
+                    <p><strong data-i18n="footer.description3">初心者歓迎・上級者歓迎・誰でも大歓迎！</strong></p>
                 </div>
                 <div class="footer-links">
-                    <h5>リンク</h5>
+                    <h5 data-i18n="footer.links_title">リンク</h5>
                     <ul>
-                        <li><a href="/rules">コミュニティルール</a></li>
-                        <li><a href="/guidelines">質問ガイドライン</a></li>
-                        <li><a href="/support">サポート</a></li>
+                        <li><a href="/rules" data-i18n="common.rules">コミュニティルール</a></li>
+                        <li><a href="/guidelines" data-i18n="common.guidelines">質問ガイドライン</a></li>
+                        <li><a href="/support" data-i18n="common.support">サポート</a></li>
                     </ul>
                 </div>
                 <div class="footer-social">
-                    <h5>SNS・掲載サイト</h5>
+                    <h5 data-i18n="footer.social_title">SNS・掲載サイト</h5>
                     <div class="social-links">
                         <button class="social-btn discord"
                             onclick="window.open('https://discord.gg/uxENZNrk5n', '_blank')" title="Discordに参加">
@@ -420,11 +417,12 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 パソコミ - PC Community. All rights reserved.</p>
+                <p data-i18n="footer.copyright">&copy; 2024 パソコミ - PC Community. All rights reserved.</p>
             </div>
         </footer>
     </div>
 
+    <script src="/js/i18n.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/pages.js"></script>
 </body>

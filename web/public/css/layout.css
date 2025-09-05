@@ -105,6 +105,8 @@
     gap: 8px;
     align-items: center;
     flex-wrap: wrap;
+    overflow: visible;
+    position: relative;
 }
 
 .nav-link {

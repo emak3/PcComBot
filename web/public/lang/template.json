@@ -1,0 +1,668 @@
+{
+  "meta": {
+    "name": "[LANGUAGE_NAME]",
+    "nativeName": "[NATIVE_LANGUAGE_NAME]",
+    "code": "[LANGUAGE_CODE]",
+    "flag": "[FLAG_EMOJI]"
+  },
+  "common": {
+    "home": "[HOME]",
+    "rules": "[RULES]",
+    "guidelines": "[GUIDELINES]",
+    "support": "[SUPPORT]",
+    "discord": "Discord",
+    "login": "[LOGIN]",
+    "logout": "[LOGOUT]",
+    "submit": "[SUBMIT]",
+    "required": "[REQUIRED]",
+    "optional": "[OPTIONAL]",
+    "back": "[BACK]",
+    "close": "[CLOSE]",
+    "save": "[SAVE]",
+    "cancel": "[CANCEL]",
+    "delete": "[DELETE]",
+    "edit": "[EDIT]",
+    "loading": "[LOADING]",
+    "error": "[ERROR]",
+    "success": "[SUCCESS]",
+    "warning": "[WARNING]",
+    "info": "[INFO]"
+  },
+  "header": {
+    "title": "PC Community",
+    "subtitle": "[PC_COMMUNITY_SUBTITLE]"
+  },
+  "footer": {
+    "title": "[FOOTER_TITLE]",
+    "description1": "[FOOTER_DESCRIPTION1]",
+    "description2": "[FOOTER_DESCRIPTION2]",
+    "description3": "[FOOTER_DESCRIPTION3]",
+    "links_title": "[LINKS]",
+    "social_title": "[SOCIAL_TITLE]",
+    "copyright": "&copy; 2024 [COMMUNITY_NAME]. All rights reserved."
+  },
+  "home": {
+    "title": "PC Community - [HOME]",
+    "hero": {
+      "title": "[HERO_TITLE]",
+      "description1": "[HERO_DESCRIPTION1]",
+      "description2": "[HERO_DESCRIPTION2]",
+      "description3": "[HERO_DESCRIPTION3]",
+      "description4": "[HERO_DESCRIPTION4]",
+      "join_discord": "[JOIN_COMMUNITY]",
+      "bottom_text": "[HERO_BOTTOM_TEXT]",
+      "tags": {
+        "programming": "#[PROGRAMMING]",
+        "pc": "#PC",
+        "computer": "#[COMPUTER]",
+        "diy_pc": "#[DIY_PC]",
+        "gadgets": "#[GADGETS]"
+      }
+    },
+    "why_choose": {
+      "title": "[WHY_CHOOSE_TITLE]",
+      "subtitle": "[WHY_CHOOSE_SUBTITLE]",
+      "reliable_scale": {
+        "title": "[RELIABLE_SCALE_TITLE]",
+        "description": "[RELIABLE_SCALE_DESCRIPTION]"
+      },
+      "resolution_power": {
+        "title": "[RESOLUTION_POWER_TITLE]",
+        "description": "[RESOLUTION_POWER_DESCRIPTION]"
+      },
+      "wide_support": {
+        "title": "[WIDE_SUPPORT_TITLE]",
+        "description": "[WIDE_SUPPORT_DESCRIPTION]"
+      }
+    },
+    "support_system": {
+      "title": "[SUPPORT_SYSTEM_TITLE]",
+      "subtitle": "[SUPPORT_SYSTEM_SUBTITLE]",
+      "question_forum": {
+        "title": "[QUESTION_FORUM_TITLE]",
+        "description": "[QUESTION_FORUM_DESCRIPTION]"
+      },
+      "best_answer": {
+        "title": "[BEST_ANSWER_TITLE]",
+        "description": "[BEST_ANSWER_DESCRIPTION]"
+      },
+      "research_culture": {
+        "title": "[RESEARCH_CULTURE_TITLE]",
+        "description": "[RESEARCH_CULTURE_DESCRIPTION]"
+      }
+    },
+    "community_benefits": {
+      "title": "[COMMUNITY_BENEFITS_TITLE]",
+      "subtitle": "[COMMUNITY_BENEFITS_SUBTITLE]",
+      "events": {
+        "title": "[EVENTS_TITLE]",
+        "description": "[EVENTS_DESCRIPTION]"
+      },
+      "close_distance": {
+        "title": "[CLOSE_DISTANCE_TITLE]",
+        "description": "[CLOSE_DISTANCE_DESCRIPTION]"
+      },
+      "friendly_environment": {
+        "title": "[FRIENDLY_ENVIRONMENT_TITLE]",
+        "description": "[FRIENDLY_ENVIRONMENT_DESCRIPTION]"
+      }
+    },
+    "target_audience": {
+      "title": "[TARGET_AUDIENCE_TITLE]",
+      "subtitle": "[TARGET_AUDIENCE_SUBTITLE]",
+      "programming_beginner_title": "[PROGRAMMING_BEGINNER_TITLE]",
+      "programming_beginner": "[PROGRAMMING_BEGINNER_DESCRIPTION]",
+      "pc_builder_title": "[PC_BUILDER_TITLE]",
+      "pc_builder": "[PC_BUILDER_DESCRIPTION]",
+      "advanced_discussion_title": "[ADVANCED_DISCUSSION_TITLE]",
+      "advanced_discussion": "[ADVANCED_DISCUSSION_DESCRIPTION]",
+      "troubleshooting_title": "[TROUBLESHOOTING_TITLE]",
+      "troubleshooting": "[TROUBLESHOOTING_DESCRIPTION]",
+      "community_title": "[COMMUNITY_CONNECTION_TITLE]",
+      "community": "[COMMUNITY_CONNECTION_DESCRIPTION]",
+      "latest_tech_title": "[LATEST_TECH_TITLE]",
+      "latest_tech": "[LATEST_TECH_DESCRIPTION]"
+    },
+    "important_notice": {
+      "title": "[IMPORTANT_NOTICE_TITLE]",
+      "description1": "[IMPORTANT_NOTICE_DESCRIPTION1]",
+      "description2": "[IMPORTANT_NOTICE_DESCRIPTION2]",
+      "description3": "[IMPORTANT_NOTICE_DESCRIPTION3]"
+    },
+    "quick_access": {
+      "title": "[QUICK_ACCESS]",
+      "subtitle": "[QUICK_ACCESS_SUBTITLE]",
+      "rules": {
+        "title": "[COMMUNITY_RULES]",
+        "description": "[RULES_DESCRIPTION]"
+      },
+      "guidelines": {
+        "title": "[QUESTION_GUIDELINES]",
+        "description": "[GUIDELINES_DESCRIPTION]"
+      },
+      "admin_support": {
+        "title": "[ADMIN_SUPPORT]",
+        "description": "[ADMIN_SUPPORT_DESCRIPTION]"
+      }
+    },
+    "stats": {
+      "members": "1,500+",
+      "members_label": "[MEMBERS]",
+      "resolution": "90%+",
+      "resolution_label": "[RESOLUTION_RATE]",
+      "response": "< 1[HOUR]",
+      "response_label": "[AVERAGE_RESPONSE_TIME]"
+    },
+    "features": {
+      "title": "[FEATURES_TITLE]",
+      "items": [
+        {
+          "title": "[QUICK_SUPPORT]",
+          "description": "[QUICK_SUPPORT_DESCRIPTION]"
+        },
+        {
+          "title": "[BEGINNER_FRIENDLY]",
+          "description": "[BEGINNER_FRIENDLY_DESCRIPTION]"
+        },
+        {
+          "title": "[ACTIVE_COMMUNITY]",
+          "description": "[ACTIVE_COMMUNITY_DESCRIPTION]"
+        },
+        {
+          "title": "[EXPERT_KNOWLEDGE]",
+          "description": "[EXPERT_KNOWLEDGE_DESCRIPTION]"
+        }
+      ]
+    },
+    "links": {
+      "title": "[GETTING_STARTED]",
+      "description": "[LINKS_DESCRIPTION]",
+      "items": [
+        {
+          "title": "[COMMUNITY_RULES]",
+          "description": "[RULES_DESCRIPTION]",
+          "link": "/rules"
+        },
+        {
+          "title": "[QUESTION_GUIDELINES]",
+          "description": "[GUIDELINES_DESCRIPTION]",
+          "link": "/guidelines"
+        },
+        {
+          "title": "[SUPPORT]",
+          "description": "[SUPPORT_DESCRIPTION]",
+          "link": "/support"
+        }
+      ]
+    },
+    "rules": {
+      "title": "PC Community - [RULES]",
+      "page_title": "[COMMUNITY_RULES]",
+      "page_description": "[RULES_PAGE_DESCRIPTION]",
+      "basic_rules": {
+        "title": "[BASIC_RULES]",
+        "rule1": {
+          "title": "[MUTUAL_RESPECT]",
+          "description": "[MUTUAL_RESPECT_DESCRIPTION]"
+        },
+        "rule2": {
+          "title": "[PROPER_CHANNEL_USE]",
+          "description": "[PROPER_CHANNEL_USE_DESCRIPTION]"
+        },
+        "rule3": {
+          "title": "[NO_SPAM]",
+          "description": "[NO_SPAM_DESCRIPTION]"
+        }
+      },
+      "prohibited_actions": {
+        "title": "[PROHIBITED_ACTIONS]",
+        "advertising": {
+          "title": "[NO_ADVERTISING]",
+          "items": [
+            "[NO_YOUTUBE_PROMOTION]",
+            "[NO_DISCORD_INVITATION]",
+            "[NO_PRODUCT_PROMOTION]",
+            "[NO_AFFILIATE_LINKS]",
+            "[NO_COMMERCIAL_POSTS]"
+          ]
+        },
+        "exceptions": {
+          "title": "[EXCEPTIONS]",
+          "description": "[EXCEPTIONS_DESCRIPTION]"
+        }
+      }
+    },
+    "guidelines_simple": {
+      "title": "PC Community - [QUESTION_GUIDELINES]",
+      "page_title": "[QUESTION_GUIDELINES]",
+      "page_description": "[GUIDELINES_PAGE_DESCRIPTION]",
+      "before_asking": {
+        "title": "[BEFORE_ASKING]",
+        "description": "[BEFORE_ASKING_DESCRIPTION]"
+      },
+      "good_question": {
+        "title": "[GOOD_QUESTION_EXAMPLE]",
+        "example": "[GOOD_QUESTION_EXAMPLE_TEXT]"
+      },
+      "tips": {
+        "title": "[QUESTION_TIPS]",
+        "tip1": "[TIP1]",
+        "tip2": "[TIP2]",
+        "tip3": "[TIP3]",
+        "tip4": "[TIP4]"
+      }
+    },
+    "support": {
+      "title": "PC Community - [ADMIN_CONTACT]",
+      "page_title": "[ADMIN_CONTACT]",
+      "page_description": "[SUPPORT_PAGE_DESCRIPTION]",
+      "login_required": "[LOGIN_REQUIRED]",
+      "login_button": "[LOGIN_WITH_DISCORD]",
+      "form": {
+        "category": "[CATEGORY]",
+        "select_category": "[SELECT_CATEGORY]",
+        "custom_title": "[TITLE]",
+        "want_dialog": "[WANT_DIALOG]",
+        "anonymous": "[ANONYMOUS_SUBMIT]",
+        "content": "[CONTENT]",
+        "content_placeholder": "[CONTENT_PLACEHOLDER]",
+        "attachments": "[FILE_ATTACHMENTS]",
+        "drop_files": "[DROP_OR_CLICK_FILES]",
+        "submit": "[SUBMIT]"
+      }
+    }
+  },
+  "404": {
+    "title": "404 - [PAGE_NOT_FOUND] | PC Community",
+    "page_title": "[PAGE_NOT_FOUND]",
+    "description": "[404_DESCRIPTION]",
+    "back_home": "[BACK_HOME]",
+    "back_previous": "[BACK_PREVIOUS]",
+    "popular_pages": "[POPULAR_PAGES]",
+    "search_title": "[SEARCH_TITLE]",
+    "search_placeholder": "[SEARCH_PLACEHOLDER]",
+    "search_button": "[SEARCH]"
+  },
+  "rules_detailed": {
+    "title": "[COMMUNITY_RULES]",
+    "description": "[RULES_DETAILED_DESCRIPTION]",
+    "important_notice": {
+      "title": "[IMPORTANT_MATTERS]",
+      "content1": "[IMPORTANT_CONTENT1]",
+      "content2": "[IMPORTANT_CONTENT2]"
+    },
+    "rules": [
+      {
+        "title": "[NO_SPAM_RULE]",
+        "icon": "fas fa-ban",
+        "content": "[PROHIBITED_ACTIONS]:",
+        "items": [
+          "[SHORT_URLS]",
+          "[EXCESSIVE_EMOJIS]",
+          "[EXCESSIVE_REACTIONS]",
+          "[TEXT_WALLS]"
+        ],
+        "info": {
+          "title": "[DETAILED_EXPLANATION]",
+          "content": "[SPAM_EXPLANATION]"
+        }
+      },
+      {
+        "title": "[SFW_RULE]",
+        "icon": "fas fa-shield-alt",
+        "content1": "[SFW_CONTENT1]",
+        "content2": "[SFW_CONTENT2]",
+        "terms": {
+          "title": "[TERMINOLOGY]",
+          "sfw": "SFW: Safe for work ([SFW_EXPLANATION])",
+          "pfp": "PFP: Profile picture ([PFP_EXPLANATION])"
+        },
+        "examples": {
+          "bad": {
+            "title": "[AVOID_CONTENT]",
+            "content": "[BAD_CONTENT_EXAMPLES]"
+          },
+          "good": {
+            "title": "[APPROPRIATE_CONTENT]",
+            "content": "[GOOD_CONTENT_EXAMPLES]"
+          }
+        }
+      },
+      {
+        "title": "[READABLE_NAME_RULE]",
+        "icon": "fas fa-user-edit",
+        "content": "[READABLE_NAME_CONTENT]",
+        "allowed": {
+          "title": "[ALLOWED_CHARACTERS]",
+          "items": [
+            "[ENGLISH]",
+            "[ALPHANUMERIC]",
+            "[NATIVE_CHARACTERS1]",
+            "[NATIVE_CHARACTERS2]",
+            "[NATIVE_CHARACTERS3]",
+            "[SOME_SYMBOLS]"
+          ]
+        },
+        "restrictions": {
+          "title": "[RESTRICTIONS]",
+          "items": [
+            "[NO_STARTING_SYMBOLS]",
+            "[NO_SPECIAL_CHARS]",
+            "[AVOID_MENTION_DIFFICULTY]"
+          ]
+        },
+        "symbols": {
+          "title": "[ALLOWED_SYMBOLS]",
+          "content": "[ ] @ ^ $ ( ) _ { } | ? + \\ * ."
+        },
+        "reason": "[READABLE_NAME_REASON]"
+      },
+      {
+        "title": "[GENERAL_CONVERSATION_ONLY]",
+        "icon": "fas fa-comments",
+        "content1": "[GENERAL_CONVERSATION_CONTENT1]",
+        "content2": "[GENERAL_CONVERSATION_CONTENT2]",
+        "forbidden_topics": {
+          "title": "[FORBIDDEN_TOPICS]",
+          "items": [
+            "[RELIGIOUS_TOPICS]",
+            "[POLITICAL_TOPICS]",
+            "[AGGRESSIVE_CONTENT]",
+            "[CONTROVERSIAL_CONTENT]",
+            "[DISCRIMINATORY_STATEMENTS]",
+            "[OVERLY_NEGATIVE_CONTENT]"
+          ]
+        },
+        "reason": "[GENERAL_CONVERSATION_REASON]"
+      },
+      {
+        "title": "[NO_ADVERTISING_RULE]",
+        "icon": "fas fa-ad",
+        "content1": "[NO_ADVERTISING_CONTENT1]",
+        "content2": "[NO_ADVERTISING_CONTENT2]",
+        "forbidden_examples": {
+          "title": "[FORBIDDEN_EXAMPLES]",
+          "items": [
+            "[NO_YOUTUBE_PROMOTION]",
+            "[NO_DISCORD_INVITATION]",
+            "[NO_PRODUCT_PROMOTION]",
+            "[NO_AFFILIATE_LINKS]",
+            "[NO_COMMERCIAL_POSTS]"
+          ]
+        },
+        "exception": {
+          "title": "[EXCEPTIONS]",
+          "content": "[ADVERTISING_EXCEPTION]"
+        }
+      },
+      {
+        "title": "[READ_GUIDELINES_RULE]",
+        "icon": "fas fa-question-circle",
+        "content1": "[READ_GUIDELINES_CONTENT1]",
+        "content2": "[READ_GUIDELINES_CONTENT2]",
+        "content3": "[READ_GUIDELINES_CONTENT3]",
+        "importance": {
+          "title": "[GUIDELINES_IMPORTANCE]",
+          "content": "[GUIDELINES_IMPORTANCE_CONTENT]"
+        },
+        "guide_link": "[READ_QUESTION_GUIDELINES]"
+      }
+    ],
+    "contact": {
+      "title": "[NEED_SUPPORT]",
+      "content": "[CONTACT_CONTENT]",
+      "support_link": "[CONTACT_SUPPORT]",
+      "discord_link": "[JOIN_DISCORD]"
+    },
+    "terms": {
+      "title": "[REFERENCE_MATERIALS]",
+      "content": "[TERMS_CONTENT]",
+      "discord_tos": "Discord Terms of Service",
+      "discord_guidelines": "Discord Community Guidelines"
+    }
+  },
+  "guidelines": {
+    "title": "[QUESTION_GUIDELINES]",
+    "description": "[GUIDELINES_DESCRIPTION]",
+    "important_notice": {
+      "title": "[IMPORTANT_MATTERS]",
+      "content1": "[GUIDELINES_IMPORTANT_CONTENT1]",
+      "content2": "[GUIDELINES_IMPORTANT_CONTENT2]"
+    },
+    "guidelines": [
+      {
+        "title": "[SEARCH_AND_RESEARCH]",
+        "icon": "fas fa-search",
+        "content1": "[SEARCH_CONTENT1]",
+        "content2": "[SEARCH_CONTENT2]",
+        "content3": "[SEARCH_CONTENT3]",
+        "tips": {
+          "title": "[SEARCH_TIPS]",
+          "items": [
+            "[SEARCH_ERROR_MESSAGES]",
+            "[TRY_ENGLISH_SEARCH]",
+            "[COMBINE_KEYWORDS]",
+            "[CHECK_OFFICIAL_DOCS]"
+          ]
+        }
+      },
+      {
+        "title": "[CLEAR_TITLE]",
+        "icon": "fas fa-newspaper",
+        "content1": "[CLEAR_TITLE_CONTENT1]",
+        "content2": "[CLEAR_TITLE_CONTENT2]",
+        "tips": {
+          "title": "[TITLE_WRITING_TIPS]",
+          "content": "[TITLE_WRITING_CONTENT]",
+          "examples": {
+            "title": "[GOOD_TITLE_EXAMPLES]",
+            "items": [
+              "[EXAMPLE_TITLE1]",
+              "[EXAMPLE_TITLE2]",
+              "[EXAMPLE_TITLE3]",
+              "[EXAMPLE_TITLE4]"
+            ]
+          }
+        }
+      },
+      {
+        "title": "[PROPER_QUESTION_BODY]",
+        "icon": "fas fa-list",
+        "content": "[QUESTION_BODY_CONTENT]",
+        "checklist": {
+          "title": "[QUESTION_CHECKLIST]",
+          "items": [
+            "[CHECKLIST_ITEM1]",
+            "[CHECKLIST_ITEM2]",
+            "[CHECKLIST_ITEM3]",
+            "[CHECKLIST_ITEM4]"
+          ]
+        },
+        "required_info": {
+          "title": "[REQUIRED_INFO]",
+          "purpose": {
+            "title": "[PURPOSE]",
+            "content": "[PURPOSE_CONTENT]"
+          },
+          "current_state": {
+            "title": "[CURRENT_STATE]",
+            "content": "[CURRENT_STATE_CONTENT]"
+          }
+        },
+        "examples": {
+          "bad": {
+            "title": "[BAD_EXAMPLE]",
+            "content": "[BAD_QUESTION_EXAMPLE]"
+          },
+          "good": {
+            "title": "[GOOD_EXAMPLE]",
+            "content": "[GOOD_QUESTION_EXAMPLE]"
+          }
+        }
+      },
+      {
+        "title": "[TOOLS_BEING_USED]",
+        "icon": "fas fa-desktop",
+        "pc_problems": {
+          "title": "[PC_PROBLEMS_CASE]",
+          "items": [
+            "[OS_INFO]",
+            "[PARTS_INFO]",
+            "[PC_MODEL_INFO]"
+          ]
+        },
+        "programming_problems": {
+          "title": "[PROGRAMMING_PROBLEMS_CASE]",
+          "items": [
+            "[OS_INFO]",
+            "[LANGUAGE_INFO]",
+            "[LIBRARY_INFO]",
+            "[CODE_SYNTAX_HIGHLIGHT]"
+          ]
+        },
+        "code_formatting": {
+          "title": "[CODE_WRITING_METHOD]",
+          "example": "```[LANGUAGE_NAME](py, js, rb[ETC])\n[CODE]\n```",
+          "important": "[CODE_COPY_PASTE_IMPORTANT]"
+        }
+      },
+      {
+        "title": "[PROHIBITED_QUESTIONS]",
+        "icon": "fas fa-ban",
+        "scraping": {
+          "title": "[SCRAPING_RELATED]",
+          "content": "[SCRAPING_PROHIBITION]",
+          "reason": "[SCRAPING_PROHIBITION_REASON]"
+        }
+      },
+      {
+        "title": "[AFTER_PROBLEM_SOLVED]",
+        "icon": "fas fa-crown",
+        "questioner": {
+          "title": "[TO_QUESTIONERS]",
+          "content": "[QUESTIONER_CLOSE_INSTRUCTION]",
+          "how_to_close": {
+            "title": "[HOW_TO_CLOSE]",
+            "content": "[CLOSE_METHOD_INSTRUCTION]"
+          }
+        },
+        "abandoned_threads": {
+          "title": "[ABANDONED_THREADS]",
+          "content": "[ABANDONED_THREADS_CONTENT]",
+          "resolved": "[RESOLVED_CASE]",
+          "unresolved": "[UNRESOLVED_CASE]",
+          "weekly_update": "[WEEKLY_UPDATE_REQUIREMENT]"
+        }
+      },
+      {
+        "title": "[TO_EXPERTS]",
+        "icon": "fas fa-users",
+        "rules": [
+          {
+            "title": "[NO_ANSWER_GUIDELINE_VIOLATION]",
+            "content": "[NO_ANSWER_VIOLATION_CONTENT]",
+            "icon": "fas fa-ban"
+          },
+          {
+            "title": "[DONT_CLOSE_UNTIL_QUESTIONER_CLOSES]",
+            "icon": "fas fa-lock"
+          },
+          {
+            "title": "[BE_KIND]",
+            "content": "[BE_KIND_CONTENT]",
+            "icon": "fas fa-heart"
+          }
+        ]
+      }
+    ],
+    "notes": {
+      "title": "[IMPORTANT_NOTICES]",
+      "content1": "[GUIDELINES_CHANGE_NOTICE]",
+      "last_updated": "[LAST_UPDATED]: 2024[YEAR]11[MONTH]1[DAY] 22:30",
+      "contact": "[GUIDELINES_CONTACT]"
+    }
+  },
+  "support_detailed": {
+    "title": "[ADMIN_CONTACT]",
+    "description": "",
+    "login": {
+      "title": "[ADMIN_CONTACT]",
+      "content": "[SUPPORT_LOGIN_CONTENT]",
+      "login_button": "[LOGIN_WITH_DISCORD]"
+    },
+    "form": {
+      "title": "[ADMIN_CONTACT]",
+      "category": {
+        "label": "[CATEGORY]",
+        "placeholder": "[SELECT_CATEGORY]",
+        "options": {
+          "violation": "🚨 [VIOLATION_REPORT]",
+          "question": "❓ [QUESTION_TO_ADMIN]",
+          "suggestion": "💡 [SUGGESTION_OPINION]",
+          "timeout": "⏰ [TIMEOUT_UNBAN_REQUEST]",
+          "bug": "🐛 [BUG_REPORT]",
+          "other": "📌 [OTHER]"
+        }
+      },
+      "custom_title": {
+        "label": "[TITLE]",
+        "placeholder": "[ENTER_SPECIFIC_TITLE]"
+      },
+      "options": {
+        "label": "[OPTIONS]",
+        "dialog": {
+          "label": "[WANT_DIALOG_WITH_ADMIN]",
+          "help": "[DIALOG_HELP_TEXT]"
+        },
+        "anonymous": {
+          "label": "[WANT_ANONYMOUS]",
+          "help": "[ANONYMOUS_HELP_TEXT]"
+        }
+      },
+      "content": {
+        "label": "[CONTENT]",
+        "placeholder": "[CONTENT_PLACEHOLDER_DETAILED]",
+        "char_count": "/ 800"
+      },
+      "attachments": {
+        "label": "[FILE_ATTACHMENTS]",
+        "drag_drop": "[DRAG_DROP_FILES]",
+        "click_select": "[OR_CLICK_SELECT]",
+        "paste_info": "[PASTE_IMAGE_INFO]",
+        "file_info": "[FILE_SIZE_LIMIT_INFO]",
+        "supported_formats": "[SUPPORTED_FORMATS]: JPG, PNG, PDF, DOC, ZIP"
+      },
+      "submit": "[SUBMIT]"
+    }
+  },
+  "language_switcher": {
+    "title": "[SELECT_LANGUAGE]",
+    "current": "[CURRENT_LANGUAGE]"
+  },
+  "js": {
+    "messages": {
+      "max_files": "[MAX_FILES_MESSAGE]",
+      "file_too_large": "{filename} [FILE_TOO_LARGE_MESSAGE]",
+      "filename_fixed": "[FILENAME_FIXED_MESSAGE]: \"{original}\" → \"{safe}\"",
+      "file_already_selected": "{filename} [FILE_ALREADY_SELECTED_MESSAGE]",
+      "file_added": "{filename} [FILE_ADDED_MESSAGE]",
+      "file_removed": "{filename} [FILE_REMOVED_MESSAGE]",
+      "images_pasted": "📋 {count}[IMAGES_PASTED_MESSAGE]",
+      "select_category": "[SELECT_CATEGORY_MESSAGE]",
+      "enter_title": "[ENTER_TITLE_MESSAGE]",
+      "enter_content": "[ENTER_CONTENT_MESSAGE]",
+      "content_too_long": "[CONTENT_TOO_LONG_MESSAGE]",
+      "sending": "[SENDING]...",
+      "error_occurred": "[ERROR_OCCURRED]",
+      "network_error": "[NETWORK_ERROR_MESSAGE]",
+      "anonymous_not_available_in_dialog": "[ANONYMOUS_NOT_AVAILABLE_IN_DIALOG_MESSAGE]",
+      "logging_in": "[LOGGING_IN]...",
+      "logging_out": "[LOGGING_OUT]...",
+      "logged_out": "[LOGGED_OUT]",
+      "logout_failed": "[LOGOUT_FAILED]",
+      "discord_link_not_configured": "[DISCORD_LINK_NOT_CONFIGURED_MESSAGE]",
+      "discord_server_opened": "[DISCORD_SERVER_OPENED_MESSAGE]",
+      "discord_server_failed": "[DISCORD_SERVER_FAILED_MESSAGE]"
+    }
+  }
+}

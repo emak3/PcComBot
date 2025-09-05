@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC Community - 管理者への問い合わせ</title>
+    <title data-i18n="support_detailed.title">PC Community - 管理者への問い合わせ</title>
     <meta name="title" content="管理者への問い合わせ - パソコミ | PC Community">
     <meta name="description" content="違反報告、質問、要望、タイムアウト解除申請、バグ報告など、管理者への問い合わせはこちらからできます。">
     <meta name="keywords" content="問い合わせ,サポート,管理者,違反報告,要望,質問,バグ報告,タイムアウト解除,Discord,パソコミ">
@@ -19,8 +19,7 @@
     <link rel="stylesheet" href="/css/pages.css">
     <link rel="stylesheet" href="/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+    <link rel="icon" href="./favicon.ico">
 </head>
 
 <body>
@@ -32,25 +31,24 @@
         <header class="header">
             <div class="header-content">
                 <h1 class="header-title">
-                    <i class="fas fa-desktop header-icon"></i>
-                    PC Community
+                    <img src="./server_name.png" alt="PC Community" style="height: 40px; width: auto;">
                 </h1>
                 <nav class="header-nav">
                     <a href="/" class="nav-link">
                         <i class="fas fa-home"></i>
-                        ホーム
+                        <span data-i18n="common.home">ホーム</span>
                     </a>
                     <a href="/rules" class="nav-link">
                         <i class="fas fa-gavel"></i>
-                        ルール
+                        <span data-i18n="common.rules">ルール</span>
                     </a>
                     <a href="/guidelines" class="nav-link">
                         <i class="fas fa-question-circle"></i>
-                        質問ガイド
+                        <span data-i18n="common.guidelines">質問ガイド</span>
                     </a>
                     <a href="/support" class="nav-link active">
                         <i class="fas fa-headset"></i>
-                        サポート
+                        <span data-i18n="common.support">サポート</span>
                     </a>
                 </nav>
             </div>
@@ -60,11 +58,11 @@
             <!-- Login Prompt -->
             <div class="login-prompt" id="loginPrompt" style="display: none;">
                 <div class="login-card">
-                    <h2><i class="fas fa-gamepad"></i> 管理者への問い合わせ</h2>
-                    <p>問い合わせフォームを利用するには、Discordアカウントでログインしてください。</p>
+                    <h2><i class="fas fa-gamepad"></i> <span data-i18n="support_detailed.login.title">管理者への問い合わせ</span></h2>
+                    <p data-i18n="support_detailed.login.content">問い合わせフォームを利用するには、Discordアカウントでログインしてください。</p>
                     <button class="btn btn-discord" onclick="login()">
                         <i class="fab fa-discord"></i>
-                        Discordでログイン
+                        <span data-i18n="support_detailed.login.login_button">Discordでログイン</span>
                     </button>
                 </div>
             </div>
@@ -77,89 +75,89 @@
                     <!-- ユーザー情報がここに動的に挿入される -->
                 </div>
                 
-                <h2 class="form-title"><i class="fas fa-edit"></i> 管理者への問い合わせ</h2>
+                <h2 class="form-title"><i class="fas fa-edit"></i> <span data-i18n="support_detailed.form.title">管理者への問い合わせ</span></h2>
 
                 <form id="inquiryForm" enctype="multipart/form-data">
                     <!-- Category Selection -->
                     <div class="form-group">
-                        <label for="category" class="form-label"><i class="fas fa-list"></i> カテゴリー <span
-                                class="required">*</span></label>
+                        <label for="category" class="form-label"><i class="fas fa-list"></i> <span data-i18n="support_detailed.form.category.label">カテゴリー</span> <span
+                                class="required" data-i18n="common.required">*</span></label>
                         <select id="category" name="category" class="form-select" required>
-                            <option value="">カテゴリーを選択してください</option>
-                            <option value="違反報告">🚨 違反報告</option>
-                            <option value="管理者への質問">❓ 管理者への質問</option>
-                            <option value="要望・意見">💡 要望・意見</option>
-                            <option value="タイムアウト解除申請">⏰ タイムアウト等 解除申請</option>
-                            <option value="バグ報告">🐛 バグ報告</option>
-                            <option value="その他">📌 その他</option>
+                            <option value="" data-i18n="support_detailed.form.category.placeholder">カテゴリーを選択してください</option>
+                            <option value="違反報告" data-i18n="support_detailed.form.category.options.violation">🚨 違反報告</option>
+                            <option value="管理者への質問" data-i18n="support_detailed.form.category.options.question">❓ 管理者への質問</option>
+                            <option value="要望・意見" data-i18n="support_detailed.form.category.options.suggestion">💡 要望・意見</option>
+                            <option value="タイムアウト解除申請" data-i18n="support_detailed.form.category.options.timeout">⏰ タイムアウト等 解除申請</option>
+                            <option value="バグ報告" data-i18n="support_detailed.form.category.options.bug">🐛 バグ報告</option>
+                            <option value="その他" data-i18n="support_detailed.form.category.options.other">📌 その他</option>
                         </select>
                     </div>
 
                     <!-- Custom Title for "Other" -->
                     <div class="form-group" id="customTitleGroup" style="display: none;">
-                        <label for="customTitle" class="form-label"><i class="fas fa-tag"></i> タイトル</label>
+                        <label for="customTitle" class="form-label"><i class="fas fa-tag"></i> <span data-i18n="support_detailed.form.custom_title.label">タイトル</span> <span class="required" data-i18n="common.required">*</span></label>
                         <input type="text" id="customTitle" name="customTitle" class="form-input"
-                            placeholder="具体的なタイトルを入力してください" maxlength="50">
+                            data-i18n-attr='{"placeholder": "support_detailed.form.custom_title.placeholder"}' placeholder="具体的なタイトルを入力してください" maxlength="50">
                     </div>
 
                     <!-- Options -->
                     <div class="form-group">
                         <label class="form-label">
-                            <i class="fas fa-cog"></i> オプション
-                            <span class="optional-label">(任意)</span>
+                            <i class="fas fa-cog"></i> <span data-i18n="support_detailed.form.options.label">オプション</span>
+                            <span class="optional-label" data-i18n="common.optional">(任意)</span>
                         </label>
                         
                         <div class="checkbox-group">
                             <label class="checkbox-label">
                                 <input type="checkbox" id="wantDialog" name="wantDialog" class="checkbox">
                                 <span class="checkbox-custom"></span>
-                                <i class="fas fa-comments"></i> 管理者との対話を希望する
+                                <i class="fas fa-comments"></i> <span data-i18n="support_detailed.form.options.dialog.label">管理者との対話を希望する</span>
                             </label>
-                            <p class="checkbox-help">チェックすると専用チャンネルが作成され、管理者と直接やり取りができます。</p>
+                            <p class="checkbox-help" data-i18n="support_detailed.form.options.dialog.help">チェックすると専用チャンネルが作成され、管理者と直接やり取りができます。</p>
                         </div>
 
                         <div class="checkbox-group">
                             <label class="checkbox-label">
                                 <input type="checkbox" id="anonymous" name="anonymous" class="checkbox">
                                 <span class="checkbox-custom"></span>
-                                <i class="fas fa-user-secret"></i> 匿名を希望する
+                                <i class="fas fa-user-secret"></i> <span data-i18n="support_detailed.form.options.anonymous.label">匿名を希望する</span>
                             </label>
-                            <p class="checkbox-help">※荒らし防止のため、PCBには送信者情報が保存されますが、管理者には表示されません。</p>
+                            <p class="checkbox-help" data-i18n="support_detailed.form.options.anonymous.help">※荒らし防止のため、PCBには送信者情報が保存されますが、管理者には表示されません。</p>
                         </div>
                     </div>
 
                     <!-- Content Input -->
                     <div class="form-group">
                         <label for="content" class="form-label">
-                            <i class="fas fa-pen"></i> 内容 <span class="required">*</span>
+                            <i class="fas fa-pen"></i> <span data-i18n="support_detailed.form.content.label">内容</span> <span class="required" data-i18n="common.required">*</span>
                         </label>
                         
                         <textarea id="content" name="content" class="form-textarea"
-                            placeholder="問い合わせ内容を詳しく記入してください（800文字以内）"
+                            data-i18n-attr='{"placeholder": "support_detailed.form.content.placeholder"}' placeholder="問い合わせ内容を詳しく記入してください（800文字以内）"
                             maxlength="800" required></textarea>
 
                         <div class="char-counter">
-                            <span id="charCount">0</span> / 800
+                            <span id="charCount">0</span> <span data-i18n="support_detailed.form.content.char_count">/ 800</span>
                         </div>
                     </div>
 
                     <!-- File Upload -->
                     <div class="form-group">
                         <label for="attachments" class="form-label">
-                            <i class="fas fa-paperclip"></i> 添付ファイル
-                            <span class="optional-label">(任意)</span>
+                            <i class="fas fa-paperclip"></i> <span data-i18n="support_detailed.form.attachments.label">添付ファイル</span>
+                            <span class="optional-label" data-i18n="common.optional">(任意)</span>
                         </label>
                         <div class="file-upload-area" id="fileUploadArea">
                             <input type="file" id="attachments" name="attachments" multiple
                                 accept=".jpg,.jpeg,.png,.gif,.pdf,.txt,.doc,.docx,.zip,.rar" class="file-input">
                             <div class="file-upload-content" id="fileUploadContent">
                                 <div class="file-upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                                <p><strong>ファイルをドラッグ&ドロップ</strong><br>またはクリックして選択</p>
+                                <p><strong data-i18n="support_detailed.form.attachments.drag_drop">ファイルをドラッグ&ドロップ</strong><br><span data-i18n="support_detailed.form.attachments.click_select">またはクリックして選択</span></p>
                                 <div class="paste-info">
                                     <i class="fas fa-keyboard"></i>
-                                    <span>画像は <kbd>Ctrl+V</kbd> でペーストも可能</span>
+                                    <span data-i18n="support_detailed.form.attachments.paste_info">画像は <kbd>Ctrl+V</kbd> でペーストも可能</span>
                                 </div>
-                                <p class="file-upload-note">最大5ファイル、各1MB未満<br>対応形式: JPG, PNG, PDF, DOC, ZIP</p>
+                                <p class="file-upload-note"><span data-i18n="support_detailed.form.attachments.file_info">最大5ファイル、各1MB未満</span><br><span data-i18n="support_detailed.form.attachments.supported_formats">対応形式: JPG, PNG, PDF, DOC, ZIP</span></p>
                             </div>
                             <div class="file-upload-preview" id="fileUploadPreview" style="display: none;">
                                 <div class="upload-preview-grid" id="uploadPreviewGrid"></div>
@@ -170,7 +168,7 @@
                     <!-- Submit Button -->
                     <div class="form-actions">
                         <button type="submit" class="btn btn-submit" id="submitBtn">
-                            <i class="fas fa-paper-plane"></i> 送信する
+                            <i class="fas fa-paper-plane"></i> <span data-i18n="support_detailed.form.submit">送信する</span>
                         </button>
                     </div>
                 </form>
@@ -183,23 +181,23 @@
             <div class="footer-content">
                 <div class="footer-info">
                     <h4>
-                        <i class="fas fa-desktop header-icon"></i>
-                        パソコミ - PC Community
+                        <i class="header-icon"></i>
+                        <span data-i18n="footer.title">パソコミ - PC Community</span>
                     </h4>
-                    <p>パソコン・プログラミング愛好家のための最強コミュニティ</p>
-                    <p>1,500人以上のメンバーが参加し、解決率90%超えを誇るサポート体制</p>
-                    <p><strong>初心者歓迎・上級者歓迎・誰でも大歓迎！</strong></p>
+                    <p data-i18n="footer.description1">パソコン・プログラミング愛好家のための最強コミュニティ</p>
+                    <p data-i18n="footer.description2">1,500人以上のメンバーが参加し、解決率90%超えを誇るサポート体制</p>
+                    <p><strong data-i18n="footer.description3">初心者歓迎・上級者歓迎・誰でも大歓迎！</strong></p>
                 </div>
                 <div class="footer-links">
-                    <h5>リンク</h5>
+                    <h5 data-i18n="footer.links_title">リンク</h5>
                     <ul>
-                        <li><a href="/rules">コミュニティルール</a></li>
-                        <li><a href="/guidelines">質問ガイドライン</a></li>
-                        <li><a href="/support">サポート</a></li>
+                        <li><a href="/rules" data-i18n="common.rules">コミュニティルール</a></li>
+                        <li><a href="/guidelines" data-i18n="common.guidelines">質問ガイドライン</a></li>
+                        <li><a href="/support" data-i18n="common.support">サポート</a></li>
                     </ul>
                 </div>
                 <div class="footer-social">
-                    <h5>SNS・掲載サイト</h5>
+                    <h5 data-i18n="footer.social_title">SNS・掲載サイト</h5>
                     <div class="social-links">
                         <button class="social-btn discord"
                             onclick="window.open('https://discord.gg/uxENZNrk5n', '_blank')" title="Discordに参加">
@@ -221,7 +219,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 パソコミ - PC Community. All rights reserved.</p>
+                <p data-i18n="footer.copyright">&copy; 2024 パソコミ - PC Community. All rights reserved.</p>
             </div>
         </footer>
     </div>
@@ -229,6 +227,7 @@
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
 
+    <script src="/js/i18n.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/pages.js"></script>
 </body>

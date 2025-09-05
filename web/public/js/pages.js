@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Discord招待リンクの取得
     await loadDiscordInvite();
 
-    // サーバーアイコンの取得と設定
-    await loadServerIcon();
+    // サーバーアイコンの設定
+    loadServerIcon();
 
     // ページ固有の初期化
     const currentPage = getCurrentPage();
@@ -26,112 +26,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupSmoothScroll();
 });
 
-// サーバーアイコンを取得して設定
-async function loadServerIcon () {
-    try {
-        // ローディング状態を表示
-        showLoadingIcon();
-
-        const response = await fetch("/api/server-icon");
-        const data = await response.json();
-
-        if (data.success && data.iconURL) {
-            updateHeaderIcon(data.iconURL, data.serverName);
-            console.log("サーバーアイコンを取得しました:", data.iconURL);
-        } else {
-            console.warn("サーバーアイコンの取得に失敗、フォールバックアイコンを使用");
-            updateHeaderIcon(null, "PC Community");
-        }
-    } catch (error) {
-        console.error("サーバーアイコンの取得に失敗しました:", error);
-        console.warn("デフォルトアイコンを使用します");
-        updateHeaderIcon(null, "PC Community");
-    }
-}
-
-// ローディングアイコンを表示
-function showLoadingIcon () {
-    const headerIcons = document.querySelectorAll(".header-icon");
-    const heroIcon = document.querySelector(".pc-icon");
-
-    // ヘッダーアイコンのローディング
-    headerIcons.forEach(iconElement => {
-        iconElement.className = "header-icon";
-        iconElement.innerHTML = '<div class="server-icon-loading"></div>';
-    });
-
-    // ヒーローセクションアイコンのローディング
-    if (heroIcon) {
-        heroIcon.innerHTML = '<div class="hero-icon-loading"></div>';
-    }
-}
-
-// ヘッダーアイコンを更新
-function updateHeaderIcon (iconURL, serverName) {
-    const headerIcons = document.querySelectorAll(".header-icon");
-    const heroIcon = document.querySelector(".pc-icon");
-
-    // ヘッダーアイコンの更新
-    headerIcons.forEach(iconElement => {
-        if (iconURL) {
-            // サーバーアイコンが取得できた場合
-            const imgElement = document.createElement("img");
-            imgElement.src = iconURL;
-            imgElement.alt = serverName || "Server Icon";
-            imgElement.className = "server-icon";
-            imgElement.style.width = "32px";
-            imgElement.style.height = "32px";
-            imgElement.style.borderRadius = "50%";
-            imgElement.style.objectFit = "cover";
-
-            // エラー時のフォールバック
-            imgElement.onerror = function () {
-                console.warn("サーバーアイコンの読み込みに失敗、FontAwesomeアイコンにフォールバック");
-                this.style.display = "none";
-                iconElement.className = "fas fa-desktop header-icon";
-                iconElement.style.fontSize = "32px";
-            };
-
-            // 既存のクラスをクリアして画像に置換
-            iconElement.className = "header-icon";
-            iconElement.style.fontSize = "";
-            iconElement.innerHTML = "";
-            iconElement.appendChild(imgElement);
-        } else {
-            // フォールバック：FontAwesome アイコン
-            iconElement.className = "fas fa-desktop header-icon";
-            iconElement.style.fontSize = "32px";
-            iconElement.innerHTML = "";
-        }
-    });
-
-    // ヒーローセクションのアイコンも更新
-    if (heroIcon) {
-        if (iconURL) {
-            // サーバーアイコンが取得できた場合
-            const imgElement = document.createElement("img");
-            imgElement.src = iconURL;
-            imgElement.alt = serverName || "Server Icon";
-            imgElement.className = "hero-server-icon";
-            imgElement.style.width = "120px";
-            imgElement.style.height = "120px";
-            imgElement.style.borderRadius = "50%";
-            imgElement.style.objectFit = "cover";
-
-            // エラー時のフォールバック
-            imgElement.onerror = function () {
-                console.warn("ヒーローアイコンの読み込みに失敗、FontAwesomeアイコンにフォールバック");
-                this.style.display = "none";
-                heroIcon.innerHTML = '<i class="fas fa-desktop"></i>';
-            };
-
-            // 既存の内容をクリアして画像に置換
-            heroIcon.innerHTML = "";
-            heroIcon.appendChild(imgElement);
-        } else {
-            // フォールバック：FontAwesome アイコン
-            heroIcon.innerHTML = '<i class="fas fa-desktop"></i>';
-        }
+// サーバーアイコンを設定
+function loadServerIcon() {
+    const headerIcon = document.querySelector('.header-icon');
+    if (headerIcon) {
+        headerIcon.innerHTML = '<img src="./server_icon.png" alt="icon" style="width: 32px; height: 32px; border-radius: 50%"></img>';
     }
 }
 
@@ -160,17 +59,17 @@ function joinDiscord () {
     console.log("使用するDiscord招待リンク:", DISCORD_INVITE_URL);
 
     if (!DISCORD_INVITE_URL || DISCORD_INVITE_URL === "https://discord.gg/your-server-link") {
-        console.warn("Discord招待リンクが設定されていません");
-        showToast("Discord招待リンクが設定されていません。管理者にお問い合わせください。", "error");
+        console.warn("Discord invite link not configured");
+        showToast(i18n.translate('js.messages.discord_link_not_configured'), "error");
         return;
     }
 
     try {
         window.open(DISCORD_INVITE_URL, "_blank");
-        showToast("Discordサーバーを開きました！", "success");
+        showToast(i18n.translate('js.messages.discord_server_opened'), "success");
     } catch (error) {
-        console.error("Discord招待リンクの開放に失敗:", error);
-        showToast("Discordサーバーを開けませんでした。", "error");
+        console.error("Failed to open Discord invite link:", error);
+        showToast(i18n.translate('js.messages.discord_server_failed'), "error");
     }
 }
 
@@ -207,12 +106,12 @@ function updateUserSection (user) {
 
     userSection.innerHTML = `
         <div class="user-info">
-            <img src="${user.avatarURL}" alt="Avatar" class="user-avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <img src="${user.avatarURL}" alt="Avatar" class="user-avatar" onerror="this.src='/favicon.ico'">
             <span class="user-name">${escapeHtml(user.displayName || user.globalName || user.username)}</span>
         </div>
         <div class="auth-buttons">
             <button class="btn btn-secondary" onclick="logoutUser()">
-                <i class="fas fa-sign-out-alt"></i> ログアウト
+                <i class="fas fa-sign-out-alt"></i> ${i18n.translate('common.logout')}
             </button>
         </div>
     `;
@@ -295,12 +194,12 @@ function animateNumber (element, start, end, duration) {
     requestAnimationFrame(updateNumber);
 }
 
-// Discordログイン
+// Discord login function / Discordログイン機能
 function loginDiscord () {
     const btn = event.target;
     const originalText = btn.innerHTML;
 
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ログイン中...';
+    btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${i18n.translate('js.messages.logging_in')}`;
     btn.disabled = true;
 
     const currentPath = window.location.pathname;
@@ -317,7 +216,7 @@ async function logoutUser () {
         const btn = event.target;
         const originalText = btn.innerHTML;
 
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ログアウト中...';
+        btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${i18n.translate('js.messages.logging_out')}`;
         btn.disabled = true;
 
         const response = await fetch("/auth/logout", {
@@ -328,19 +227,19 @@ async function logoutUser () {
         });
 
         if (response.ok) {
-            showToast("ログアウトしました", "success");
+            showToast(i18n.translate('js.messages.logged_out'), "success");
             setTimeout(() => {
                 window.location.reload();
             }, 1000);
         } else {
-            throw new Error("ログアウト失敗");
+            throw new Error("Logout failed");
         }
     } catch (error) {
-        console.error("ログアウトエラー:", error);
-        showToast("ログアウトに失敗しました", "error");
+        console.error("Logout error:", error);
+        showToast(i18n.translate('js.messages.logout_failed'), "error");
 
         const btn = event.target;
-        btn.innerHTML = '<i class="fas fa-sign-out-alt"></i> ログアウト';
+        btn.innerHTML = `<i class="fas fa-sign-out-alt"></i> ${i18n.translate('common.logout')}`;
         btn.disabled = false;
     }
 }

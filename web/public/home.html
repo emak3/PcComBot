@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC Community - ホーム</title>
+    <title data-i18n="home.title">PC Community - ホーム</title>
     <meta name="title" content="パソコミ - パソコン・プログラミング愛好家のための最強コミュニティ">
     <meta name="description" content="プログラミングで躓いた時、PCトラブルに悩んだ時、「誰かに聞けたら...」と思ったことはありませんか？1,500人以上が参加し、解決率90%超えを誇るDiscordコミュニティ「パソコミ」で成長しよう！">
     <meta name="keywords" content="プログラミング,PC,パソコン,自作PC,ガジェット,Discord,コミュニティ,質問,サポート,初心者歓迎,解決率90%">
@@ -20,8 +20,7 @@
     <link rel="stylesheet" href="/css/pages.css">
     <link rel="stylesheet" href="/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+    <link rel="icon" href="/favicon.ico">
 </head>
 
 <body>
@@ -33,25 +32,24 @@
         <header class="header">
             <div class="header-content">
                 <h1 class="header-title">
-                    <i class="fas fa-desktop header-icon"></i>
-                    PC Community
+                    <img src="./server_name.png" alt="PC Community" style="height: 40px; width: auto;">
                 </h1>
                 <nav class="header-nav">
                     <a href="/" class="nav-link active">
                         <i class="fas fa-home"></i>
-                        ホーム
+                        <span data-i18n="common.home">ホーム</span>
                     </a>
                     <a href="/rules" class="nav-link">
                         <i class="fas fa-gavel"></i>
-                        ルール
+                        <span data-i18n="common.rules">ルール</span>
                     </a>
                     <a href="/guidelines" class="nav-link">
                         <i class="fas fa-question-circle"></i>
-                        質問ガイド
+                        <span data-i18n="common.guidelines">質問ガイド</span>
                     </a>
                     <a href="/support" class="nav-link">
                         <i class="fas fa-headset"></i>
-                        サポート
+                        <span data-i18n="common.support">サポート</span>
                     </a>
                 </nav>
             </div>
@@ -64,37 +62,37 @@
                 <div class="hero-content">
                     <div style="text-align: center; width: 100%;">
                         <h2 class="hero-title">
-                            <span class="gradient-text">🎯 今すぐ参加しよう！</span>
+                            <span class="gradient-text" data-i18n="home.hero.title">🎯 今すぐ参加しよう！</span>
                         </h2>
                         <p class="hero-description">
-                            パソコンやプログラミングのスキルアップを目指すなら、<br>
-                            パソコミで一緒に成長しませんか？<br>
-                            <strong>初心者歓迎・上級者歓迎・誰でも大歓迎！</strong><br>
-                            あなたの参加をメンバー一同お待ちしています🎉
+                            <span data-i18n="home.hero.description1">パソコンやプログラミングのスキルアップを目指すなら、</span><br>
+                            <span data-i18n="home.hero.description2">パソコミで一緒に成長しませんか？</span><br>
+                            <strong data-i18n="home.hero.description3">初心者歓迎・上級者歓迎・誰でも大歓迎！</strong><br>
+                            <span data-i18n="home.hero.description4">あなたの参加をメンバー一同お待ちしています🎉</span>
                         </p>
                         <div class="hero-buttons" style="justify-content: center;">
                             <button class="btn btn-primary"
                                 onclick="window.open('https://discord.gg/uxENZNrk5n', '_blank')"
                                 style="font-size: 18px; padding: 20px 40px;">
                                 <i class="fab fa-discord"></i>
-                                パソコミに参加
+                                <span data-i18n="home.hero.join_discord">パソコミに参加</span>
                             </button>
                         </div>
-                        <p style="margin-top: 30px; font-size: 18px; color: var(--discord-blurple); font-weight: 600;">
+                        <p style="margin-top: 30px; font-size: 18px; color: var(--discord-blurple); font-weight: 600;" data-i18n="home.hero.bottom_text">
                             💻 パソコンコミュニティで、新しい学びの扉を開こう！
                         </p>
                         <div
                             style="margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
                             <span
-                                style="background: var(--discord-blurple); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">#プログラミング</span>
+                                style="background: var(--discord-blurple); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;" data-i18n="home.hero.tags.programming">#プログラミング</span>
                             <span
-                                style="background: var(--discord-blurple); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">#PC</span>
+                                style="background: var(--discord-blurple); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;" data-i18n="home.hero.tags.pc">#PC</span>
                             <span
-                                style="background: var(--discord-blurple); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">#パソコン</span>
+                                style="background: var(--discord-blurple); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;" data-i18n="home.hero.tags.computer">#パソコン</span>
                             <span
-                                style="background: var(--discord-blurple); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">#自作PC</span>
+                                style="background: var(--discord-blurple); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;" data-i18n="home.hero.tags.diy_pc">#自作PC</span>
                             <span
-                                style="background: var(--discord-blurple); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">#ガジェット</span>
+                                style="background: var(--discord-blurple); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;" data-i18n="home.hero.tags.gadgets">#ガジェット</span>
                         </div>
                     </div>
                 </div>
@@ -102,30 +100,30 @@
             <!-- Why Choose Us Section -->
             <section class="features-section">
                 <div class="section-header">
-                    <h3>🌟 なぜパソコミが選ばれるのか？</h3>
-                    <p>圧倒的な実績と充実のサポート体制</p>
+                    <h3 data-i18n="home.why_choose.title">🌟 なぜパソコミが選ばれるのか？</h3>
+                    <p data-i18n="home.why_choose.subtitle">圧倒的な実績と充実のサポート体制</p>
                 </div>
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-users"></i>
                         </div>
-                        <h4>📊 信頼できる規模感</h4>
-                        <p><strong>1,500人以上</strong>の活発なメンバーが参加する大規模コミュニティ。どんな質問にも専門知識を持つ誰かが答えてくれます。</p>
+                        <h4 data-i18n="home.why_choose.reliable_scale.title">📊 信頼できる規模感</h4>
+                        <p data-i18n="home.why_choose.reliable_scale.description"><strong>1,500人以上</strong>の活発なメンバーが参加する大規模コミュニティ。どんな質問にも専門知識を持つ誰かが答えてくれます。</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-bolt"></i>
                         </div>
-                        <h4>⚡ 驚異の問題解決力</h4>
-                        <p><strong>解決率90%超え</strong>を誇る質問対応力！専門的な知識を持つメンバーが多数在籍し、的確なアドバイスを提供します。</p>
+                        <h4 data-i18n="home.why_choose.resolution_power.title">⚡ 驚異の問題解決力</h4>
+                        <p data-i18n="home.why_choose.resolution_power.description"><strong>解決率90%超え</strong>を誇る質問対応力！専門的な知識を持つメンバーが多数在籍し、的確なアドバイスを提供します。</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-bullseye"></i>
                         </div>
-                        <h4>🎯 幅広いサポート範囲</h4>
-                        <p>プログラミング相談・PC自作・カスタマイズ・トラブル解決まで、初心者から上級者まで幅広く対応します。</p>
+                        <h4 data-i18n="home.why_choose.wide_support.title">🎯 幅広いサポート範囲</h4>
+                        <p data-i18n="home.why_choose.wide_support.description">プログラミング相談・PC自作・カスタマイズ・トラブル解決まで、初心者から上級者まで幅広く対応します。</p>
                     </div>
                 </div>
             </section>
@@ -133,30 +131,30 @@
             <!-- Support System Section -->
             <section class="features-section">
                 <div class="section-header">
-                    <h3>🛠️ 初心者に優しい充実のサポート体制</h3>
-                    <p>効率的な学習と成長をサポートする仕組み</p>
+                    <h3 data-i18n="home.support_system.title">🛠️ 初心者に優しい充実のサポート体制</h3>
+                    <p data-i18n="home.support_system.subtitle">効率的な学習と成長をサポートする仕組み</p>
                 </div>
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-clipboard-list"></i>
                         </div>
-                        <h4>📋 質問フォーラム制度</h4>
-                        <p>専用の質問フォーラムを設置し、効率的に問題解決ができる環境を整備。質問ガイドラインに沿って投稿すれば、より適切で早い回答が期待できます。</p>
+                        <h4 data-i18n="home.support_system.question_forum.title">📋 質問フォーラム制度</h4>
+                        <p data-i18n="home.support_system.question_forum.description">専用の質問フォーラムを設置し、効率的に問題解決ができる環境を整備。質問ガイドラインに沿って投稿すれば、より適切で早い回答が期待できます。</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-trophy"></i>
                         </div>
-                        <h4>🏆 ベストアンサーロール制度</h4>
-                        <p>優秀な回答を継続的に提供してくれるメンバーには「ベストアンサーロール」を付与。信頼できる回答者が一目でわかるシステムです。</p>
+                        <h4 data-i18n="home.support_system.best_answer.title">🏆 ベストアンサーロール制度</h4>
+                        <p data-i18n="home.support_system.best_answer.description">優秀な回答を継続的に提供してくれるメンバーには「ベストアンサーロール」を付与。信頼できる回答者が一目でわかるシステムです。</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-book-open"></i>
                         </div>
-                        <h4>📚 「調べてから質問」の文化</h4>
-                        <p>自分で調べる力も身につけながら成長できる健全な学習環境。困った時のヒントも豊富に用意されています。</p>
+                        <h4 data-i18n="home.support_system.research_culture.title">📚 「調べてから質問」の文化</h4>
+                        <p data-i18n="home.support_system.research_culture.description">自分で調べる力も身につけながら成長できる健全な学習環境。困った時のヒントも豊富に用意されています。</p>
                     </div>
                 </div>
             </section>
@@ -164,30 +162,30 @@
             <!-- Community Benefits Section -->
             <section class="features-section">
                 <div class="section-header">
-                    <h3>🎉 コミュニティならではの特典</h3>
-                    <p>学習だけじゃない、楽しいコミュニティライフ</p>
+                    <h3 data-i18n="home.community_benefits.title">🎉 コミュニティならではの特典</h3>
+                    <p data-i18n="home.community_benefits.subtitle">学習だけじゃない、楽しいコミュニティライフ</p>
                 </div>
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-calendar"></i>
                         </div>
-                        <h4>🎪 充実のイベント</h4>
-                        <p>不定期でイベントも開催！メンバーからの提案も大歓迎で、あなたのアイデアが実現するかもしれません。</p>
+                        <h4 data-i18n="home.community_benefits.events.title">🎪 充実のイベント</h4>
+                        <p data-i18n="home.community_benefits.events.description">不定期でイベントも開催！メンバーからの提案も大歓迎で、あなたのアイデアが実現するかもしれません。</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-handshake"></i>
                         </div>
-                        <h4>🤝 運営との近い距離感</h4>
-                        <p>モデレーターとメンバーの距離が近く、気軽に相談できる雰囲気。対面サポートや提案フォームも用意されています。</p>
+                        <h4 data-i18n="home.community_benefits.close_distance.title">🤝 運営との近い距離感</h4>
+                        <p data-i18n="home.community_benefits.close_distance.description">モデレーターとメンバーの距離が近く、気軽に相談できる雰囲気。対面サポートや提案フォームも用意されています。</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-heart"></i>
                         </div>
-                        <h4>🌈 フレンドリーで平和な環境</h4>
-                        <p>「平和で優しいメンバー達」が自慢のパソコミ。初心者でも気後れすることなく質問でき、温かい雰囲気です。</p>
+                        <h4 data-i18n="home.community_benefits.friendly_environment.title">🌈 フレンドリーで平和な環境</h4>
+                        <p data-i18n="home.community_benefits.friendly_environment.description">「平和で優しいメンバー達」が自慢のパソコミ。初心者でも気後れすることなく質問でき、温かい雰囲気です。</p>
                     </div>
                 </div>
             </section>
@@ -195,56 +193,56 @@
             <!-- Target Audience Section -->
             <section class="links-section">
                 <div class="section-header">
-                    <h3>🚀 こんな人におすすめ！</h3>
-                    <p>あなたに当てはまる項目はありますか？</p>
+                    <h3 data-i18n="home.target_audience.title">🚀 こんな人におすすめ！</h3>
+                    <p data-i18n="home.target_audience.subtitle">あなたに当てはまる項目はありますか？</p>
                 </div>
                 <div class="links-grid">
                     <div class="link-card">
                         <div class="link-icon">
                             <i class="fas fa-seedling"></i>
                         </div>
-                        <h4>プログラミング初心者</h4>
-                        <p>プログラミングを始めたばかりで基礎的なことから学びたい</p>
+                        <h4 data-i18n="home.target_audience.programming_beginner_title">プログラミング初心者</h4>
+                        <p data-i18n="home.target_audience.programming_beginner">プログラミングを始めたばかりで基礎的なことから学びたい</p>
                         <span class="link-arrow">✅</span>
                     </div>
                     <div class="link-card">
                         <div class="link-icon">
                             <i class="fas fa-tools"></i>
                         </div>
-                        <h4>PC自作に挑戦したい人</h4>
-                        <p>PC自作に挑戦したいけど不安がある</p>
+                        <h4 data-i18n="home.target_audience.pc_builder_title">PC自作に挑戦したい人</h4>
+                        <p data-i18n="home.target_audience.pc_builder">PC自作に挑戦したいけど不安がある</p>
                         <span class="link-arrow">✅</span>
                     </div>
                     <div class="link-card">
                         <div class="link-icon">
                             <i class="fas fa-brain"></i>
                         </div>
-                        <h4>技術議論を楽しみたい上級者</h4>
-                        <p>技術的な議論を楽しみたい上級者</p>
+                        <h4 data-i18n="home.target_audience.advanced_discussion_title">技術議論を楽しみたい上級者</h4>
+                        <p data-i18n="home.target_audience.advanced_discussion">技術的な議論を楽しみたい上級者</p>
                         <span class="link-arrow">✅</span>
                     </div>
                     <div class="link-card">
                         <div class="link-icon">
                             <i class="fas fa-ambulance"></i>
                         </div>
-                        <h4>トラブル解決が必要な人</h4>
-                        <p>トラブル解決を手伝ってもらいたい</p>
+                        <h4 data-i18n="home.target_audience.troubleshooting_title">トラブル解決が必要な人</h4>
+                        <p data-i18n="home.target_audience.troubleshooting">トラブル解決を手伝ってもらいたい</p>
                         <span class="link-arrow">✅</span>
                     </div>
                     <div class="link-card">
                         <div class="link-icon">
                             <i class="fas fa-users"></i>
                         </div>
-                        <h4>仲間と繋がりたい人</h4>
-                        <p>同じ趣味を持つ仲間と繋がりたい</p>
+                        <h4 data-i18n="home.target_audience.community_title">仲間と繋がりたい人</h4>
+                        <p data-i18n="home.target_audience.community">同じ趣味を持つ仲間と繋がりたい</p>
                         <span class="link-arrow">✅</span>
                     </div>
                     <div class="link-card">
                         <div class="link-icon">
                             <i class="fas fa-rocket"></i>
                         </div>
-                        <h4>最新技術をキャッチアップしたい人</h4>
-                        <p>最新の技術情報をキャッチアップしたい</p>
+                        <h4 data-i18n="home.target_audience.latest_tech_title">最新技術をキャッチアップしたい人</h4>
+                        <p data-i18n="home.target_audience.latest_tech">最新の技術情報をキャッチアップしたい</p>
                         <span class="link-arrow">✅</span>
                     </div>
                 </div>
@@ -257,10 +255,10 @@
                         <i class="fas fa-exclamation-triangle"></i>
                     </div>
                     <div class="notice-content">
-                        <h3>💡 参加前に知っておきたいこと</h3>
-                        <p>参加には<strong>14日以上経過したDiscordアカウント</strong>が必要です。新規アカウントの場合は、14日経過後に改めてご参加ください。</p>
-                        <p><strong>※アカウント作成から14日未満の場合、14日経過するまでタイムアウトされます。</strong></p>
-                        <p>これは荒らし対策のための措置で、より安全で快適なコミュニティ環境を保つためのものです。</p>
+                        <h3 data-i18n="home.important_notice.title">💡 参加前に知っておきたいこと</h3>
+                        <p data-i18n="home.important_notice.description1">参加には<strong>14日以上経過したDiscordアカウント</strong>が必要です。新規アカウントの場合は、14日経過後に改めてご参加ください。</p>
+                        <p data-i18n="home.important_notice.description2"><strong>※アカウント作成から14日未満の場合、14日経過するまでタイムアウトされます。</strong></p>
+                        <p data-i18n="home.important_notice.description3">これは荒らし対策のための措置で、より安全で快適なコミュニティ環境を保つためのものです。</p>
                     </div>
                 </div>
             </section>
@@ -268,32 +266,32 @@
             <!-- Quick Access -->
             <section class="links-section">
                 <div class="section-header">
-                    <h3>クイックアクセス</h3>
-                    <p>よく使用されるページ</p>
+                    <h3 data-i18n="home.quick_access.title">クイックアクセス</h3>
+                    <p data-i18n="home.quick_access.subtitle">よく使用されるページ</p>
                 </div>
                 <div class="links-grid">
                     <a href="/rules" class="link-card">
                         <div class="link-icon">
                             <i class="fas fa-gavel"></i>
                         </div>
-                        <h4>コミュニティルール</h4>
-                        <p>みんなが快適に過ごすためのルール</p>
+                        <h4 data-i18n="home.quick_access.rules.title">コミュニティルール</h4>
+                        <p data-i18n="home.quick_access.rules.description">みんなが快適に過ごすためのルール</p>
                         <span class="link-arrow">→</span>
                     </a>
                     <a href="/guidelines" class="link-card">
                         <div class="link-icon">
                             <i class="fas fa-question-circle"></i>
                         </div>
-                        <h4>質問ガイドライン</h4>
-                        <p>効果的な質問の仕方とマナー</p>
+                        <h4 data-i18n="home.quick_access.guidelines.title">質問ガイドライン</h4>
+                        <p data-i18n="home.quick_access.guidelines.description">効果的な質問の仕方とマナー</p>
                         <span class="link-arrow">→</span>
                     </a>
                     <a href="/support" class="link-card">
                         <div class="link-icon">
                             <i class="fas fa-headset"></i>
                         </div>
-                        <h4>管理者サポート</h4>
-                        <p>問題や要望を管理者に報告</p>
+                        <h4 data-i18n="home.quick_access.admin_support.title">管理者サポート</h4>
+                        <p data-i18n="home.quick_access.admin_support.description">問題や要望を管理者に報告</p>
                         <span class="link-arrow">→</span>
                     </a>
                 </div>
@@ -305,23 +303,23 @@
             <div class="footer-content">
                 <div class="footer-info">
                     <h4>
-                        <i class="fas fa-desktop header-icon"></i>
-                        パソコミ - PC Community
+                        <i class="header-icon"></i>
+                        <span data-i18n="footer.title">パソコミ - PC Community</span>
                     </h4>
-                    <p>パソコン・プログラミング愛好家のための最強コミュニティ</p>
-                    <p>1,500人以上のメンバーが参加し、解決率90%超えを誇るサポート体制</p>
-                    <p><strong>初心者歓迎・上級者歓迎・誰でも大歓迎！</strong></p>
+                    <p data-i18n="footer.description1">パソコン・プログラミング愛好家のための最強コミュニティ</p>
+                    <p data-i18n="footer.description2">1,500人以上のメンバーが参加し、解決率90%超えを誇るサポート体制</p>
+                    <p><strong data-i18n="footer.description3">初心者歓迎・上級者歓迎・誰でも大歓迎！</strong></p>
                 </div>
                 <div class="footer-links">
-                    <h5>リンク</h5>
+                    <h5 data-i18n="footer.links_title">リンク</h5>
                     <ul>
-                        <li><a href="/rules">コミュニティルール</a></li>
-                        <li><a href="/guidelines">質問ガイドライン</a></li>
-                        <li><a href="/support">サポート</a></li>
+                        <li><a href="/rules"><span data-i18n="common.rules">コミュニティルール</span></a></li>
+                        <li><a href="/guidelines"><span data-i18n="common.guidelines">質問ガイドライン</span></a></li>
+                        <li><a href="/support"><span data-i18n="common.support">サポート</span></a></li>
                     </ul>
                 </div>
                 <div class="footer-social">
-                    <h5>SNS・掲載サイト</h5>
+                    <h5 data-i18n="footer.social_title">SNS・掲載サイト</h5>
                     <div class="social-links">
                         <button class="social-btn discord"
                             onclick="window.open('https://discord.gg/uxENZNrk5n', '_blank')" title="Discordに参加">
@@ -343,20 +341,15 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 パソコミ - PC Community. All rights reserved.</p>
+                <p data-i18n="footer.copyright">&copy; 2024 パソコミ - PC Community. All rights reserved.</p>
             </div>
         </footer>
     </div>
 
+    <script src="/js/i18n.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/pages.js"></script>
 
-    <script>
-        // Discord参加ボタンをカスタマイズ
-        function joinDiscord() {
-            window.open('https://discord.gg/uxENZNrk5n', '_blank');
-        }
-    </script>
 </body>
 
 </html>

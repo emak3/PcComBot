@@ -1,0 +1,668 @@
+{
+  "meta": {
+    "name": "English",
+    "nativeName": "English",
+    "code": "en",
+    "flag": "🇺🇸"
+  },
+  "common": {
+    "home": "Home",
+    "rules": "Rules",
+    "guidelines": "Guidelines",
+    "support": "Support",
+    "discord": "Discord",
+    "login": "Login",
+    "logout": "Logout",
+    "submit": "Submit",
+    "required": "Required",
+    "optional": "Optional",
+    "back": "Back",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information"
+  },
+  "header": {
+    "title": "PC Community",
+    "subtitle": "The Ultimate Community for PC and Programming Enthusiasts"
+  },
+  "footer": {
+    "title": "PC Community",
+    "description1": "The Ultimate Community for PC and Programming Enthusiasts",
+    "description2": "Over 1,500 members with a 90%+ resolution rate support system",
+    "description3": "Beginners Welcome・Experts Welcome・Everyone Welcome!",
+    "links_title": "Links",
+    "social_title": "Social Media & Listings",
+    "copyright": "&copy; 2024 PC Community. All rights reserved."
+  },
+  "home": {
+    "title": "PC Community - Home",
+    "hero": {
+      "title": "🎯 Join Now!",
+      "description1": "If you're looking to improve your PC or programming skills,",
+      "description2": "why not grow together with PC Community?",
+      "description3": "Beginners Welcome・Experts Welcome・Everyone Welcome!",
+      "description4": "All members are waiting for your participation 🎉",
+      "join_discord": "Join PC Community",
+      "bottom_text": "💻 Open new doors of learning with PC Community!",
+      "tags": {
+        "programming": "#Programming",
+        "pc": "#PC",
+        "computer": "#Computer",
+        "diy_pc": "#DIY PC",
+        "gadgets": "#Gadgets"
+      }
+    },
+    "why_choose": {
+      "title": "🌟 Why PC Community is Chosen?",
+      "subtitle": "Outstanding track record and comprehensive support system",
+      "reliable_scale": {
+        "title": "📊 Reliable Scale",
+        "description": "A large-scale community with over 1,500 active members. Someone with specialized knowledge will answer any question."
+      },
+      "resolution_power": {
+        "title": "⚡ Amazing Problem-Solving Power",
+        "description": "Boasting a 90%+ resolution rate for questions! Many members with specialized knowledge provide accurate advice."
+      },
+      "wide_support": {
+        "title": "🎯 Wide Support Range",
+        "description": "From programming consultation to PC building, customization, and troubleshooting, we support everyone from beginners to experts."
+      }
+    },
+    "support_system": {
+      "title": "🛠️ Comprehensive Support System Friendly to Beginners",
+      "subtitle": "Mechanisms that support efficient learning and growth",
+      "question_forum": {
+        "title": "📋 Question Forum System",
+        "description": "We have dedicated question forums to create an environment for efficient problem-solving. Following the question guidelines, you can expect more appropriate and faster responses."
+      },
+      "best_answer": {
+        "title": "🏆 Best Answer Role System",
+        "description": "Members who consistently provide excellent answers receive a 'Best Answer Role'. This system makes reliable answerers easily identifiable."
+      },
+      "research_culture": {
+        "title": "📚 'Research Before Asking' Culture",
+        "description": "A healthy learning environment where you can grow while developing your research skills. Plenty of hints are available when you're stuck."
+      }
+    },
+    "community_benefits": {
+      "title": "🎉 Community-Exclusive Benefits",
+      "subtitle": "Not just learning, but enjoyable community life",
+      "events": {
+        "title": "🎪 Rich Events",
+        "description": "Events are held irregularly! Suggestions from members are also welcome, and your ideas might come to life."
+      },
+      "close_distance": {
+        "title": "🤝 Close Distance with Management",
+        "description": "Short distance between moderators and members, creating a casual atmosphere for consultation. Face-to-face support and suggestion forms are also available."
+      },
+      "friendly_environment": {
+        "title": "🌈 Friendly and Peaceful Environment",
+        "description": "PC Community prides itself on 'peaceful and kind members'. Even beginners can ask questions without hesitation in a warm atmosphere."
+      }
+    },
+    "target_audience": {
+      "title": "🚀 Recommended for These People!",
+      "subtitle": "Do any of these apply to you?",
+      "programming_beginner_title": "Programming Beginners",
+      "programming_beginner": "Programming beginners who want to learn from the basics",
+      "pc_builder_title": "People Who Want to Try PC Building",
+      "pc_builder": "People who want to try PC building but feel anxious",
+      "advanced_discussion_title": "Advanced Users Who Want Technical Discussions",
+      "advanced_discussion": "Advanced users who want to enjoy technical discussions",
+      "troubleshooting_title": "People Who Need Troubleshooting",
+      "troubleshooting": "People who need help with troubleshooting",
+      "community_title": "People Who Want to Connect",
+      "community": "People who want to connect with like-minded individuals",
+      "latest_tech_title": "People Who Want to Keep Up with Latest Tech",
+      "latest_tech": "People who want to keep up with the latest technology"
+    },
+    "important_notice": {
+      "title": "💡 Important Information Before Joining",
+      "description1": "Participation requires a <strong>Discord account that is 14 days or older</strong>. For new accounts, please join again after 14 days have passed.",
+      "description2": "<strong>※If your account is less than 14 days old, you will be timed out until 14 days have passed.</strong>",
+      "description3": "This is an anti-trolling measure to maintain a safer and more comfortable community environment."
+    },
+    "quick_access": {
+      "title": "Quick Access",
+      "subtitle": "Frequently used pages",
+      "rules": {
+        "title": "Community Rules",
+        "description": "Rules for everyone to enjoy comfortably"
+      },
+      "guidelines": {
+        "title": "Question Guidelines",
+        "description": "Effective questioning methods and etiquette"
+      },
+      "admin_support": {
+        "title": "Admin Support",
+        "description": "Report problems or requests to administrators"
+      }
+    },
+    "stats": {
+      "members": "1,500+",
+      "members_label": "Members",
+      "resolution": "90%+",
+      "resolution_label": "Resolution Rate",
+      "response": "< 1 hour",
+      "response_label": "Average Response Time"
+    },
+    "features": {
+      "title": "Why Choose PC Community",
+      "items": [
+        {
+          "title": "Quick Support",
+          "description": "Experienced members provide quick support"
+        },
+        {
+          "title": "Beginner Friendly",
+          "description": "Feel free to ask any questions"
+        },
+        {
+          "title": "Active Community",
+          "description": "Someone is always online 24/7"
+        },
+        {
+          "title": "Expert Knowledge",
+          "description": "Specialists in various fields are available"
+        }
+      ]
+    },
+    "links": {
+      "title": "Getting Started",
+      "description": "Please read these before joining the community.",
+      "items": [
+        {
+          "title": "Community Rules",
+          "description": "Rules to ensure everyone has a comfortable experience",
+          "link": "/rules"
+        },
+        {
+          "title": "Question Guidelines",
+          "description": "Guide for asking effective questions",
+          "link": "/guidelines"
+        },
+        {
+          "title": "Support",
+          "description": "Contact administrators here",
+          "link": "/support"
+        }
+      ]
+    }
+  },
+  "rules": {
+    "title": "PC Community - Rules",
+    "page_title": "Community Rules",
+    "page_description": "Rules for everyone to enjoy comfortably. Please read them carefully.",
+    "basic_rules": {
+      "title": "Basic Rules",
+      "rule1": {
+        "title": "Principle of Mutual Respect",
+        "description": "All members should respect each other and interact politely. Aggressive remarks, insults, and discriminatory expressions are prohibited."
+      },
+      "rule2": {
+        "title": "Appropriate Channel Usage",
+        "description": "Please post according to the purpose of each channel. Questions in question channels, casual chat in chat channels, etc. Choose the appropriate place."
+      },
+      "rule3": {
+        "title": "Prohibition of Spam",
+        "description": "Please refrain from consecutive posts of the same message, meaningless character strings, and excessive use of emojis."
+      }
+    },
+    "prohibited_actions": {
+      "title": "Prohibited Actions",
+      "advertising": {
+        "title": "Prohibition of Advertising",
+        "items": [
+          "Unrelated YouTube channel promotion",
+          "Invitation to other Discord servers",
+          "Product or service advertising",
+          "Affiliate links",
+          "Commercial posts"
+        ]
+      },
+      "exceptions": {
+        "title": "About Exceptions",
+        "description": "Exceptions are made for cases related to technical questions or information sharing that benefits the community. Please ask administrators if unsure."
+      }
+    }
+  },
+  "guidelines_simple": {
+    "title": "PC Community - Question Guidelines",
+    "page_title": "Question Guidelines",
+    "page_description": "Guidelines for asking effective questions.",
+    "before_asking": {
+      "title": "Before Asking",
+      "description": "First, try to research on your own. Check Google search, official documentation, and past questions."
+    },
+    "good_question": {
+      "title": "Example of a Good Question",
+      "example": "\"I tried to read a CSV file using the pandas library in Python 3.9, but got a 'FileNotFoundError'. The file path is './data.csv' and I confirmed the file exists in the same directory. What could be the possible causes?\""
+    },
+    "tips": {
+      "title": "Question Tips",
+      "tip1": "Include specific environment information",
+      "tip2": "Record error messages accurately",
+      "tip3": "Clearly state what you've tried",
+      "tip4": "Format code properly"
+    }
+  },
+  "support": {
+    "title": "PC Community - Contact Administrators",
+    "page_title": "Contact Administrators",
+    "page_description": "For violation reports, questions, requests, timeout removal applications, bug reports, etc.",
+    "login_required": "Discord login is required to use this feature.",
+    "login_button": "Login with Discord",
+    "form": {
+      "category": "Category",
+      "select_category": "Please select a category",
+      "custom_title": "Title",
+      "want_dialog": "Want to dialog with administrators",
+      "anonymous": "Submit anonymously",
+      "content": "Content",
+      "content_placeholder": "Please tell us in detail...",
+      "attachments": "File Attachments",
+      "drop_files": "Drop files or click to select",
+      "submit": "Submit"
+    }
+  },
+  "404": {
+    "title": "404 - Page Not Found | PC Community",
+    "page_title": "Page Not Found",
+    "description": "The page you're looking for has been deleted or the URL may be incorrect.",
+    "back_home": "Back to Home",
+    "back_previous": "Back to Previous Page",
+    "popular_pages": "Popular Pages",
+    "search_title": "Can't find the page you're looking for?",
+    "search_placeholder": "Enter search keywords...",
+    "search_button": "Search"
+  },
+  "rules_detailed": {
+    "title": "Community Rules",
+    "description": "These are the rules to ensure everyone has a comfortable experience. Please read them carefully.",
+    "important_notice": {
+      "title": "Important Notice",
+      "content1": "If you break the above rules, we will give you several warnings before banning, but severe violations or obvious trolling may result in immediate bans without warning.",
+      "content2": "If you violate Discord's TOS, you will be banned immediately. Even for actions not mentioned above, management reserves the right to take appropriate measures."
+    },
+    "rules": [
+      {
+        "title": "No Spam!",
+        "icon": "fas fa-ban",
+        "content": "The following activities are prohibited:",
+        "items": [
+          "Shortened URLs or hidden URLs",
+          "Excessive emojis",
+          "Excessive reactions",
+          "Text walls (overly long messages)"
+        ],
+        "info": {
+          "title": "Detailed Explanation",
+          "content": "Spam activities harm other members' experience. Moderate use of emojis and normal conversation is fine."
+        }
+      },
+      {
+        "title": "Keep it SFW!",
+        "icon": "fas fa-shield-alt",
+        "content1": "Within reason, some mild language is acceptable.",
+        "content2": "If your username/PFP is offensive, you may be asked to change it.",
+        "terms": {
+          "title": "Terms Explained",
+          "sfw": "SFW: Safe for work (content safe for workplace)",
+          "pfp": "PFP: Profile picture"
+        },
+        "examples": {
+          "bad": {
+            "title": "Content to Avoid",
+            "content": "Overly aggressive language, inappropriate images, content difficult to view at work"
+          },
+          "good": {
+            "title": "Appropriate Content",
+            "content": "Constructive discussions, moderate jokes, content anyone can view"
+          }
+        }
+      },
+      {
+        "title": "Use Readable Names!",
+        "icon": "fas fa-user-edit",
+        "content": "Usernames containing special characters that make mentioning difficult must be changed.",
+        "allowed": {
+          "title": "Allowed Characters",
+          "items": [
+            "English",
+            "Numbers",
+            "Kanji",
+            "Katakana",
+            "Hiragana",
+            "Some symbols"
+          ]
+        },
+        "restrictions": {
+          "title": "Restrictions",
+          "items": [
+            "No symbols at the beginning of names",
+            "No special characters allowed",
+            "Avoid characters that make mentioning difficult"
+          ]
+        },
+        "symbols": {
+          "title": "Allowed Symbols",
+          "content": "[ ] @ ^ $ ( ) _ { } | ? + \\ * ."
+        },
+        "reason": "Readable names facilitate smooth communication and make mentioning and message exchanges smoother."
+      },
+      {
+        "title": "General Conversation Only",
+        "icon": "fas fa-comments",
+        "content1": "Religion, politics, and other negative and aggressive topics are prohibited.",
+        "content2": "Attempting to start arguments is considered aggressive behavior.",
+        "forbidden_topics": {
+          "title": "Prohibited Topics",
+          "items": [
+            "Religious topics",
+            "Political topics",
+            "Aggressive content",
+            "Content that incites arguments",
+            "Discriminatory statements",
+            "Excessively negative content"
+          ]
+        },
+        "reason": "PC Community is intended for technical learning and information exchange. We avoid controversial topics to maintain a constructive and positive environment."
+      },
+      {
+        "title": "No Advertising or Self-Promotion",
+        "icon": "fas fa-ad",
+        "content1": "Links to your own content or channels are prohibited unless permitted or relevant to the conversation flow.",
+        "content2": "Recruiting for Discord or other communities is strictly prohibited.",
+        "forbidden_examples": {
+          "title": "Prohibited Examples",
+          "items": [
+            "Irrelevant YouTube channel promotion",
+            "Recruiting for other Discord servers",
+            "Product or service advertising",
+            "Affiliate links",
+            "Commercial posts"
+          ]
+        },
+        "exception": {
+          "title": "About Exceptions",
+          "content": "Sharing relevant links as part of answering technical questions or information sharing is fine. However, it's important that promotion is not the main purpose."
+        }
+      },
+      {
+        "title": "Read the Guidelines Before Asking!",
+        "icon": "fas fa-question-circle",
+        "content1": "Before using the question forum, you must read the question guidelines.",
+        "content2": "Answering questions that obviously show the guidelines weren't read is also prohibited.",
+        "content3": "Missing parts should be selected from the embed options posted in the thread before the answerer asks.",
+        "importance": {
+          "title": "Importance of Question Guidelines",
+          "content": "Proper questions lead to faster and more accurate answers. This respects answerers' time and leads to efficient problem-solving."
+        },
+        "guide_link": "Read Question Guidelines"
+      }
+    ],
+    "contact": {
+      "title": "Need Support?",
+      "content": "If you have questions, don't hesitate to ask our helpful MODs for assistance!",
+      "support_link": "Contact Support",
+      "discord_link": "Join Discord"
+    },
+    "terms": {
+      "title": "Reference Materials",
+      "content": "Please also check the following for other terms and conditions:",
+      "discord_tos": "Discord Terms of Service",
+      "discord_guidelines": "Discord Community Guidelines"
+    }
+  },
+  "guidelines": {
+    "title": "Question Guidelines",
+    "description": "These guidelines help resolve questions smoothly. Please read them before asking questions.",
+    "important_notice": {
+      "title": "Important Notice",
+      "content1": "These guidelines are established to help resolve questions smoothly. Being questioned by answerers means there are deficiencies in your question description.",
+      "content2": "Questions that don't follow the guidelines will be deleted or otherwise handled by moderators."
+    },
+    "guidelines": [
+      {
+        "title": "Search and Research First",
+        "icon": "fas fa-search",
+        "content1": "Always search on Google or similar before asking questions.",
+        "content2": "Describe what you researched, what you learned, and what you tried.",
+        "content3": "Including links to related sites that weren't helpful helps others understand how your question differs from others.",
+        "tips": {
+          "title": "Search Tips",
+          "items": [
+            "Search error messages exactly as they appear",
+            "Try searching in English too",
+            "Combine multiple keywords",
+            "Check official documentation"
+          ]
+        }
+      },
+      {
+        "title": "Write Clear Titles",
+        "icon": "fas fa-newspaper",
+        "content1": "The forum displays your question title and part of the beginning of the details, and many members use this information to decide whether they can answer and if they're interested.",
+        "content2": "If the title is unclear or uninteresting, you may not get answers.",
+        "tips": {
+          "title": "How to Write Titles",
+          "content": "If you're unsure how to write a title, write the title last. Writing the detailed part of the question first sometimes makes it easier to explain the current problem.",
+          "examples": {
+            "title": "Good Title Examples",
+            "items": [
+              "Windows \"○○.dll\" not found error",
+              "How to △△ in Python",
+              "Cannot run Minecraft",
+              "About the difference between CPU and GPU"
+            ]
+          }
+        }
+      },
+      {
+        "title": "Write Clear Question Body",
+        "icon": "fas fa-list",
+        "content": "When asking someone something, you need to correctly convey the question content and information needed for answers.",
+        "checklist": {
+          "title": "Pre-Question Checklist",
+          "items": [
+            "Is this not an abstract question?",
+            "Is it clear what you want to know?",
+            "Will others understand it the way you intend?",
+            "Is the information needed to answer the question included?"
+          ]
+        },
+        "required_info": {
+          "title": "Required Information",
+          "purpose": {
+            "title": "Purpose",
+            "content": "Without knowing the purpose, we can't suggest alternative solutions."
+          },
+          "current_state": {
+            "title": "Current State",
+            "content": "What you're currently working on as a solution to your purpose."
+          }
+        },
+        "examples": {
+          "bad": {
+            "title": "Bad Example",
+            "content": "How can I do ××?"
+          },
+          "good": {
+            "title": "Good Example",
+            "content": "I want to do ○○. For that, I want to do ××, so what methods are there? Currently I'm ~~"
+          }
+        }
+      },
+      {
+        "title": "What You're Using",
+        "icon": "fas fa-desktop",
+        "pc_problems": {
+          "title": "For PC Problems",
+          "items": [
+            "OS: Windows 10, Ubuntu 21.04, etc.",
+            "Parts: If you know which part is causing problems, specify it",
+            "PC Model: If it's a purchased PC, include the model number"
+          ]
+        },
+        "programming_problems": {
+          "title": "For Programming Problems",
+          "items": [
+            "OS: Windows 10, Ubuntu 21.04, etc.",
+            "Language: Python 3.7, Node.js 14, etc.",
+            "Libraries: Libraries installed via pip, npm, etc.",
+            "Code: Include syntax highlighting"
+          ]
+        },
+        "code_formatting": {
+          "title": "How to Format Code",
+          "example": "```language_name(py, js, rb, etc.)\ncode\n```",
+          "important": "Important: Copy and paste errors and code in full text (screenshots make it difficult for answerers to reproduce in their environment)"
+        }
+      },
+      {
+        "title": "Prohibited Questions",
+        "icon": "fas fa-ban",
+        "scraping": {
+          "title": "Scraping Related",
+          "content": "Questions and answers about scraping activities on sites that don't explicitly allow it are prohibited",
+          "reason": "This is generally not recommended behavior and violates terms of service clauses even when not explicitly prohibited."
+        }
+      },
+      {
+        "title": "When Problems Are Resolved",
+        "icon": "fas fa-crown",
+        "questioner": {
+          "title": "For Questioners",
+          "content": "Questioners should post a summary of the solution before closing (same for self-resolved cases).",
+          "how_to_close": {
+            "title": "How to Close",
+            "content": "Right-click or long-press the message that led to the solution and select BestAnswer from Apps."
+          }
+        },
+        "abandoned_threads": {
+          "title": "About Abandoned Threads",
+          "content": "Administrators and moderators may request thread closure:",
+          "resolved": "If resolved: Summarize the thread and close it",
+          "unresolved": "If unresolved: Let us know it's still unresolved",
+          "weekly_update": "Even if permitted by moderators not to close due to circumstances, provide status updates at least weekly."
+        }
+      },
+      {
+        "title": "For @Experts (Answerers)",
+        "icon": "fas fa-users",
+        "rules": [
+          {
+            "title": "Answering guideline-violating questions is prohibited",
+            "content": "Encourage questioners to make their questions comply with guidelines",
+            "icon": "fas fa-ban"
+          },
+          {
+            "title": "Don't treat as closed until the questioner closes it",
+            "icon": "fas fa-lock"
+          },
+          {
+            "title": "Respond kindly",
+            "content": "For posts that don't follow guidelines, kindly paste the guideline link",
+            "icon": "fas fa-heart"
+          }
+        ]
+      }
+    ],
+    "notes": {
+      "title": "Important Announcements",
+      "content1": "These guidelines may be changed. You will be notified of any changes.",
+      "last_updated": "Last updated: November 1, 2024 22:30",
+      "contact": "Questions about these guidelines can be asked here or in Discord."
+    }
+  },
+  "support_detailed": {
+    "title": "Contact Administrators",
+    "description": "",
+    "login": {
+      "title": "Contact Administrators",
+      "content": "To use the contact form, please log in with your Discord account.",
+      "login_button": "Login with Discord"
+    },
+    "form": {
+      "title": "Contact Administrators",
+      "category": {
+        "label": "Category",
+        "placeholder": "Select a category",
+        "options": {
+          "violation": "🚨 Report Violation",
+          "question": "❓ Question to Admin",
+          "suggestion": "💡 Suggestion/Opinion",
+          "timeout": "⏰ Timeout Release Request",
+          "bug": "🐛 Bug Report",
+          "other": "📌 Other"
+        }
+      },
+      "custom_title": {
+        "label": "Title",
+        "placeholder": "Enter a specific title"
+      },
+      "options": {
+        "label": "Options",
+        "dialog": {
+          "label": "Request dialogue with administrator",
+          "help": "Checking this will create a dedicated channel for direct communication with administrators."
+        },
+        "anonymous": {
+          "label": "Request anonymity",
+          "help": "※For anti-trolling purposes, sender information is stored in PCB but won't be displayed to administrators."
+        }
+      },
+      "content": {
+        "label": "Content",
+        "placeholder": "Please describe your inquiry in detail (within 800 characters)",
+        "char_count": "/ 800"
+      },
+      "attachments": {
+        "label": "Attachments",
+        "drag_drop": "Drag & drop files",
+        "click_select": "or click to select",
+        "paste_info": "Images can be pasted with Ctrl+V",
+        "file_info": "Max 5 files, each under 1MB",
+        "supported_formats": "Supported formats: JPG, PNG, PDF, DOC, ZIP"
+      },
+      "submit": "Submit"
+    }
+  },
+  "language_switcher": {
+    "title": "Select Language",
+    "current": "Current Language"
+  },
+  "js": {
+    "messages": {
+      "max_files": "Maximum 5 files allowed",
+      "file_too_large": "{filename} exceeds 1MB",
+      "filename_fixed": "Filename corrected: \"{original}\" → \"{safe}\"",
+      "file_already_selected": "{filename} is already selected",
+      "file_added": "{filename} added",
+      "file_removed": "{filename} removed",
+      "images_pasted": "📋 {count} images pasted",
+      "select_category": "Please select a category",
+      "enter_title": "Please enter a title",
+      "enter_content": "Please enter content",
+      "content_too_long": "Content must be within 800 characters",
+      "sending": "Sending...",
+      "error_occurred": "An error occurred",
+      "network_error": "Submission failed. Please check your network connection.",
+      "anonymous_not_available_in_dialog": "Anonymous mode is not available in dialog mode",
+      "logging_in": "Logging in...",
+      "logging_out": "Logging out...",
+      "logged_out": "Logged out successfully",
+      "logout_failed": "Logout failed",
+      "discord_link_not_configured": "Discord invite link is not configured. Please contact administrators.",
+      "discord_server_opened": "Discord server opened!",
+      "discord_server_failed": "Failed to open Discord server."
+    }
+  }
+}
