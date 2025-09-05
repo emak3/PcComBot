@@ -193,10 +193,12 @@ class I18n {
      * Create language switcher UI (globe icon version)
      */
     async createLanguageSwitcher() {
-        // Remove existing switcher
+        // Check if switcher already exists in HTML
         const existingSwitcher = document.querySelector('.language-switcher');
         if (existingSwitcher) {
-            existingSwitcher.remove();
+            // Update existing switcher instead of removing it
+            await this.updateExistingLanguageSwitcher();
+            return;
         }
 
         const headerNav = document.querySelector('.header-nav');
@@ -262,6 +264,63 @@ class I18n {
         `;
         
         headerNav.appendChild(switcher);
+        
+        // Set up events
+        this.setupLanguageSwitcherEvents();
+    }
+
+    /**
+     * Update existing language switcher with current language options
+     */
+    async updateExistingLanguageSwitcher() {
+        const existingSwitcher = document.querySelector('.language-switcher');
+        const dropdown = existingSwitcher.querySelector('.language-dropdown');
+        
+        if (!dropdown) return;
+
+        // Get available languages
+        const availableLanguages = await this.getAvailableLanguages();
+        
+        // Pre-load language metadata for all available languages
+        const languageMetadata = {};
+        for (const langCode of availableLanguages) {
+            try {
+                // Try to load just the metadata portion of the language file
+                if (!this.translations[langCode]) {
+                    const response = await fetch(`/lang/${langCode}.json`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.meta) {
+                            // Store just the meta info temporarily for UI generation
+                            this.translations[langCode] = { meta: data.meta };
+                        }
+                    }
+                }
+                languageMetadata[langCode] = this.getLangMeta(langCode);
+            } catch (error) {
+                console.warn(`Could not load metadata for ${langCode}:`, error);
+                languageMetadata[langCode] = this.getLangMeta(langCode); // Use fallback
+            }
+        }
+
+        // Update dropdown content
+        dropdown.innerHTML = availableLanguages.map(langCode => {
+            const langData = languageMetadata[langCode] || this.getLangMeta(langCode);
+            const isActive = langCode === this.currentLanguage;
+            return `
+                <div class="language-option ${isActive ? 'active' : ''}" data-lang="${langCode}">
+                    <span class="language-flag">${langData.flag}</span>
+                    <div class="language-info">
+                        <div class="language-name">${langData.name}</div>
+                        <div class="language-native">${langData.nativeName}</div>
+                    </div>
+                    ${isActive ? '<i class="fas fa-check language-check"></i>' : ''}
+                </div>
+            `;
+        }).join('');
+
+        // Update the button display
+        this.updateLanguageSwitcher();
         
         // Set up events
         this.setupLanguageSwitcherEvents();

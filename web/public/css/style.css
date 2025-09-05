@@ -1296,11 +1296,13 @@ ul li, ol li {
     font-size: 14px;
     cursor: pointer;
     transition: all 0.2s ease;
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: 8px;
     min-width: 120px;
     justify-content: space-between;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .language-selector-btn:hover {
