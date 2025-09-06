@@ -81,7 +81,7 @@ class I18n {
                 console.warn('Could not auto-detect languages, falling back to known languages');
             }
             
-            // Fallback to known languages
+            // ここに追加しないといけない
             const knownLanguages = ['ja', 'en']; 
             this.availableLanguages = knownLanguages;
             return knownLanguages;
