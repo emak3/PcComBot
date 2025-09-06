@@ -42,7 +42,7 @@
     "copyright": "&copy; 2024 PC Community. All rights reserved."
   },
   "home": {
-    "title": "PC Community - Home",
+    "title": "Home",
     "hero": {
       "title": "🎯 Join Now!",
       "description1": "If you're looking to improve your PC or programming skills,",
@@ -197,7 +197,7 @@
     }
   },
   "rules": {
-    "title": "PC Community - Rules",
+    "title": "Rules",
     "page_title": "Community Rules",
     "page_description": "Rules for everyone to enjoy comfortably. Please read them carefully.",
     "basic_rules": {
@@ -232,56 +232,6 @@
         "description": "Exceptions are made for cases related to technical questions or information sharing that benefits the community. Please ask administrators if unsure."
       }
     }
-  },
-  "guidelines_simple": {
-    "title": "PC Community - Question Guidelines",
-    "page_title": "Question Guidelines",
-    "page_description": "Guidelines for asking effective questions.",
-    "before_asking": {
-      "title": "Before Asking",
-      "description": "First, try to research on your own. Check Google search, official documentation, and past questions."
-    },
-    "good_question": {
-      "title": "Example of a Good Question",
-      "example": "\"I tried to read a CSV file using the pandas library in Python 3.9, but got a 'FileNotFoundError'. The file path is './data.csv' and I confirmed the file exists in the same directory. What could be the possible causes?\""
-    },
-    "tips": {
-      "title": "Question Tips",
-      "tip1": "Include specific environment information",
-      "tip2": "Record error messages accurately",
-      "tip3": "Clearly state what you've tried",
-      "tip4": "Format code properly"
-    }
-  },
-  "support": {
-    "title": "PC Community - Contact Administrators",
-    "page_title": "Contact Administrators",
-    "page_description": "For violation reports, questions, requests, timeout removal applications, bug reports, etc.",
-    "login_required": "Discord login is required to use this feature.",
-    "login_button": "Login with Discord",
-    "form": {
-      "category": "Category",
-      "select_category": "Please select a category",
-      "custom_title": "Title",
-      "want_dialog": "Want to dialog with administrators",
-      "anonymous": "Submit anonymously",
-      "content": "Content",
-      "content_placeholder": "Please tell us in detail...",
-      "attachments": "File Attachments",
-      "drop_files": "Drop files or click to select",
-      "submit": "Submit"
-    }
-  },
-  "404": {
-    "title": "404 - Page Not Found | PC Community",
-    "page_title": "Page Not Found",
-    "description": "The page you're looking for has been deleted or the URL may be incorrect.",
-    "back_home": "Back to Home",
-    "back_previous": "Back to Previous Page",
-    "popular_pages": "Popular Pages",
-    "search_title": "Can't find the page you're looking for?",
-    "search_placeholder": "Enter search keywords...",
-    "search_button": "Search"
   },
   "rules_detailed": {
     "title": "Community Rules",
@@ -581,6 +531,36 @@
       "last_updated": "Last updated: November 1, 2024 22:30",
       "contact": "Questions about these guidelines can be asked here or in Discord."
     }
+  },
+  "support": {
+    "title": "Contact Administrators",
+    "page_title": "Contact Administrators",
+    "page_description": "For violation reports, questions, requests, timeout removal applications, bug reports, etc.",
+    "login_required": "Discord login is required to use this feature.",
+    "login_button": "Login with Discord",
+    "form": {
+      "category": "Category",
+      "select_category": "Please select a category",
+      "custom_title": "Title",
+      "want_dialog": "Want to dialog with administrators",
+      "anonymous": "Submit anonymously",
+      "content": "Content",
+      "content_placeholder": "Please tell us in detail...",
+      "attachments": "File Attachments",
+      "drop_files": "Drop files or click to select",
+      "submit": "Submit"
+    }
+  },
+  "404": {
+    "title": "404 - Page Not Found | PC Community",
+    "page_title": "Page Not Found",
+    "description": "The page you're looking for has been deleted or the URL may be incorrect.",
+    "back_home": "Back to Home",
+    "back_previous": "Back to Previous Page",
+    "popular_pages": "Popular Pages",
+    "search_title": "Can't find the page you're looking for?",
+    "search_placeholder": "Enter search keywords...",
+    "search_button": "Search"
   },
   "support_detailed": {
     "title": "Contact Administrators",
