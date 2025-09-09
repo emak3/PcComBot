@@ -12,6 +12,11 @@ const RssService = require("./services/RssService.js");
 const RssScheduler = require("./services/RssScheduler.js");
 const RssDatabase = require("./services/RssDatabase.js");
 
+// YouTube通知機能
+const YouTubeService = require("./services/YouTubeService.js");
+const YouTubeScheduler = require("./services/YouTubeScheduler.js");
+const YouTubeDatabase = require("./services/YouTubeDatabase.js");
+
 // フォーラム自動チェック機能
 const ForumAutoChecker = require("./services/ForumAutoChecker.js");
 
@@ -127,6 +132,38 @@ client.login(config.token).then(async () => {
         }
     }
 
+    // YouTube通知機能の初期化
+    if (config.youtube?.enabled && config.youtube?.apiKey && database.isConnected()) {
+        try {
+            const youtubeService = new YouTubeService(config.youtube.apiKey);
+            const youtubeDatabase = new YouTubeDatabase();
+            const youtubeScheduler = new YouTubeScheduler(youtubeService, youtubeDatabase, client);
+
+            // 有効なYouTubeチャンネルをフィルタリング
+            const enabledChannels = config.youtube.channels.filter(channel => channel.enabled !== false);
+
+            if (enabledChannels.length > 0) {
+                await youtubeScheduler.startAllSchedules(enabledChannels);
+                log.info(`YouTube通知機能を開始しました (${enabledChannels.length}個のチャンネル)`);
+                
+                // Graceful shutdown時にスケジュールを停止するため、クライアントオブジェクトに追加
+                client.youtubeScheduler = youtubeScheduler;
+            } else {
+                log.info("有効なYouTubeチャンネルが設定されていません");
+            }
+        } catch (error) {
+            log.error("YouTube通知機能の初期化に失敗しました:", error);
+        }
+    } else {
+        if (!config.youtube?.enabled) {
+            log.info("YouTube通知機能は無効になっています");
+        } else if (!config.youtube?.apiKey) {
+            log.warn("YouTube API キーが設定されていません");
+        } else if (!database.isConnected()) {
+            log.warn("Firebase接続が無効のため、YouTube通知機能は利用できません");
+        }
+    }
+
     // フォーラム自動チェック機能の初期化
     try {
         const forumAutoChecker = new ForumAutoChecker(client);
@@ -140,4 +177,39 @@ client.login(config.token).then(async () => {
     // Webサーバー起動
     const webServer = new WebServer(client);
     webServer.start();
+
+    // Graceful shutdown処理
+    const shutdown = async () => {
+        log.info('シャットダウン処理を開始します...');
+
+        try {
+            // YouTubeスケジュールを停止
+            if (client.youtubeScheduler) {
+                client.youtubeScheduler.stopAllSchedules();
+            }
+        } catch (error) {
+            log.error('YouTubeスケジュール停止エラー:', error);
+        }
+
+        try {
+            // フォーラム自動チェックを停止
+            if (client.forumAutoChecker) {
+                if (typeof client.forumAutoChecker.stop === 'function') {
+                    client.forumAutoChecker.stop();
+                } else {
+                    log.warn('ForumAutoChecker.stopメソッドが存在しません');
+                }
+            }
+        } catch (error) {
+            log.error('フォーラム自動チェック停止エラー:', error);
+        }
+
+        // Discordクライアントを破棄
+        client.destroy();
+        log.info('ボットを正常に終了しました');
+        process.exit(0);
+    };
+
+    process.on('SIGINT', shutdown);
+    process.on('SIGTERM', shutdown);
 });

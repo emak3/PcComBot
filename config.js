@@ -5,7 +5,7 @@ const path = require("path");
  * Firebase サービスアカウント設定を取得
  * @returns {Object} Firebase サービスアカウント設定
  */
-function getFirebaseServiceAccount () {
+function getFirebaseServiceAccount() {
     // 方法1: サービスアカウントファイルを使用
     if (process.env.FIREBASE_SERVICE_ACCOUNT_PATH) {
         const serviceAccountPath = path.resolve(process.env.FIREBASE_SERVICE_ACCOUNT_PATH);
@@ -134,6 +134,61 @@ module.exports = {
                 name: "ギャズログ｜GAZLOG",
                 url: "https://gazlog.jp/feed/",
                 channels: ["1392149451950391356"],
+                enabled: true
+            },
+            //競馬
+            {
+                name: "Netkeiba 国内最大級の競馬情報サイト",
+                url: "https://rss.netkeiba.com/?pid=rss_netkeiba&site=netkeiba",
+                channels: ["1365691475744260177"],
+                enabled: true
+            },
+            {
+                name: "競馬 - nikkansports.com",
+                url: "https://www.nikkansports.com/keiba/atom.xml",
+                channels: ["1365691475744260177"],
+                enabled: true
+            },
+            //サッカー
+            {
+                name: "J1 - nikkansports.com",
+                url: "https://www.nikkansports.com/soccer/jleague/j1/atom.xml",
+                channels: ["1404049528369184900"],
+                enabled: true
+            },
+            {
+                name: "サッカーキング - Yahoo!ニュース",
+                url: "https://news.yahoo.co.jp/rss/media/soccerk/all.xml",
+                channels: ["1404049528369184900"],
+                enabled: true
+            },
+            //野球
+            {
+                name: "プロ野球 - nikkansports.com",
+                url: "https://www.nikkansports.com/baseball/professional/atom.xml",
+                channels: ["1404082803246632990"],
+                enabled: true
+            },
+            {
+                name: "Full-Count - Yahoo!ニュース",
+                url: "https://news.yahoo.co.jp/rss/media/fullcount/all.xml",
+                channels: ["1404082803246632990"],
+                enabled: true
+            },
+            //
+        ]
+    },
+
+    // YouTube通知機能設定
+    youtube: {
+        enabled: process.env.YOUTUBE_ENABLED !== "false" && process.env.YOUTUBE_API_KEY,
+        apiKey: process.env.YOUTUBE_API_KEY,
+        intervalMinutes: parseInt(process.env.YOUTUBE_INTERVAL_MINUTES) || 15,
+        channels: [
+            {
+                name: "JRA公式チャンネル",
+                channelId: "UCj6AKkCWS6FJqf0o5wP45eQ",
+                notificationChannelId: "1365691475744260177",
                 enabled: true
             }
         ]

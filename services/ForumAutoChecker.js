@@ -20,6 +20,7 @@ class ForumAutoChecker {
         this.checkedThreads = new Set(); // 既にチェック済みのスレッドを記録
         this.pendingClosures = new Map(); // 24時間後の自動クローズ予定スレッド
         this.isRunning = false;
+        this.cronTasks = []; // cronタスクを保存
     }
 
     /**
@@ -32,14 +33,16 @@ class ForumAutoChecker {
         }
 
         // 毎日8,12,15,21時に実行
-        cron.schedule("0 8,12,15,21 * * *", async () => {
+        const mainTask = cron.schedule("0 8,12,15,21 * * *", async () => {
             await this.checkInactiveThreads();
         });
+        this.cronTasks.push(mainTask);
 
         // 1時間ごとに自動クローズをチェック
-        cron.schedule("0 * * * *", async () => {
+        const closureTask = cron.schedule("0 * * * *", async () => {
             await this.processAutomaticClosures();
         });
+        this.cronTasks.push(closureTask);
 
         this.isRunning = true;
         log.info("ForumAutoChecker を開始しました (毎日8,12,15,21時に実行)");
@@ -303,6 +306,28 @@ class ForumAutoChecker {
         }
 
         log.info("チェック済みスレッドリストをクリーンアップしました");
+    }
+
+    /**
+     * 自動チェック機能を停止
+     */
+    stop() {
+        if (!this.isRunning) {
+            log.warn("ForumAutoChecker は既に停止しています");
+            return;
+        }
+
+        // 全てのcronタスクを停止
+        this.cronTasks.forEach((task, index) => {
+            if (task) {
+                task.stop();
+                log.debug(`cronタスク ${index} を停止しました`);
+            }
+        });
+
+        this.cronTasks = [];
+        this.isRunning = false;
+        log.info("ForumAutoChecker を停止しました");
     }
 }
 
