@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Read(//c/Users/nana_/Documents/program/shikeo/**)"
-    ],
-    "deny": [],
-    "ask": []
-  }
-}
