@@ -1,5 +1,6 @@
+.claude/
 node_modules/
-/.claude
+
 # dev.env.exampleをコピーして
 # ローカル開発ではdev.envにリネームする想定
 dev.env
