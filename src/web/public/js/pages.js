@@ -24,6 +24,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // スムーズスクロール設定
     setupSmoothScroll();
+
+    // 言語変更時のユーザーセクション更新
+    window.addEventListener('languageChanged', async () => {
+        // ユーザー情報を再取得してセクションを更新
+        try {
+            const response = await fetch("/api/user");
+            const data = await response.json();
+            if (data.user) {
+                updateUserSection(data.user);
+            }
+        } catch (error) {
+            console.error("言語変更時のユーザーセクション更新に失敗:", error);
+        }
+    });
 });
 
 // サーバーアイコンを設定
@@ -104,6 +118,10 @@ function updateUserSection (user) {
     const userSection = document.getElementById("userSection");
     if (!userSection) return;
 
+    // i18nが初期化されているかチェック
+    const logoutText = window.i18n && window.i18n.isInitialized() ? 
+        i18n.translate('common.logout') : 'ログアウト';
+
     userSection.innerHTML = `
         <div class="user-info">
             <img src="${user.avatarURL}" alt="Avatar" class="user-avatar" onerror="this.src='/favicon.ico'">
@@ -111,7 +129,7 @@ function updateUserSection (user) {
         </div>
         <div class="auth-buttons">
             <button class="btn btn-secondary" onclick="logoutUser()">
-                <i class="fas fa-sign-out-alt"></i> ${i18n.translate('common.logout')}
+                <i class="fas fa-sign-out-alt"></i> ${logoutText}
             </button>
         </div>
     `;
