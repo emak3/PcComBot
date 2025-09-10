@@ -1,7 +1,7 @@
 const { Client, Partials, GatewayIntentBits } = require("discord.js");
 const config = require("./config.js");
 const log = require("../core/logger.js");
-const { readdirSync } = require("node:fs");
+const { readdirSync, existsSync } = require("node:fs");
 const path = require("node:path");
 const WebServer = require("../web/app.js");
 
@@ -75,23 +75,32 @@ for (const file of readdirSync(path.join(__dirname, "../bot/interactions")).filt
     const interaction = require(`../bot/interactions/${file}`);
     client.interactions.push(interaction);
 }
-for (const file of readdirSync(path.join(__dirname, "../bot/interactions/modals")).filter((file) =>
-    file.endsWith(".js")
-)) {
-    const modal = require(`../bot/interactions/modals/${file}`);
-    client.modals.push(modal);
+const modalsPath = path.join(__dirname, "../bot/interactions/modals");
+if (existsSync(modalsPath)) {
+    for (const file of readdirSync(modalsPath).filter((file) =>
+        file.endsWith(".js")
+    )) {
+        const modal = require(`../bot/interactions/modals/${file}`);
+        client.modals.push(modal);
+    }
 }
-for (const file of readdirSync(path.join(__dirname, "../bot/interactions/buttons")).filter((file) =>
-    file.endsWith(".js")
-)) {
-    const button = require(`../bot/interactions/buttons/${file}`);
-    client.buttons.push(button);
+const buttonsPath = path.join(__dirname, "../bot/interactions/buttons");
+if (existsSync(buttonsPath)) {
+    for (const file of readdirSync(buttonsPath).filter((file) =>
+        file.endsWith(".js")
+    )) {
+        const button = require(`../bot/interactions/buttons/${file}`);
+        client.buttons.push(button);
+    }
 }
-for (const file of readdirSync(path.join(__dirname, "../bot/interactions/menus")).filter((file) =>
-    file.endsWith(".js")
-)) {
-    const menu = require(`../bot/interactions/menus/${file}`);
-    client.menus.push(menu);
+const menusPath = path.join(__dirname, "../bot/interactions/menus");
+if (existsSync(menusPath)) {
+    for (const file of readdirSync(menusPath).filter((file) =>
+        file.endsWith(".js")
+    )) {
+        const menu = require(`../bot/interactions/menus/${file}`);
+        client.menus.push(menu);
+    }
 }
 for (const file of readdirSync(path.join(__dirname, "../messages")).filter((file) =>
     file.endsWith(".js")
