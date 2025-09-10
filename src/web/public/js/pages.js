@@ -118,10 +118,6 @@ function updateUserSection (user) {
     const userSection = document.getElementById("userSection");
     if (!userSection) return;
 
-    // i18nが初期化されているかチェック
-    const logoutText = window.i18n && window.i18n.isInitialized() ? 
-        i18n.translate('common.logout') : 'ログアウト';
-
     userSection.innerHTML = `
         <div class="user-info">
             <img src="${user.avatarURL}" alt="Avatar" class="user-avatar" onerror="this.src='/favicon.ico'">
@@ -129,10 +125,25 @@ function updateUserSection (user) {
         </div>
         <div class="auth-buttons">
             <button class="btn btn-secondary" onclick="logoutUser()">
-                <i class="fas fa-sign-out-alt"></i> ${logoutText}
+                <i class="fas fa-sign-out-alt"></i> <span data-i18n="common.logout">ログアウト</span>
             </button>
         </div>
     `;
+
+    // HTML要素が作成された後にi18nで翻訳を適用
+    if (window.i18n && window.i18n.isInitialized()) {
+        window.i18n.updatePageContent();
+    } else {
+        // i18nが初期化されていない場合は、初期化を待ってから翻訳を適用
+        const waitForI18n = () => {
+            if (window.i18n && window.i18n.isInitialized()) {
+                window.i18n.updatePageContent();
+            } else {
+                setTimeout(waitForI18n, 50);
+            }
+        };
+        waitForI18n();
+    }
 }
 
 // コミュニティ統計を読み込み
