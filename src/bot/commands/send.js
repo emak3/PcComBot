@@ -76,8 +76,9 @@ module.exports = {
         });
 
         await interaction.channel.send({
-            components: [clauseContainer],
-            flags: MessageFlags.IsComponentsV2
+            // components: [clauseContainer],
+            // flags: MessageFlags.IsComponentsV2
+            content: "<@&976073488022507560>\nwhttps://discord.com/channels/932529116400459786/1019989168283197483 に質問を投稿すると、不足情報が表示されるようになりました。"
         })
     }
 };
