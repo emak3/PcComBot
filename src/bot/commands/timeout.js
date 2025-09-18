@@ -26,11 +26,7 @@ module.exports = {
                     { name: "3日", value: "3d" },
                     { name: "7日", value: "7d" },
                     { name: "14日", value: "14d" },
-                    { name: "30日", value: "30d" },
-                    { name: "60日", value: "60d" },
-                    { name: "90日", value: "90d" },
-                    { name: "120日", value: "120d" },
-                    { name: "360日", value: "360d" }
+                    { name: "28日 (最大)", value: "28d" }
                 )
         )
         .addStringOption(option =>
@@ -55,17 +51,13 @@ module.exports = {
         if (!mem) return interaction.reply({ content: "メンバーが見つかりません。", flags: MessageFlags.Ephemeral });
         if (mem.communicationDisabledUntilTimestamp) return interaction.reply({ content: "このユーザーはタイムアウト済みです。", flags: MessageFlags.Ephemeral });
 
-        // 期間を秒に変換
+        // 期間をミリ秒に変換 (Discordの最大制限は28日)
         const durationMap = {
             "1d": 86400000,     // 1日
             "3d": 259200000,    // 3日
             "7d": 604800000,    // 7日
             "14d": 1209600000,  // 14日
-            "30d": 2592000000,  // 30日
-            "60d": 5184000000,  // 60日
-            "90d": 7776000000,  // 90日
-            "120d": 10368000000, // 120日
-            "360d": 31104000000  // 360日
+            "28d": 2419200000   // 28日 (Discordの最大制限)
         };
 
         const timeoutDuration = durationMap[duration];
@@ -119,10 +111,17 @@ module.exports = {
 
         } catch (error) {
             log.error("タイムアウト実行エラー:", error);
-            await interaction.editReply({
-                content: "タイムアウトの実行に失敗しました。",
-                flags: MessageFlags.Ephemeral
-            });
+            if (interaction.replied) {
+                await interaction.editReply({
+                    content: "タイムアウトの実行に失敗しました。",
+                    flags: MessageFlags.Ephemeral
+                });
+            } else {
+                await interaction.reply({
+                    content: "タイムアウトの実行に失敗しました。",
+                    flags: MessageFlags.Ephemeral
+                });
+            }
         }
     }
 };
