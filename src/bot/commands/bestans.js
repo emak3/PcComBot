@@ -1,4 +1,4 @@
-const { ContextMenuCommandBuilder, InteractionContextType, ApplicationCommandType } = require("discord.js");
+const { ContextMenuCommandBuilder, InteractionContextType, ApplicationCommandType, MessageFlags } = require("discord.js");
 const config = require("../../app/config.js");
 const DiscordHelpers = require("../../utils/discordHelpers.js");
 const ErrorHandler = require("../../utils/errorHandler.js");
@@ -28,7 +28,7 @@ module.exports = {
                         "❌ 権限不足",
                         "投稿者以外使用できません。"
                     );
-                    return await DiscordHelpers.safeReply(interaction, { embeds: [errorEmbed] }, { ephemeral: true });
+                    return await DiscordHelpers.safeReply(interaction, { embeds: [errorEmbed] }, { flags: MessageFlags.Ephemeral });
                 }
 
                 // ForumAutoCheckerの状態を更新
@@ -56,7 +56,7 @@ module.exports = {
                     "❌ 場所エラー",
                     "ここでは使用できません。"
                 );
-                await DiscordHelpers.safeReply(interaction, { embeds: [errorEmbed] }, { ephemeral: true });
+                await DiscordHelpers.safeReply(interaction, { embeds: [errorEmbed] }, { flags: MessageFlags.Ephemeral });
             }
         }, "ベストアンサーコマンド実行", log).catch(async (error) => {
             await ErrorHandler.handleDiscordError(error, interaction, "ベストアンサーコマンド");

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ChannelType, ActionRowBuilder, ButtonBuilder, ButtonStyle, InteractionContextType, PermissionFlagsBits } = require("discord.js");
+const { SlashCommandBuilder, ChannelType, ActionRowBuilder, ButtonBuilder, ButtonStyle, InteractionContextType, PermissionFlagsBits, MessageFlags } = require("discord.js");
 const config = require("../../app/config.js");
 const forumExclude = require("./forumExclude.js");
 const DiscordHelpers = require("../../utils/discordHelpers.js");
@@ -30,7 +30,7 @@ module.exports = {
             }
 
             // deferReplyを安全に実行
-            await DiscordHelpers.safeDeferReply(interaction, { ephemeral: true });
+            await DiscordHelpers.safeDeferReply(interaction, { flags: MessageFlags.Ephemeral });
 
             // 質問フォーラムチャンネルを取得
             const forumChannel = interaction.guild.channels.cache.get(config.questionChId);

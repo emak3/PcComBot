@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits, ChannelType } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits, ChannelType, MessageFlags } = require("discord.js");
 const log = require("../../core/logger.js");
 const Database = require("../../core/database.js");
 const DiscordHelpers = require("../../utils/discordHelpers.js");
@@ -211,7 +211,7 @@ async function handleAdd (interaction) {
                 "⚠️ 注意",
                 `**${channel.name}** は既に除外リストに登録されています。`
             );
-            return await DiscordHelpers.safeReply(interaction, { embeds: [warningEmbed] }, { ephemeral: true });
+            return await DiscordHelpers.safeReply(interaction, { embeds: [warningEmbed] }, { flags: MessageFlags.Ephemeral });
         }
 
         await module.exports.addExcludedChannel(channel.id);
@@ -248,7 +248,7 @@ async function handleRemove (interaction) {
                 "⚠️ 注意",
                 `**${channel.name}** は除外リストに登録されていません。`
             );
-            return await DiscordHelpers.safeReply(interaction, { embeds: [warningEmbed] }, { ephemeral: true });
+            return await DiscordHelpers.safeReply(interaction, { embeds: [warningEmbed] }, { flags: MessageFlags.Ephemeral });
         }
 
         await module.exports.removeExcludedChannel(channel.id);

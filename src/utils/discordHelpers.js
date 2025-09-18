@@ -159,7 +159,7 @@ class DiscordHelpers {
         
         return await this.safeReply(interaction, {
             embeds: [errorEmbed]
-        }, { ephemeral: true });
+        }, { flags: MessageFlags.Ephemeral });
     }
 }
 
