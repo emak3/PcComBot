@@ -132,7 +132,7 @@ module.exports = {
             },
             {
                 name: "ギャズログ｜GAZLOG",
-                url: "hhttps://gazlog.com/feed/",
+                url: "https://gazlog.com/feed/",
                 channels: ["1392149451950391356"],
                 enabled: true
             },
