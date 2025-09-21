@@ -1,6 +1,7 @@
-const { SlashCommandBuilder, ContainerBuilder, ButtonStyle, MessageFlags, InteractionContextType, PermissionFlagsBits } = require("discord.js");
+const { SlashCommandBuilder, ContainerBuilder, ButtonStyle, MessageFlags, InteractionContextType, PermissionFlagsBits, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, ChannelType } = require("discord.js");
 const config = require("../../app/config.js");
 const log = require("../../core/logger.js");
+const modalStorage = require("../../core/modalStorage.js");
 
 /**
  *
@@ -9,7 +10,12 @@ const log = require("../../core/logger.js");
 module.exports = {
     command: new SlashCommandBuilder()
         .setName("send")
-        .setDescription("あらかじめ設定しておいたものを送信する")
+        .setDescription("Discord APIのJSONを使ってメッセージを送信する")
+        .addChannelOption(option =>
+            option.setName('channel')
+                .setDescription('送信先のチャンネル')
+                .addChannelTypes(ChannelType.GuildText, ChannelType.GuildAnnouncement)
+                .setRequired(true))
         .setContexts(InteractionContextType.Guild)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
@@ -18,67 +24,25 @@ module.exports = {
      * @param {CommandInteraction} interaction
      */
     async execute(interaction) {
-        const clauseContainer = new ContainerBuilder()
-            .addSectionComponents(
-                section => section
-                    .addTextDisplayComponents(
-                        textDisplay => textDisplay
-                            .setContent("## 📖 Community Rules"),
-                        textDisplay => textDisplay
-                            .setContent("メンバーが快適に過ごすためのルールです。必ずお読みください。\n-# These are the rules to ensure everyone has a comfortable experience. Please read them carefully.")
-                    )
-                    .setButtonAccessory(
-                        button => button
-                            .setLabel('Community Rules')
-                            .setURL('https://pcb.ouma3.org/rules')
-                            .setStyle(ButtonStyle.Link)
-                    )
-            )
-            .addSeparatorComponents(
-                separator => separator
-            )
-            .addSectionComponents(
-                section => section
-                    .addTextDisplayComponents(
-                        textDisplay => textDisplay
-                            .setContent("## ❓ Question Guidelines"),
-                        textDisplay => textDisplay
-                            .setContent("質問をスムーズに解決するためのガイドラインです。必ず読んでから質問してください。\n-# These guidelines help resolve questions smoothly. Please read them before asking questions.")
-                    )
-                    .setButtonAccessory(
-                        button => button
-                            .setLabel('Question Guidelines')
-                            .setURL('https://pcb.ouma3.org/guidelines')
-                            .setStyle(ButtonStyle.Link)
-                    )
-            )
-            .addSeparatorComponents(
-                separator => separator
-            )
-            .addSectionComponents(
-                section => section
-                    .addTextDisplayComponents(
-                        textDisplay => textDisplay
-                            .setContent("## 📮 Contact Administrators"),
-                        textDisplay => textDisplay
-                            .setContent("サポートが必要な場合はこちらをご利用ください。\n-# If you need support, please use this.")
-                    )
-                    .setButtonAccessory(
-                        button => button
-                            .setLabel('Contact Administrators')
-                            .setURL('https://pcb.ouma3.org/support')
-                            .setStyle(ButtonStyle.Link)
-                    )
-            );
-        await interaction.reply({
-            content: "aa",
-            flags: MessageFlags.Ephemeral
-        });
+        const targetChannel = interaction.options.getChannel('channel');
+        const lastInput = modalStorage.getLastInput(interaction.user.id, 'send_json');
 
-        await interaction.channel.send({
-            // components: [clauseContainer],
-            // flags: MessageFlags.IsComponentsV2
-            content: "<@&976073488022507560>\nギャズログ｜GAZLOG のドメインを移行後のURLに変更しました。"
-        })
+        const modal = new ModalBuilder()
+            .setCustomId(`send_json_modal_${targetChannel.id}`)
+            .setTitle('Discord API JSON 入力');
+
+        const jsonInput = new TextInputBuilder()
+            .setCustomId('json_input')
+            .setLabel('Discord API JSON')
+            .setStyle(TextInputStyle.Paragraph)
+            .setPlaceholder('Discord APIのJSONフォーマットでメッセージデータを入力してください\n例: {"content": "Hello World!"}')
+            .setRequired(true)
+            .setMaxLength(4000)
+            .setValue(lastInput);
+
+        const actionRow = new ActionRowBuilder().addComponents(jsonInput);
+        modal.addComponents(actionRow);
+
+        await interaction.showModal(modal);
     }
 };
